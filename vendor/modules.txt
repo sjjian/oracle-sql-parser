@@ -1,0 +1,31 @@
+# github.com/timtadh/data-structures v0.5.3
+## explicit
+github.com/timtadh/data-structures/errors
+github.com/timtadh/data-structures/hashtable
+github.com/timtadh/data-structures/linked
+github.com/timtadh/data-structures/list
+github.com/timtadh/data-structures/rand
+github.com/timtadh/data-structures/set
+github.com/timtadh/data-structures/tree
+github.com/timtadh/data-structures/tree/avl
+github.com/timtadh/data-structures/types
+# github.com/timtadh/lexmachine v0.2.2
+## explicit
+github.com/timtadh/lexmachine
+github.com/timtadh/lexmachine/dfa
+github.com/timtadh/lexmachine/frontend
+github.com/timtadh/lexmachine/inst
+github.com/timtadh/lexmachine/machines
+github.com/timtadh/lexmachine/queue
+# modernc.org/goyacc v1.0.0
+## explicit
+# modernc.org/mathutil v1.4.1
+## explicit
+# modernc.org/parser v1.0.1
+## explicit
+# modernc.org/sortutil v1.1.0
+## explicit
+# modernc.org/strutil v1.1.1
+## explicit
+# modernc.org/y v1.0.1
+## explicit
