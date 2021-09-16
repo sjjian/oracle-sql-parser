@@ -75,11 +75,53 @@ var stdTokenMap = map[string]int{
 }
 
 var keywordMap = map[string]int{
-	"SELECT": _select,
-	"FROM":   _from,
-	"ADD":    _add,
-	"TABLE":  _table,
-	"ALTER":  _alter,
+	"select":        _select,
+	"from":          _from,
+	"add":           _add,
+	"table":         _table,
+	"alter":         _alter,
+	"char":          _char,
+	"byte":          _byte,
+	"varchar2":      _varchar2,
+	"nchar":         _nchar,
+	"nvarchar2":     _nvarchar2,
+	"number":        _number,
+	"float":         _float,
+	"binary_float":  _binaryFloat,
+	"binary_double": _binaryDouble,
+	"long":          _long,
+	"raw":           _raw,
+	"date":          _date,
+	"timestamp":     _timestamp,
+	"with":          _with,
+	"local":         _local,
+	"time":          _time,
+	"zone":          _zone,
+	"interval":      _interval,
+	"year":          _year,
+	"to":            _to,
+	"mouth":         _mouth,
+	"day":           _day,
+	"second":        _second,
+	"blob":          _blob,
+	"clob":          _clob,
+	"nclob":         _nclob,
+	"bfile":         _bfile,
+	"rowid":         _rowid,
+	"urowid":        _urowid,
+	"character":     _character,
+	"varying":       _varying,
+	"varchar":       _varchar,
+	"national":      _national,
+	"numeric":       _numeric,
+	"decimal":       _decimal,
+	"dec":           _dec,
+	"interger":      _interger,
+	"int":           _int,
+	"smallint":      _smallInt,
+	"double":        _double,
+	"precision":     _precision,
+	"real":          _real,
 }
 
 func init() {
@@ -94,6 +136,7 @@ func init() {
 
 	lexer.Add([]byte("( |\t|\n|\r)+"), skip)
 
+	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
 	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
 
 	AddTokenBetween(_doubleQuoteStr, []byte(`"`), byte('"'))
