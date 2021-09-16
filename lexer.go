@@ -1,8 +1,9 @@
-package main
+package oralce_sql_parser
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/sjjian/oralce_sql_parser/ast"
 	"github.com/timtadh/lexmachine"
 	"github.com/timtadh/lexmachine/machines"
 	"strings"
@@ -22,26 +23,26 @@ func skip(*lexmachine.Scanner, *machines.Match) (interface{}, error) {
 
 func AddTokenBetween(tokenId int, start []byte, end byte) {
 	lexer.Add(start, func(scan *lexmachine.Scanner, match *machines.Match) (interface{}, error) {
-		str := make([]byte, 0, 10)
-		str = append(str, match.Bytes...)
+		var buf bytes.Buffer
 		match.EndLine = match.StartLine
 		match.EndColumn = match.StartColumn
 		for tc := scan.TC; tc < len(scan.Text); tc++ {
-			str = append(str, scan.Text[tc])
+			curByte := scan.Text[tc]
+
+			// calculate location
 			match.EndColumn += 1
-			text := scan.Text[tc]
-			if text == '\n' {
+			if curByte == '\n' {
 				match.EndLine += 1
 			}
-			if text == end {
-				match.TC = scan.TC
+			// match end
+			if curByte == end {
 				scan.TC = tc + 1
-				match.Bytes = str
-				x, _ := token(tokenId)(scan, match)
-				t := x.(*lexmachine.Token)
-				v := t.Value.(string)
-				t.Value = v[1 : len(v)-1]
-				return t, nil
+				match.TC = scan.TC
+				match.Bytes = buf.Bytes()
+				return scan.Token(tokenId, buf.String(), match), nil
+			} else {
+				// between start and end
+				buf.WriteByte(curByte)
 			}
 		}
 		return nil, fmt.Errorf("unclosed %s with %s, staring at %d, (%d, %d)",
@@ -68,11 +69,17 @@ func AddIdentToken(tokenId int, rs string) {
 
 var stdTokenMap = map[string]int{
 	`\*`: int('*'),
+	`\(`: int('('),
+	`\)`: int(')'),
+	`\.`: int('.'),
 }
 
 var keywordMap = map[string]int{
 	"SELECT": _select,
 	"FROM":   _from,
+	"ADD":    _add,
+	"TABLE":  _table,
+	"ALTER":  _alter,
 }
 
 func init() {
@@ -87,6 +94,8 @@ func init() {
 
 	lexer.Add([]byte("( |\t|\n|\r)+"), skip)
 
+	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
+
 	AddTokenBetween(_doubleQuoteStr, []byte(`"`), byte('"'))
 	AddTokenBetween(_singleQuoteStr, []byte(`'`), byte('\''))
 	err := lexer.Compile()
@@ -98,6 +107,7 @@ func init() {
 type yyLexImpl struct {
 	scanner *lexmachine.Scanner
 	err     error
+	result  ast.Node
 }
 
 func NewLexer(s string) (*yyLexImpl, error) {
@@ -125,7 +135,9 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 	}
 	token := tok.(*lexmachine.Token)
 	fmt.Println(3)
-	fmt.Println(string(token.Lexeme))
+	fmt.Printf("[%d]\n", token.Type)
+	lval.str = string(token.Lexeme)
+	fmt.Printf("[%s]\n", string(token.Lexeme))
 	return token.Type
 
 }

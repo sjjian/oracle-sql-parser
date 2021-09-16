@@ -1,3 +1,10 @@
+# github.com/davecgh/go-spew v1.1.0
+github.com/davecgh/go-spew/spew
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.7.0
+## explicit
+github.com/stretchr/testify/assert
 # github.com/timtadh/data-structures v0.5.3
 ## explicit
 github.com/timtadh/data-structures/errors
@@ -17,15 +24,5 @@ github.com/timtadh/lexmachine/frontend
 github.com/timtadh/lexmachine/inst
 github.com/timtadh/lexmachine/machines
 github.com/timtadh/lexmachine/queue
-# modernc.org/goyacc v1.0.0
-## explicit
-# modernc.org/mathutil v1.4.1
-## explicit
-# modernc.org/parser v1.0.1
-## explicit
-# modernc.org/sortutil v1.1.0
-## explicit
-# modernc.org/strutil v1.1.1
-## explicit
-# modernc.org/y v1.0.1
-## explicit
+# gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+gopkg.in/yaml.v3

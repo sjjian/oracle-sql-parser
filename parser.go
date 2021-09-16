@@ -1,23 +1,19 @@
-package main
+package oralce_sql_parser
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/sjjian/oralce_sql_parser/ast"
+)
 
-func main() {
-	err := Parser(`select * FROM 'a'`)
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-func Parser(query string) error {
+func Parser(query string) (ast.Node, error) {
 	l, err := NewLexer(query)
 	if err != nil {
 		fmt.Println(err)
-		return err
+		return nil, err
 	}
 	yyParse(l)
 	if l.err != nil {
-		return l.err
+		return nil, l.err
 	}
-	return nil
+	return l.result, nil
 }
