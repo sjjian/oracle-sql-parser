@@ -1,7 +1,18 @@
 package datatype
 
 type Datatype interface {
-	Type() int
+	LiteralType() Literal
+}
+
+const (
+	LiteralTypeInt = iota
+	LiteralTypeFloat
+	LiteralTypeString
+)
+
+type Literal struct {
+	Type int
+	Size int
 }
 
 type Char struct {
@@ -9,6 +20,10 @@ type Char struct {
 	IsByteSize bool
 	IsCharSize bool
 	IsVarying  bool
+}
+
+func (c *Char) LiteralType() Literal {
+	return Literal{Type: LiteralTypeString}
 }
 
 type Varchar struct {
