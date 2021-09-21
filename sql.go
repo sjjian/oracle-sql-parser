@@ -4,12 +4,19 @@ package oralce_sql_parser
 
 import __yyfmt__ "fmt"
 
+import (
+	"github.com/sjjian/oralce_sql_parser/ast"
+	"github.com/sjjian/oralce_sql_parser/ast/datatype"
+)
+
 type yySymType struct {
 	yys      int
 	nothing  struct{}
+	i        int
 	str      string
 	node     ast.Node
 	anything interface{}
+	dt       datatype.Datatype
 }
 
 type yyXError struct {
@@ -81,13 +88,13 @@ var (
 
 	yyXLAT = map[int]int{
 		41:    0,  // ')' (113x)
-		44:    1,  // ',' (78x)
+		44:    1,  // ',' (79x)
 		57393: 2,  // _intNumber (29x)
 		40:    3,  // '(' (28x)
 		57344: 4,  // $end (19x)
 		57350: 5,  // _add (14x)
-		46:    6,  // '.' (7x)
-		57351: 7,  // _char (7x)
+		57351: 6,  // _char (7x)
+		46:    7,  // '.' (6x)
 		57380: 8,  // _character (5x)
 		57361: 9,  // _raw (5x)
 		57381: 10, // _varying (5x)
@@ -149,7 +156,7 @@ var (
 		57405: 66, // ColumnClause (1x)
 		57407: 67, // ColumnDefinitionList (1x)
 		57409: 68, // ColumnProperties (1x)
-		57410: 69, // DataType (1x)
+		57410: 69, // Datatype (1x)
 		57411: 70, // DatetimeDataTypes (1x)
 		57412: 71, // DefaultProperties (1x)
 		57415: 72, // InvisibleProperty (1x)
@@ -180,8 +187,8 @@ var (
 		"'('",
 		"$end",
 		"_add",
-		"'.'",
 		"_char",
+		"'.'",
 		"_character",
 		"_raw",
 		"_varying",
@@ -243,7 +250,7 @@ var (
 		"ColumnClause",
 		"ColumnDefinitionList",
 		"ColumnProperties",
-		"DataType",
+		"Datatype",
 		"DatetimeDataTypes",
 		"DefaultProperties",
 		"InvisibleProperty",
@@ -390,7 +397,7 @@ var (
 		// 5
 		{20: 110, 29: 109, 41: 108, 85: 107},
 		{4: 93, 93, 75: 113},
-		{4: 97, 97, 111},
+		{4: 97, 97, 7: 111},
 		{4: 95, 95, 95, 95, 95, 95, 11: 95, 95, 95, 95, 95, 95, 95, 95, 95, 21: 95, 95, 95, 95, 95, 95, 95, 95, 30: 95, 95, 95, 95, 95, 95, 95, 38: 95, 95, 95},
 		{4: 94, 94, 94, 94, 94, 94, 11: 94, 94, 94, 94, 94, 94, 94, 94, 94, 21: 94, 94, 94, 94, 94, 94, 94, 94, 30: 94, 94, 94, 94, 94, 94, 94, 38: 94, 94, 94},
 		// 10
@@ -413,8 +420,8 @@ var (
 		{78, 78},
 		// 25
 		{76, 76},
-		{7: 138, 157, 147, 11: 154, 145, 144, 151, 152, 148, 162, 161, 166, 21: 143, 164, 163, 150, 146, 159, 140, 153, 30: 142, 160, 141, 167, 155, 165, 149, 38: 156, 158, 139, 62: 131, 64: 132, 69: 129, 135, 73: 136, 134, 77: 133, 130, 81: 137},
-		{7: 74, 74, 74, 11: 74, 74, 74, 74, 74, 74, 74, 74, 74, 21: 74, 74, 74, 74, 74, 74, 74, 74, 30: 74, 74, 74, 74, 74, 74, 74, 38: 74, 74, 74},
+		{6: 138, 8: 157, 147, 11: 154, 145, 144, 151, 152, 148, 162, 161, 166, 21: 143, 164, 163, 150, 146, 159, 140, 153, 30: 142, 160, 141, 167, 155, 165, 149, 38: 156, 158, 139, 62: 131, 64: 132, 69: 129, 135, 73: 136, 134, 77: 133, 130, 81: 137},
+		{6: 74, 8: 74, 74, 11: 74, 74, 74, 74, 74, 74, 74, 74, 74, 21: 74, 74, 74, 74, 74, 74, 74, 74, 30: 74, 74, 74, 74, 74, 74, 74, 38: 74, 74, 74},
 		{73, 73, 65: 288},
 		{69, 69},
 		// 30
@@ -451,7 +458,7 @@ var (
 		{25, 25, 3: 213},
 		{3: 206, 10: 207},
 		{3: 203},
-		{7: 188, 187},
+		{6: 188, 8: 187},
 		{14, 14, 3: 181},
 		// 60
 		{11, 11, 3: 175},
@@ -464,7 +471,7 @@ var (
 		{1, 1},
 		{2, 2},
 		{2: 170},
-		{171, 6: 172},
+		{171, 7: 172},
 		// 70
 		{7, 7},
 		{2: 173},
@@ -472,14 +479,14 @@ var (
 		{6, 6},
 		{2: 176},
 		// 75
-		{177, 6: 178},
+		{177, 7: 178},
 		{10, 10},
 		{2: 179},
 		{180},
 		{9, 9},
 		// 80
 		{2: 182},
-		{183, 6: 184},
+		{183, 7: 184},
 		{13, 13},
 		{2: 185},
 		{186},
@@ -566,7 +573,7 @@ var (
 		{253},
 		{47, 47},
 		{2: 255},
-		{256, 6: 257},
+		{256, 257},
 		// 155
 		{50, 50},
 		{2: 258},
@@ -586,7 +593,7 @@ var (
 		{53, 53},
 		{2: 271},
 		// 170
-		{272, 7: 274, 42: 273},
+		{272, 6: 274, 42: 273},
 		{57, 57},
 		{276},
 		{275},
@@ -599,7 +606,7 @@ var (
 		{281},
 		// 180
 		{21, 21},
-		{283, 7: 285, 42: 284},
+		{283, 6: 285, 42: 284},
 		{60, 60},
 		{287},
 		{286},
@@ -888,6 +895,461 @@ yynewstate:
 	case 27:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 32:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 33:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 34:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 35:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 36:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 37:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 38:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 39:
+		{
+			yyVAL.dt = yyS[yypt-0].dt
+		}
+	case 40:
+		{
+			d := &datatype.Char{}
+			d.SetDataDefine(datatype.DataDefineChar)
+			yyVAL.dt = d
+		}
+	case 41:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Char{Size: &size}
+			d.SetDataDefine(datatype.DataDefineChar)
+			yyVAL.dt = d
+		}
+	case 42:
+		{
+			size := yyS[yypt-2].i
+			d := &datatype.Char{Size: &size, IsByteSize: true}
+			d.SetDataDefine(datatype.DataDefineChar)
+			yyVAL.dt = d
+		}
+	case 43:
+		{
+			size := yyS[yypt-2].i
+			d := &datatype.Char{Size: &size, IsCharSize: true}
+			d.SetDataDefine(datatype.DataDefineChar)
+			d.SetDataDefine(datatype.DataDefineChar)
+			yyVAL.dt = d
+		}
+	case 44:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineVarchar2)
+			yyVAL.dt = d
+		}
+	case 45:
+		{
+			size := yyS[yypt-2].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.IsByteSize = true
+			d.SetDataDefine(datatype.DataDefineVarchar2)
+			yyVAL.dt = d
+		}
+	case 46:
+		{
+			size := yyS[yypt-2].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.IsCharSize = true
+			d.SetDataDefine(datatype.DataDefineVarchar2)
+			yyVAL.dt = d
+		}
+	case 47:
+		{
+			d := &datatype.NChar{}
+			d.SetDataDefine(datatype.DataDefineNChar)
+			yyVAL.dt = d
+		}
+	case 48:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NChar{Size: &size}
+			d.SetDataDefine(datatype.DataDefineNChar)
+			yyVAL.dt = d
+		}
+	case 49:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineNVarChar2)
+			yyVAL.dt = d
+		}
+	case 50:
+		{
+			d := &datatype.Number{}
+			d.SetDataDefine(datatype.DataDefineNumber)
+			yyVAL.dt = d
+		}
+	case 51:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineNumber)
+			yyVAL.dt = d
+		}
+	case 52:
+		{
+			precision := yyS[yypt-3].i
+			scale := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision, Scale: &scale}
+			d.SetDataDefine(datatype.DataDefineNumber)
+			yyVAL.dt = d
+		}
+	case 53:
+		{
+			d := &datatype.Float{}
+			d.SetDataDefine(datatype.DataDefineFloat)
+			yyVAL.dt = d
+		}
+	case 54:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Float{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineFloat)
+			yyVAL.dt = d
+		}
+	case 55:
+		{
+			d := &datatype.BinaryFloat{}
+			d.SetDataDefine(datatype.DataDefineBinaryFloat)
+			yyVAL.dt = d
+		}
+	case 56:
+		{
+			d := &datatype.BinaryDouble{}
+			d.SetDataDefine(datatype.DataDefineBinaryDouble)
+			yyVAL.dt = d
+		}
+	case 57:
+		{
+			d := &datatype.Long{}
+			d.SetDataDefine(datatype.DataDefineLong)
+			yyVAL.dt = d
+		}
+	case 58:
+		{
+			d := &datatype.LongRaw{}
+			d.SetDataDefine(datatype.DataDefineLongRaw)
+			yyVAL.dt = d
+		}
+	case 59:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Raw{Size: &size}
+			d.SetDataDefine(datatype.DataDefineRaw)
+			yyVAL.dt = d
+		}
+	case 60:
+		{
+			d := &datatype.Date{}
+			d.SetDataDefine(datatype.DataDefineDate)
+			yyVAL.dt = d
+		}
+	case 61:
+		{
+			d := &datatype.Timestamp{}
+			d.SetDataDefine(datatype.DataDefineTimestamp)
+			yyVAL.dt = d
+		}
+	case 62:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision}
+			d.SetDataDefine(datatype.DataDefineTimestamp)
+			yyVAL.dt = d
+		}
+	case 63:
+		{
+			precision := yyS[yypt-4].i
+			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
+			d.SetDataDefine(datatype.DataDefineTimestamp)
+			yyVAL.dt = d
+		}
+	case 64:
+		{
+			precision := yyS[yypt-5].i
+			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
+			d.SetDataDefine(datatype.DataDefineTimestamp)
+			yyVAL.dt = d
+		}
+	case 65:
+		{
+			d := &datatype.IntervalYear{}
+			d.SetDataDefine(datatype.DataDefineIntervalYear)
+			yyVAL.dt = d
+		}
+	case 66:
+		{
+			precision := yyS[yypt-3].i
+			d := &datatype.IntervalYear{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineIntervalYear)
+			yyVAL.dt = d
+		}
+	case 67:
+		{
+			d := &datatype.IntervalDay{}
+			d.SetDataDefine(datatype.DataDefineIntervalDay)
+			yyVAL.dt = d
+		}
+	case 68:
+		{
+			precision := yyS[yypt-3].i
+			d := &datatype.IntervalDay{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineIntervalDay)
+			yyVAL.dt = d
+		}
+	case 69:
+		{
+			precision := yyS[yypt-6].i
+			sPrecision := yyS[yypt-1].i
+			d := &datatype.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
+			d.SetDataDefine(datatype.DataDefineIntervalDay)
+			yyVAL.dt = d
+		}
+	case 70:
+		{
+			sPrecision := yyS[yypt-1].i
+			d := &datatype.IntervalDay{FractionalSecondsPrecision: &sPrecision}
+			d.SetDataDefine(datatype.DataDefineIntervalDay)
+			yyVAL.dt = d
+		}
+	case 71:
+		{
+			d := &datatype.Blob{}
+			d.SetDataDefine(datatype.DataDefineBlob)
+			yyVAL.dt = d
+		}
+	case 72:
+		{
+			d := &datatype.Clob{}
+			d.SetDataDefine(datatype.DataDefineClob)
+			yyVAL.dt = d
+		}
+	case 73:
+		{
+			d := &datatype.NClob{}
+			d.SetDataDefine(datatype.DataDefineNClob)
+			yyVAL.dt = d
+		}
+	case 74:
+		{
+			d := &datatype.BFile{}
+			d.SetDataDefine(datatype.DataDefineBFile)
+			yyVAL.dt = d
+		}
+	case 75:
+		{
+			d := &datatype.RowId{}
+			d.SetDataDefine(datatype.DataDefineRowId)
+			yyVAL.dt = d
+		}
+	case 76:
+		{
+			d := &datatype.URowId{}
+			d.SetDataDefine(datatype.DataDefineURowId)
+			yyVAL.dt = d
+		}
+	case 77:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.URowId{Size: &size}
+			d.SetDataDefine(datatype.DataDefineURowId)
+			yyVAL.dt = d
+		}
+	case 78:
+		{
+			d := &datatype.Char{}
+			d.SetDataDefine(datatype.DataDefineCharacter)
+			yyVAL.dt = d
+		}
+	case 79:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineCharacterVarying)
+			yyVAL.dt = d
+		}
+	case 80:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineCharVarying)
+			yyVAL.dt = d
+		}
+	case 81:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineNCharVarying)
+			yyVAL.dt = d
+		}
+	case 82:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineVarchar)
+			yyVAL.dt = d
+		}
+	case 83:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NChar{Size: &size}
+			d.SetDataDefine(datatype.DataDefineNationalCharacter)
+			yyVAL.dt = d
+		}
+	case 84:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineNationalCharacterVarying)
+			yyVAL.dt = d
+		}
+	case 85:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NChar{Size: &size}
+			d.SetDataDefine(datatype.DataDefineNationalChar)
+			yyVAL.dt = d
+		}
+	case 86:
+		{
+			size := yyS[yypt-1].i
+			d := &datatype.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(datatype.DataDefineNationalCharVarying)
+			yyVAL.dt = d
+		}
+	case 87:
+		{
+			d := &datatype.Number{}
+			d.SetDataDefine(datatype.DataDefineNumeric)
+			yyVAL.dt = d
+		}
+	case 88:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineNumeric)
+			yyVAL.dt = d
+		}
+	case 89:
+		{
+			precision := yyS[yypt-3].i
+			scale := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision, Scale: &scale}
+			d.SetDataDefine(datatype.DataDefineNumeric)
+			yyVAL.dt = d
+		}
+	case 90:
+		{
+			d := &datatype.Number{}
+			d.SetDataDefine(datatype.DataDefineDecimal)
+			yyVAL.dt = d
+		}
+	case 91:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineDecimal)
+			yyVAL.dt = d
+		}
+	case 92:
+		{
+			precision := yyS[yypt-3].i
+			scale := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision, Scale: &scale}
+			d.SetDataDefine(datatype.DataDefineDecimal)
+			yyVAL.dt = d
+		}
+	case 93:
+		{
+			d := &datatype.Number{}
+			d.SetDataDefine(datatype.DataDefineDec)
+			yyVAL.dt = d
+		}
+	case 94:
+		{
+			precision := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineDec)
+			yyVAL.dt = d
+		}
+	case 95:
+		{
+			precision := yyS[yypt-3].i
+			scale := yyS[yypt-1].i
+			d := &datatype.Number{Precision: &precision, Scale: &scale}
+			d.SetDataDefine(datatype.DataDefineDec)
+			yyVAL.dt = d
+		}
+	case 96:
+		{
+			precision := 38
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineInteger)
+			yyVAL.dt = d
+		}
+	case 97:
+		{
+			precision := 38
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineInt)
+			yyVAL.dt = d
+		}
+	case 98:
+		{
+			precision := 38
+			d := &datatype.Number{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineSmallInt)
+			yyVAL.dt = d
+		}
+	case 99:
+		{
+			precision := 126
+			d := &datatype.Float{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineDoublePrecision)
+			yyVAL.dt = d
+		}
+	case 100:
+		{
+			precision := 63
+			d := &datatype.Float{Precision: &precision}
+			d.SetDataDefine(datatype.DataDefineReal)
+			yyVAL.dt = d
 		}
 
 	}

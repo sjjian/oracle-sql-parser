@@ -6,6 +6,7 @@ import (
 	"github.com/sjjian/oralce_sql_parser/ast"
 	"github.com/timtadh/lexmachine"
 	"github.com/timtadh/lexmachine/machines"
+	"strconv"
 	"strings"
 )
 
@@ -139,6 +140,14 @@ func init() {
 	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
 	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
 
+	lexer.Add([]byte(`[0-9]+`), func(s *lexmachine.Scanner, m *machines.Match) (interface{}, error) {
+		v, err :=  strconv.Atoi(string(m.Bytes))
+		if err != nil {
+			return nil, err
+		}
+		return s.Token(_intNumber, v, m), nil
+	})
+
 	AddTokenBetween(_doubleQuoteStr, []byte(`"`), byte('"'))
 	AddTokenBetween(_singleQuoteStr, []byte(`'`), byte('\''))
 	err := lexer.Compile()
@@ -179,7 +188,12 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 	token := tok.(*lexmachine.Token)
 	fmt.Println(3)
 	fmt.Printf("[%d]\n", token.Type)
-	lval.str = string(token.Lexeme)
+	switch v := token.Value.(type) {
+	case string:
+		lval.str = v
+	case int:
+		lval.i = v
+	}
 	fmt.Printf("[%s]\n", string(token.Lexeme))
 	return token.Type
 
