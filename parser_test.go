@@ -7,7 +7,7 @@ import (
 )
 
 func TestParser(t *testing.T) {
-	stmt, err := Parser("alter table db1.table1 add ()")
+	stmt, err := Parser("alter table db1.table1 add (id varchar2(255))")
 	assert.NoError(t, err)
 	assert.IsType(t, &ast.AlterTableStmt{}, stmt)
 }

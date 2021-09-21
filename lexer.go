@@ -186,8 +186,6 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 		return 0
 	}
 	token := tok.(*lexmachine.Token)
-	fmt.Println(3)
-	fmt.Printf("[%d]\n", token.Type)
 	switch v := token.Value.(type) {
 	case string:
 		lval.str = v

@@ -16,7 +16,6 @@ type yySymType struct {
 	str      string
 	node     ast.Node
 	anything interface{}
-	dt       datatype.Datatype
 }
 
 type yyXError struct {
@@ -87,12 +86,12 @@ var (
 	yyPrec = map[int]int{}
 
 	yyXLAT = map[int]int{
-		41:    0,  // ')' (113x)
+		41:    0,  // ')' (111x)
 		44:    1,  // ',' (79x)
 		57393: 2,  // _intNumber (29x)
-		40:    3,  // '(' (28x)
-		57344: 4,  // $end (19x)
-		57350: 5,  // _add (14x)
+		40:    3,  // '(' (26x)
+		57344: 4,  // $end (21x)
+		57350: 5,  // _add (16x)
 		57351: 6,  // _char (7x)
 		46:    7,  // '.' (6x)
 		57380: 8,  // _character (5x)
@@ -153,7 +152,7 @@ var (
 		57402: 63, // ChangeColumnClauseList (1x)
 		57403: 64, // CharacterDataTypes (1x)
 		57404: 65, // CollateClause (1x)
-		57405: 66, // ColumnClause (1x)
+		57405: 66, // ColumnClauses (1x)
 		57407: 67, // ColumnDefinitionList (1x)
 		57409: 68, // ColumnProperties (1x)
 		57410: 69, // Datatype (1x)
@@ -247,7 +246,7 @@ var (
 		"ChangeColumnClauseList",
 		"CharacterDataTypes",
 		"CollateClause",
-		"ColumnClause",
+		"ColumnClauses",
 		"ColumnDefinitionList",
 		"ColumnProperties",
 		"Datatype",
@@ -299,7 +298,7 @@ var (
 		14:  {48, 1},
 		15:  {48, 1},
 		16:  {48, 1},
-		17:  {47, 8},
+		17:  {47, 6},
 		18:  {68, 0},
 		19:  {79, 0},
 		20:  {52, 0},
@@ -387,7 +386,7 @@ var (
 
 	yyXErrors = map[yyXError]string{}
 
-	yyParseTab = [199][]uint16{
+	yyParseTab = [197][]uint16{
 		// 0
 		{54: 105, 61: 104, 83: 102, 103},
 		{4: 101},
@@ -407,7 +406,7 @@ var (
 		{4: 81, 122, 47: 119, 118, 51: 121, 120, 63: 116, 66: 115, 80: 117},
 		{4: 98},
 		// 15
-		{4: 91, 122, 47: 119, 299, 51: 121, 120},
+		{4: 91, 122, 47: 119, 297, 51: 121, 120},
 		{4: 90},
 		{4: 89, 89},
 		{4: 87, 87},
@@ -618,13 +617,11 @@ var (
 		{70, 70, 71: 291},
 		// 190
 		{75, 75},
-		{3: 83, 68: 295},
+		{4: 83, 83, 68: 295},
 		{20: 110, 29: 109, 41: 128, 49: 294, 127, 53: 126},
 		{77, 77},
-		{3: 296},
+		{4: 82, 82, 79: 296},
 		// 195
-		{82, 79: 297},
-		{298},
 		{4: 84, 84},
 		{4: 88, 88},
 	}
@@ -859,10 +856,15 @@ yynewstate:
 		{
 			yylex.(*yyLexImpl).result = yyS[yypt-0].node
 		}
+	case 2:
+		{
+			yyVAL.node = yyS[yypt-0].node
+		}
 	case 3:
 		{
 			yyVAL.node = &ast.AlterTableStmt{
-				TableName: yyS[yypt-3].anything.(*ast.TableName),
+				TableName:     yyS[yypt-3].anything.(*ast.TableName),
+				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
 			}
 		}
 	case 4:
@@ -892,61 +894,126 @@ yynewstate:
 				Value: yyS[yypt-0].str,
 			}
 		}
+	case 10:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 11:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 12:
+		{
+			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
+		}
+	case 13:
+		{
+			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.ColumnClause), yyS[yypt-0].anything.(ast.ColumnClause))
+		}
+	case 14:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 15:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 16:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 17:
+		{
+			yyVAL.anything = &ast.AddColumnClause{
+				Columns: yyS[yypt-3].anything.([]*ast.ColumnDefine),
+			}
+		}
+	case 20:
+		{
+			// todo:
+		}
+	case 21:
+		{
+			// todo:
+		}
+	case 22:
+		{
+			// todo:
+		}
+	case 23:
+		{
+			yyVAL.anything = []*ast.ColumnDefine{yyS[yypt-0].anything.(*ast.ColumnDefine)}
+		}
+	case 24:
+		{
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDefine), yyS[yypt-0].anything.(*ast.ColumnDefine))
+		}
+	case 25:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 26:
+		{
+			yyVAL.anything = &ast.ColumnDefine{
+				ColumnName: yyS[yypt-5].anything.(*ast.Identifier),
+				Datatype:   yyS[yypt-4].anything.(datatype.Datatype),
+			}
+		}
 	case 27:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 32:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 33:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 34:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 35:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 36:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 37:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 38:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 39:
 		{
-			yyVAL.dt = yyS[yypt-0].dt
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 40:
 		{
 			d := &datatype.Char{}
 			d.SetDataDefine(datatype.DataDefineChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 41:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.Char{Size: &size}
 			d.SetDataDefine(datatype.DataDefineChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 42:
 		{
 			size := yyS[yypt-2].i
 			d := &datatype.Char{Size: &size, IsByteSize: true}
 			d.SetDataDefine(datatype.DataDefineChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 43:
 		{
@@ -954,7 +1021,7 @@ yynewstate:
 			d := &datatype.Char{Size: &size, IsCharSize: true}
 			d.SetDataDefine(datatype.DataDefineChar)
 			d.SetDataDefine(datatype.DataDefineChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 44:
 		{
@@ -962,7 +1029,7 @@ yynewstate:
 			d := &datatype.Varchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineVarchar2)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 45:
 		{
@@ -971,7 +1038,7 @@ yynewstate:
 			d.Size = &size
 			d.IsByteSize = true
 			d.SetDataDefine(datatype.DataDefineVarchar2)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 46:
 		{
@@ -980,20 +1047,20 @@ yynewstate:
 			d.Size = &size
 			d.IsCharSize = true
 			d.SetDataDefine(datatype.DataDefineVarchar2)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 47:
 		{
 			d := &datatype.NChar{}
 			d.SetDataDefine(datatype.DataDefineNChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 48:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.NChar{Size: &size}
 			d.SetDataDefine(datatype.DataDefineNChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 49:
 		{
@@ -1001,20 +1068,20 @@ yynewstate:
 			d := &datatype.NVarchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineNVarChar2)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 50:
 		{
 			d := &datatype.Number{}
 			d.SetDataDefine(datatype.DataDefineNumber)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 51:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineNumber)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 52:
 		{
@@ -1022,110 +1089,110 @@ yynewstate:
 			scale := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision, Scale: &scale}
 			d.SetDataDefine(datatype.DataDefineNumber)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 53:
 		{
 			d := &datatype.Float{}
 			d.SetDataDefine(datatype.DataDefineFloat)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 54:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Float{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineFloat)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 55:
 		{
 			d := &datatype.BinaryFloat{}
 			d.SetDataDefine(datatype.DataDefineBinaryFloat)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 56:
 		{
 			d := &datatype.BinaryDouble{}
 			d.SetDataDefine(datatype.DataDefineBinaryDouble)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 57:
 		{
 			d := &datatype.Long{}
 			d.SetDataDefine(datatype.DataDefineLong)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 58:
 		{
 			d := &datatype.LongRaw{}
 			d.SetDataDefine(datatype.DataDefineLongRaw)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 59:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.Raw{Size: &size}
 			d.SetDataDefine(datatype.DataDefineRaw)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 60:
 		{
 			d := &datatype.Date{}
 			d.SetDataDefine(datatype.DataDefineDate)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 61:
 		{
 			d := &datatype.Timestamp{}
 			d.SetDataDefine(datatype.DataDefineTimestamp)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 62:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision}
 			d.SetDataDefine(datatype.DataDefineTimestamp)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 63:
 		{
 			precision := yyS[yypt-4].i
 			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
 			d.SetDataDefine(datatype.DataDefineTimestamp)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 64:
 		{
 			precision := yyS[yypt-5].i
 			d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
 			d.SetDataDefine(datatype.DataDefineTimestamp)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 65:
 		{
 			d := &datatype.IntervalYear{}
 			d.SetDataDefine(datatype.DataDefineIntervalYear)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 66:
 		{
 			precision := yyS[yypt-3].i
 			d := &datatype.IntervalYear{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineIntervalYear)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 67:
 		{
 			d := &datatype.IntervalDay{}
 			d.SetDataDefine(datatype.DataDefineIntervalDay)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 68:
 		{
 			precision := yyS[yypt-3].i
 			d := &datatype.IntervalDay{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineIntervalDay)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 69:
 		{
@@ -1133,63 +1200,63 @@ yynewstate:
 			sPrecision := yyS[yypt-1].i
 			d := &datatype.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
 			d.SetDataDefine(datatype.DataDefineIntervalDay)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 70:
 		{
 			sPrecision := yyS[yypt-1].i
 			d := &datatype.IntervalDay{FractionalSecondsPrecision: &sPrecision}
 			d.SetDataDefine(datatype.DataDefineIntervalDay)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 71:
 		{
 			d := &datatype.Blob{}
 			d.SetDataDefine(datatype.DataDefineBlob)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 72:
 		{
 			d := &datatype.Clob{}
 			d.SetDataDefine(datatype.DataDefineClob)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 73:
 		{
 			d := &datatype.NClob{}
 			d.SetDataDefine(datatype.DataDefineNClob)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 74:
 		{
 			d := &datatype.BFile{}
 			d.SetDataDefine(datatype.DataDefineBFile)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 75:
 		{
 			d := &datatype.RowId{}
 			d.SetDataDefine(datatype.DataDefineRowId)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 76:
 		{
 			d := &datatype.URowId{}
 			d.SetDataDefine(datatype.DataDefineURowId)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 77:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.URowId{Size: &size}
 			d.SetDataDefine(datatype.DataDefineURowId)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 78:
 		{
 			d := &datatype.Char{}
 			d.SetDataDefine(datatype.DataDefineCharacter)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 79:
 		{
@@ -1197,7 +1264,7 @@ yynewstate:
 			d := &datatype.Varchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineCharacterVarying)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 80:
 		{
@@ -1205,7 +1272,7 @@ yynewstate:
 			d := &datatype.Varchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineCharVarying)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 81:
 		{
@@ -1213,7 +1280,7 @@ yynewstate:
 			d := &datatype.NVarchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineNCharVarying)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 82:
 		{
@@ -1221,14 +1288,14 @@ yynewstate:
 			d := &datatype.Varchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineVarchar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 83:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.NChar{Size: &size}
 			d.SetDataDefine(datatype.DataDefineNationalCharacter)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 84:
 		{
@@ -1236,14 +1303,14 @@ yynewstate:
 			d := &datatype.NVarchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineNationalCharacterVarying)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 85:
 		{
 			size := yyS[yypt-1].i
 			d := &datatype.NChar{Size: &size}
 			d.SetDataDefine(datatype.DataDefineNationalChar)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 86:
 		{
@@ -1251,20 +1318,20 @@ yynewstate:
 			d := &datatype.NVarchar2{}
 			d.Size = &size
 			d.SetDataDefine(datatype.DataDefineNationalCharVarying)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 87:
 		{
 			d := &datatype.Number{}
 			d.SetDataDefine(datatype.DataDefineNumeric)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 88:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineNumeric)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 89:
 		{
@@ -1272,20 +1339,20 @@ yynewstate:
 			scale := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision, Scale: &scale}
 			d.SetDataDefine(datatype.DataDefineNumeric)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 90:
 		{
 			d := &datatype.Number{}
 			d.SetDataDefine(datatype.DataDefineDecimal)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 91:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineDecimal)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 92:
 		{
@@ -1293,20 +1360,20 @@ yynewstate:
 			scale := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision, Scale: &scale}
 			d.SetDataDefine(datatype.DataDefineDecimal)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 93:
 		{
 			d := &datatype.Number{}
 			d.SetDataDefine(datatype.DataDefineDec)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 94:
 		{
 			precision := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineDec)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 95:
 		{
@@ -1314,42 +1381,42 @@ yynewstate:
 			scale := yyS[yypt-1].i
 			d := &datatype.Number{Precision: &precision, Scale: &scale}
 			d.SetDataDefine(datatype.DataDefineDec)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 96:
 		{
 			precision := 38
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineInteger)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 97:
 		{
 			precision := 38
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineInt)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 98:
 		{
 			precision := 38
 			d := &datatype.Number{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineSmallInt)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 99:
 		{
 			precision := 126
 			d := &datatype.Float{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineDoublePrecision)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 	case 100:
 		{
 			precision := 63
 			d := &datatype.Float{Precision: &precision}
 			d.SetDataDefine(datatype.DataDefineReal)
-			yyVAL.dt = d
+			yyVAL.anything = d
 		}
 
 	}

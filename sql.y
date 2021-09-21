@@ -14,7 +14,6 @@ import (
     str		    string
     node 	    ast.Node
     anything 	interface{}
-    dt          datatype.Datatype
 }
 
 %token	<nothing>
@@ -91,9 +90,7 @@ import (
 	TableName		"*ast.tableName"
 	Identifier		"*ast.Identifier"
 	ColumnName
-
-%type   <dt>
-    Datatype
+	Datatype
     OralceBuiltInDataTypes
     CharacterDataTypes
     NumberDataTypes
@@ -102,6 +99,16 @@ import (
     LargeObjectDataTypes
     RowIdDataTypes
     AnsiSupportDataTypes
+    ColumnClauses
+    ChangeColumnClauseList
+    ChangeColumnClause
+    RenameColumnClause
+    AddColumnClause
+    ModidyColumnClause
+    RealColumnDefinition
+    ColumnDefinitionList
+    ColumnDefinition
+    DropColumnClause
 
 %start Start
 
@@ -115,13 +122,17 @@ Start:
 
 Statement:
 	AlterTableStmt
+	{
+	    $$ = $1
+	}
 
 // see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877
 AlterTableStmt:
-	_alter _table TableName MemoptimizeReadClause MemoptimizeWriteClause  ColumnClause
+	_alter _table TableName MemoptimizeReadClause MemoptimizeWriteClause ColumnClauses
 	{
 		$$ = &ast.AlterTableStmt{
-			TableName: $3.(*ast.TableName),
+			TableName:      $3.(*ast.TableName),
+			ColumnClauses:  $6.([]ast.ColumnClause),
 		}
 	}
 
@@ -160,42 +171,94 @@ MemoptimizeReadClause:
 
 MemoptimizeWriteClause:
 
-ColumnClause:
+ColumnClauses:
 	ChangeColumnClauseList
+	{
+	    $$ = $1
+	}
 |	RenameColumnClause
+    {
+        $$ = $1
+    }
 
 ChangeColumnClauseList:
 	ChangeColumnClause
+	{
+	    $$ = []ast.ColumnClause{$1.(ast.ColumnClause)}
+	}
 |	ChangeColumnClauseList ChangeColumnClause
+    {
+        $$ = append($1.([]ast.ColumnClause), $2.(ast.ColumnClause))
+    }
 
 ChangeColumnClause:
 	AddColumnClause
+	{
+	    $$ = $1
+	}
 |	ModidyColumnClause
+	{
+	    $$ = $1
+	}
 |	DropColumnClause
+	{
+	    $$ = $1
+	}
 
 AddColumnClause:
-	_add '(' ColumnDefinitionList ')' ColumnProperties '(' OutOfLinePartStorageList ')'
+	_add '(' ColumnDefinitionList ')' ColumnProperties  OutOfLinePartStorageList
+	{
+		$$ = &ast.AddColumnClause{
+			Columns:    $3.([]*ast.ColumnDefine),
+		}
+	}
 
 ColumnProperties:
 
 OutOfLinePartStorageList:
 
 ModidyColumnClause:
+    {
+        // todo:
+    }
 
 DropColumnClause:
+    {
+        // todo:
+    }
+
 
 RenameColumnClause:
+    {
+        // todo:
+    }
+
 
 ColumnDefinitionList:
 	ColumnDefinition
+	{
+	    $$ = []*ast.ColumnDefine{$1.(*ast.ColumnDefine)}
+	}
 |	ColumnDefinitionList ',' ColumnDefinition
+    {
+        $$ = append($1.([]*ast.ColumnDefine), $3.(*ast.ColumnDefine))
+    }
 
 ColumnDefinition:
 	RealColumnDefinition
+	{
+	    $$ = $1
+	}
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
 	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties
+	{
+		$$ = &ast.ColumnDefine{
+    		ColumnName: $1.(*ast.Identifier),
+    		Datatype:   $2.(datatype.Datatype),
+    	}
+	}
 
 ColumnName:
 	Identifier
