@@ -1,6 +1,8 @@
 package ast
 
-import "github.com/sjjian/oralce_sql_parser/ast/datatype"
+import (
+	"github.com/sjjian/oralce_sql_parser/ast/element"
+)
 
 type AlterTableStmt struct {
 	node
@@ -22,6 +24,6 @@ type AddColumnClause struct {
 }
 
 type ColumnDefine struct {
-	ColumnName *Identifier
-	Datatype datatype.Datatype
+	ColumnName *element.Identifier
+	Datatype   element.Datatype
 }

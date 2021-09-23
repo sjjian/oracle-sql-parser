@@ -1,16 +1,11 @@
 package ast
 
-type TableName struct {
-	Schema *Identifier
-	Table  *Identifier
-}
-
-const (
-	IdentifierTypeQuoted    = iota // "schema" . "table"
-	IdentifierTypeNonQuoted        // schema . table
+import (
+	"github.com/sjjian/oralce_sql_parser/ast/element"
 )
 
-type Identifier struct {
-	Typ   int
-	Value string
+type TableName struct {
+	Schema *element.Identifier
+	Table  *element.Identifier
 }
+

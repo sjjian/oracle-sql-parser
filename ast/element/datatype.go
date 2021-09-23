@@ -1,4 +1,4 @@
-package datatype
+package element
 
 type Datatype interface {
 	DataDefine() DataDefine
@@ -125,7 +125,7 @@ type IntervalDay struct {
 // Smallint is  a alias of Number(38)
 type Number struct {
 	datatype
-	Precision *int
+	Precision *NumberOrAsterisk
 	Scale     *int
 }
 
@@ -134,7 +134,7 @@ type Number struct {
 // Real is a alias of FLOAT(63).
 type Float struct {
 	datatype
-	Precision *int
+	Precision *NumberOrAsterisk
 }
 
 type BinaryFloat struct {

@@ -3,7 +3,7 @@ package oralce_sql_parser
 
 import (
 	"github.com/sjjian/oralce_sql_parser/ast"
-	"github.com/sjjian/oralce_sql_parser/ast/datatype"
+	"github.com/sjjian/oralce_sql_parser/ast/element"
 )
 
 %}
@@ -87,8 +87,8 @@ import (
 	AlterTableStmt		"*ast.AlterTableStmt"
 
 %type	<anything>
-	TableName		"*ast.tableName"
-	Identifier		"*ast.Identifier"
+	TableName
+	Identifier
 	ColumnName
 	Datatype
     OralceBuiltInDataTypes
@@ -109,6 +109,7 @@ import (
     ColumnDefinitionList
     ColumnDefinition
     DropColumnClause
+    NumberOrAsterisk
 
 %start Start
 
@@ -140,29 +141,29 @@ TableName:
 	Identifier
 	{
 		$$ = &ast.TableName{
-			Table: $1.(*ast.Identifier),
+			Table: $1.(*element.Identifier),
 		}
 	}
 |	Identifier '.' Identifier
 	{
 		$$ = &ast.TableName{
-			Schema:	$1.(*ast.Identifier),
-			Table: 	$3.(*ast.Identifier),
+			Schema:	$1.(*element.Identifier),
+			Table: 	$3.(*element.Identifier),
 		}
 	}
 
 Identifier:
 	_nonquotedIdentifier
 	{
-		$$ = &ast.Identifier{
-			Typ: ast.IdentifierTypeNonQuoted,
+		$$ = &element.Identifier{
+			Typ: element.IdentifierTypeNonQuoted,
 			Value: $1,
 		}
 	}
 |	_doubleQuoteStr
 	{
-		$$ = &ast.Identifier{
-			Typ: ast.IdentifierTypeQuoted,
+		$$ = &element.Identifier{
+			Typ: element.IdentifierTypeQuoted,
 			Value: $1,
 		}
 	}
@@ -255,8 +256,8 @@ RealColumnDefinition:
 	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties
 	{
 		$$ = &ast.ColumnDefine{
-    		ColumnName: $1.(*ast.Identifier),
-    		Datatype:   $2.(datatype.Datatype),
+    		ColumnName: $1.(*element.Identifier),
+    		Datatype:   $2.(element.Datatype),
     	}
 	}
 
@@ -285,6 +286,16 @@ Datatype:
 	{
 	    $$ = $1
 	}
+
+NumberOrAsterisk:
+    _intNumber
+    {
+        $$ = &element.NumberOrAsterisk{Number: $1}
+    }
+|   '*'
+    {
+        $$ = &element.NumberOrAsterisk{IsAsterisk: true}
+    }
 
 OralceBuiltInDataTypes:
 	CharacterDataTypes
@@ -315,77 +326,77 @@ OralceBuiltInDataTypes:
 CharacterDataTypes:
 	_char
 	{
-	    d := &datatype.Char{}
-	    d.SetDataDefine(datatype.DataDefineChar)
+	    d := &element.Char{}
+	    d.SetDataDefine(element.DataDefineChar)
 	    $$ = d
 	}
 |	_char '(' _intNumber ')'
     {
         size := $3
-        d := &datatype.Char{Size: &size}
-        d.SetDataDefine(datatype.DataDefineChar)
+        d := &element.Char{Size: &size}
+        d.SetDataDefine(element.DataDefineChar)
         $$ = d
     }
 |	_char '(' _intNumber _byte ')'
     {
         size := $3
-        d := &datatype.Char{Size: &size, IsByteSize: true}
-        d.SetDataDefine(datatype.DataDefineChar)
+        d := &element.Char{Size: &size, IsByteSize: true}
+        d.SetDataDefine(element.DataDefineChar)
         $$ = d
     }
 |	_char '(' _intNumber _char ')'
     {
         size := $3
-        d := &datatype.Char{Size: &size, IsCharSize: true}
-        d.SetDataDefine(datatype.DataDefineChar)
-        d.SetDataDefine(datatype.DataDefineChar)
+        d := &element.Char{Size: &size, IsCharSize: true}
+        d.SetDataDefine(element.DataDefineChar)
+        d.SetDataDefine(element.DataDefineChar)
         $$ = d
     }
 |	_varchar2 '(' _intNumber ')'
     {
         size := $3
-        d := &datatype.Varchar2{}
+        d := &element.Varchar2{}
         d.Size = &size
-        d.SetDataDefine(datatype.DataDefineVarchar2)
+        d.SetDataDefine(element.DataDefineVarchar2)
         $$ = d
     }
 |	_varchar2 '(' _intNumber _byte ')'
     {
         size := $3
-        d := &datatype.Varchar2{}
+        d := &element.Varchar2{}
         d.Size = &size
         d.IsByteSize = true
-        d.SetDataDefine(datatype.DataDefineVarchar2)
+        d.SetDataDefine(element.DataDefineVarchar2)
         $$ = d
     }
 |	_varchar2 '(' _intNumber _char ')'
     {
         size := $3
-        d := &datatype.Varchar2{}
+        d := &element.Varchar2{}
         d.Size = &size
         d.IsCharSize = true
-        d.SetDataDefine(datatype.DataDefineVarchar2)
+        d.SetDataDefine(element.DataDefineVarchar2)
         $$ = d
     }
 |	_nchar
     {
-        d := &datatype.NChar{}
-        d.SetDataDefine(datatype.DataDefineNChar)
+        d := &element.NChar{}
+        d.SetDataDefine(element.DataDefineNChar)
         $$ = d
     }
 |	_nchar '(' _intNumber ')'
     {
         size := $3
-        d := &datatype.NChar{Size: &size}
-        d.SetDataDefine(datatype.DataDefineNChar)
+        d := &element.NChar{Size: &size}
+        d.SetDataDefine(element.DataDefineNChar)
         $$ = d
     }
 |	_nvarchar2 '(' _intNumber ')'
     {
         size := $3
-        d := &datatype.NVarchar2{}
+        d := &element.NVarchar2{}
         d.Size = &size
-        d.SetDataDefine(datatype.DataDefineNVarChar2)
+        d.SetDataDefine(element.DataDefineNVarChar2)
         $$ = d
     }
 
@@ -401,48 +412,48 @@ The precision p can range from 1 to 126 binary digits. A FLOAT value requires fr
 NumberDataTypes:
 	_number
 	{
-	    d := &datatype.Number{}
-	    d.SetDataDefine(datatype.DataDefineNumber)
+	    d := &element.Number{}
+	    d.SetDataDefine(element.DataDefineNumber)
 	    $$ = d
 	}
-|	_number '(' _intNumber ')'
+|	_number '(' NumberOrAsterisk ')'
 	{
-	    precision := $3
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineNumber)
+	    precision := $3.(*element.NumberOrAsterisk)
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineNumber)
 	    $$ = d
 	}
-|	_number '(' _intNumber ',' _intNumber ')'
+|	_number '(' NumberOrAsterisk ',' _intNumber ')'
 	{
-	    precision := $3
+	    precision := $3.(*element.NumberOrAsterisk)
 	    scale := $5
-	    d := &datatype.Number{Precision: &precision, Scale: &scale}
-	    d.SetDataDefine(datatype.DataDefineNumber)
+	    d := &element.Number{Precision: precision, Scale: &scale}
+	    d.SetDataDefine(element.DataDefineNumber)
 	    $$ = d
 	}
 |	_float
 	{
-	    d := &datatype.Float{}
-	    d.SetDataDefine(datatype.DataDefineFloat)
+	    d := &element.Float{}
+	    d.SetDataDefine(element.DataDefineFloat)
 	    $$ = d
 	}
-|	_float '(' _intNumber ')'
+|	_float '(' NumberOrAsterisk ')'
 	{
-		precision := $3
-	    d := &datatype.Float{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineFloat)
+	    precision := $3.(*element.NumberOrAsterisk)
+	    d := &element.Float{Precision: precision}
+	    d.SetDataDefine(element.DataDefineFloat)
 	    $$ = d
 	}
 |	_binaryFloat
 	{
-	    d := &datatype.BinaryFloat{}
-	    d.SetDataDefine(datatype.DataDefineBinaryFloat)
+	    d := &element.BinaryFloat{}
+	    d.SetDataDefine(element.DataDefineBinaryFloat)
         $$ = d
 	}
 |	_binaryDouble
 	{
-	    d := &datatype.BinaryDouble{}
-	    d.SetDataDefine(datatype.DataDefineBinaryDouble)
+	    d := &element.BinaryDouble{}
+	    d.SetDataDefine(element.DataDefineBinaryDouble)
         $$ = d
 	}
 
@@ -455,21 +466,21 @@ Raw binary data of length size bytes. You must specify size for a RAW value. Max
 LongAndRawDataTypes:
 	_long
 	{
-	    d := &datatype.Long{}
-	    d.SetDataDefine(datatype.DataDefineLong)
+	    d := &element.Long{}
+	    d.SetDataDefine(element.DataDefineLong)
     	$$ = d
     }
 |	_long _raw
 	{
-	    d := &datatype.LongRaw{}
-	    d.SetDataDefine(datatype.DataDefineLongRaw)
+	    d := &element.LongRaw{}
+	    d.SetDataDefine(element.DataDefineLongRaw)
     	$$ = d
 	}
 |	_raw '(' _intNumber ')'
 	{
 	    size := $3
-	    d := &datatype.Raw{Size: &size}
-	    d.SetDataDefine(datatype.DataDefineRaw)
+	    d := &element.Raw{Size: &size}
+	    d.SetDataDefine(element.DataDefineRaw)
     	$$ = d
 	}
 
@@ -490,102 +501,102 @@ Stores a period of time in days, hours, minutes, and seconds, where
 DatetimeDataTypes:
 	_date
 	{
-        d := &datatype.Date{}
-        d.SetDataDefine(datatype.DataDefineDate)
+        d := &element.Date{}
+        d.SetDataDefine(element.DataDefineDate)
         $$ = d
     }
 |	_timestamp
 	{
-        d := &datatype.Timestamp{}
-        d.SetDataDefine(datatype.DataDefineTimestamp)
+        d := &element.Timestamp{}
+        d.SetDataDefine(element.DataDefineTimestamp)
         $$ = d
 	}
 |	_timestamp '(' _intNumber ')'
 	{
 	    precision := $3
-        d := &datatype.Timestamp{FractionalSecondsPrecision: &precision}
-        d.SetDataDefine(datatype.DataDefineTimestamp)
+        d := &element.Timestamp{FractionalSecondsPrecision: &precision}
+        d.SetDataDefine(element.DataDefineTimestamp)
         $$ = d
 	}
 |	_timestamp '(' _intNumber ')' _with _time _zone
 	{
 	    precision := $3
-        d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
-        d.SetDataDefine(datatype.DataDefineTimestamp)
+        d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
+        d.SetDataDefine(element.DataDefineTimestamp)
         $$ = d
 	}
 |	_timestamp '(' _intNumber ')' _with _local _time _zone
 	{
 	    precision := $3
-        d := &datatype.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
-        d.SetDataDefine(datatype.DataDefineTimestamp)
+        d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
+        d.SetDataDefine(element.DataDefineTimestamp)
         $$ = d
 	}
 |	_interval _year _to _mouth
 	{
-        d := &datatype.IntervalYear{}
-        d.SetDataDefine(datatype.DataDefineIntervalYear)
+        d := &element.IntervalYear{}
+        d.SetDataDefine(element.DataDefineIntervalYear)
         $$ = d
 	}
 |	_interval _year '(' _intNumber ')' _to _mouth
 	{
 	    precision := $4
-        d := &datatype.IntervalYear{Precision: &precision}
-        d.SetDataDefine(datatype.DataDefineIntervalYear)
+        d := &element.IntervalYear{Precision: &precision}
+        d.SetDataDefine(element.DataDefineIntervalYear)
         $$ = d
 	}
 |	_interval _day _to _second
 	{
-        d := &datatype.IntervalDay{}
-        d.SetDataDefine(datatype.DataDefineIntervalDay)
+        d := &element.IntervalDay{}
+        d.SetDataDefine(element.DataDefineIntervalDay)
         $$ = d
 	}
 |	_interval _day '(' _intNumber ')' _to _second
 	{
 	    precision := $4
-        d := &datatype.IntervalDay{Precision: &precision}
-        d.SetDataDefine(datatype.DataDefineIntervalDay)
+        d := &element.IntervalDay{Precision: &precision}
+        d.SetDataDefine(element.DataDefineIntervalDay)
         $$ = d
 	}
 |	_interval _day '(' _intNumber ')' _to _second '(' _intNumber ')'
 	{
 	    precision := $4
 	    sPrecision := $9
-        d := &datatype.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
-        d.SetDataDefine(datatype.DataDefineIntervalDay)
+        d := &element.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
+        d.SetDataDefine(element.DataDefineIntervalDay)
         $$ = d
 	}
 |	_interval _day _to _second '(' _intNumber ')'
 	{
 	    sPrecision := $6
-        d := &datatype.IntervalDay{FractionalSecondsPrecision: &sPrecision}
-        d.SetDataDefine(datatype.DataDefineIntervalDay)
+        d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
+        d.SetDataDefine(element.DataDefineIntervalDay)
         $$ = d
 	}
 
 LargeObjectDataTypes:
 	_blob
 	{
-        d := &datatype.Blob{}
-        d.SetDataDefine(datatype.DataDefineBlob)
+        d := &element.Blob{}
+        d.SetDataDefine(element.DataDefineBlob)
         $$ = d
     }
 |	_clob
 	{
-        d := &datatype.Clob{}
-        d.SetDataDefine(datatype.DataDefineClob)
+        d := &element.Clob{}
+        d.SetDataDefine(element.DataDefineClob)
         $$ = d
 	}
 |	_nclob
 	{
-        d := &datatype.NClob{}
-        d.SetDataDefine(datatype.DataDefineNClob)
+        d := &element.NClob{}
+        d.SetDataDefine(element.DataDefineNClob)
         $$ = d
 	}
 |	_bfile
 	{
-        d := &datatype.BFile{}
-        d.SetDataDefine(datatype.DataDefineBFile)
+        d := &element.BFile{}
+        d.SetDataDefine(element.DataDefineBFile)
         $$ = d
 	}
 
@@ -597,189 +608,189 @@ The optional size is the size of a column of type UROWID. The maximum size and d
 RowIdDataTypes:
 	_rowid
 	{
-        d := &datatype.RowId{}
-        d.SetDataDefine(datatype.DataDefineRowId)
+        d := &element.RowId{}
+        d.SetDataDefine(element.DataDefineRowId)
         $$ = d
     }
 |	_urowid
 	{
-        d := &datatype.URowId{}
-        d.SetDataDefine(datatype.DataDefineURowId)
+        d := &element.URowId{}
+        d.SetDataDefine(element.DataDefineURowId)
         $$ = d
 	}
 |	_urowid '(' _intNumber ')'
 	{
 	    size := $3
-        d := &datatype.URowId{Size: &size}
-        d.SetDataDefine(datatype.DataDefineURowId)
+        d := &element.URowId{Size: &size}
+        d.SetDataDefine(element.DataDefineURowId)
         $$ = d
 	}
 
 AnsiSupportDataTypes:
 	_character '(' _intNumber ')'
 	{
-	    d := &datatype.Char{}
-	    d.SetDataDefine(datatype.DataDefineCharacter)
+	    d := &element.Char{}
+	    d.SetDataDefine(element.DataDefineCharacter)
 	    $$ = d
     }
 |	_character _varying '(' _intNumber ')'
 	{
 	    size := $4
-	    d := &datatype.Varchar2{}
+	    d := &element.Varchar2{}
 	    d.Size = &size
-	    d.SetDataDefine(datatype.DataDefineCharacterVarying)
+	    d.SetDataDefine(element.DataDefineCharacterVarying)
 	    $$ = d
 	}
 |	_char _varying '(' _intNumber ')'
 	{
 	    size := $4
-	    d := &datatype.Varchar2{}
+	    d := &element.Varchar2{}
 	    d.Size = &size
-	    d.SetDataDefine(datatype.DataDefineCharVarying)
+	    d.SetDataDefine(element.DataDefineCharVarying)
 	    $$ = d
 	}
 |	_nchar _varying '(' _intNumber ')'
 	{
         size := $4
-        d := &datatype.NVarchar2{}
+        d := &element.NVarchar2{}
         d.Size = &size
-        d.SetDataDefine(datatype.DataDefineNCharVarying)
+        d.SetDataDefine(element.DataDefineNCharVarying)
         $$ = d
 	}
 |	_varchar '(' _intNumber ')'
 	{
 	    size := $3
-	    d := &datatype.Varchar2{}
+	    d := &element.Varchar2{}
 	    d.Size = &size
-	    d.SetDataDefine(datatype.DataDefineVarchar)
+	    d.SetDataDefine(element.DataDefineVarchar)
 	    $$ = d
 	}
 |	_national _character '(' _intNumber ')'
 	{
 	    size := $4
-	    d := &datatype.NChar{Size: &size}
-	    d.SetDataDefine(datatype.DataDefineNationalCharacter)
+	    d := &element.NChar{Size: &size}
+	    d.SetDataDefine(element.DataDefineNationalCharacter)
 	    $$ = d
 	}
 |	_national _character _varying '(' _intNumber ')'
 	{
 	    size := $5
-	    d := &datatype.NVarchar2{}
+	    d := &element.NVarchar2{}
 	    d.Size = &size
-	    d.SetDataDefine(datatype.DataDefineNationalCharacterVarying)
+	    d.SetDataDefine(element.DataDefineNationalCharacterVarying)
 	    $$ = d
 	}
 |	_national _char '(' _intNumber ')'
 	{
 	    size := $4
-	    d := &datatype.NChar{Size: &size}
-	    d.SetDataDefine(datatype.DataDefineNationalChar)
+	    d := &element.NChar{Size: &size}
+	    d.SetDataDefine(element.DataDefineNationalChar)
 	    $$ = d
 	}
 |	_national _char _varying '(' _intNumber ')'
 	{
 	    size := $5
-	    d := &datatype.NVarchar2{}
+	    d := &element.NVarchar2{}
 	    d.Size = &size
-	    d.SetDataDefine(datatype.DataDefineNationalCharVarying)
+	    d.SetDataDefine(element.DataDefineNationalCharVarying)
 	    $$ = d
 	}
 |	_numeric
 	{
-	    d := &datatype.Number{}
-	    d.SetDataDefine(datatype.DataDefineNumeric)
+	    d := &element.Number{}
+	    d.SetDataDefine(element.DataDefineNumeric)
 	    $$ = d
 	}
-|	_numeric '(' _intNumber ')'
+|	_numeric '(' NumberOrAsterisk ')'
 	{
-	    precision := $3
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineNumeric)
+	    precision := $3.(*element.NumberOrAsterisk)
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineNumeric)
 	    $$ = d
 	}
-|	_numeric '(' _intNumber '.' _intNumber ')'
+|	_numeric '(' NumberOrAsterisk '.' _intNumber ')'
 	{
-	    precision := $3
+	    precision := $3.(*element.NumberOrAsterisk)
 	    scale := $5
-	    d := &datatype.Number{Precision: &precision, Scale: &scale}
-	    d.SetDataDefine(datatype.DataDefineNumeric)
+	    d := &element.Number{Precision: precision, Scale: &scale}
+	    d.SetDataDefine(element.DataDefineNumeric)
 	    $$ = d
 	}
 |	_decimal
 	{
-	    d := &datatype.Number{}
-	    d.SetDataDefine(datatype.DataDefineDecimal)
+	    d := &element.Number{}
+	    d.SetDataDefine(element.DataDefineDecimal)
 	    $$ = d
 	}
-|	_decimal '(' _intNumber ')'
+|	_decimal '(' NumberOrAsterisk ')'
 	{
-	    precision := $3
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineDecimal)
+	    precision := $3.(*element.NumberOrAsterisk)
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineDecimal)
 	    $$ = d
 	}
-|	_decimal '(' _intNumber '.' _intNumber ')'
+|	_decimal '(' NumberOrAsterisk '.' _intNumber ')'
 	{
-	    precision := $3
+	    precision := $3.(*element.NumberOrAsterisk)
 	    scale := $5
-	    d := &datatype.Number{Precision: &precision, Scale: &scale}
-	    d.SetDataDefine(datatype.DataDefineDecimal)
+	    d := &element.Number{Precision: precision, Scale: &scale}
+	    d.SetDataDefine(element.DataDefineDecimal)
 	    $$ = d
 	}
 |	_dec
 	{
-	    d := &datatype.Number{}
-	    d.SetDataDefine(datatype.DataDefineDec)
+	    d := &element.Number{}
+	    d.SetDataDefine(element.DataDefineDec)
 	    $$ = d
 	}
-|	_dec '(' _intNumber ')'
+|	_dec '(' NumberOrAsterisk ')'
 	{
-	    precision := $3
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineDec)
+	    precision := $3.(*element.NumberOrAsterisk)
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineDec)
 	    $$ = d
 	}
-|	_dec '(' _intNumber '.' _intNumber ')'
+|	_dec '(' NumberOrAsterisk '.' _intNumber ')'
 	{
-	    precision := $3
+	    precision := $3.(*element.NumberOrAsterisk)
 	    scale := $5
-	    d := &datatype.Number{Precision: &precision, Scale: &scale}
-	    d.SetDataDefine(datatype.DataDefineDec)
+	    d := &element.Number{Precision: precision, Scale: &scale}
+	    d.SetDataDefine(element.DataDefineDec)
 	    $$ = d
 	}
 |	_interger
 	{
-	    precision := 38
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineInteger)
+	    precision := &element.NumberOrAsterisk{Number: 38}
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineInteger)
 	    $$ = d
 	}
 |	_int
 	{
-	    precision := 38
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineInt)
+	    precision := &element.NumberOrAsterisk{Number: 38}
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineInt)
 	    $$ = d
 	}
 |	_smallInt
 	{
-	    precision := 38
-	    d := &datatype.Number{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineSmallInt)
+	    precision := &element.NumberOrAsterisk{Number: 38}
+	    d := &element.Number{Precision: precision}
+	    d.SetDataDefine(element.DataDefineSmallInt)
 	    $$ = d
 	}
 |	_double _precision
 	{
-		precision := 126
-	    d := &datatype.Float{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineDoublePrecision)
+		precision := &element.NumberOrAsterisk{Number: 126}
+	    d := &element.Float{Precision: precision}
+	    d.SetDataDefine(element.DataDefineDoublePrecision)
 	    $$ = d
 	}
 |	_real
 	{
-		precision := 63
-	    d := &datatype.Float{Precision: &precision}
-	    d.SetDataDefine(datatype.DataDefineReal)
+		precision := &element.NumberOrAsterisk{Number: 63}
+	    d := &element.Float{Precision: precision}
+	    d.SetDataDefine(element.DataDefineReal)
 	    $$ = d
 	}
 %%
