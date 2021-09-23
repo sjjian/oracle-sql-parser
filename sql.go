@@ -23,7 +23,7 @@ type yyXError struct {
 }
 
 const (
-	yyDefault            = 57397
+	yyDefault            = 57398
 	yyEofCode            = 57344
 	_add                 = 57350
 	_alter               = 57348
@@ -35,16 +35,17 @@ const (
 	_char                = 57351
 	_character           = 57380
 	_clob                = 57375
+	_collate             = 57393
 	_date                = 57362
 	_day                 = 57372
 	_dec                 = 57386
 	_decimal             = 57385
 	_double              = 57390
-	_doubleQuoteStr      = 57395
+	_doubleQuoteStr      = 57396
 	_float               = 57357
 	_from                = 57347
 	_int                 = 57388
-	_intNumber           = 57393
+	_intNumber           = 57394
 	_interger            = 57387
 	_interval            = 57368
 	_local               = 57365
@@ -53,7 +54,7 @@ const (
 	_national            = 57383
 	_nchar               = 57354
 	_nclob               = 57376
-	_nonquotedIdentifier = 57396
+	_nonquotedIdentifier = 57397
 	_number              = 57356
 	_numeric             = 57384
 	_nvarchar2           = 57355
@@ -63,7 +64,7 @@ const (
 	_rowid               = 57378
 	_second              = 57373
 	_select              = 57346
-	_singleQuoteStr      = 57394
+	_singleQuoteStr      = 57395
 	_smallInt            = 57389
 	_table               = 57349
 	_time                = 57366
@@ -79,111 +80,113 @@ const (
 	yyErrCode            = 57345
 
 	yyMaxDepth = 200
-	yyTabOfs   = -103
+	yyTabOfs   = -104
 )
 
 var (
 	yyPrec = map[int]int{}
 
 	yyXLAT = map[int]int{
-		41:    0,  // ')' (113x)
-		44:    1,  // ',' (81x)
-		57393: 2,  // _intNumber (29x)
-		40:    3,  // '(' (26x)
-		57344: 4,  // $end (21x)
-		57350: 5,  // _add (16x)
-		46:    6,  // '.' (8x)
-		57351: 7,  // _char (7x)
-		42:    8,  // '*' (5x)
-		57380: 9,  // _character (5x)
-		57361: 10, // _raw (5x)
-		57381: 11, // _varying (5x)
-		57422: 12, // NumberOrAsterisk (5x)
-		57377: 13, // _bfile (4x)
-		57359: 14, // _binaryDouble (4x)
-		57358: 15, // _binaryFloat (4x)
-		57374: 16, // _blob (4x)
-		57375: 17, // _clob (4x)
-		57362: 18, // _date (4x)
-		57386: 19, // _dec (4x)
-		57385: 20, // _decimal (4x)
-		57390: 21, // _double (4x)
-		57395: 22, // _doubleQuoteStr (4x)
-		57357: 23, // _float (4x)
-		57388: 24, // _int (4x)
-		57387: 25, // _interger (4x)
-		57368: 26, // _interval (4x)
-		57360: 27, // _long (4x)
-		57383: 28, // _national (4x)
-		57354: 29, // _nchar (4x)
-		57376: 30, // _nclob (4x)
-		57396: 31, // _nonquotedIdentifier (4x)
-		57356: 32, // _number (4x)
-		57384: 33, // _numeric (4x)
-		57355: 34, // _nvarchar2 (4x)
-		57392: 35, // _real (4x)
-		57378: 36, // _rowid (4x)
-		57389: 37, // _smallInt (4x)
-		57363: 38, // _timestamp (4x)
-		57370: 39, // _to (4x)
-		57379: 40, // _urowid (4x)
-		57382: 41, // _varchar (4x)
-		57353: 42, // _varchar2 (4x)
-		57414: 43, // Identifier (4x)
-		57352: 44, // _byte (2x)
-		57371: 45, // _mouth (2x)
-		57373: 46, // _second (2x)
-		57366: 47, // _time (2x)
-		57367: 48, // _zone (2x)
-		57398: 49, // AddColumnClause (2x)
-		57401: 50, // ChangeColumnClause (2x)
-		57406: 51, // ColumnDefinition (2x)
-		57408: 52, // ColumnName (2x)
-		57413: 53, // DropColumnClause (2x)
-		57420: 54, // ModidyColumnClause (2x)
-		57425: 55, // RealColumnDefinition (2x)
-		57348: 56, // _alter (1x)
-		57372: 57, // _day (1x)
-		57365: 58, // _local (1x)
-		57391: 59, // _precision (1x)
-		57349: 60, // _table (1x)
-		57364: 61, // _with (1x)
-		57369: 62, // _year (1x)
-		57399: 63, // AlterTableStmt (1x)
-		57400: 64, // AnsiSupportDataTypes (1x)
-		57402: 65, // ChangeColumnClauseList (1x)
-		57403: 66, // CharacterDataTypes (1x)
-		57404: 67, // CollateClause (1x)
-		57405: 68, // ColumnClauses (1x)
-		57407: 69, // ColumnDefinitionList (1x)
-		57409: 70, // ColumnProperties (1x)
-		57410: 71, // Datatype (1x)
-		57411: 72, // DatetimeDataTypes (1x)
-		57412: 73, // DefaultProperties (1x)
-		57415: 74, // InvisibleProperty (1x)
-		57416: 75, // LargeObjectDataTypes (1x)
-		57417: 76, // LongAndRawDataTypes (1x)
-		57418: 77, // MemoptimizeReadClause (1x)
-		57419: 78, // MemoptimizeWriteClause (1x)
-		57421: 79, // NumberDataTypes (1x)
-		57423: 80, // OralceBuiltInDataTypes (1x)
-		57424: 81, // OutOfLinePartStorageList (1x)
-		57426: 82, // RenameColumnClause (1x)
-		57427: 83, // RowIdDataTypes (1x)
-		57428: 84, // SortProperty (1x)
-		57429: 85, // Start (1x)
-		57430: 86, // Statement (1x)
-		57431: 87, // TableName (1x)
-		57397: 88, // $default (0x)
-		57347: 89, // _from (0x)
-		57346: 90, // _select (0x)
-		57394: 91, // _singleQuoteStr (0x)
-		57345: 92, // error (0x)
+		41:    0,  // ')' (114x)
+		44:    1,  // ',' (82x)
+		57393: 2,  // _collate (70x)
+		57394: 3,  // _intNumber (29x)
+		40:    4,  // '(' (26x)
+		57344: 5,  // $end (21x)
+		57350: 6,  // _add (16x)
+		46:    7,  // '.' (8x)
+		57351: 8,  // _char (7x)
+		42:    9,  // '*' (5x)
+		57380: 10, // _character (5x)
+		57361: 11, // _raw (5x)
+		57381: 12, // _varying (5x)
+		57423: 13, // NumberOrAsterisk (5x)
+		57377: 14, // _bfile (4x)
+		57359: 15, // _binaryDouble (4x)
+		57358: 16, // _binaryFloat (4x)
+		57374: 17, // _blob (4x)
+		57375: 18, // _clob (4x)
+		57362: 19, // _date (4x)
+		57386: 20, // _dec (4x)
+		57385: 21, // _decimal (4x)
+		57390: 22, // _double (4x)
+		57396: 23, // _doubleQuoteStr (4x)
+		57357: 24, // _float (4x)
+		57388: 25, // _int (4x)
+		57387: 26, // _interger (4x)
+		57368: 27, // _interval (4x)
+		57360: 28, // _long (4x)
+		57383: 29, // _national (4x)
+		57354: 30, // _nchar (4x)
+		57376: 31, // _nclob (4x)
+		57397: 32, // _nonquotedIdentifier (4x)
+		57356: 33, // _number (4x)
+		57384: 34, // _numeric (4x)
+		57355: 35, // _nvarchar2 (4x)
+		57392: 36, // _real (4x)
+		57378: 37, // _rowid (4x)
+		57389: 38, // _smallInt (4x)
+		57363: 39, // _timestamp (4x)
+		57370: 40, // _to (4x)
+		57379: 41, // _urowid (4x)
+		57382: 42, // _varchar (4x)
+		57353: 43, // _varchar2 (4x)
+		57415: 44, // Identifier (4x)
+		57352: 45, // _byte (2x)
+		57371: 46, // _mouth (2x)
+		57373: 47, // _second (2x)
+		57366: 48, // _time (2x)
+		57367: 49, // _zone (2x)
+		57399: 50, // AddColumnClause (2x)
+		57402: 51, // ChangeColumnClause (2x)
+		57407: 52, // ColumnDefinition (2x)
+		57409: 53, // ColumnName (2x)
+		57414: 54, // DropColumnClause (2x)
+		57421: 55, // ModidyColumnClause (2x)
+		57426: 56, // RealColumnDefinition (2x)
+		57348: 57, // _alter (1x)
+		57372: 58, // _day (1x)
+		57365: 59, // _local (1x)
+		57391: 60, // _precision (1x)
+		57349: 61, // _table (1x)
+		57364: 62, // _with (1x)
+		57369: 63, // _year (1x)
+		57400: 64, // AlterTableStmt (1x)
+		57401: 65, // AnsiSupportDataTypes (1x)
+		57403: 66, // ChangeColumnClauseList (1x)
+		57404: 67, // CharacterDataTypes (1x)
+		57405: 68, // CollateClause (1x)
+		57406: 69, // ColumnClauses (1x)
+		57408: 70, // ColumnDefinitionList (1x)
+		57410: 71, // ColumnProperties (1x)
+		57411: 72, // Datatype (1x)
+		57412: 73, // DatetimeDataTypes (1x)
+		57413: 74, // DefaultProperties (1x)
+		57416: 75, // InvisibleProperty (1x)
+		57417: 76, // LargeObjectDataTypes (1x)
+		57418: 77, // LongAndRawDataTypes (1x)
+		57419: 78, // MemoptimizeReadClause (1x)
+		57420: 79, // MemoptimizeWriteClause (1x)
+		57422: 80, // NumberDataTypes (1x)
+		57424: 81, // OralceBuiltInDataTypes (1x)
+		57425: 82, // OutOfLinePartStorageList (1x)
+		57427: 83, // RenameColumnClause (1x)
+		57428: 84, // RowIdDataTypes (1x)
+		57429: 85, // SortProperty (1x)
+		57430: 86, // Start (1x)
+		57431: 87, // Statement (1x)
+		57432: 88, // TableName (1x)
+		57398: 89, // $default (0x)
+		57347: 90, // _from (0x)
+		57346: 91, // _select (0x)
+		57395: 92, // _singleQuoteStr (0x)
+		57345: 93, // error (0x)
 	}
 
 	yySymNames = []string{
 		"')'",
 		"','",
+		"_collate",
 		"_intNumber",
 		"'('",
 		"$end",
@@ -278,360 +281,362 @@ var (
 	}
 
 	yyTokenLiteralStrings = map[int]string{
-		57393: "int number",
-		57395: "double quotes string",
-		57396: "nonquoted identifier",
-		57394: "single quotes string",
+		57394: "int number",
+		57396: "double quotes string",
+		57397: "nonquoted identifier",
+		57395: "single quotes string",
 	}
 
 	yyReductions = map[int]struct{ xsym, components int }{
 		0:   {0, 1},
-		1:   {85, 1},
-		2:   {86, 1},
-		3:   {63, 6},
-		4:   {87, 1},
-		5:   {87, 3},
-		6:   {43, 1},
-		7:   {43, 1},
-		8:   {77, 0},
-		9:   {78, 0},
-		10:  {68, 1},
-		11:  {68, 1},
-		12:  {65, 1},
-		13:  {65, 2},
-		14:  {50, 1},
-		15:  {50, 1},
-		16:  {50, 1},
-		17:  {49, 6},
-		18:  {70, 0},
-		19:  {81, 0},
+		1:   {86, 1},
+		2:   {87, 1},
+		3:   {88, 1},
+		4:   {88, 3},
+		5:   {44, 1},
+		6:   {44, 1},
+		7:   {64, 6},
+		8:   {78, 0},
+		9:   {79, 0},
+		10:  {69, 1},
+		11:  {69, 1},
+		12:  {83, 0},
+		13:  {66, 1},
+		14:  {66, 2},
+		15:  {51, 1},
+		16:  {51, 1},
+		17:  {51, 1},
+		18:  {50, 6},
+		19:  {55, 0},
 		20:  {54, 0},
-		21:  {53, 0},
+		21:  {71, 0},
 		22:  {82, 0},
-		23:  {69, 1},
-		24:  {69, 3},
-		25:  {51, 1},
-		26:  {55, 6},
-		27:  {52, 1},
-		28:  {67, 0},
-		29:  {84, 0},
-		30:  {74, 0},
-		31:  {73, 0},
-		32:  {71, 1},
-		33:  {71, 1},
-		34:  {12, 1},
-		35:  {12, 1},
-		36:  {80, 1},
-		37:  {80, 1},
-		38:  {80, 1},
-		39:  {80, 1},
-		40:  {80, 1},
-		41:  {80, 1},
-		42:  {66, 1},
-		43:  {66, 4},
-		44:  {66, 5},
-		45:  {66, 5},
-		46:  {66, 4},
-		47:  {66, 5},
-		48:  {66, 5},
-		49:  {66, 1},
-		50:  {66, 4},
-		51:  {66, 4},
-		52:  {79, 1},
-		53:  {79, 4},
-		54:  {79, 6},
-		55:  {79, 1},
-		56:  {79, 4},
-		57:  {79, 1},
-		58:  {79, 1},
-		59:  {76, 1},
-		60:  {76, 2},
-		61:  {76, 4},
-		62:  {72, 1},
-		63:  {72, 1},
-		64:  {72, 4},
-		65:  {72, 7},
-		66:  {72, 8},
-		67:  {72, 4},
-		68:  {72, 7},
-		69:  {72, 4},
-		70:  {72, 7},
-		71:  {72, 10},
-		72:  {72, 7},
-		73:  {75, 1},
-		74:  {75, 1},
-		75:  {75, 1},
-		76:  {75, 1},
-		77:  {83, 1},
-		78:  {83, 1},
-		79:  {83, 4},
-		80:  {64, 4},
-		81:  {64, 5},
-		82:  {64, 5},
-		83:  {64, 5},
-		84:  {64, 4},
-		85:  {64, 5},
-		86:  {64, 6},
-		87:  {64, 5},
-		88:  {64, 6},
-		89:  {64, 1},
-		90:  {64, 4},
-		91:  {64, 6},
-		92:  {64, 1},
-		93:  {64, 4},
-		94:  {64, 6},
-		95:  {64, 1},
-		96:  {64, 4},
-		97:  {64, 6},
-		98:  {64, 1},
-		99:  {64, 1},
-		100: {64, 1},
-		101: {64, 2},
-		102: {64, 1},
+		23:  {70, 1},
+		24:  {70, 3},
+		25:  {52, 1},
+		26:  {56, 6},
+		27:  {53, 1},
+		28:  {68, 0},
+		29:  {68, 1},
+		30:  {85, 0},
+		31:  {75, 0},
+		32:  {74, 0},
+		33:  {72, 1},
+		34:  {72, 1},
+		35:  {13, 1},
+		36:  {13, 1},
+		37:  {81, 1},
+		38:  {81, 1},
+		39:  {81, 1},
+		40:  {81, 1},
+		41:  {81, 1},
+		42:  {81, 1},
+		43:  {67, 1},
+		44:  {67, 4},
+		45:  {67, 5},
+		46:  {67, 5},
+		47:  {67, 4},
+		48:  {67, 5},
+		49:  {67, 5},
+		50:  {67, 1},
+		51:  {67, 4},
+		52:  {67, 4},
+		53:  {80, 1},
+		54:  {80, 4},
+		55:  {80, 6},
+		56:  {80, 1},
+		57:  {80, 4},
+		58:  {80, 1},
+		59:  {80, 1},
+		60:  {77, 1},
+		61:  {77, 2},
+		62:  {77, 4},
+		63:  {73, 1},
+		64:  {73, 1},
+		65:  {73, 4},
+		66:  {73, 7},
+		67:  {73, 8},
+		68:  {73, 4},
+		69:  {73, 7},
+		70:  {73, 4},
+		71:  {73, 7},
+		72:  {73, 10},
+		73:  {73, 7},
+		74:  {76, 1},
+		75:  {76, 1},
+		76:  {76, 1},
+		77:  {76, 1},
+		78:  {84, 1},
+		79:  {84, 1},
+		80:  {84, 4},
+		81:  {65, 4},
+		82:  {65, 5},
+		83:  {65, 5},
+		84:  {65, 5},
+		85:  {65, 4},
+		86:  {65, 5},
+		87:  {65, 6},
+		88:  {65, 5},
+		89:  {65, 6},
+		90:  {65, 1},
+		91:  {65, 4},
+		92:  {65, 6},
+		93:  {65, 1},
+		94:  {65, 4},
+		95:  {65, 6},
+		96:  {65, 1},
+		97:  {65, 4},
+		98:  {65, 6},
+		99:  {65, 1},
+		100: {65, 1},
+		101: {65, 1},
+		102: {65, 2},
+		103: {65, 1},
 	}
 
 	yyXErrors = map[yyXError]string{}
 
-	yyParseTab = [199][]uint16{
+	yyParseTab = [200][]uint16{
 		// 0
-		{56: 107, 63: 106, 85: 104, 105},
-		{4: 103},
-		{4: 102},
-		{4: 101},
-		{60: 108},
+		{57: 108, 64: 107, 86: 105, 106},
+		{5: 104},
+		{5: 103},
+		{5: 102},
+		{61: 109},
 		// 5
-		{22: 112, 31: 111, 43: 110, 87: 109},
-		{4: 95, 95, 77: 115},
-		{4: 99, 99, 113},
-		{4: 97, 97, 97, 97, 9: 97, 97, 13: 97, 97, 97, 97, 97, 97, 97, 97, 97, 23: 97, 97, 97, 97, 97, 97, 97, 97, 32: 97, 97, 97, 97, 97, 97, 97, 40: 97, 97, 97},
-		{4: 96, 96, 96, 96, 9: 96, 96, 13: 96, 96, 96, 96, 96, 96, 96, 96, 96, 23: 96, 96, 96, 96, 96, 96, 96, 96, 32: 96, 96, 96, 96, 96, 96, 96, 40: 96, 96, 96},
+		{23: 112, 32: 111, 44: 110, 88: 113},
+		{5: 101, 101, 302},
+		{5: 99, 99, 99, 99, 10: 99, 99, 14: 99, 99, 99, 99, 99, 99, 99, 99, 99, 24: 99, 99, 99, 99, 99, 99, 99, 99, 33: 99, 99, 99, 99, 99, 99, 99, 41: 99, 99, 99},
+		{5: 98, 98, 98, 98, 10: 98, 98, 14: 98, 98, 98, 98, 98, 98, 98, 98, 98, 24: 98, 98, 98, 98, 98, 98, 98, 98, 33: 98, 98, 98, 98, 98, 98, 98, 41: 98, 98, 98},
+		{5: 96, 96, 78: 114},
 		// 10
-		{22: 112, 31: 111, 43: 114},
-		{4: 98, 98},
-		{4: 94, 94, 78: 116},
-		{4: 83, 124, 49: 121, 120, 53: 123, 122, 65: 118, 68: 117, 82: 119},
-		{4: 100},
+		{5: 95, 95, 79: 115},
+		{5: 92, 123, 50: 120, 119, 54: 122, 121, 66: 117, 69: 116, 83: 118},
+		{5: 97},
+		{5: 94, 123, 50: 120, 301, 54: 122, 121},
+		{5: 93},
 		// 15
-		{4: 93, 124, 49: 121, 301, 53: 123, 122},
-		{4: 92},
-		{4: 91, 91},
-		{4: 89, 89},
-		{4: 88, 88},
+		{5: 91, 91},
+		{5: 89, 89},
+		{5: 88, 88},
+		{5: 87, 87},
+		{4: 124},
 		// 20
-		{4: 87, 87},
-		{3: 125},
-		{22: 112, 31: 111, 43: 130, 51: 127, 129, 55: 128, 69: 126},
+		{23: 112, 32: 111, 44: 129, 52: 126, 128, 56: 127, 70: 125},
 		{296, 297},
-		{80, 80},
-		// 25
-		{78, 78},
-		{7: 140, 9: 159, 149, 13: 156, 147, 146, 153, 154, 150, 164, 163, 168, 23: 145, 166, 165, 152, 148, 161, 142, 155, 32: 144, 162, 143, 169, 157, 167, 151, 40: 158, 160, 141, 64: 133, 66: 134, 71: 131, 137, 75: 138, 136, 79: 135, 132, 83: 139},
-		{7: 76, 9: 76, 76, 13: 76, 76, 76, 76, 76, 76, 76, 76, 76, 23: 76, 76, 76, 76, 76, 76, 76, 76, 32: 76, 76, 76, 76, 76, 76, 76, 40: 76, 76, 76},
-		{75, 75, 67: 292},
-		{71, 71},
-		// 30
-		{70, 70},
-		{67, 67},
-		{66, 66},
-		{65, 65},
-		{64, 64},
-		// 35
-		{63, 63},
-		{62, 62},
-		{61, 61, 3: 281, 11: 282},
-		{3: 274},
-		{54, 54, 3: 267, 11: 268},
-		// 40
-		{3: 264},
-		{51, 51, 3: 258},
-		{48, 48, 3: 255},
-		{46, 46},
-		{45, 45},
-		// 45
-		{44, 44, 10: 254},
-		{3: 251},
-		{41, 41},
-		{40, 40, 3: 242},
-		{57: 221, 62: 220},
-		// 50
-		{30, 30},
-		{29, 29},
-		{28, 28},
-		{27, 27},
-		{26, 26},
-		// 55
-		{25, 25, 3: 217},
-		{3: 210, 11: 211},
-		{3: 207},
-		{7: 192, 9: 191},
-		{14, 14, 3: 185},
-		// 60
-		{11, 11, 3: 179},
-		{8, 8, 3: 171},
-		{5, 5},
-		{4, 4},
-		{3, 3},
-		// 65
-		{59: 170},
-		{1, 1},
-		{2, 2},
-		{2: 172, 8: 173, 12: 174},
-		{69, 69, 6: 69},
-		// 70
-		{68, 68, 6: 68},
-		{175, 6: 176},
-		{7, 7},
-		{2: 177},
-		{178},
-		// 75
-		{6, 6},
-		{2: 172, 8: 173, 12: 180},
-		{181, 6: 182},
-		{10, 10},
-		{2: 183},
-		// 80
-		{184},
-		{9, 9},
-		{2: 172, 8: 173, 12: 186},
-		{187, 6: 188},
-		{13, 13},
-		// 85
-		{2: 189},
-		{190},
-		{12, 12},
-		{3: 200, 11: 201},
-		{3: 193, 11: 194},
-		// 90
-		{2: 198},
-		{3: 195},
-		{2: 196},
-		{197},
-		{15, 15},
-		// 95
-		{199},
-		{16, 16},
-		{2: 205},
-		{3: 202},
-		{2: 203},
-		// 100
-		{204},
-		{17, 17},
-		{206},
-		{18, 18},
-		{2: 208},
-		// 105
-		{209},
-		{19, 19},
-		{2: 215},
-		{3: 212},
-		{2: 213},
-		// 110
-		{214},
-		{22, 22},
-		{216},
-		{23, 23},
-		{2: 218},
-		// 115
-		{219},
-		{24, 24},
-		{3: 236, 39: 235},
-		{3: 223, 39: 222},
-		{46: 231},
-		// 120
-		{2: 224},
-		{225},
-		{39: 226},
-		{46: 227},
-		{33, 33, 3: 228},
-		// 125
-		{2: 229},
-		{230},
-		{32, 32},
-		{34, 34, 3: 232},
-		{2: 233},
-		// 130
-		{234},
-		{31, 31},
-		{45: 241},
-		{2: 237},
-		{238},
-		// 135
-		{39: 239},
-		{45: 240},
-		{35, 35},
-		{36, 36},
-		{2: 243},
-		// 140
-		{244},
-		{39, 39, 61: 245},
-		{47: 246, 58: 247},
-		{48: 250},
-		{47: 248},
-		// 145
-		{48: 249},
-		{37, 37},
-		{38, 38},
-		{2: 252},
-		{253},
-		// 150
-		{42, 42},
-		{43, 43},
-		{2: 172, 8: 173, 12: 256},
-		{257},
-		{47, 47},
-		// 155
-		{2: 172, 8: 173, 12: 259},
-		{260, 261},
-		{50, 50},
-		{2: 262},
-		{263},
-		// 160
-		{49, 49},
-		{2: 265},
-		{266},
-		{52, 52},
-		{2: 272},
-		// 165
-		{3: 269},
-		{2: 270},
-		{271},
-		{20, 20},
-		{273},
-		// 170
-		{53, 53},
-		{2: 275},
-		{276, 7: 278, 44: 277},
-		{57, 57},
-		{280},
-		// 175
-		{279},
-		{55, 55},
-		{56, 56},
-		{2: 286},
-		{3: 283},
-		// 180
-		{2: 284},
-		{285},
-		{21, 21},
-		{287, 7: 289, 44: 288},
-		{60, 60},
-		// 185
-		{291},
-		{290},
-		{58, 58},
-		{59, 59},
-		{74, 74, 84: 293},
-		// 190
-		{73, 73, 74: 294},
-		{72, 72, 73: 295},
-		{77, 77},
-		{4: 85, 85, 70: 299},
-		{22: 112, 31: 111, 43: 130, 51: 298, 129, 55: 128},
-		// 195
+		{81, 81},
 		{79, 79},
-		{4: 84, 84, 81: 300},
-		{4: 86, 86},
-		{4: 90, 90},
+		{8: 139, 10: 158, 148, 14: 155, 146, 145, 152, 153, 149, 163, 162, 167, 24: 144, 165, 164, 151, 147, 160, 141, 154, 33: 143, 161, 142, 168, 156, 166, 150, 41: 157, 159, 140, 65: 132, 67: 133, 72: 130, 136, 76: 137, 135, 80: 134, 131, 84: 138},
+		// 25
+		{8: 77, 10: 77, 77, 14: 77, 77, 77, 77, 77, 77, 77, 77, 77, 24: 77, 77, 77, 77, 77, 77, 77, 77, 33: 77, 77, 77, 77, 77, 77, 77, 41: 77, 77, 77},
+		{76, 76, 292, 68: 291},
+		{71, 71, 71},
+		{70, 70, 70},
+		{67, 67, 67},
+		// 30
+		{66, 66, 66},
+		{65, 65, 65},
+		{64, 64, 64},
+		{63, 63, 63},
+		{62, 62, 62},
+		// 35
+		{61, 61, 61, 4: 280, 12: 281},
+		{4: 273},
+		{54, 54, 54, 4: 266, 12: 267},
+		{4: 263},
+		{51, 51, 51, 4: 257},
+		// 40
+		{48, 48, 48, 4: 254},
+		{46, 46, 46},
+		{45, 45, 45},
+		{44, 44, 44, 11: 253},
+		{4: 250},
+		// 45
+		{41, 41, 41},
+		{40, 40, 40, 4: 241},
+		{58: 220, 63: 219},
+		{30, 30, 30},
+		{29, 29, 29},
+		// 50
+		{28, 28, 28},
+		{27, 27, 27},
+		{26, 26, 26},
+		{25, 25, 25, 4: 216},
+		{4: 209, 12: 210},
+		// 55
+		{4: 206},
+		{8: 191, 10: 190},
+		{14, 14, 14, 4: 184},
+		{11, 11, 11, 4: 178},
+		{8, 8, 8, 4: 170},
+		// 60
+		{5, 5, 5},
+		{4, 4, 4},
+		{3, 3, 3},
+		{60: 169},
+		{1, 1, 1},
+		// 65
+		{2, 2, 2},
+		{3: 171, 9: 172, 13: 173},
+		{69, 69, 7: 69},
+		{68, 68, 7: 68},
+		{174, 7: 175},
+		// 70
+		{7, 7, 7},
+		{3: 176},
+		{177},
+		{6, 6, 6},
+		{3: 171, 9: 172, 13: 179},
+		// 75
+		{180, 7: 181},
+		{10, 10, 10},
+		{3: 182},
+		{183},
+		{9, 9, 9},
+		// 80
+		{3: 171, 9: 172, 13: 185},
+		{186, 7: 187},
+		{13, 13, 13},
+		{3: 188},
+		{189},
+		// 85
+		{12, 12, 12},
+		{4: 199, 12: 200},
+		{4: 192, 12: 193},
+		{3: 197},
+		{4: 194},
+		// 90
+		{3: 195},
+		{196},
+		{15, 15, 15},
+		{198},
+		{16, 16, 16},
+		// 95
+		{3: 204},
+		{4: 201},
+		{3: 202},
+		{203},
+		{17, 17, 17},
+		// 100
+		{205},
+		{18, 18, 18},
+		{3: 207},
+		{208},
+		{19, 19, 19},
+		// 105
+		{3: 214},
+		{4: 211},
+		{3: 212},
+		{213},
+		{22, 22, 22},
+		// 110
+		{215},
+		{23, 23, 23},
+		{3: 217},
+		{218},
+		{24, 24, 24},
+		// 115
+		{4: 235, 40: 234},
+		{4: 222, 40: 221},
+		{47: 230},
+		{3: 223},
+		{224},
+		// 120
+		{40: 225},
+		{47: 226},
+		{33, 33, 33, 4: 227},
+		{3: 228},
+		{229},
+		// 125
+		{32, 32, 32},
+		{34, 34, 34, 4: 231},
+		{3: 232},
+		{233},
+		{31, 31, 31},
+		// 130
+		{46: 240},
+		{3: 236},
+		{237},
+		{40: 238},
+		{46: 239},
+		// 135
+		{35, 35, 35},
+		{36, 36, 36},
+		{3: 242},
+		{243},
+		{39, 39, 39, 62: 244},
+		// 140
+		{48: 245, 59: 246},
+		{49: 249},
+		{48: 247},
+		{49: 248},
+		{37, 37, 37},
+		// 145
+		{38, 38, 38},
+		{3: 251},
+		{252},
+		{42, 42, 42},
+		{43, 43, 43},
+		// 150
+		{3: 171, 9: 172, 13: 255},
+		{256},
+		{47, 47, 47},
+		{3: 171, 9: 172, 13: 258},
+		{259, 260},
+		// 155
+		{50, 50, 50},
+		{3: 261},
+		{262},
+		{49, 49, 49},
+		{3: 264},
+		// 160
+		{265},
+		{52, 52, 52},
+		{3: 271},
+		{4: 268},
+		{3: 269},
+		// 165
+		{270},
+		{20, 20, 20},
+		{272},
+		{53, 53, 53},
+		{3: 274},
+		// 170
+		{275, 8: 277, 45: 276},
+		{57, 57, 57},
+		{279},
+		{278},
+		{55, 55, 55},
+		// 175
+		{56, 56, 56},
+		{3: 285},
+		{4: 282},
+		{3: 283},
+		{284},
+		// 180
+		{21, 21, 21},
+		{286, 8: 288, 45: 287},
+		{60, 60, 60},
+		{290},
+		{289},
+		// 185
+		{58, 58, 58},
+		{59, 59, 59},
+		{74, 74, 85: 293},
+		{75, 75},
+		{73, 73, 75: 294},
+		// 190
+		{72, 72, 74: 295},
+		{78, 78},
+		{5: 83, 83, 71: 299},
+		{23: 112, 32: 111, 44: 129, 52: 298, 128, 56: 127},
+		{80, 80},
+		// 195
+		{5: 82, 82, 82: 300},
+		{5: 86, 86},
+		{5: 90, 90},
+		{23: 112, 32: 111, 44: 303},
+		{5: 100, 100},
 	}
 )
 
@@ -672,7 +677,7 @@ func yylex1(yylex yyLexer, lval *yySymType) (n int) {
 }
 
 func yyParse(yylex yyLexer) int {
-	const yyError = 92
+	const yyError = 93
 
 	yyEx, _ := yylex.(yyLexerEx)
 	var yyn int
@@ -870,37 +875,45 @@ yynewstate:
 		}
 	case 3:
 		{
-			yyVAL.node = &ast.AlterTableStmt{
-				TableName:     yyS[yypt-3].anything.(*ast.TableName),
-				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
-			}
-		}
-	case 4:
-		{
 			yyVAL.anything = &ast.TableName{
 				Table: yyS[yypt-0].anything.(*element.Identifier),
 			}
 		}
-	case 5:
+	case 4:
 		{
 			yyVAL.anything = &ast.TableName{
 				Schema: yyS[yypt-2].anything.(*element.Identifier),
 				Table:  yyS[yypt-0].anything.(*element.Identifier),
 			}
 		}
-	case 6:
+	case 5:
 		{
 			yyVAL.anything = &element.Identifier{
 				Typ:   element.IdentifierTypeNonQuoted,
 				Value: yyS[yypt-0].str,
 			}
 		}
-	case 7:
+	case 6:
 		{
 			yyVAL.anything = &element.Identifier{
 				Typ:   element.IdentifierTypeQuoted,
 				Value: yyS[yypt-0].str,
 			}
+		}
+	case 7:
+		{
+			yyVAL.node = &ast.AlterTableStmt{
+				TableName:     yyS[yypt-3].anything.(*ast.TableName),
+				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
+			}
+		}
+	case 8:
+		{
+			// TODO
+		}
+	case 9:
+		{
+			// TODO
 		}
 	case 10:
 		{
@@ -912,15 +925,15 @@ yynewstate:
 		}
 	case 12:
 		{
-			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
+			// todo:
 		}
 	case 13:
 		{
-			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.ColumnClause), yyS[yypt-0].anything.(ast.ColumnClause))
+			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
 		}
 	case 14:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.ColumnClause), yyS[yypt-0].anything.(ast.ColumnClause))
 		}
 	case 15:
 		{
@@ -932,9 +945,17 @@ yynewstate:
 		}
 	case 17:
 		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 18:
+		{
 			yyVAL.anything = &ast.AddColumnClause{
 				Columns: yyS[yypt-3].anything.([]*ast.ColumnDefine),
 			}
+		}
+	case 19:
+		{
+			// todo:
 		}
 	case 20:
 		{
@@ -942,11 +963,11 @@ yynewstate:
 		}
 	case 21:
 		{
-			// todo:
+			// TODO
 		}
 	case 22:
 		{
-			// todo:
+			// TODO
 		}
 	case 23:
 		{
@@ -971,9 +992,9 @@ yynewstate:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 32:
+	case 28:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			// empty
 		}
 	case 33:
 		{
@@ -981,15 +1002,15 @@ yynewstate:
 		}
 	case 34:
 		{
-			yyVAL.anything = &element.NumberOrAsterisk{Number: yyS[yypt-0].i}
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 35:
 		{
-			yyVAL.anything = &element.NumberOrAsterisk{IsAsterisk: true}
+			yyVAL.anything = &element.NumberOrAsterisk{Number: yyS[yypt-0].i}
 		}
 	case 36:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.anything = &element.NumberOrAsterisk{IsAsterisk: true}
 		}
 	case 37:
 		{
@@ -1013,25 +1034,29 @@ yynewstate:
 		}
 	case 42:
 		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 43:
+		{
 			d := &element.Char{}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 43:
+	case 44:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Char{Size: &size}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 44:
+	case 45:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsByteSize: true}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 45:
+	case 46:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsCharSize: true}
@@ -1039,20 +1064,11 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 46:
+	case 47:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineVarchar2)
-			yyVAL.anything = d
-		}
-	case 47:
-		{
-			size := yyS[yypt-2].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.IsByteSize = true
 			d.SetDataDefine(element.DataDefineVarchar2)
 			yyVAL.anything = d
 		}
@@ -1061,24 +1077,33 @@ yynewstate:
 			size := yyS[yypt-2].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.IsCharSize = true
+			d.IsByteSize = true
 			d.SetDataDefine(element.DataDefineVarchar2)
 			yyVAL.anything = d
 		}
 	case 49:
 		{
+			size := yyS[yypt-2].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.IsCharSize = true
+			d.SetDataDefine(element.DataDefineVarchar2)
+			yyVAL.anything = d
+		}
+	case 50:
+		{
 			d := &element.NChar{}
 			d.SetDataDefine(element.DataDefineNChar)
 			yyVAL.anything = d
 		}
-	case 50:
+	case 51:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDefine(element.DataDefineNChar)
 			yyVAL.anything = d
 		}
-	case 51:
+	case 52:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -1086,20 +1111,20 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineNVarChar2)
 			yyVAL.anything = d
 		}
-	case 52:
+	case 53:
 		{
 			d := &element.Number{}
 			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
-	case 53:
+	case 54:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
-	case 54:
+	case 55:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
@@ -1107,110 +1132,110 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
-	case 55:
+	case 56:
 		{
 			d := &element.Float{}
 			d.SetDataDefine(element.DataDefineFloat)
 			yyVAL.anything = d
 		}
-	case 56:
+	case 57:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Float{Precision: precision}
 			d.SetDataDefine(element.DataDefineFloat)
 			yyVAL.anything = d
 		}
-	case 57:
+	case 58:
 		{
 			d := &element.BinaryFloat{}
 			d.SetDataDefine(element.DataDefineBinaryFloat)
 			yyVAL.anything = d
 		}
-	case 58:
+	case 59:
 		{
 			d := &element.BinaryDouble{}
 			d.SetDataDefine(element.DataDefineBinaryDouble)
 			yyVAL.anything = d
 		}
-	case 59:
+	case 60:
 		{
 			d := &element.Long{}
 			d.SetDataDefine(element.DataDefineLong)
 			yyVAL.anything = d
 		}
-	case 60:
+	case 61:
 		{
 			d := &element.LongRaw{}
 			d.SetDataDefine(element.DataDefineLongRaw)
 			yyVAL.anything = d
 		}
-	case 61:
+	case 62:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Raw{Size: &size}
 			d.SetDataDefine(element.DataDefineRaw)
 			yyVAL.anything = d
 		}
-	case 62:
+	case 63:
 		{
 			d := &element.Date{}
 			d.SetDataDefine(element.DataDefineDate)
 			yyVAL.anything = d
 		}
-	case 63:
+	case 64:
 		{
 			d := &element.Timestamp{}
 			d.SetDataDefine(element.DataDefineTimestamp)
 			yyVAL.anything = d
 		}
-	case 64:
+	case 65:
 		{
 			precision := yyS[yypt-1].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision}
 			d.SetDataDefine(element.DataDefineTimestamp)
 			yyVAL.anything = d
 		}
-	case 65:
+	case 66:
 		{
 			precision := yyS[yypt-4].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
 			d.SetDataDefine(element.DataDefineTimestamp)
 			yyVAL.anything = d
 		}
-	case 66:
+	case 67:
 		{
 			precision := yyS[yypt-5].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
 			d.SetDataDefine(element.DataDefineTimestamp)
 			yyVAL.anything = d
 		}
-	case 67:
+	case 68:
 		{
 			d := &element.IntervalYear{}
 			d.SetDataDefine(element.DataDefineIntervalYear)
 			yyVAL.anything = d
 		}
-	case 68:
+	case 69:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalYear{Precision: &precision}
 			d.SetDataDefine(element.DataDefineIntervalYear)
 			yyVAL.anything = d
 		}
-	case 69:
+	case 70:
 		{
 			d := &element.IntervalDay{}
 			d.SetDataDefine(element.DataDefineIntervalDay)
 			yyVAL.anything = d
 		}
-	case 70:
+	case 71:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalDay{Precision: &precision}
 			d.SetDataDefine(element.DataDefineIntervalDay)
 			yyVAL.anything = d
 		}
-	case 71:
+	case 72:
 		{
 			precision := yyS[yypt-6].i
 			sPrecision := yyS[yypt-1].i
@@ -1218,68 +1243,60 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineIntervalDay)
 			yyVAL.anything = d
 		}
-	case 72:
+	case 73:
 		{
 			sPrecision := yyS[yypt-1].i
 			d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
 			d.SetDataDefine(element.DataDefineIntervalDay)
 			yyVAL.anything = d
 		}
-	case 73:
+	case 74:
 		{
 			d := &element.Blob{}
 			d.SetDataDefine(element.DataDefineBlob)
 			yyVAL.anything = d
 		}
-	case 74:
+	case 75:
 		{
 			d := &element.Clob{}
 			d.SetDataDefine(element.DataDefineClob)
 			yyVAL.anything = d
 		}
-	case 75:
+	case 76:
 		{
 			d := &element.NClob{}
 			d.SetDataDefine(element.DataDefineNClob)
 			yyVAL.anything = d
 		}
-	case 76:
+	case 77:
 		{
 			d := &element.BFile{}
 			d.SetDataDefine(element.DataDefineBFile)
 			yyVAL.anything = d
 		}
-	case 77:
+	case 78:
 		{
 			d := &element.RowId{}
 			d.SetDataDefine(element.DataDefineRowId)
 			yyVAL.anything = d
 		}
-	case 78:
+	case 79:
 		{
 			d := &element.URowId{}
 			d.SetDataDefine(element.DataDefineURowId)
 			yyVAL.anything = d
 		}
-	case 79:
+	case 80:
 		{
 			size := yyS[yypt-1].i
 			d := &element.URowId{Size: &size}
 			d.SetDataDefine(element.DataDefineURowId)
 			yyVAL.anything = d
 		}
-	case 80:
+	case 81:
 		{
 			d := &element.Char{}
 			d.SetDataDefine(element.DataDefineCharacter)
-			yyVAL.anything = d
-		}
-	case 81:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 82:
@@ -1287,10 +1304,18 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharVarying)
+			d.SetDataDefine(element.DataDefineCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 83:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineCharVarying)
+			yyVAL.anything = d
+		}
+	case 84:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -1298,7 +1323,7 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineNCharVarying)
 			yyVAL.anything = d
 		}
-	case 84:
+	case 85:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
@@ -1306,14 +1331,14 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineVarchar)
 			yyVAL.anything = d
 		}
-	case 85:
+	case 86:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDefine(element.DataDefineNationalCharacter)
 			yyVAL.anything = d
 		}
-	case 86:
+	case 87:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -1321,14 +1346,14 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineNationalCharacterVarying)
 			yyVAL.anything = d
 		}
-	case 87:
+	case 88:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDefine(element.DataDefineNationalChar)
 			yyVAL.anything = d
 		}
-	case 88:
+	case 89:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -1336,98 +1361,98 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineNationalCharVarying)
 			yyVAL.anything = d
 		}
-	case 89:
-		{
-			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineNumeric)
-			yyVAL.anything = d
-		}
 	case 90:
 		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Number{Precision: precision}
+			d := &element.Number{}
 			d.SetDataDefine(element.DataDefineNumeric)
 			yyVAL.anything = d
 		}
 	case 91:
 		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Number{Precision: precision}
+			d.SetDataDefine(element.DataDefineNumeric)
+			yyVAL.anything = d
+		}
+	case 92:
+		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDefine(element.DataDefineNumeric)
 			yyVAL.anything = d
 		}
-	case 92:
-		{
-			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineDecimal)
-			yyVAL.anything = d
-		}
 	case 93:
 		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Number{Precision: precision}
+			d := &element.Number{}
 			d.SetDataDefine(element.DataDefineDecimal)
 			yyVAL.anything = d
 		}
 	case 94:
 		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Number{Precision: precision}
+			d.SetDataDefine(element.DataDefineDecimal)
+			yyVAL.anything = d
+		}
+	case 95:
+		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDefine(element.DataDefineDecimal)
 			yyVAL.anything = d
 		}
-	case 95:
+	case 96:
 		{
 			d := &element.Number{}
 			d.SetDataDefine(element.DataDefineDec)
 			yyVAL.anything = d
 		}
-	case 96:
+	case 97:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineDec)
 			yyVAL.anything = d
 		}
-	case 97:
+	case 98:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDefine(element.DataDefineDec)
-			yyVAL.anything = d
-		}
-	case 98:
-		{
-			precision := &element.NumberOrAsterisk{Number: 38}
-			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineInteger)
 			yyVAL.anything = d
 		}
 	case 99:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineInt)
+			d.SetDataDefine(element.DataDefineInteger)
 			yyVAL.anything = d
 		}
 	case 100:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineSmallInt)
+			d.SetDataDefine(element.DataDefineInt)
 			yyVAL.anything = d
 		}
 	case 101:
+		{
+			precision := &element.NumberOrAsterisk{Number: 38}
+			d := &element.Number{Precision: precision}
+			d.SetDataDefine(element.DataDefineSmallInt)
+			yyVAL.anything = d
+		}
+	case 102:
 		{
 			precision := &element.NumberOrAsterisk{Number: 126}
 			d := &element.Float{Precision: precision}
 			d.SetDataDefine(element.DataDefineDoublePrecision)
 			yyVAL.anything = d
 		}
-	case 102:
+	case 103:
 		{
 			precision := &element.NumberOrAsterisk{Number: 63}
 			d := &element.Float{Precision: precision}

@@ -64,6 +64,7 @@ import (
     _double
     _precision
     _real
+    _collate
 
 %token <i>
 	_intNumber 		"int number"
@@ -127,15 +128,7 @@ Statement:
 	    $$ = $1
 	}
 
-// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877
-AlterTableStmt:
-	_alter _table TableName MemoptimizeReadClause MemoptimizeWriteClause ColumnClauses
-	{
-		$$ = &ast.AlterTableStmt{
-			TableName:      $3.(*ast.TableName),
-			ColumnClauses:  $6.([]ast.ColumnClause),
-		}
-	}
+/* +++++++++++++++++++++++++++++++++++++++++++++ base stmt ++++++++++++++++++++++++++++++++++++++++++++ */
 
 TableName:
 	Identifier
@@ -168,9 +161,27 @@ Identifier:
 		}
 	}
 
+/* +++++++++++++++++++++++++++++++++++++++++++++ alter table ++++++++++++++++++++++++++++++++++++++++++++ */
+
+// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877
+AlterTableStmt:
+	_alter _table TableName MemoptimizeReadClause MemoptimizeWriteClause ColumnClauses
+	{
+		$$ = &ast.AlterTableStmt{
+			TableName:      $3.(*ast.TableName),
+			ColumnClauses:  $6.([]ast.ColumnClause),
+		}
+	}
+
 MemoptimizeReadClause:
+    {
+        // TODO
+    }
 
 MemoptimizeWriteClause:
+    {
+        // TODO
+    }
 
 ColumnClauses:
 	ChangeColumnClauseList
@@ -181,6 +192,12 @@ ColumnClauses:
     {
         $$ = $1
     }
+
+RenameColumnClause:
+    {
+        // todo:
+    }
+
 
 ChangeColumnClauseList:
 	ChangeColumnClause
@@ -214,10 +231,6 @@ AddColumnClause:
 		}
 	}
 
-ColumnProperties:
-
-OutOfLinePartStorageList:
-
 ModidyColumnClause:
     {
         // todo:
@@ -228,10 +241,14 @@ DropColumnClause:
         // todo:
     }
 
-
-RenameColumnClause:
+ColumnProperties:
     {
-        // todo:
+        // TODO
+    }
+
+OutOfLinePartStorageList:
+    {
+        // TODO
     }
 
 
@@ -268,6 +285,10 @@ ColumnName:
 	}
 
 CollateClause:
+    {
+        // empty
+    }
+|   _collate
 
 SortProperty:
 
@@ -275,6 +296,8 @@ InvisibleProperty:
 
 DefaultProperties:
 
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
 // see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/Data-Types.html#GUID-A3C0D836-BADB-44E5-A5D4-265BA5968483
 Datatype:
@@ -793,4 +816,5 @@ AnsiSupportDataTypes:
 	    d.SetDataDefine(element.DataDefineReal)
 	    $$ = d
 	}
+
 %%

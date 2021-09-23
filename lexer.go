@@ -123,6 +123,7 @@ var keywordMap = map[string]int{
 	"double":        _double,
 	"precision":     _precision,
 	"real":          _real,
+	"collate": 		 _collate,
 }
 
 func init() {
