@@ -11,6 +11,7 @@ import (
 %union {
     nothing	    struct{}
     i           int
+    b           bool
     str		    string
     node 	    ast.Node
     anything 	interface{}
@@ -65,6 +66,9 @@ import (
     _precision
     _real
     _collate
+    _sort
+    _invisible
+    _visible
 
 %token <i>
 	_intNumber 		"int number"
@@ -77,6 +81,9 @@ import (
 // define type for all structure
 %type 	<i>
 	_intNumber
+
+%type <b>
+    SortProperty
 
 %type 	<str>
 	_singleQuoteStr
@@ -111,6 +118,8 @@ import (
     ColumnDefinition
     DropColumnClause
     NumberOrAsterisk
+    CollateClause
+    InvisibleProperty
 
 %start Start
 
@@ -124,6 +133,10 @@ Start:
 
 Statement:
 	AlterTableStmt
+	{
+	    $$ = $1
+	}
+|   AlterTableStmt ';'
 	{
 	    $$ = $1
 	}
@@ -272,9 +285,21 @@ ColumnDefinition:
 RealColumnDefinition:
 	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties
 	{
+	    var collation *ast.Collation
+	    if $3 != nil {
+	        collation = $3.(*ast.Collation)
+	    }
+	    var invisible *ast.InvisibleProperty
+	    if $5 != nil {
+	        invisible = $5.(*ast.InvisibleProperty)
+	    }
+
 		$$ = &ast.ColumnDefine{
-    		ColumnName: $1.(*element.Identifier),
-    		Datatype:   $2.(element.Datatype),
+    		ColumnName:         $1.(*element.Identifier),
+    		Datatype:           $2.(element.Datatype),
+    		Collation:          collation,
+    		Sort:               ast.SortProperty($4),
+    		InvisibleProperty:  invisible,
     	}
 	}
 
@@ -286,13 +311,34 @@ ColumnName:
 
 CollateClause:
     {
-        // empty
+        $$ = nil
     }
-|   _collate
+|   _collate Identifier
+    {
+        $$ = &ast.Collation{Name: $2.(*element.Identifier)}
+    }
 
 SortProperty:
+    {
+        $$ = false
+    }
+|   _sort
+    {
+        $$ = true
+    }
 
 InvisibleProperty:
+    {
+        $$ = nil
+    }
+|   _invisible
+    {
+        $$ = &ast.InvisibleProperty{Type: ast.InvisiblePropertyInvisible}
+    }
+|   _visible
+    {
+        $$ = &ast.InvisibleProperty{Type: ast.InvisiblePropertyVisible}
+    }
 
 DefaultProperties:
 

@@ -6,17 +6,17 @@ import (
 
 type AlterTableStmt struct {
 	node
-	TableName 		*TableName
-	ColumnClauses 	[]ColumnClause
+	TableName     *TableName
+	ColumnClauses []ColumnClause
 }
 
 type ColumnClause interface {
 	IsColumnClause()
 }
 
-type columnClause struct {}
+type columnClause struct{}
 
-func (c *columnClause) IsColumnClause(){}
+func (c *columnClause) IsColumnClause() {}
 
 type AddColumnClause struct {
 	columnClause
@@ -24,6 +24,9 @@ type AddColumnClause struct {
 }
 
 type ColumnDefine struct {
-	ColumnName *element.Identifier
-	Datatype   element.Datatype
+	ColumnName        *element.Identifier
+	Datatype          element.Datatype
+	Collation         *Collation
+	Sort              SortProperty
+	InvisibleProperty *InvisibleProperty
 }

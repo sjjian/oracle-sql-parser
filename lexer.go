@@ -73,6 +73,8 @@ var stdTokenMap = map[string]int{
 	`\(`: int('('),
 	`\)`: int(')'),
 	`\.`: int('.'),
+	`,`:  int(','),
+	`;`:  int(';'),
 }
 
 var keywordMap = map[string]int{
@@ -123,7 +125,10 @@ var keywordMap = map[string]int{
 	"double":        _double,
 	"precision":     _precision,
 	"real":          _real,
-	"collate": 		 _collate,
+	"collate":       _collate,
+	"sort":          _sort,
+	"invisible":     _invisible,
+	"visible":       _visible,
 }
 
 func init() {
@@ -142,7 +147,7 @@ func init() {
 	lexer.Add([]byte("[a-zA-Z]+\\w+"), token(_nonquotedIdentifier))
 
 	lexer.Add([]byte(`[0-9]+`), func(s *lexmachine.Scanner, m *machines.Match) (interface{}, error) {
-		v, err :=  strconv.Atoi(string(m.Bytes))
+		v, err := strconv.Atoi(string(m.Bytes))
 		if err != nil {
 			return nil, err
 		}
@@ -174,16 +179,13 @@ func NewLexer(s string) (*yyLexImpl, error) {
 }
 
 func (l *yyLexImpl) Lex(lval *yySymType) int {
-	fmt.Println("================")
 	tok, err, eof := l.scanner.Next()
 	if err != nil {
-		fmt.Println(1)
 		fmt.Println(err)
 		l.err = err
 		return 0
 	}
 	if eof {
-		fmt.Println(2)
 		return 0
 	}
 	token := tok.(*lexmachine.Token)
@@ -193,7 +195,6 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 	case int:
 		lval.i = v
 	}
-	fmt.Printf("[%s]\n", string(token.Lexeme))
 	return token.Type
 
 }

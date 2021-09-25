@@ -11,6 +11,8 @@ func Parser(query string) (ast.Node, error) {
 		fmt.Println(err)
 		return nil, err
 	}
+
+	//yyDebug = 4
 	yyParse(l)
 	if l.err != nil {
 		return nil, l.err
