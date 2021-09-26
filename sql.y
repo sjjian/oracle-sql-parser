@@ -69,6 +69,12 @@ import (
     _sort
     _invisible
     _visible
+    _encrypt
+    _using
+    _identified
+    _by
+    _no
+    _salt
 
 %token <i>
 	_intNumber 		"int number"
@@ -283,7 +289,7 @@ ColumnDefinition:
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
-	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties
+	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties EncryptClause
 	{
 	    var collation *ast.Collation
 	    if $3 != nil {
@@ -342,6 +348,39 @@ InvisibleProperty:
 
 DefaultProperties:
 
+EncryptClause:
+    {
+        // empty
+    }
+|   _encrypt EncryptionSpec
+
+EncryptionSpec:
+    EncryptAlgorithm IdentifiedByClause IntergrityAlgorithm SaltProperty
+
+EncryptAlgorithm:
+    {
+        // empty
+    }
+|   _using _singleQuoteStr
+
+IdentifiedByClause:
+    {
+        // empty
+    }
+|   _identified _by Identifier
+
+IntergrityAlgorithm:
+    {
+        // empty
+    }
+|   _singleQuoteStr
+
+SaltProperty:
+    {
+        // empty
+    }
+|   _salt
+|   _no _salt
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 

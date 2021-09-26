@@ -129,6 +129,12 @@ var keywordMap = map[string]int{
 	"sort":          _sort,
 	"invisible":     _invisible,
 	"visible":       _visible,
+	"encrypt":       _encrypt,
+	"using":         _using,
+	"identified":    _identified,
+	"by":            _by,
+	"no":            _no,
+	"salt":          _salt,
 }
 
 func init() {
