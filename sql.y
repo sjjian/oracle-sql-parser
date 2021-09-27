@@ -75,6 +75,25 @@ import (
     _by
     _no
     _salt
+    _constraint
+    _key
+    _not
+    _null
+    _primary
+    _unique
+    _references
+    _cascade
+    _delete
+    _on
+    _set
+    _deferrable
+    _deferred
+    _immediate
+    _initially
+    _norely
+    _rely
+    _is
+    _scope
 
 %token <i>
 	_intNumber 		"int number"
@@ -162,6 +181,16 @@ TableName:
 			Schema:	$1.(*element.Identifier),
 			Table: 	$3.(*element.Identifier),
 		}
+	}
+
+ColumnNameList:
+    ColumnName
+|   ColumnNameList ',' ColumnName
+
+ColumnName:
+	Identifier
+	{
+		$$ = $1
 	}
 
 Identifier:
@@ -289,7 +318,7 @@ ColumnDefinition:
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
-	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties EncryptClause
+	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties EncryptClause ColumnDefinitionConstraint
 	{
 	    var collation *ast.Collation
 	    if $3 != nil {
@@ -307,12 +336,6 @@ RealColumnDefinition:
     		Sort:               ast.SortProperty($4),
     		InvisibleProperty:  invisible,
     	}
-	}
-
-ColumnName:
-	Identifier
-	{
-		$$ = $1
 	}
 
 CollateClause:
@@ -381,6 +404,17 @@ SaltProperty:
     }
 |   _salt
 |   _no _salt
+
+ColumnDefinitionConstraint:
+    {
+        // empty
+    }
+|   InlineRefConstraint
+|   InlineConstraintList
+
+InlineConstraintList:
+    InlineConstraint
+|   InlineConstraintList InlineConstraint
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -902,4 +936,75 @@ AnsiSupportDataTypes:
 	    $$ = d
 	}
 
+/* +++++++++++++++++++++++++++++++++++++++++++++ constraint ++++++++++++++++++++++++++++++++++++++++++++ */
+//Constraint:
+//    InlineConstraint
+//|   OutOfLineConstraint
+//|   InlineRefConstraint
+//|   OutOfLineRefConstraint
+
+ConstraintNameOrEmpty:
+    {
+        // empty
+    }
+|   _constraint Identifier
+
+InlineConstraint:
+    ConstraintNameOrEmpty InlineConstraintProperty ConstraintStateOrEmpty
+
+InlineConstraintProperty:
+    _null
+|   _not _null
+|   _unique
+|   _primary _key
+|   ReferencesClause
+//|   ConstraintCheckCondition // todo
+
+ReferencesClause:
+    _references TableName ColumnNameListOrEmpty ReferencesOnDelete
+
+ColumnNameListOrEmpty:
+    {
+        // empty
+    }
+|   '(' ColumnNameList ')'
+
+ReferencesOnDelete:
+    {
+        // empty
+    }
+|   _on _delete _cascade
+|   _on _delete _set _null
+
+ConstraintStateOrEmpty:
+    {
+        // empty
+    }
+|   ConstraintState
+
+ConstraintState:
+    ConstraintStateDeferrable ConstraintStateRely
+|   ConstraintStateDeferrable ConstraintStateDeferredOrImmediate ConstraintStateRely
+|   ConstraintStateDeferredOrImmediate ConstraintStateRely
+|   ConstraintStateDeferredOrImmediate ConstraintStateDeferrable ConstraintStateRely
+
+ConstraintStateDeferrable:
+    _deferrable
+|   _not _deferrable
+
+ConstraintStateDeferredOrImmediate:
+    _initially _deferred
+|   _initially _immediate
+
+ConstraintStateRely:
+    {
+        // empty
+    }
+|   _rely
+|   _norely
+
+InlineRefConstraint:
+    _scope _is TableName
+|   _with _rowid
+|   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
 %%
