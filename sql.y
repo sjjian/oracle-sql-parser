@@ -156,7 +156,7 @@ import (
     ChangeColumnClause
     RenameColumnClause
     AddColumnClause
-    ModidyColumnClause
+    ModifyColumnClause
     RealColumnDefinition
     ColumnDefinitionList
     ColumnDefinition
@@ -281,7 +281,7 @@ ChangeColumnClause:
 	{
 	    $$ = $1
 	}
-|	ModidyColumnClause
+|	ModifyColumnClause
 	{
 	    $$ = $1
 	}
@@ -289,6 +289,8 @@ ChangeColumnClause:
 	{
 	    $$ = $1
 	}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ add column ++++++++++++++++++++++++++++++++++++++++++++ */
 
 AddColumnClause:
 	_add '(' ColumnDefinitionList ')' ColumnProperties  OutOfLinePartStorageList
@@ -337,7 +339,7 @@ ColumnDefinition:
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
-	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultOrIdentityClause EncryptClause ColumnDefinitionConstraint
+	ColumnName Datatype CollateClause SortProperty InvisiblePropertyOrEmpty DefaultOrIdentityClause EncryptClause ColumnDefinitionConstraint
 	{
 	    var collation *ast.Collation
 	    if $3 != nil {
@@ -375,11 +377,17 @@ SortProperty:
         $$ = true
     }
 
-InvisibleProperty:
+InvisiblePropertyOrEmpty:
     {
         $$ = nil
     }
-|   _invisible
+|   InvisibleProperty
+    {
+        $$ = $1
+    }
+
+InvisibleProperty:
+    _invisible
     {
         $$ = &ast.InvisibleProperty{Type: ast.InvisiblePropertyInvisible}
     }
@@ -478,6 +486,55 @@ ColumnDefinitionConstraint:
 InlineConstraintList:
     InlineConstraint
 |   InlineConstraintList InlineConstraint
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ modify column ++++++++++++++++++++++++++++++++++++++++++++ */
+
+ModifyColumnClause:
+    _modify '(' ModifyColumnProperties ')'
+|   _modify '(' ModifyColumnVisibilityList ')'
+|   ModifyColumnSubstitutable
+
+ModifyColumnProperties:
+    ModifyColumnProperty
+|   ModifyColumnProperties ',' ModifyColumnProperty
+
+ModifyColumnProperty:
+    ModifyRealColumnProperty
+// |   ModifyVirtualColumnProperty // TODO
+
+ModifyRealColumnProperty:
+    ColumnName Datatype CollateClause DefaultOrIdentityClauseForModify EncryptClauseForModify ColumnConstraintForModify
+
+DefaultOrIdentityClauseForModify:
+    _drop _identity
+|   DefaultOrIdentityClause
+
+EncryptClauseForModify:
+    _decrypt
+|   EncryptClause
+
+ColumnConstraintForModify:
+    {
+        // empty
+    }
+|   InlineConstraintList
+
+ModifyColumnVisibilityList:
+    ModifyColumnVisibility
+|   ModifyColumnVisibilityList ',' ModifyColumnVisibility
+
+ModifyColumnVisibility:
+    ColumnName InvisibleProperty
+
+ModifyColumnSubstitutable:
+    _column ColumnName _substitutable _at _all _levels IsForce
+|   _column ColumnName _not _substitutable _at _all _levels IsForce
+
+IsForce:
+    {
+        // empty
+    }
+|   _force
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
