@@ -50,6 +50,12 @@ alter table db1.table1 add (id varchar2(255) collate binary_ci  visible)
 		`
 alter table db1.table1 add (id varchar2(255) collate binary_ci sort invisible) 
 `,
+		`
+alter table db1.table1 add (id varchar2(255) default "test") 
+`,
+		`
+alter table db1.table1 add (id number default 123) 
+`,
 	}
 	for _, query := range querys {
 		stmt, err := Parser(query)

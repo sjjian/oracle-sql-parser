@@ -94,6 +94,25 @@ import (
     _rely
     _is
     _scope
+    _default
+    _always
+    _as
+    _generated
+    _identity
+    _cache
+    _cycle
+    _increment
+    _limit
+    _maxvalue
+    _minvalue
+    _nocache
+    _nocycle
+    _nomaxvalue
+    _nominvalue
+    _noorder
+    _order
+    _start
+    _value
 
 %token <i>
 	_intNumber 		"int number"
@@ -318,7 +337,7 @@ ColumnDefinition:
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
-	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultProperties EncryptClause ColumnDefinitionConstraint
+	ColumnName Datatype CollateClause SortProperty InvisibleProperty DefaultOrIdentityClause EncryptClause ColumnDefinitionConstraint
 	{
 	    var collation *ast.Collation
 	    if $3 != nil {
@@ -369,7 +388,51 @@ InvisibleProperty:
         $$ = &ast.InvisibleProperty{Type: ast.InvisiblePropertyVisible}
     }
 
-DefaultProperties:
+DefaultOrIdentityClause:
+    {
+        // empty
+    }
+|   DefaultClause
+|   IdentityClause
+
+DefaultClause:
+    _default Expr
+|   _default _no _null Expr
+
+IdentityClause:
+    _generated  _as _identity IdentityOptionsOrEmpty
+|   _generated _always _as _identity IdentityOptionsOrEmpty
+|   _generated _always _as _identity IdentityOptionsOrEmpty
+|   _generated _by _default _as _identity IdentityOptionsOrEmpty
+|   _generated _by _default _on _null _as _identity IdentityOptionsOrEmpty
+
+IdentityOptionsOrEmpty:
+    {
+        // empty
+    }
+|   '(' IdentityOptions ')'
+
+IdentityOptions:
+    {
+        // empty
+    }
+|   IdentityOption
+|   IdentityOptions IdentityOption
+
+IdentityOption:
+    _start _with _intNumber
+|   _start _with _limit _value
+|   _increment _by _intNumber
+|   _maxvalue _intNumber
+|   _nomaxvalue
+|   _minvalue _intNumber
+|   _nominvalue
+|   _cycle
+|   _nocycle
+|   _cache _intNumber
+|   _nocache
+|   _order
+|   _noorder
 
 EncryptClause:
     {
@@ -1009,4 +1072,14 @@ InlineRefConstraint:
     _scope _is TableName
 |   _with _rowid
 |   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ expr ++++++++++++++++++++++++++++++++++++++++++++ */
+
+// see https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/Expressions.html#GUID-E7A5363C-AEE9-4809-99C1-1A9C6E3AE017
+
+// TODO: support expression
+Expr:
+    _intNumber
+|   _doubleQuoteStr
+
 %%
