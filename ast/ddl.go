@@ -30,3 +30,7 @@ type ColumnDefine struct {
 	Sort              SortProperty
 	InvisibleProperty *InvisibleProperty
 }
+
+type ModifyColumnClause struct {
+	columnClause
+}

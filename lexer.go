@@ -173,6 +173,15 @@ var keywordMap = map[string]int{
 	"order":         _order,
 	"start":         _start,
 	"value":         _value,
+	"modify":        _modify,
+	"drop":          _drop,
+	"decrypt":       _decrypt,
+	"all":           _all,
+	"at":            _at,
+	"column":        _column,
+	"levels":        _levels,
+	"substitutable": _substitutable,
+	"force":         _force,
 }
 
 func init() {

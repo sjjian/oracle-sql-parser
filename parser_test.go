@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestParseAlterTable(t *testing.T) {
+func TestParseAlterTableAddColumn(t *testing.T) {
 	querys := []string{
 		`
 alter table db1.table1 add (id number)
@@ -55,6 +55,9 @@ alter table db1.table1 add (id varchar2(255) default "test")
 `,
 		`
 alter table db1.table1 add (id number default 123) 
+`,
+		`
+alter table db1.table1 modify (id number default 123) 
 `,
 	}
 	for _, query := range querys {

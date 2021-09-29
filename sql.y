@@ -113,6 +113,15 @@ import (
     _order
     _start
     _value
+    _modify
+    _drop
+    _decrypt
+    _all
+    _at
+    _column
+    _levels
+    _substitutable
+    _force
 
 %token <i>
 	_intNumber 		"int number"
@@ -164,6 +173,7 @@ import (
     NumberOrAsterisk
     CollateClause
     InvisibleProperty
+    InvisiblePropertyOrEmpty
 
 %start Start
 
@@ -283,7 +293,7 @@ ChangeColumnClause:
 	}
 |	ModifyColumnClause
 	{
-	    $$ = $1
+	    $$ = &ast.ModifyColumnClause{}
 	}
 |	DropColumnClause
 	{
@@ -299,11 +309,6 @@ AddColumnClause:
 			Columns:    $3.([]*ast.ColumnDefine),
 		}
 	}
-
-ModidyColumnClause:
-    {
-        // todo:
-    }
 
 DropColumnClause:
     {
@@ -491,8 +496,17 @@ InlineConstraintList:
 
 ModifyColumnClause:
     _modify '(' ModifyColumnProperties ')'
+    {
+        $$ = nil
+    }
 |   _modify '(' ModifyColumnVisibilityList ')'
+    {
+        $$ = nil
+    }
 |   ModifyColumnSubstitutable
+    {
+        $$ = nil
+    }
 
 ModifyColumnProperties:
     ModifyColumnProperty
