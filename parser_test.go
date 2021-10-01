@@ -59,6 +59,15 @@ alter table db1.table1 add (id number default 123)
 		`
 alter table db1.table1 modify (id number default 123) 
 `,
+		`
+alter table db1.table1 drop column id
+`,
+		`
+alter table db1.table1 drop (id,name)
+`,
+		`
+alter table db1.table1 set unused column id
+`,
 	}
 	for _, query := range querys {
 		stmt, err := Parser(query)

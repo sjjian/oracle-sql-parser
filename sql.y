@@ -122,6 +122,14 @@ import (
     _levels
     _substitutable
     _force
+    _columns
+    _continue
+    _unused
+    _constraints
+    _invalidate
+    _online
+    _checkpoint
+    _rename
 
 %token <i>
 	_intNumber 		"int number"
@@ -267,14 +275,8 @@ ColumnClauses:
 	}
 |	RenameColumnClause
     {
-        $$ = $1
+        $$ = []ast.ColumnClause{&ast.RenameColumnClause{}}
     }
-
-RenameColumnClause:
-    {
-        // todo:
-    }
-
 
 ChangeColumnClauseList:
 	ChangeColumnClause
@@ -297,7 +299,7 @@ ChangeColumnClause:
 	}
 |	DropColumnClause
 	{
-	    $$ = $1
+	    $$ = &ast.DropColumnClause{}
 	}
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ add column ++++++++++++++++++++++++++++++++++++++++++++ */
@@ -309,11 +311,6 @@ AddColumnClause:
 			Columns:    $3.([]*ast.ColumnDefine),
 		}
 	}
-
-DropColumnClause:
-    {
-        // todo:
-    }
 
 ColumnProperties:
     {
@@ -549,6 +546,64 @@ IsForce:
         // empty
     }
 |   _force
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ drop column ++++++++++++++++++++++++++++++++++++++++++++ */
+
+DropColumnClause:
+    _set _unused ColumnNameListForDropColumn DropColumnPropertiesOrEmpty DropColumnOnline
+    {
+    	$$ = nil
+    }
+|   _drop ColumnNameListForDropColumn DropColumnPropertiesOrEmpty DropColumnCheckpoint
+    {
+    	$$ = nil
+    }
+|   _drop _unused _columns DropColumnCheckpoint
+    {
+    	$$ = nil
+    }
+|   _drop _columns _continue DropColumnCheckpoint
+    {
+    	$$ = nil
+    }
+
+ColumnNameListForDropColumn:
+    _column ColumnName
+|   '(' ColumnNameList ')'
+
+DropColumnPropertiesOrEmpty:
+    {
+        // empty
+    }
+|   DropColumnProperties
+
+DropColumnProperties:
+    DropColumnProperty
+|   DropColumnProperties DropColumnProperty
+
+DropColumnProperty:
+    _cascade _constraints
+|   _invalidate
+
+DropColumnOnline:
+    {
+        // empty
+    }
+|   _online
+
+DropColumnCheckpoint:
+    {
+        // empty
+    }
+|   _checkpoint _intNumber
+
+/* +++++++++++++++++++++++++++++++++++++++++++ rename column +++++++++++++++++++++++++++++++++++++++++ */
+
+RenameColumnClause:
+    _rename _column ColumnName _to ColumnName
+    {
+    	$$ = nil
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 

@@ -182,6 +182,14 @@ var keywordMap = map[string]int{
 	"levels":        _levels,
 	"substitutable": _substitutable,
 	"force":         _force,
+	"columns":       _columns,
+	"continue":      _continue,
+	"unused":        _unused,
+	"constraints":   _constraints,
+	"invalidate":    _invalidate,
+	"online":        _online,
+	"checkpoint":    _checkpoint,
+	"rename":        _rename,
 }
 
 func init() {

@@ -34,3 +34,11 @@ type ColumnDefine struct {
 type ModifyColumnClause struct {
 	columnClause
 }
+
+type DropColumnClause struct {
+	columnClause
+}
+
+type RenameColumnClause struct {
+	columnClause
+}
