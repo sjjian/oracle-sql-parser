@@ -24,7 +24,7 @@ type yyXError struct {
 }
 
 const (
-	yyDefault            = 57462
+	yyDefault            = 57484
 	yyEofCode            = 57344
 	_add                 = 57350
 	_all                 = 57444
@@ -36,6 +36,7 @@ const (
 	_binaryDouble        = 57359
 	_binaryFloat         = 57358
 	_blob                = 57374
+	_blockchain          = 57459
 	_by                  = 57400
 	_byte                = 57352
 	_cache               = 57427
@@ -47,10 +48,13 @@ const (
 	_collate             = 57393
 	_column              = 57446
 	_columns             = 57450
+	_commit              = 57472
 	_constraint          = 57403
 	_constraints         = 57453
 	_continue            = 57451
+	_create              = 57458
 	_cycle               = 57428
+	_data                = 57466
 	_date                = 57362
 	_day                 = 57372
 	_dec                 = 57386
@@ -59,22 +63,28 @@ const (
 	_default             = 57422
 	_deferrable          = 57414
 	_deferred            = 57415
+	_definition          = 57473
 	_delete              = 57411
 	_double              = 57390
-	_doubleQuoteStr      = 57460
+	_doubleQuoteStr      = 57482
 	_drop                = 57442
+	_duplicated          = 57460
 	_encrypt             = 57397
+	_extended            = 57467
 	_float               = 57357
+	_for                 = 57476
 	_force               = 57449
 	_from                = 57347
 	_generated           = 57425
+	_global              = 57461
 	_identified          = 57399
 	_identity            = 57426
 	_immediate           = 57416
+	_immutable           = 57462
 	_increment           = 57429
 	_initially           = 57417
 	_int                 = 57388
-	_intNumber           = 57458
+	_intNumber           = 57480
 	_interger            = 57387
 	_interval            = 57368
 	_invalidate          = 57454
@@ -86,6 +96,8 @@ const (
 	_local               = 57365
 	_long                = 57360
 	_maxvalue            = 57431
+	_memoptimize         = 57477
+	_metadata            = 57468
 	_minvalue            = 57432
 	_modify              = 57441
 	_mouth               = 57371
@@ -97,7 +109,8 @@ const (
 	_nocycle             = 57434
 	_nomaxvalue          = 57435
 	_nominvalue          = 57436
-	_nonquotedIdentifier = 57461
+	_none                = 57469
+	_nonquotedIdentifier = 57483
 	_noorder             = 57437
 	_norely              = 57418
 	_not                 = 57405
@@ -108,25 +121,33 @@ const (
 	_on                  = 57412
 	_online              = 57455
 	_order               = 57438
+	_parent              = 57471
 	_precision           = 57391
+	_preserve            = 57474
 	_primary             = 57407
+	_private             = 57463
 	_raw                 = 57361
+	_read                = 57478
 	_real                = 57392
 	_references          = 57409
 	_rely                = 57419
 	_rename              = 57457
 	_rowid               = 57378
+	_rows                = 57475
 	_salt                = 57402
 	_scope               = 57421
 	_second              = 57373
 	_select              = 57346
 	_set                 = 57413
-	_singleQuoteStr      = 57459
+	_sharded             = 57464
+	_sharding            = 57470
+	_singleQuoteStr      = 57481
 	_smallInt            = 57389
 	_sort                = 57394
 	_start               = 57439
 	_substitutable       = 57448
 	_table               = 57349
+	_temporary           = 57465
 	_time                = 57366
 	_timestamp           = 57363
 	_to                  = 57370
@@ -140,55 +161,56 @@ const (
 	_varying             = 57381
 	_visible             = 57396
 	_with                = 57364
+	_write               = 57479
 	_year                = 57369
 	_zone                = 57367
 	yyErrCode            = 57345
 
 	yyMaxDepth = 200
-	yyTabOfs   = -221
+	yyTabOfs   = -268
 )
 
 var (
 	yyPrec = map[int]int{}
 
 	yyXLAT = map[int]int{
-		41:    0,   // ')' (226x)
-		44:    1,   // ',' (177x)
-		57406: 2,   // _null (158x)
-		57405: 3,   // _not (156x)
-		57407: 4,   // _primary (154x)
-		57409: 5,   // _references (154x)
-		57408: 6,   // _unique (154x)
-		57403: 7,   // _constraint (151x)
-		57442: 8,   // _drop (116x)
-		57364: 9,   // _with (109x)
-		57421: 10,  // _scope (108x)
-		57397: 11,  // _encrypt (101x)
-		57443: 12,  // _decrypt (92x)
-		57422: 13,  // _default (83x)
-		57425: 14,  // _generated (82x)
-		57395: 15,  // _invisible (79x)
-		57396: 16,  // _visible (79x)
-		57394: 17,  // _sort (74x)
-		57393: 18,  // _collate (71x)
-		57446: 19,  // _column (47x)
-		57344: 20,  // $end (46x)
-		57413: 21,  // _set (45x)
-		57350: 22,  // _add (44x)
-		57441: 23,  // _modify (44x)
-		59:    24,  // ';' (43x)
-		40:    25,  // '(' (38x)
-		57458: 26,  // _intNumber (37x)
-		57414: 27,  // _deferrable (21x)
-		57460: 28,  // _doubleQuoteStr (21x)
-		57417: 29,  // _initially (20x)
-		57461: 30,  // _nonquotedIdentifier (19x)
-		57503: 31,  // Identifier (19x)
-		57427: 32,  // _cache (17x)
-		57428: 33,  // _cycle (17x)
-		57429: 34,  // _increment (17x)
-		57431: 35,  // _maxvalue (17x)
-		57432: 36,  // _minvalue (17x)
+		41:    0,   // ')' (159x)
+		44:    1,   // ',' (110x)
+		57406: 2,   // _null (87x)
+		57405: 3,   // _not (85x)
+		57407: 4,   // _primary (83x)
+		57409: 5,   // _references (83x)
+		57408: 6,   // _unique (83x)
+		57344: 7,   // $end (81x)
+		57403: 8,   // _constraint (80x)
+		59:    9,   // ';' (78x)
+		57393: 10,  // _collate (72x)
+		57446: 11,  // _column (54x)
+		57442: 12,  // _drop (54x)
+		57413: 13,  // _set (52x)
+		57350: 14,  // _add (51x)
+		57441: 15,  // _modify (51x)
+		40:    16,  // '(' (44x)
+		57364: 17,  // _with (40x)
+		57421: 18,  // _scope (38x)
+		57480: 19,  // _intNumber (37x)
+		57477: 20,  // _memoptimize (36x)
+		57482: 21,  // _doubleQuoteStr (33x)
+		57471: 22,  // _parent (33x)
+		57483: 23,  // _nonquotedIdentifier (31x)
+		57397: 24,  // _encrypt (30x)
+		57422: 25,  // _default (24x)
+		57412: 26,  // _on (24x)
+		57529: 27,  // Identifier (23x)
+		57443: 28,  // _decrypt (22x)
+		57414: 29,  // _deferrable (21x)
+		57417: 30,  // _initially (20x)
+		57427: 31,  // _cache (17x)
+		57428: 32,  // _cycle (17x)
+		57429: 33,  // _increment (17x)
+		57431: 34,  // _maxvalue (17x)
+		57432: 35,  // _minvalue (17x)
+		57401: 36,  // _no (17x)
 		57433: 37,  // _nocache (17x)
 		57434: 38,  // _nocycle (17x)
 		57435: 39,  // _nomaxvalue (17x)
@@ -197,164 +219,210 @@ var (
 		57438: 42,  // _order (17x)
 		57439: 43,  // _start (17x)
 		57456: 44,  // _checkpoint (14x)
-		57410: 45,  // _cascade (13x)
-		57454: 46,  // _invalidate (12x)
-		57455: 47,  // _online (12x)
-		57475: 48,  // ColumnName (12x)
-		57401: 49,  // _no (10x)
-		57402: 50,  // _salt (10x)
-		57351: 51,  // _char (9x)
-		46:    52,  // '.' (8x)
-		57418: 53,  // _norely (8x)
-		57412: 54,  // _on (8x)
-		57419: 55,  // _rely (8x)
-		57459: 56,  // _singleQuoteStr (8x)
-		57370: 57,  // _to (8x)
-		57380: 58,  // _character (7x)
-		57361: 59,  // _raw (7x)
-		57457: 60,  // _rename (7x)
-		57378: 61,  // _rowid (7x)
-		57377: 62,  // _bfile (6x)
-		57359: 63,  // _binaryDouble (6x)
-		57358: 64,  // _binaryFloat (6x)
-		57374: 65,  // _blob (6x)
-		57375: 66,  // _clob (6x)
-		57362: 67,  // _date (6x)
-		57386: 68,  // _dec (6x)
-		57385: 69,  // _decimal (6x)
-		57390: 70,  // _double (6x)
-		57357: 71,  // _float (6x)
-		57388: 72,  // _int (6x)
-		57387: 73,  // _interger (6x)
-		57368: 74,  // _interval (6x)
-		57360: 75,  // _long (6x)
-		57383: 76,  // _national (6x)
-		57354: 77,  // _nchar (6x)
-		57376: 78,  // _nclob (6x)
-		57356: 79,  // _number (6x)
-		57384: 80,  // _numeric (6x)
-		57355: 81,  // _nvarchar2 (6x)
-		57392: 82,  // _real (6x)
-		57389: 83,  // _smallInt (6x)
-		57363: 84,  // _timestamp (6x)
-		57379: 85,  // _urowid (6x)
-		57382: 86,  // _varchar (6x)
-		57353: 87,  // _varchar2 (6x)
-		42:    88,  // '*' (5x)
-		57426: 89,  // _identity (5x)
-		57448: 90,  // _substitutable (5x)
-		57381: 91,  // _varying (5x)
-		57528: 92,  // NumberOrAsterisk (5x)
-		57424: 93,  // _as (4x)
-		57480: 94,  // ConstraintNameOrEmpty (4x)
-		57485: 95,  // ConstraintStateRely (4x)
-		57507: 96,  // IdentityOptionsOrEmpty (4x)
-		57508: 97,  // InlineConstraint (4x)
-		57400: 98,  // _by (3x)
-		57399: 99,  // _identified (3x)
-		57465: 100, // AnsiSupportDataTypes (3x)
-		57468: 101, // CharacterDataTypes (3x)
-		57482: 102, // ConstraintStateDeferrable (3x)
-		57483: 103, // ConstraintStateDeferredOrImmediate (3x)
-		57486: 104, // Datatype (3x)
-		57487: 105, // DatetimeDataTypes (3x)
-		57491: 106, // DropColumnCheckpoint (3x)
-		57496: 107, // DropColumnProperty (3x)
-		57513: 108, // InvisibleProperty (3x)
-		57516: 109, // LargeObjectDataTypes (3x)
-		57517: 110, // LongAndRawDataTypes (3x)
-		57527: 111, // NumberDataTypes (3x)
-		57529: 112, // OralceBuiltInDataTypes (3x)
-		57535: 113, // RowIdDataTypes (3x)
-		57540: 114, // TableName (3x)
-		57444: 115, // _all (2x)
-		57445: 116, // _at (2x)
-		57352: 117, // _byte (2x)
-		57450: 118, // _columns (2x)
-		57449: 119, // _force (2x)
-		57447: 120, // _levels (2x)
-		57371: 121, // _mouth (2x)
-		57373: 122, // _second (2x)
-		57366: 123, // _time (2x)
-		57452: 124, // _unused (2x)
-		57367: 125, // _zone (2x)
-		57463: 126, // AddColumnClause (2x)
-		57466: 127, // ChangeColumnClause (2x)
-		57469: 128, // CollateClause (2x)
-		57472: 129, // ColumnDefinition (2x)
-		57476: 130, // ColumnNameList (2x)
-		57477: 131, // ColumnNameListForDropColumn (2x)
-		57481: 132, // ConstraintState (2x)
-		57484: 133, // ConstraintStateOrEmpty (2x)
-		57488: 134, // DefaultClause (2x)
-		57489: 135, // DefaultOrIdentityClause (2x)
-		57492: 136, // DropColumnClause (2x)
-		57494: 137, // DropColumnProperties (2x)
-		57495: 138, // DropColumnPropertiesOrEmpty (2x)
-		57498: 139, // EncryptClause (2x)
-		57501: 140, // Expr (2x)
-		57504: 141, // IdentityClause (2x)
-		57505: 142, // IdentityOption (2x)
-		57509: 143, // InlineConstraintList (2x)
-		57510: 144, // InlineConstraintProperty (2x)
-		57515: 145, // IsForce (2x)
-		57520: 146, // ModifyColumnClause (2x)
-		57522: 147, // ModifyColumnProperty (2x)
-		57523: 148, // ModifyColumnSubstitutable (2x)
-		57524: 149, // ModifyColumnVisibility (2x)
-		57526: 150, // ModifyRealColumnProperty (2x)
-		57531: 151, // RealColumnDefinition (2x)
-		57532: 152, // ReferencesClause (2x)
-		57348: 153, // _alter (1x)
-		57423: 154, // _always (1x)
-		57453: 155, // _constraints (1x)
-		57451: 156, // _continue (1x)
-		57372: 157, // _day (1x)
-		57415: 158, // _deferred (1x)
-		57411: 159, // _delete (1x)
-		57416: 160, // _immediate (1x)
-		57420: 161, // _is (1x)
-		57404: 162, // _key (1x)
-		57430: 163, // _limit (1x)
-		57365: 164, // _local (1x)
-		57391: 165, // _precision (1x)
-		57349: 166, // _table (1x)
-		57398: 167, // _using (1x)
-		57440: 168, // _value (1x)
-		57369: 169, // _year (1x)
-		57464: 170, // AlterTableStmt (1x)
-		57467: 171, // ChangeColumnClauseList (1x)
-		57470: 172, // ColumnClauses (1x)
-		57471: 173, // ColumnConstraintForModify (1x)
-		57473: 174, // ColumnDefinitionConstraint (1x)
-		57474: 175, // ColumnDefinitionList (1x)
-		57478: 176, // ColumnNameListOrEmpty (1x)
-		57479: 177, // ColumnProperties (1x)
-		57490: 178, // DefaultOrIdentityClauseForModify (1x)
-		57493: 179, // DropColumnOnline (1x)
-		57497: 180, // EncryptAlgorithm (1x)
-		57499: 181, // EncryptClauseForModify (1x)
-		57500: 182, // EncryptionSpec (1x)
-		57502: 183, // IdentifiedByClause (1x)
-		57506: 184, // IdentityOptions (1x)
-		57511: 185, // InlineRefConstraint (1x)
-		57512: 186, // IntergrityAlgorithm (1x)
-		57514: 187, // InvisiblePropertyOrEmpty (1x)
-		57518: 188, // MemoptimizeReadClause (1x)
-		57519: 189, // MemoptimizeWriteClause (1x)
-		57521: 190, // ModifyColumnProperties (1x)
-		57525: 191, // ModifyColumnVisibilityList (1x)
-		57530: 192, // OutOfLinePartStorageList (1x)
-		57533: 193, // ReferencesOnDelete (1x)
-		57534: 194, // RenameColumnClause (1x)
-		57536: 195, // SaltProperty (1x)
-		57537: 196, // SortProperty (1x)
-		57538: 197, // Start (1x)
-		57539: 198, // Statement (1x)
-		57462: 199, // $default (0x)
-		57347: 200, // _from (0x)
-		57346: 201, // _select (0x)
-		57345: 202, // error (0x)
+		57457: 45,  // _rename (14x)
+		57499: 46,  // ColumnName (14x)
+		57410: 47,  // _cascade (13x)
+		57454: 48,  // _invalidate (12x)
+		57455: 49,  // _online (12x)
+		57425: 50,  // _generated (11x)
+		57402: 51,  // _salt (10x)
+		57351: 52,  // _char (9x)
+		57395: 53,  // _invisible (9x)
+		57396: 54,  // _visible (9x)
+		46:    55,  // '.' (8x)
+		57418: 56,  // _norely (8x)
+		57419: 57,  // _rely (8x)
+		57481: 58,  // _singleQuoteStr (8x)
+		57370: 59,  // _to (8x)
+		57380: 60,  // _character (7x)
+		57361: 61,  // _raw (7x)
+		57378: 62,  // _rowid (7x)
+		57377: 63,  // _bfile (6x)
+		57359: 64,  // _binaryDouble (6x)
+		57358: 65,  // _binaryFloat (6x)
+		57374: 66,  // _blob (6x)
+		57375: 67,  // _clob (6x)
+		57362: 68,  // _date (6x)
+		57386: 69,  // _dec (6x)
+		57385: 70,  // _decimal (6x)
+		57390: 71,  // _double (6x)
+		57357: 72,  // _float (6x)
+		57388: 73,  // _int (6x)
+		57387: 74,  // _interger (6x)
+		57368: 75,  // _interval (6x)
+		57360: 76,  // _long (6x)
+		57383: 77,  // _national (6x)
+		57354: 78,  // _nchar (6x)
+		57376: 79,  // _nclob (6x)
+		57356: 80,  // _number (6x)
+		57384: 81,  // _numeric (6x)
+		57355: 82,  // _nvarchar2 (6x)
+		57392: 83,  // _real (6x)
+		57389: 84,  // _smallInt (6x)
+		57363: 85,  // _timestamp (6x)
+		57379: 86,  // _urowid (6x)
+		57382: 87,  // _varchar (6x)
+		57353: 88,  // _varchar2 (6x)
+		42:    89,  // '*' (5x)
+		57426: 90,  // _identity (5x)
+		57470: 91,  // _sharding (5x)
+		57448: 92,  // _substitutable (5x)
+		57381: 93,  // _varying (5x)
+		57559: 94,  // NumberOrAsterisk (5x)
+		57583: 95,  // TableName (5x)
+		57424: 96,  // _as (4x)
+		57476: 97,  // _for (4x)
+		57394: 98,  // _sort (4x)
+		57496: 99,  // ColumnDefinition (4x)
+		57504: 100, // ConstraintNameOrEmpty (4x)
+		57509: 101, // ConstraintStateRely (4x)
+		57533: 102, // IdentityOptionsOrEmpty (4x)
+		57535: 103, // InlineConstraint (4x)
+		57567: 104, // RealColumnDefinition (4x)
+		57400: 105, // _by (3x)
+		57399: 106, // _identified (3x)
+		57487: 107, // AnsiSupportDataTypes (3x)
+		57491: 108, // CharacterDataTypes (3x)
+		57492: 109, // CollateClause (3x)
+		57506: 110, // ConstraintStateDeferrable (3x)
+		57507: 111, // ConstraintStateDeferredOrImmediate (3x)
+		57511: 112, // Datatype (3x)
+		57512: 113, // DatetimeDataTypes (3x)
+		57517: 114, // DropColumnCheckpoint (3x)
+		57522: 115, // DropColumnProperty (3x)
+		57540: 116, // InvisibleProperty (3x)
+		57543: 117, // LargeObjectDataTypes (3x)
+		57544: 118, // LongAndRawDataTypes (3x)
+		57558: 119, // NumberDataTypes (3x)
+		57563: 120, // OralceBuiltInDataTypes (3x)
+		57575: 121, // RowIdDataTypes (3x)
+		57444: 122, // _all (2x)
+		57445: 123, // _at (2x)
+		57459: 124, // _blockchain (2x)
+		57352: 125, // _byte (2x)
+		57450: 126, // _columns (2x)
+		57472: 127, // _commit (2x)
+		57466: 128, // _data (2x)
+		57473: 129, // _definition (2x)
+		57411: 130, // _delete (2x)
+		57449: 131, // _force (2x)
+		57447: 132, // _levels (2x)
+		57371: 133, // _mouth (2x)
+		57474: 134, // _preserve (2x)
+		57478: 135, // _read (2x)
+		57475: 136, // _rows (2x)
+		57373: 137, // _second (2x)
+		57349: 138, // _table (2x)
+		57465: 139, // _temporary (2x)
+		57366: 140, // _time (2x)
+		57452: 141, // _unused (2x)
+		57479: 142, // _write (2x)
+		57367: 143, // _zone (2x)
+		57485: 144, // AddColumnClause (2x)
+		57489: 145, // ChangeColumnClause (2x)
+		57500: 146, // ColumnNameList (2x)
+		57501: 147, // ColumnNameListForDropColumn (2x)
+		57505: 148, // ConstraintState (2x)
+		57508: 149, // ConstraintStateOrEmpty (2x)
+		57513: 150, // DefaultClause (2x)
+		57515: 151, // DefaultOrIdentityClause (2x)
+		57518: 152, // DropColumnClause (2x)
+		57520: 153, // DropColumnProperties (2x)
+		57521: 154, // DropColumnPropertiesOrEmpty (2x)
+		57524: 155, // EncryptClause (2x)
+		57527: 156, // Expr (2x)
+		57530: 157, // IdentityClause (2x)
+		57531: 158, // IdentityOption (2x)
+		57536: 159, // InlineConstraintList (2x)
+		57537: 160, // InlineConstraintProperty (2x)
+		57542: 161, // IsForce (2x)
+		57547: 162, // MemoptimizeRead (2x)
+		57549: 163, // MemoptimizeWrite (2x)
+		57551: 164, // ModifyColumnClause (2x)
+		57553: 165, // ModifyColumnProperty (2x)
+		57554: 166, // ModifyColumnSubstitutable (2x)
+		57555: 167, // ModifyColumnVisibility (2x)
+		57557: 168, // ModifyRealColumnProperty (2x)
+		57568: 169, // ReferencesClause (2x)
+		57573: 170, // RelTableProperty (2x)
+		61:    171, // '=' (1x)
+		57348: 172, // _alter (1x)
+		57423: 173, // _always (1x)
+		57453: 174, // _constraints (1x)
+		57451: 175, // _continue (1x)
+		57458: 176, // _create (1x)
+		57372: 177, // _day (1x)
+		57415: 178, // _deferred (1x)
+		57460: 179, // _duplicated (1x)
+		57467: 180, // _extended (1x)
+		57461: 181, // _global (1x)
+		57416: 182, // _immediate (1x)
+		57462: 183, // _immutable (1x)
+		57420: 184, // _is (1x)
+		57404: 185, // _key (1x)
+		57430: 186, // _limit (1x)
+		57365: 187, // _local (1x)
+		57468: 188, // _metadata (1x)
+		57469: 189, // _none (1x)
+		57391: 190, // _precision (1x)
+		57463: 191, // _private (1x)
+		57464: 192, // _sharded (1x)
+		57398: 193, // _using (1x)
+		57440: 194, // _value (1x)
+		57369: 195, // _year (1x)
+		57486: 196, // AlterTableStmt (1x)
+		57488: 197, // BlockchainTableClauses (1x)
+		57490: 198, // ChangeColumnClauseList (1x)
+		57494: 199, // ColumnClauses (1x)
+		57495: 200, // ColumnConstraintForModify (1x)
+		57497: 201, // ColumnDefinitionConstraint (1x)
+		57498: 202, // ColumnDefinitionList (1x)
+		57502: 203, // ColumnNameListOrEmpty (1x)
+		57503: 204, // ColumnProperties (1x)
+		57510: 205, // CreateTableStmt (1x)
+		57514: 206, // DefaultCollateClauseOrEmpty (1x)
+		57516: 207, // DefaultOrIdentityClauseForModify (1x)
+		57519: 208, // DropColumnOnline (1x)
+		57523: 209, // EncryptAlgorithm (1x)
+		57525: 210, // EncryptClauseForModify (1x)
+		57526: 211, // EncryptionSpec (1x)
+		57528: 212, // IdentifiedByClause (1x)
+		57532: 213, // IdentityOptions (1x)
+		57534: 214, // ImmutableTableClauses (1x)
+		57538: 215, // InlineRefConstraint (1x)
+		57539: 216, // IntergrityAlgorithm (1x)
+		57541: 217, // InvisiblePropertyOrEmpty (1x)
+		57545: 218, // Memoptimize (1x)
+		57546: 219, // MemoptimizeForAlterTable (1x)
+		57548: 220, // MemoptimizeReadForAlterTable (1x)
+		57550: 221, // MemoptimizeWriteForAlterTable (1x)
+		57552: 222, // ModifyColumnProperties (1x)
+		57556: 223, // ModifyColumnVisibilityList (1x)
+		57560: 224, // OnCommitClause (1x)
+		57561: 225, // OnCommitDef (1x)
+		57562: 226, // OnCommitRows (1x)
+		57564: 227, // OutOfLinePartStorageList (1x)
+		57565: 228, // ParentTable (1x)
+		57566: 229, // PhysicalProperties (1x)
+		57569: 230, // ReferencesOnDelete (1x)
+		57570: 231, // RelTableDef (1x)
+		57571: 232, // RelTableProperties (1x)
+		57572: 233, // RelTablePropertiesOrEmpty (1x)
+		57574: 234, // RenameColumnClause (1x)
+		57576: 235, // SaltProperty (1x)
+		57577: 236, // ShardingType (1x)
+		57578: 237, // SortProperty (1x)
+		57579: 238, // Start (1x)
+		57580: 239, // Statement (1x)
+		57581: 240, // StatementList (1x)
+		57582: 241, // TableDef (1x)
+		57584: 242, // TableProperties (1x)
+		57585: 243, // TableType (1x)
+		57484: 244, // $default (0x)
+		57347: 245, // _from (0x)
+		57346: 246, // _select (0x)
+		57493: 247, // CollateClauseOrEmpty (0x)
+		57345: 248, // error (0x)
 	}
 
 	yySymNames = []string{
@@ -365,36 +433,36 @@ var (
 		"_primary",
 		"_references",
 		"_unique",
+		"$end",
 		"_constraint",
-		"_drop",
-		"_with",
-		"_scope",
-		"_encrypt",
-		"_decrypt",
-		"_default",
-		"_generated",
-		"_invisible",
-		"_visible",
-		"_sort",
+		"';'",
 		"_collate",
 		"_column",
-		"$end",
+		"_drop",
 		"_set",
 		"_add",
 		"_modify",
-		"';'",
 		"'('",
+		"_with",
+		"_scope",
 		"_intNumber",
-		"_deferrable",
+		"_memoptimize",
 		"_doubleQuoteStr",
-		"_initially",
+		"_parent",
 		"_nonquotedIdentifier",
+		"_encrypt",
+		"_default",
+		"_on",
 		"Identifier",
+		"_decrypt",
+		"_deferrable",
+		"_initially",
 		"_cache",
 		"_cycle",
 		"_increment",
 		"_maxvalue",
 		"_minvalue",
+		"_no",
 		"_nocache",
 		"_nocycle",
 		"_nomaxvalue",
@@ -403,22 +471,23 @@ var (
 		"_order",
 		"_start",
 		"_checkpoint",
+		"_rename",
+		"ColumnName",
 		"_cascade",
 		"_invalidate",
 		"_online",
-		"ColumnName",
-		"_no",
+		"_generated",
 		"_salt",
 		"_char",
+		"_invisible",
+		"_visible",
 		"'.'",
 		"_norely",
-		"_on",
 		"_rely",
 		"_singleQuoteStr",
 		"_to",
 		"_character",
 		"_raw",
-		"_rename",
 		"_rowid",
 		"_bfile",
 		"_binaryDouble",
@@ -448,18 +517,25 @@ var (
 		"_varchar2",
 		"'*'",
 		"_identity",
+		"_sharding",
 		"_substitutable",
 		"_varying",
 		"NumberOrAsterisk",
+		"TableName",
 		"_as",
+		"_for",
+		"_sort",
+		"ColumnDefinition",
 		"ConstraintNameOrEmpty",
 		"ConstraintStateRely",
 		"IdentityOptionsOrEmpty",
 		"InlineConstraint",
+		"RealColumnDefinition",
 		"_by",
 		"_identified",
 		"AnsiSupportDataTypes",
 		"CharacterDataTypes",
+		"CollateClause",
 		"ConstraintStateDeferrable",
 		"ConstraintStateDeferredOrImmediate",
 		"Datatype",
@@ -472,22 +548,30 @@ var (
 		"NumberDataTypes",
 		"OralceBuiltInDataTypes",
 		"RowIdDataTypes",
-		"TableName",
 		"_all",
 		"_at",
+		"_blockchain",
 		"_byte",
 		"_columns",
+		"_commit",
+		"_data",
+		"_definition",
+		"_delete",
 		"_force",
 		"_levels",
 		"_mouth",
+		"_preserve",
+		"_read",
+		"_rows",
 		"_second",
+		"_table",
+		"_temporary",
 		"_time",
 		"_unused",
+		"_write",
 		"_zone",
 		"AddColumnClause",
 		"ChangeColumnClause",
-		"CollateClause",
-		"ColumnDefinition",
 		"ColumnNameList",
 		"ColumnNameListForDropColumn",
 		"ConstraintState",
@@ -504,31 +588,42 @@ var (
 		"InlineConstraintList",
 		"InlineConstraintProperty",
 		"IsForce",
+		"MemoptimizeRead",
+		"MemoptimizeWrite",
 		"ModifyColumnClause",
 		"ModifyColumnProperty",
 		"ModifyColumnSubstitutable",
 		"ModifyColumnVisibility",
 		"ModifyRealColumnProperty",
-		"RealColumnDefinition",
 		"ReferencesClause",
+		"RelTableProperty",
+		"'='",
 		"_alter",
 		"_always",
 		"_constraints",
 		"_continue",
+		"_create",
 		"_day",
 		"_deferred",
-		"_delete",
+		"_duplicated",
+		"_extended",
+		"_global",
 		"_immediate",
+		"_immutable",
 		"_is",
 		"_key",
 		"_limit",
 		"_local",
+		"_metadata",
+		"_none",
 		"_precision",
-		"_table",
+		"_private",
+		"_sharded",
 		"_using",
 		"_value",
 		"_year",
 		"AlterTableStmt",
+		"BlockchainTableClauses",
 		"ChangeColumnClauseList",
 		"ColumnClauses",
 		"ColumnConstraintForModify",
@@ -536,6 +631,8 @@ var (
 		"ColumnDefinitionList",
 		"ColumnNameListOrEmpty",
 		"ColumnProperties",
+		"CreateTableStmt",
+		"DefaultCollateClauseOrEmpty",
 		"DefaultOrIdentityClauseForModify",
 		"DropColumnOnline",
 		"EncryptAlgorithm",
@@ -543,751 +640,909 @@ var (
 		"EncryptionSpec",
 		"IdentifiedByClause",
 		"IdentityOptions",
+		"ImmutableTableClauses",
 		"InlineRefConstraint",
 		"IntergrityAlgorithm",
 		"InvisiblePropertyOrEmpty",
-		"MemoptimizeReadClause",
-		"MemoptimizeWriteClause",
+		"Memoptimize",
+		"MemoptimizeForAlterTable",
+		"MemoptimizeReadForAlterTable",
+		"MemoptimizeWriteForAlterTable",
 		"ModifyColumnProperties",
 		"ModifyColumnVisibilityList",
+		"OnCommitClause",
+		"OnCommitDef",
+		"OnCommitRows",
 		"OutOfLinePartStorageList",
+		"ParentTable",
+		"PhysicalProperties",
 		"ReferencesOnDelete",
+		"RelTableDef",
+		"RelTableProperties",
+		"RelTablePropertiesOrEmpty",
 		"RenameColumnClause",
 		"SaltProperty",
+		"ShardingType",
 		"SortProperty",
 		"Start",
 		"Statement",
+		"StatementList",
+		"TableDef",
+		"TableProperties",
+		"TableType",
 		"$default",
 		"_from",
 		"_select",
+		"CollateClauseOrEmpty",
 		"error",
 	}
 
 	yyTokenLiteralStrings = map[int]string{
-		57458: "int number",
-		57460: "double quotes string",
-		57461: "nonquoted identifier",
-		57459: "single quotes string",
+		57480: "int number",
+		57482: "double quotes string",
+		57483: "nonquoted identifier",
+		57481: "single quotes string",
 	}
 
 	yyReductions = map[int]struct{ xsym, components int }{
 		0:   {0, 1},
-		1:   {197, 1},
-		2:   {198, 1},
-		3:   {198, 2},
-		4:   {114, 1},
-		5:   {114, 3},
-		6:   {130, 1},
-		7:   {130, 3},
-		8:   {48, 1},
-		9:   {31, 1},
-		10:  {31, 1},
-		11:  {170, 6},
-		12:  {188, 0},
-		13:  {189, 0},
-		14:  {172, 1},
-		15:  {172, 1},
-		16:  {171, 1},
-		17:  {171, 2},
-		18:  {127, 1},
-		19:  {127, 1},
-		20:  {127, 1},
-		21:  {126, 6},
-		22:  {177, 0},
-		23:  {192, 0},
-		24:  {175, 1},
-		25:  {175, 3},
-		26:  {129, 1},
-		27:  {151, 8},
-		28:  {128, 0},
-		29:  {128, 2},
-		30:  {196, 0},
-		31:  {196, 1},
-		32:  {187, 0},
-		33:  {187, 1},
-		34:  {108, 1},
-		35:  {108, 1},
-		36:  {135, 0},
-		37:  {135, 1},
-		38:  {135, 1},
-		39:  {134, 2},
-		40:  {134, 4},
-		41:  {141, 4},
-		42:  {141, 5},
-		43:  {141, 5},
-		44:  {141, 6},
-		45:  {141, 8},
-		46:  {96, 0},
-		47:  {96, 3},
-		48:  {184, 0},
-		49:  {184, 1},
-		50:  {184, 2},
-		51:  {142, 3},
-		52:  {142, 4},
-		53:  {142, 3},
-		54:  {142, 2},
-		55:  {142, 1},
-		56:  {142, 2},
-		57:  {142, 1},
-		58:  {142, 1},
-		59:  {142, 1},
-		60:  {142, 2},
-		61:  {142, 1},
-		62:  {142, 1},
-		63:  {142, 1},
-		64:  {139, 0},
-		65:  {139, 2},
-		66:  {182, 4},
-		67:  {180, 0},
-		68:  {180, 2},
-		69:  {183, 0},
-		70:  {183, 3},
-		71:  {186, 0},
-		72:  {186, 1},
-		73:  {195, 0},
-		74:  {195, 1},
-		75:  {195, 2},
-		76:  {174, 0},
-		77:  {174, 1},
-		78:  {174, 1},
-		79:  {143, 1},
-		80:  {143, 2},
-		81:  {146, 4},
-		82:  {146, 4},
-		83:  {146, 1},
-		84:  {190, 1},
-		85:  {190, 3},
-		86:  {147, 1},
-		87:  {150, 6},
-		88:  {178, 2},
-		89:  {178, 1},
-		90:  {181, 1},
-		91:  {181, 1},
-		92:  {173, 0},
-		93:  {173, 1},
-		94:  {191, 1},
-		95:  {191, 3},
-		96:  {149, 2},
-		97:  {148, 7},
-		98:  {148, 8},
-		99:  {145, 0},
-		100: {145, 1},
-		101: {136, 5},
-		102: {136, 4},
-		103: {136, 4},
-		104: {136, 4},
-		105: {131, 2},
-		106: {131, 3},
-		107: {138, 0},
-		108: {138, 1},
-		109: {137, 1},
-		110: {137, 2},
-		111: {107, 2},
-		112: {107, 1},
-		113: {179, 0},
-		114: {179, 1},
-		115: {106, 0},
-		116: {106, 2},
-		117: {194, 5},
-		118: {104, 1},
-		119: {104, 1},
-		120: {92, 1},
-		121: {92, 1},
-		122: {112, 1},
-		123: {112, 1},
-		124: {112, 1},
-		125: {112, 1},
-		126: {112, 1},
-		127: {112, 1},
-		128: {101, 1},
-		129: {101, 4},
-		130: {101, 5},
-		131: {101, 5},
-		132: {101, 4},
-		133: {101, 5},
-		134: {101, 5},
-		135: {101, 1},
-		136: {101, 4},
-		137: {101, 4},
-		138: {111, 1},
-		139: {111, 4},
-		140: {111, 6},
-		141: {111, 1},
-		142: {111, 4},
-		143: {111, 1},
-		144: {111, 1},
-		145: {110, 1},
-		146: {110, 2},
-		147: {110, 4},
-		148: {105, 1},
-		149: {105, 1},
-		150: {105, 4},
-		151: {105, 7},
-		152: {105, 8},
-		153: {105, 4},
-		154: {105, 7},
-		155: {105, 4},
-		156: {105, 7},
-		157: {105, 10},
-		158: {105, 7},
-		159: {109, 1},
-		160: {109, 1},
-		161: {109, 1},
-		162: {109, 1},
-		163: {113, 1},
-		164: {113, 1},
-		165: {113, 4},
-		166: {100, 4},
-		167: {100, 5},
-		168: {100, 5},
-		169: {100, 5},
-		170: {100, 4},
-		171: {100, 5},
-		172: {100, 6},
-		173: {100, 5},
-		174: {100, 6},
-		175: {100, 1},
-		176: {100, 4},
-		177: {100, 6},
-		178: {100, 1},
-		179: {100, 4},
-		180: {100, 6},
-		181: {100, 1},
-		182: {100, 4},
-		183: {100, 6},
-		184: {100, 1},
-		185: {100, 1},
-		186: {100, 1},
-		187: {100, 2},
-		188: {100, 1},
-		189: {94, 0},
-		190: {94, 2},
-		191: {97, 3},
-		192: {144, 1},
-		193: {144, 2},
-		194: {144, 1},
-		195: {144, 2},
-		196: {144, 1},
-		197: {152, 4},
-		198: {176, 0},
-		199: {176, 3},
-		200: {193, 0},
-		201: {193, 3},
-		202: {193, 4},
-		203: {133, 0},
-		204: {133, 1},
-		205: {132, 2},
-		206: {132, 3},
-		207: {132, 2},
-		208: {132, 3},
-		209: {102, 1},
-		210: {102, 2},
-		211: {103, 2},
-		212: {103, 2},
-		213: {95, 0},
-		214: {95, 1},
-		215: {95, 1},
-		216: {185, 3},
-		217: {185, 2},
-		218: {185, 3},
-		219: {140, 1},
-		220: {140, 1},
+		1:   {238, 1},
+		2:   {240, 1},
+		3:   {240, 2},
+		4:   {239, 1},
+		5:   {239, 1},
+		6:   {95, 1},
+		7:   {95, 3},
+		8:   {146, 1},
+		9:   {146, 3},
+		10:  {46, 1},
+		11:  {27, 1},
+		12:  {27, 1},
+		13:  {196, 5},
+		14:  {199, 1},
+		15:  {199, 1},
+		16:  {198, 1},
+		17:  {198, 2},
+		18:  {145, 1},
+		19:  {145, 1},
+		20:  {145, 1},
+		21:  {144, 6},
+		22:  {204, 0},
+		23:  {227, 0},
+		24:  {202, 1},
+		25:  {202, 3},
+		26:  {99, 1},
+		27:  {104, 8},
+		28:  {247, 0},
+		29:  {247, 1},
+		30:  {109, 2},
+		31:  {237, 0},
+		32:  {237, 1},
+		33:  {217, 0},
+		34:  {217, 1},
+		35:  {116, 1},
+		36:  {116, 1},
+		37:  {151, 0},
+		38:  {151, 1},
+		39:  {151, 1},
+		40:  {150, 2},
+		41:  {150, 4},
+		42:  {157, 4},
+		43:  {157, 5},
+		44:  {157, 5},
+		45:  {157, 6},
+		46:  {157, 8},
+		47:  {102, 0},
+		48:  {102, 3},
+		49:  {213, 0},
+		50:  {213, 1},
+		51:  {213, 2},
+		52:  {158, 3},
+		53:  {158, 4},
+		54:  {158, 3},
+		55:  {158, 2},
+		56:  {158, 1},
+		57:  {158, 2},
+		58:  {158, 1},
+		59:  {158, 1},
+		60:  {158, 1},
+		61:  {158, 2},
+		62:  {158, 1},
+		63:  {158, 1},
+		64:  {158, 1},
+		65:  {155, 0},
+		66:  {155, 2},
+		67:  {211, 4},
+		68:  {209, 0},
+		69:  {209, 2},
+		70:  {212, 0},
+		71:  {212, 3},
+		72:  {216, 0},
+		73:  {216, 1},
+		74:  {235, 0},
+		75:  {235, 1},
+		76:  {235, 2},
+		77:  {201, 0},
+		78:  {201, 1},
+		79:  {201, 1},
+		80:  {159, 1},
+		81:  {159, 2},
+		82:  {164, 4},
+		83:  {164, 4},
+		84:  {164, 1},
+		85:  {222, 1},
+		86:  {222, 3},
+		87:  {165, 1},
+		88:  {168, 6},
+		89:  {207, 2},
+		90:  {207, 1},
+		91:  {210, 1},
+		92:  {210, 1},
+		93:  {200, 0},
+		94:  {200, 1},
+		95:  {223, 1},
+		96:  {223, 3},
+		97:  {167, 2},
+		98:  {166, 7},
+		99:  {166, 8},
+		100: {161, 0},
+		101: {161, 1},
+		102: {152, 5},
+		103: {152, 4},
+		104: {152, 4},
+		105: {152, 4},
+		106: {147, 2},
+		107: {147, 3},
+		108: {154, 0},
+		109: {154, 1},
+		110: {153, 1},
+		111: {153, 2},
+		112: {115, 2},
+		113: {115, 1},
+		114: {208, 0},
+		115: {208, 1},
+		116: {114, 0},
+		117: {114, 2},
+		118: {234, 5},
+		119: {205, 8},
+		120: {243, 0},
+		121: {243, 2},
+		122: {243, 2},
+		123: {243, 1},
+		124: {243, 1},
+		125: {243, 1},
+		126: {243, 1},
+		127: {243, 2},
+		128: {236, 0},
+		129: {236, 3},
+		130: {236, 3},
+		131: {236, 4},
+		132: {236, 3},
+		133: {228, 0},
+		134: {228, 2},
+		135: {241, 1},
+		136: {231, 7},
+		137: {206, 0},
+		138: {206, 2},
+		139: {214, 0},
+		140: {197, 0},
+		141: {224, 2},
+		142: {225, 0},
+		143: {225, 4},
+		144: {225, 4},
+		145: {226, 0},
+		146: {226, 4},
+		147: {226, 4},
+		148: {229, 0},
+		149: {242, 0},
+		150: {233, 0},
+		151: {233, 3},
+		152: {232, 1},
+		153: {232, 3},
+		154: {170, 1},
+		155: {112, 1},
+		156: {112, 1},
+		157: {94, 1},
+		158: {94, 1},
+		159: {120, 1},
+		160: {120, 1},
+		161: {120, 1},
+		162: {120, 1},
+		163: {120, 1},
+		164: {120, 1},
+		165: {108, 1},
+		166: {108, 4},
+		167: {108, 5},
+		168: {108, 5},
+		169: {108, 4},
+		170: {108, 5},
+		171: {108, 5},
+		172: {108, 1},
+		173: {108, 4},
+		174: {108, 4},
+		175: {119, 1},
+		176: {119, 4},
+		177: {119, 6},
+		178: {119, 1},
+		179: {119, 4},
+		180: {119, 1},
+		181: {119, 1},
+		182: {118, 1},
+		183: {118, 2},
+		184: {118, 4},
+		185: {113, 1},
+		186: {113, 1},
+		187: {113, 4},
+		188: {113, 7},
+		189: {113, 8},
+		190: {113, 4},
+		191: {113, 7},
+		192: {113, 4},
+		193: {113, 7},
+		194: {113, 10},
+		195: {113, 7},
+		196: {117, 1},
+		197: {117, 1},
+		198: {117, 1},
+		199: {117, 1},
+		200: {121, 1},
+		201: {121, 1},
+		202: {121, 4},
+		203: {107, 4},
+		204: {107, 5},
+		205: {107, 5},
+		206: {107, 5},
+		207: {107, 4},
+		208: {107, 5},
+		209: {107, 6},
+		210: {107, 5},
+		211: {107, 6},
+		212: {107, 1},
+		213: {107, 4},
+		214: {107, 6},
+		215: {107, 1},
+		216: {107, 4},
+		217: {107, 6},
+		218: {107, 1},
+		219: {107, 4},
+		220: {107, 6},
+		221: {107, 1},
+		222: {107, 1},
+		223: {107, 1},
+		224: {107, 2},
+		225: {107, 1},
+		226: {100, 0},
+		227: {100, 2},
+		228: {103, 3},
+		229: {160, 1},
+		230: {160, 2},
+		231: {160, 1},
+		232: {160, 2},
+		233: {160, 1},
+		234: {169, 4},
+		235: {203, 0},
+		236: {203, 3},
+		237: {230, 0},
+		238: {230, 3},
+		239: {230, 4},
+		240: {149, 0},
+		241: {149, 1},
+		242: {148, 2},
+		243: {148, 3},
+		244: {148, 2},
+		245: {148, 3},
+		246: {110, 1},
+		247: {110, 2},
+		248: {111, 2},
+		249: {111, 2},
+		250: {101, 0},
+		251: {101, 1},
+		252: {101, 1},
+		253: {215, 3},
+		254: {215, 2},
+		255: {215, 3},
+		256: {219, 2},
+		257: {220, 1},
+		258: {220, 4},
+		259: {221, 1},
+		260: {221, 4},
+		261: {218, 2},
+		262: {162, 0},
+		263: {162, 3},
+		264: {163, 0},
+		265: {163, 3},
+		266: {156, 1},
+		267: {156, 1},
 	}
 
 	yyXErrors = map[yyXError]string{}
 
-	yyParseTab = [409][]uint16{
+	yyParseTab = [487][]uint16{
 		// 0
-		{153: 225, 170: 224, 197: 222, 223},
-		{20: 221},
-		{20: 220},
-		{20: 219, 24: 629},
-		{166: 226},
+		{172: 274, 176: 275, 196: 272, 205: 273, 238: 269, 271, 270},
+		{7: 268},
+		{7: 267},
+		{7: 266, 9: 754},
+		{7: 264, 9: 264},
 		// 5
-		{28: 229, 30: 228, 227, 114: 230},
-		{217, 217, 217, 217, 217, 217, 217, 217, 217, 19: 217, 21: 217, 217, 217, 25: 217, 27: 217, 29: 217, 52: 627, 54: 217, 60: 217},
-		{212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 19: 212, 212, 212, 212, 212, 212, 212, 27: 212, 29: 212, 44: 212, 212, 212, 212, 49: 212, 212, 212, 212, 54: 212, 56: 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 90: 212},
-		{211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 19: 211, 211, 211, 211, 211, 211, 211, 27: 211, 29: 211, 44: 211, 211, 211, 211, 49: 211, 211, 211, 211, 54: 211, 56: 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 90: 211},
-		{8: 209, 19: 209, 21: 209, 209, 209, 60: 209, 188: 231},
+		{7: 263, 9: 263},
+		{138: 645},
+		{138: 276},
+		{21: 148, 23: 148, 124: 283, 179: 281, 181: 278, 183: 282, 191: 279, 280, 243: 277},
+		{21: 289, 23: 288, 27: 287, 95: 290},
 		// 10
-		{8: 208, 19: 208, 21: 208, 208, 208, 60: 208, 189: 232},
-		{8: 245, 19: 243, 21: 244, 240, 241, 60: 246, 126: 237, 236, 136: 239, 146: 238, 148: 242, 171: 234, 233, 194: 235},
-		{20: 210, 24: 210},
-		{8: 245, 19: 243, 207, 244, 240, 241, 207, 126: 237, 626, 136: 239, 146: 238, 148: 242},
-		{20: 206, 24: 206},
+		{139: 286},
+		{139: 285},
+		{21: 145, 23: 145},
+		{21: 144, 23: 144},
+		{21: 143, 23: 143, 124: 284},
 		// 15
-		{8: 205, 19: 205, 205, 205, 205, 205, 205},
-		{8: 203, 19: 203, 203, 203, 203, 203, 203},
-		{8: 202, 19: 202, 202, 202, 202, 202, 202},
-		{8: 201, 19: 201, 201, 201, 201, 201, 201},
-		{25: 597},
+		{21: 142, 23: 142},
+		{21: 141, 23: 141},
+		{21: 146, 23: 146},
+		{21: 147, 23: 147},
+		{262, 262, 262, 262, 262, 262, 262, 262, 262, 262, 11: 262, 262, 262, 262, 262, 262, 20: 262, 22: 262, 25: 262, 262, 29: 262, 262, 36: 262, 45: 262, 55: 643, 91: 262},
 		// 20
-		{25: 295},
-		{8: 138, 19: 138, 138, 138, 138, 138, 138},
-		{28: 229, 30: 228, 248, 48: 282},
-		{124: 277},
-		{19: 255, 25: 256, 118: 254, 124: 253, 131: 252},
+		{257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 11: 257, 257, 257, 257, 257, 257, 257, 257, 20: 257, 22: 257, 24: 257, 257, 257, 28: 257, 257, 257, 36: 257, 44: 257, 257, 47: 257, 257, 257, 257, 257, 257, 257, 257, 257, 58: 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 91: 257, 257, 98: 257},
+		{256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 11: 256, 256, 256, 256, 256, 256, 256, 256, 20: 256, 22: 256, 24: 256, 256, 256, 28: 256, 256, 256, 36: 256, 44: 256, 256, 47: 256, 256, 256, 256, 256, 256, 256, 256, 256, 58: 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 91: 256, 256, 98: 256},
+		{7: 140, 9: 140, 16: 140, 20: 140, 22: 140, 25: 140, 140, 91: 292, 236: 291},
+		{7: 118, 9: 118, 16: 302, 20: 118, 22: 118, 25: 118, 118, 231: 300, 233: 301, 241: 299},
+		{171: 293},
 		// 25
-		{19: 247},
-		{28: 229, 30: 228, 248, 48: 249},
-		{213, 213, 3: 213, 8: 213, 15: 213, 213, 19: 213, 213, 213, 213, 213, 213, 44: 213, 213, 213, 213, 51: 213, 57: 213, 213, 213, 61: 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 90: 213},
-		{57: 250},
-		{28: 229, 30: 228, 248, 48: 251},
+		{128: 295, 180: 296, 188: 294, 297},
+		{7: 139, 9: 139, 16: 139, 20: 139, 22: 139, 25: 139, 139},
+		{7: 138, 9: 138, 16: 138, 20: 138, 22: 138, 25: 138, 138},
+		{128: 298},
+		{7: 136, 9: 136, 16: 136, 20: 136, 22: 136, 25: 136, 136},
 		// 30
-		{20: 104, 24: 104},
-		{8: 114, 19: 114, 114, 114, 114, 114, 114, 44: 114, 272, 273, 107: 271, 137: 270, 269},
-		{118: 267},
-		{156: 263},
-		{28: 229, 30: 228, 248, 48: 262},
+		{7: 137, 9: 137, 16: 137, 20: 137, 22: 137, 25: 137, 137},
+		{7: 6, 9: 6, 20: 633, 22: 6, 162: 632, 218: 631},
+		{7: 133, 9: 133, 20: 133, 22: 133},
+		{7: 129, 9: 129, 20: 129, 22: 129, 25: 129, 129, 214: 609},
+		{21: 289, 23: 288, 27: 303, 46: 305, 99: 308, 104: 304, 170: 307, 232: 306},
 		// 35
-		{28: 229, 30: 228, 248, 48: 257, 130: 258},
-		{215, 215},
-		{260, 259},
-		{28: 229, 30: 228, 248, 48: 261},
-		{8: 115, 19: 115, 115, 115, 115, 115, 115, 44: 115, 115, 115, 115},
+		{258, 258, 3: 258, 7: 258, 9: 258, 11: 258, 258, 258, 258, 258, 44: 258, 47: 258, 258, 258, 52: 258, 258, 258, 59: 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 258, 92: 258},
+		{242, 242},
+		{52: 321, 60: 340, 330, 338, 337, 328, 327, 334, 335, 331, 345, 344, 349, 326, 347, 346, 333, 329, 342, 323, 336, 325, 343, 324, 350, 348, 332, 339, 341, 322, 107: 314, 315, 112: 312, 318, 117: 319, 317, 316, 313, 320},
+		{309, 310},
+		{116, 116},
 		// 40
-		{214, 214},
-		{8: 116, 19: 116, 116, 116, 116, 116, 116, 44: 116, 116, 116, 116},
-		{8: 106, 19: 106, 106, 106, 106, 106, 106, 44: 265, 106: 264},
-		{8: 117, 19: 117, 117, 117, 117, 117, 117},
-		{26: 266},
+		{114, 114},
+		{7: 117, 9: 117, 20: 117, 22: 117, 25: 117, 117},
+		{21: 289, 23: 288, 27: 303, 46: 305, 99: 308, 104: 304, 170: 311},
+		{115, 115},
+		{10: 474, 109: 473},
 		// 45
-		{8: 105, 19: 105, 105, 105, 105, 105, 105},
-		{8: 106, 19: 106, 106, 106, 106, 106, 106, 44: 265, 106: 268},
-		{8: 118, 19: 118, 118, 118, 118, 118, 118},
-		{8: 106, 19: 106, 106, 106, 106, 106, 106, 44: 265, 106: 276},
-		{8: 113, 19: 113, 113, 113, 113, 113, 113, 44: 113, 272, 273, 113, 107: 275},
+		{10: 113},
+		{10: 112},
+		{10: 109},
+		{10: 108},
+		{10: 107},
 		// 50
-		{8: 112, 19: 112, 112, 112, 112, 112, 112, 44: 112, 112, 112, 112},
-		{155: 274},
-		{8: 109, 19: 109, 109, 109, 109, 109, 109, 44: 109, 109, 109, 109},
-		{8: 110, 19: 110, 110, 110, 110, 110, 110, 44: 110, 110, 110, 110},
-		{8: 111, 19: 111, 111, 111, 111, 111, 111, 44: 111, 111, 111, 111},
+		{10: 106},
+		{10: 105},
+		{10: 104},
+		{10: 103, 16: 462, 93: 463},
+		{16: 455},
 		// 55
-		{8: 119, 19: 119, 119, 119, 119, 119, 119},
-		{19: 255, 25: 256, 131: 278},
-		{8: 114, 19: 114, 114, 114, 114, 114, 114, 45: 272, 273, 114, 107: 271, 137: 270, 279},
-		{8: 108, 19: 108, 108, 108, 108, 108, 108, 47: 281, 179: 280},
-		{8: 120, 19: 120, 120, 120, 120, 120, 120},
+		{10: 96, 16: 448, 93: 449},
+		{16: 445},
+		{10: 93, 16: 439},
+		{10: 90, 16: 436},
+		{10: 88},
 		// 60
-		{8: 107, 19: 107, 107, 107, 107, 107, 107},
-		{3: 284, 90: 283},
-		{116: 291},
-		{90: 285},
-		{116: 286},
+		{10: 87},
+		{10: 86, 61: 435},
+		{16: 432},
+		{10: 83},
+		{10: 82, 16: 423},
 		// 65
-		{115: 287},
-		{120: 288},
-		{8: 122, 19: 122, 122, 122, 122, 122, 122, 119: 290, 145: 289},
-		{8: 123, 19: 123, 123, 123, 123, 123, 123},
-		{8: 121, 19: 121, 121, 121, 121, 121, 121},
+		{177: 402, 195: 401},
+		{10: 72},
+		{10: 71},
+		{10: 70},
+		{10: 69},
 		// 70
-		{115: 292},
-		{120: 293},
-		{8: 122, 19: 122, 122, 122, 122, 122, 122, 119: 290, 145: 294},
-		{8: 124, 19: 124, 124, 124, 124, 124, 124},
-		{28: 229, 30: 228, 248, 48: 300, 147: 298, 149: 301, 299, 190: 296, 297},
+		{10: 68},
+		{10: 67, 16: 398},
+		{16: 391, 93: 392},
+		{16: 388},
+		{52: 373, 60: 372},
 		// 75
-		{593, 594},
-		{589, 590},
-		{137, 137},
-		{135, 135},
-		{15: 302, 303, 51: 314, 58: 333, 323, 61: 331, 330, 321, 320, 327, 328, 324, 338, 337, 342, 319, 340, 339, 326, 322, 335, 316, 329, 318, 336, 317, 343, 341, 325, 332, 334, 315, 100: 307, 308, 104: 304, 311, 108: 305, 312, 310, 309, 306, 313},
+		{10: 56, 16: 366},
+		{10: 53, 16: 360},
+		{10: 50, 16: 352},
+		{10: 47},
+		{10: 46},
 		// 80
-		{127, 127},
-		{187, 187, 187, 187, 187, 187, 187, 187, 9: 187, 187, 187, 13: 187, 187},
-		{186, 186, 186, 186, 186, 186, 186, 186, 9: 186, 186, 186, 13: 186, 186},
-		{193, 193, 193, 193, 193, 193, 193, 193, 193, 11: 193, 193, 193, 193, 18: 466, 128: 467},
-		{125, 125},
+		{10: 45},
+		{190: 351},
+		{10: 43},
+		{10: 44},
+		{19: 353, 89: 354, 94: 355},
 		// 85
-		{103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103},
-		{102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102},
-		{99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99},
-		{98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98},
-		{97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97},
+		{111, 111, 55: 111},
+		{110, 110, 55: 110},
+		{356, 55: 357},
+		{10: 49},
+		{19: 358},
 		// 90
-		{96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96},
-		{95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95},
-		{94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94},
-		{93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 25: 455, 91: 456},
-		{25: 448},
+		{359},
+		{10: 48},
+		{19: 353, 89: 354, 94: 361},
+		{362, 55: 363},
+		{10: 52},
 		// 95
-		{86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 25: 441, 91: 442},
-		{25: 438},
-		{83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 25: 432},
-		{80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 25: 429},
-		{78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78},
+		{19: 364},
+		{365},
+		{10: 51},
+		{19: 353, 89: 354, 94: 367},
+		{368, 55: 369},
 		// 100
-		{77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77},
-		{76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 59: 428},
-		{25: 425},
-		{73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73},
-		{72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 72, 25: 416},
-		// 105
-		{157: 395, 169: 394},
-		{62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62},
-		{61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61},
-		{60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60},
-		{59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59},
-		// 110
-		{58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58},
-		{57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 25: 391},
-		{25: 384, 91: 385},
-		{25: 381},
-		{51: 366, 58: 365},
-		// 115
-		{46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 25: 359},
-		{43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 25: 353},
-		{40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 25: 345},
-		{37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37},
-		{36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36},
-		// 120
-		{35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35},
-		{165: 344},
-		{33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33},
-		{34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34},
-		{26: 346, 88: 347, 92: 348},
-		// 125
-		{101, 101, 52: 101},
-		{100, 100, 52: 100},
-		{349, 52: 350},
-		{39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39},
-		{26: 351},
-		// 130
-		{352},
-		{38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38},
-		{26: 346, 88: 347, 92: 354},
-		{355, 52: 356},
-		{42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42},
-		// 135
-		{26: 357},
-		{358},
-		{41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41},
-		{26: 346, 88: 347, 92: 360},
-		{361, 52: 362},
-		// 140
-		{45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45},
-		{26: 363},
-		{364},
-		{44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44},
-		{25: 374, 91: 375},
-		// 145
-		{25: 367, 91: 368},
-		{26: 372},
-		{25: 369},
-		{26: 370},
+		{10: 55},
+		{19: 370},
 		{371},
-		// 150
-		{47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47},
-		{373},
-		{48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48},
-		{26: 379},
-		{25: 376},
-		// 155
-		{26: 377},
+		{10: 54},
+		{16: 381, 93: 382},
+		// 105
+		{16: 374, 93: 375},
+		{19: 379},
+		{16: 376},
+		{19: 377},
 		{378},
-		{49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49},
+		// 110
+		{10: 57},
 		{380},
-		{50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50},
-		// 160
-		{26: 382},
-		{383},
-		{51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51},
-		{26: 389},
-		{25: 386},
-		// 165
-		{26: 387},
-		{388},
-		{54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54},
+		{10: 58},
+		{19: 386},
+		{16: 383},
+		// 115
+		{19: 384},
+		{385},
+		{10: 59},
+		{387},
+		{10: 60},
+		// 120
+		{19: 389},
 		{390},
-		{55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55},
+		{10: 61},
+		{19: 396},
+		{16: 393},
+		// 125
+		{19: 394},
+		{395},
+		{10: 64},
+		{397},
+		{10: 65},
+		// 130
+		{19: 399},
+		{400},
+		{10: 66},
+		{16: 417, 59: 416},
+		{16: 404, 59: 403},
+		// 135
+		{137: 412},
+		{19: 405},
+		{406},
+		{59: 407},
+		{137: 408},
+		// 140
+		{10: 75, 16: 409},
+		{19: 410},
+		{411},
+		{10: 74},
+		{10: 76, 16: 413},
+		// 145
+		{19: 414},
+		{415},
+		{10: 73},
+		{133: 422},
+		{19: 418},
+		// 150
+		{419},
+		{59: 420},
+		{133: 421},
+		{10: 77},
+		{10: 78},
+		// 155
+		{19: 424},
+		{425},
+		{10: 81, 17: 426},
+		{140: 427, 187: 428},
+		{143: 431},
+		// 160
+		{140: 429},
+		{143: 430},
+		{10: 79},
+		{10: 80},
+		{19: 433},
+		// 165
+		{434},
+		{10: 84},
+		{10: 85},
+		{19: 353, 89: 354, 94: 437},
+		{438},
 		// 170
-		{26: 392},
-		{393},
-		{56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56},
-		{25: 410, 57: 409},
-		{25: 397, 57: 396},
+		{10: 89},
+		{19: 353, 89: 354, 94: 440},
+		{441, 442},
+		{10: 92},
+		{19: 443},
 		// 175
-		{122: 405},
-		{26: 398},
-		{399},
-		{57: 400},
-		{122: 401},
-		// 180
-		{65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 25: 402},
-		{26: 403},
-		{404},
-		{64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64},
-		{66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 25: 406},
-		// 185
-		{26: 407},
-		{408},
-		{63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63},
-		{121: 415},
-		{26: 411},
-		// 190
-		{412},
-		{57: 413},
-		{121: 414},
-		{67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67},
-		{68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68},
-		// 195
-		{26: 417},
-		{418},
-		{71, 71, 71, 71, 71, 71, 71, 71, 71, 419, 71, 71, 71, 71, 71, 71, 71, 71, 71},
-		{123: 420, 164: 421},
-		{125: 424},
-		// 200
-		{123: 422},
-		{125: 423},
-		{69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69},
-		{70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70},
-		{26: 426},
-		// 205
-		{427},
-		{74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74},
-		{75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75},
-		{26: 346, 88: 347, 92: 430},
-		{431},
-		// 210
-		{79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79},
-		{26: 346, 88: 347, 92: 433},
-		{434, 435},
-		{82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82},
-		{26: 436},
-		// 215
-		{437},
-		{81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81, 81},
-		{26: 439},
-		{440},
-		{84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84},
-		// 220
-		{26: 446},
-		{25: 443},
-		{26: 444},
-		{445},
-		{52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52},
-		// 225
+		{444},
+		{10: 91},
+		{19: 446},
 		{447},
-		{85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85},
-		{26: 449},
-		{450, 51: 452, 117: 451},
-		{89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89},
-		// 230
+		{10: 94},
+		// 180
+		{19: 453},
+		{16: 450},
+		{19: 451},
+		{452},
+		{10: 62},
+		// 185
 		{454},
-		{453},
-		{87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87},
-		{88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88, 88},
-		{26: 460},
+		{10: 95},
+		{19: 456},
+		{457, 52: 459, 125: 458},
+		{10: 99},
+		// 190
+		{461},
+		{460},
+		{10: 97},
+		{10: 98},
+		{19: 467},
+		// 195
+		{16: 464},
+		{19: 465},
+		{466},
+		{10: 63},
+		{468, 52: 470, 125: 469},
+		// 200
+		{10: 102},
+		{472},
+		{471},
+		{10: 100},
+		{10: 101},
+		// 205
+		{237, 237, 237, 237, 237, 237, 237, 8: 237, 17: 237, 237, 24: 237, 237, 50: 237, 53: 237, 237, 98: 477, 237: 476},
+		{21: 289, 23: 288, 27: 475},
+		{238, 238, 238, 238, 238, 238, 238, 238, 238, 238, 12: 238, 17: 238, 238, 20: 238, 22: 238, 24: 238, 238, 238, 28: 238, 50: 238, 53: 238, 238, 98: 238},
+		{235, 235, 235, 235, 235, 235, 235, 8: 235, 17: 235, 235, 24: 235, 235, 50: 235, 53: 480, 481, 116: 479, 217: 478},
+		{236, 236, 236, 236, 236, 236, 236, 8: 236, 17: 236, 236, 24: 236, 236, 50: 236, 53: 236, 236},
+		// 210
+		{231, 231, 231, 231, 231, 231, 231, 8: 231, 17: 231, 231, 24: 231, 485, 50: 486, 150: 483, 482, 157: 484},
+		{234, 234, 234, 234, 234, 234, 234, 8: 234, 17: 234, 234, 24: 234, 234, 50: 234},
+		{233, 233, 233, 233, 233, 233, 233, 8: 233, 17: 233, 233, 24: 233, 233, 50: 233},
+		{232, 232, 232, 232, 232, 232, 232, 8: 232, 17: 232, 232, 24: 232, 232, 50: 232},
+		{203, 203, 203, 203, 203, 203, 203, 8: 203, 17: 203, 203, 24: 537, 155: 536},
+		// 215
+		{230, 230, 230, 230, 230, 230, 230, 8: 230, 17: 230, 230, 24: 230, 28: 230},
+		{229, 229, 229, 229, 229, 229, 229, 8: 229, 17: 229, 229, 24: 229, 28: 229},
+		{19: 532, 21: 533, 36: 531, 156: 530},
+		{96: 487, 105: 489, 173: 488},
+		{90: 528},
+		// 220
+		{96: 525},
+		{25: 490},
+		{26: 492, 96: 491},
+		{90: 523},
+		{2: 493},
+		// 225
+		{96: 494},
+		{90: 495},
+		{221, 221, 221, 221, 221, 221, 221, 8: 221, 16: 497, 221, 221, 24: 221, 28: 221, 102: 496},
+		{222, 222, 222, 222, 222, 222, 222, 8: 222, 17: 222, 222, 24: 222, 28: 222},
+		{219, 31: 508, 506, 501, 502, 504, 37: 509, 507, 503, 505, 511, 510, 500, 158: 499, 213: 498},
+		// 230
+		{521, 31: 508, 506, 501, 502, 504, 37: 509, 507, 503, 505, 511, 510, 500, 158: 522},
+		{218, 31: 218, 218, 218, 218, 218, 37: 218, 218, 218, 218, 218, 218, 218},
+		{17: 517},
+		{105: 515},
+		{19: 514},
 		// 235
-		{25: 457},
-		{26: 458},
-		{459},
-		{53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53},
-		{461, 51: 463, 117: 462},
+		{212, 31: 212, 212, 212, 212, 212, 37: 212, 212, 212, 212, 212, 212, 212},
+		{19: 513},
+		{210, 31: 210, 210, 210, 210, 210, 37: 210, 210, 210, 210, 210, 210, 210},
+		{209, 31: 209, 209, 209, 209, 209, 37: 209, 209, 209, 209, 209, 209, 209},
+		{208, 31: 208, 208, 208, 208, 208, 37: 208, 208, 208, 208, 208, 208, 208},
 		// 240
-		{92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92, 92},
-		{465},
-		{464},
-		{90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90},
-		{91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91},
+		{19: 512},
+		{206, 31: 206, 206, 206, 206, 206, 37: 206, 206, 206, 206, 206, 206, 206},
+		{205, 31: 205, 205, 205, 205, 205, 37: 205, 205, 205, 205, 205, 205, 205},
+		{204, 31: 204, 204, 204, 204, 204, 37: 204, 204, 204, 204, 204, 204, 204},
+		{207, 31: 207, 207, 207, 207, 207, 37: 207, 207, 207, 207, 207, 207, 207},
 		// 245
-		{28: 229, 30: 228, 588},
-		{185, 185, 185, 185, 185, 185, 185, 185, 473, 11: 185, 185, 470, 471, 134: 468, 474, 141: 469, 178: 472},
-		{184, 184, 184, 184, 184, 184, 184, 184, 9: 184, 184, 184, 184},
-		{183, 183, 183, 183, 183, 183, 183, 183, 9: 183, 183, 183, 183},
-		{26: 584, 28: 585, 49: 583, 140: 582},
+		{211, 31: 211, 211, 211, 211, 211, 37: 211, 211, 211, 211, 211, 211, 211},
+		{213, 31: 213, 213, 213, 213, 213, 37: 213, 213, 213, 213, 213, 213, 213},
+		{19: 516},
+		{214, 31: 214, 214, 214, 214, 214, 37: 214, 214, 214, 214, 214, 214, 214},
+		{19: 518, 186: 519},
 		// 250
-		{93: 539, 98: 541, 154: 540},
-		{157, 157, 157, 157, 157, 157, 157, 157, 11: 476, 478, 139: 479, 181: 477},
-		{89: 475},
-		{132, 132, 132, 132, 132, 132, 132, 132, 11: 132, 132},
-		{133, 133, 133, 133, 133, 133, 133, 133, 11: 133, 133},
+		{216, 31: 216, 216, 216, 216, 216, 37: 216, 216, 216, 216, 216, 216, 216},
+		{194: 520},
+		{215, 31: 215, 215, 215, 215, 215, 37: 215, 215, 215, 215, 215, 215, 215},
+		{220, 220, 220, 220, 220, 220, 220, 8: 220, 17: 220, 220, 24: 220, 28: 220},
+		{217, 31: 217, 217, 217, 217, 217, 37: 217, 217, 217, 217, 217, 217, 217},
 		// 255
-		{154, 154, 154, 154, 154, 154, 154, 154, 9: 154, 154, 49: 154, 154, 56: 154, 99: 154, 167: 527, 180: 526, 182: 525},
-		{129, 129, 32, 32, 32, 32, 32, 483, 94: 484, 97: 480, 143: 481, 173: 482},
-		{131, 131, 131, 131, 131, 131, 131, 131},
-		{130, 130, 130, 130, 130, 130, 130, 130},
-		{142, 142, 142, 142, 142, 142, 142, 142},
+		{221, 221, 221, 221, 221, 221, 221, 8: 221, 16: 497, 221, 221, 24: 221, 28: 221, 102: 524},
+		{223, 223, 223, 223, 223, 223, 223, 8: 223, 17: 223, 223, 24: 223, 28: 223},
+		{90: 526},
+		{221, 221, 221, 221, 221, 221, 221, 8: 221, 16: 497, 221, 221, 24: 221, 28: 221, 102: 527},
+		{225, 225, 225, 225, 225, 225, 225, 8: 225, 17: 225, 225, 24: 225, 28: 225},
 		// 260
-		{128, 128, 32, 32, 32, 32, 32, 483, 94: 484, 97: 524},
-		{134, 134},
-		{28: 229, 30: 228, 523},
-		{2: 486, 487, 489, 491, 488, 144: 485, 152: 490},
-		{18, 18, 18, 510, 18, 18, 18, 18, 27: 509, 29: 511, 102: 507, 508, 132: 506, 505},
+		{221, 221, 221, 221, 221, 221, 221, 8: 221, 16: 497, 221, 221, 24: 221, 28: 221, 102: 529},
+		{226, 226, 226, 226, 226, 226, 226, 8: 226, 17: 226, 226, 24: 226, 28: 226},
+		{228, 228, 228, 228, 228, 228, 228, 8: 228, 17: 228, 228, 24: 228, 28: 228},
+		{2: 534},
+		{2, 2, 2, 2, 2, 2, 2, 8: 2, 17: 2, 2, 24: 2, 28: 2},
 		// 265
-		{29, 29, 29, 29, 29, 29, 29, 29, 27: 29, 29: 29},
-		{2: 504},
-		{27, 27, 27, 27, 27, 27, 27, 27, 27: 27, 29: 27},
-		{162: 503},
-		{25, 25, 25, 25, 25, 25, 25, 25, 27: 25, 29: 25},
+		{1, 1, 1, 1, 1, 1, 1, 8: 1, 17: 1, 1, 24: 1, 28: 1},
+		{19: 532, 21: 533, 156: 535},
+		{227, 227, 227, 227, 227, 227, 227, 8: 227, 17: 227, 227, 24: 227, 28: 227},
+		{191, 191, 42, 42, 42, 42, 42, 8: 556, 17: 559, 558, 100: 557, 103: 555, 159: 554, 201: 552, 215: 553},
+		{200, 200, 200, 200, 200, 200, 200, 8: 200, 17: 200, 200, 36: 200, 51: 200, 58: 200, 106: 200, 193: 540, 209: 539, 211: 538},
 		// 270
-		{28: 229, 30: 228, 227, 114: 492},
-		{23, 23, 23, 23, 23, 23, 23, 23, 25: 494, 27: 23, 29: 23, 54: 23, 176: 493},
-		{21, 21, 21, 21, 21, 21, 21, 21, 27: 21, 29: 21, 54: 498, 193: 497},
-		{28: 229, 30: 228, 248, 48: 257, 130: 495},
-		{496, 259},
+		{202, 202, 202, 202, 202, 202, 202, 8: 202, 17: 202, 202},
+		{198, 198, 198, 198, 198, 198, 198, 8: 198, 17: 198, 198, 36: 198, 51: 198, 58: 198, 106: 543, 212: 542},
+		{58: 541},
+		{199, 199, 199, 199, 199, 199, 199, 8: 199, 17: 199, 199, 36: 199, 51: 199, 58: 199, 106: 199},
+		{196, 196, 196, 196, 196, 196, 196, 8: 196, 17: 196, 196, 36: 196, 51: 196, 58: 547, 216: 546},
 		// 275
-		{22, 22, 22, 22, 22, 22, 22, 22, 27: 22, 29: 22, 54: 22},
-		{24, 24, 24, 24, 24, 24, 24, 24, 27: 24, 29: 24},
-		{159: 499},
-		{21: 501, 45: 500},
-		{20, 20, 20, 20, 20, 20, 20, 20, 27: 20, 29: 20},
+		{105: 544},
+		{21: 289, 23: 288, 27: 545},
+		{197, 197, 197, 197, 197, 197, 197, 8: 197, 17: 197, 197, 36: 197, 51: 197, 58: 197},
+		{194, 194, 194, 194, 194, 194, 194, 8: 194, 17: 194, 194, 36: 550, 51: 549, 235: 548},
+		{195, 195, 195, 195, 195, 195, 195, 8: 195, 17: 195, 195, 36: 195, 51: 195},
 		// 280
-		{2: 502},
-		{19, 19, 19, 19, 19, 19, 19, 19, 27: 19, 29: 19},
-		{26, 26, 26, 26, 26, 26, 26, 26, 27: 26, 29: 26},
-		{28, 28, 28, 28, 28, 28, 28, 28, 27: 28, 29: 28},
-		{30, 30, 30, 30, 30, 30, 30, 30},
+		{201, 201, 201, 201, 201, 201, 201, 8: 201, 17: 201, 201},
+		{193, 193, 193, 193, 193, 193, 193, 8: 193, 17: 193, 193},
+		{51: 551},
+		{192, 192, 192, 192, 192, 192, 192, 8: 192, 17: 192, 192},
+		{241, 241},
 		// 285
-		{17, 17, 17, 17, 17, 17, 17, 17},
-		{8, 8, 8, 8, 8, 8, 8, 8, 29: 511, 53: 518, 55: 517, 95: 520, 103: 521},
-		{8, 8, 8, 510, 8, 8, 8, 8, 27: 509, 53: 518, 55: 517, 95: 515, 102: 516},
-		{12, 12, 12, 12, 12, 12, 12, 12, 29: 12, 53: 12, 55: 12},
-		{27: 514},
+		{190, 190},
+		{189, 189, 42, 42, 42, 42, 42, 8: 556, 100: 607, 103: 606},
+		{188, 188, 188, 188, 188, 188, 188, 8: 188},
+		{21: 289, 23: 288, 27: 605},
+		{2: 564, 565, 567, 569, 566, 160: 563, 169: 568},
 		// 290
-		{158: 512, 160: 513},
-		{10, 10, 10, 10, 10, 10, 10, 10, 27: 10, 53: 10, 55: 10},
-		{9, 9, 9, 9, 9, 9, 9, 9, 27: 9, 53: 9, 55: 9},
-		{11, 11, 11, 11, 11, 11, 11, 11, 29: 11, 53: 11, 55: 11},
-		{14, 14, 14, 14, 14, 14, 14, 14},
+		{184: 561},
+		{62: 560},
+		{14, 14},
+		{21: 289, 23: 288, 27: 287, 95: 562},
+		{15, 15},
 		// 295
-		{8, 8, 8, 8, 8, 8, 8, 8, 53: 518, 55: 517, 95: 519},
-		{7, 7, 7, 7, 7, 7, 7, 7},
-		{6, 6, 6, 6, 6, 6, 6, 6},
-		{13, 13, 13, 13, 13, 13, 13, 13},
-		{16, 16, 16, 16, 16, 16, 16, 16},
+		{28, 28, 28, 588, 28, 28, 28, 8: 28, 29: 587, 589, 110: 585, 586, 148: 584, 604},
+		{39, 39, 39, 39, 39, 39, 39, 8: 39, 29: 39, 39},
+		{2: 603},
+		{37, 37, 37, 37, 37, 37, 37, 8: 37, 29: 37, 37},
+		{185: 602},
 		// 300
-		{8, 8, 8, 8, 8, 8, 8, 8, 53: 518, 55: 517, 95: 522},
-		{15, 15, 15, 15, 15, 15, 15, 15},
-		{2: 31, 31, 31, 31, 31},
-		{141, 141, 141, 141, 141, 141, 141, 141},
-		{156, 156, 156, 156, 156, 156, 156, 156, 9: 156, 156},
+		{35, 35, 35, 588, 35, 35, 35, 8: 35, 29: 587, 589, 110: 585, 586, 148: 584, 590},
+		{21: 289, 23: 288, 27: 287, 95: 570},
+		{33, 33, 33, 33, 33, 33, 33, 8: 33, 16: 572, 26: 33, 29: 33, 33, 203: 571},
+		{31, 31, 31, 31, 31, 31, 31, 8: 31, 26: 579, 29: 31, 31, 230: 578},
+		{21: 289, 23: 288, 27: 303, 46: 573, 146: 574},
 		// 305
-		{152, 152, 152, 152, 152, 152, 152, 152, 9: 152, 152, 49: 152, 152, 56: 152, 99: 530, 183: 529},
-		{56: 528},
-		{153, 153, 153, 153, 153, 153, 153, 153, 9: 153, 153, 49: 153, 153, 56: 153, 99: 153},
-		{150, 150, 150, 150, 150, 150, 150, 150, 9: 150, 150, 49: 150, 150, 56: 534, 186: 533},
-		{98: 531},
+		{260, 260},
+		{576, 575},
+		{21: 289, 23: 288, 27: 303, 46: 577},
+		{32, 32, 32, 32, 32, 32, 32, 8: 32, 26: 32, 29: 32, 32},
+		{259, 259},
 		// 310
-		{28: 229, 30: 228, 532},
-		{151, 151, 151, 151, 151, 151, 151, 151, 9: 151, 151, 49: 151, 151, 56: 151},
-		{148, 148, 148, 148, 148, 148, 148, 148, 9: 148, 148, 49: 537, 536, 195: 535},
-		{149, 149, 149, 149, 149, 149, 149, 149, 9: 149, 149, 49: 149, 149},
-		{155, 155, 155, 155, 155, 155, 155, 155, 9: 155, 155},
+		{34, 34, 34, 34, 34, 34, 34, 8: 34, 29: 34, 34},
+		{130: 580},
+		{13: 582, 47: 581},
+		{30, 30, 30, 30, 30, 30, 30, 8: 30, 29: 30, 30},
+		{2: 583},
 		// 315
-		{147, 147, 147, 147, 147, 147, 147, 147, 9: 147, 147},
-		{50: 538},
-		{146, 146, 146, 146, 146, 146, 146, 146, 9: 146, 146},
-		{89: 580},
-		{93: 577},
+		{29, 29, 29, 29, 29, 29, 29, 8: 29, 29: 29, 29},
+		{27, 27, 27, 27, 27, 27, 27, 8: 27},
+		{18, 18, 18, 18, 18, 18, 18, 8: 18, 30: 589, 56: 597, 596, 101: 599, 111: 600},
+		{18, 18, 18, 588, 18, 18, 18, 8: 18, 29: 587, 56: 597, 596, 101: 594, 110: 595},
+		{22, 22, 22, 22, 22, 22, 22, 8: 22, 30: 22, 56: 22, 22},
 		// 320
-		{13: 542},
-		{54: 544, 93: 543},
-		{89: 575},
-		{2: 545},
-		{93: 546},
+		{29: 593},
+		{178: 591, 182: 592},
+		{13, 13},
+		{20, 20, 20, 20, 20, 20, 20, 8: 20, 29: 20, 56: 20, 20},
+		{19, 19, 19, 19, 19, 19, 19, 8: 19, 29: 19, 56: 19, 19},
 		// 325
-		{89: 547},
-		{175, 175, 175, 175, 175, 175, 175, 175, 9: 175, 175, 175, 175, 25: 549, 96: 548},
-		{176, 176, 176, 176, 176, 176, 176, 176, 9: 176, 176, 176, 176},
-		{173, 32: 560, 558, 553, 554, 556, 561, 559, 555, 557, 563, 562, 552, 142: 551, 184: 550},
-		{573, 32: 560, 558, 553, 554, 556, 561, 559, 555, 557, 563, 562, 552, 142: 574},
+		{21, 21, 21, 21, 21, 21, 21, 8: 21, 30: 21, 56: 21, 21},
+		{24, 24, 24, 24, 24, 24, 24, 8: 24},
+		{18, 18, 18, 18, 18, 18, 18, 8: 18, 56: 597, 596, 101: 598},
+		{17, 17, 17, 17, 17, 17, 17, 8: 17},
+		{16, 16, 16, 16, 16, 16, 16, 8: 16},
 		// 330
-		{172, 32: 172, 172, 172, 172, 172, 172, 172, 172, 172, 172, 172, 172},
-		{9: 569},
-		{98: 567},
-		{26: 566},
-		{166, 32: 166, 166, 166, 166, 166, 166, 166, 166, 166, 166, 166, 166},
+		{23, 23, 23, 23, 23, 23, 23, 8: 23},
+		{26, 26, 26, 26, 26, 26, 26, 8: 26},
+		{18, 18, 18, 18, 18, 18, 18, 8: 18, 56: 597, 596, 101: 601},
+		{25, 25, 25, 25, 25, 25, 25, 8: 25},
+		{36, 36, 36, 36, 36, 36, 36, 8: 36, 29: 36, 36},
 		// 335
-		{26: 565},
-		{164, 32: 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164},
-		{163, 32: 163, 163, 163, 163, 163, 163, 163, 163, 163, 163, 163, 163},
-		{162, 32: 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162},
-		{26: 564},
+		{38, 38, 38, 38, 38, 38, 38, 8: 38, 29: 38, 38},
+		{40, 40, 40, 40, 40, 40, 40, 8: 40},
+		{2: 41, 41, 41, 41, 41},
+		{187, 187, 187, 187, 187, 187, 187, 8: 187},
+		{2: 564, 565, 567, 569, 566, 160: 563, 169: 608},
 		// 340
-		{160, 32: 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160},
-		{159, 32: 159, 159, 159, 159, 159, 159, 159, 159, 159, 159, 159, 159},
-		{158, 32: 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158},
-		{161, 32: 161, 161, 161, 161, 161, 161, 161, 161, 161, 161, 161, 161},
-		{165, 32: 165, 165, 165, 165, 165, 165, 165, 165, 165, 165, 165, 165},
+		{35, 35, 35, 35, 35, 35, 35, 8: 35, 29: 35, 35},
+		{7: 128, 9: 128, 20: 128, 22: 128, 25: 128, 128, 197: 610},
+		{7: 131, 9: 131, 20: 131, 22: 131, 25: 612, 131, 206: 611},
+		{7: 126, 9: 126, 20: 126, 22: 126, 26: 616, 224: 614, 615},
+		{10: 474, 109: 613},
 		// 345
-		{167, 32: 167, 167, 167, 167, 167, 167, 167, 167, 167, 167, 167, 167},
-		{26: 568},
-		{168, 32: 168, 168, 168, 168, 168, 168, 168, 168, 168, 168, 168, 168},
-		{26: 570, 163: 571},
-		{170, 32: 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170},
+		{7: 130, 9: 130, 20: 130, 22: 130, 26: 130},
+		{7: 120, 9: 120, 20: 120, 22: 120, 229: 629},
+		{7: 123, 9: 123, 20: 123, 22: 123, 26: 623, 226: 622},
+		{127: 617},
+		{12: 618, 134: 619},
 		// 350
-		{168: 572},
-		{169, 32: 169, 169, 169, 169, 169, 169, 169, 169, 169, 169, 169, 169},
-		{174, 174, 174, 174, 174, 174, 174, 174, 9: 174, 174, 174, 174},
-		{171, 32: 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171, 171},
-		{175, 175, 175, 175, 175, 175, 175, 175, 9: 175, 175, 175, 175, 25: 549, 96: 576},
+		{129: 621},
+		{129: 620},
+		{7: 124, 9: 124, 20: 124, 22: 124, 26: 124},
+		{7: 125, 9: 125, 20: 125, 22: 125, 26: 125},
+		{7: 127, 9: 127, 20: 127, 22: 127},
 		// 355
-		{177, 177, 177, 177, 177, 177, 177, 177, 9: 177, 177, 177, 177},
-		{89: 578},
-		{175, 175, 175, 175, 175, 175, 175, 175, 9: 175, 175, 175, 175, 25: 549, 96: 579},
-		{179, 179, 179, 179, 179, 179, 179, 179, 9: 179, 179, 179, 179},
-		{175, 175, 175, 175, 175, 175, 175, 175, 9: 175, 175, 175, 175, 25: 549, 96: 581},
+		{127: 624},
+		{130: 625, 134: 626},
+		{136: 628},
+		{136: 627},
+		{7: 121, 9: 121, 20: 121, 22: 121},
 		// 360
-		{180, 180, 180, 180, 180, 180, 180, 180, 9: 180, 180, 180, 180},
-		{182, 182, 182, 182, 182, 182, 182, 182, 9: 182, 182, 182, 182},
-		{2: 586},
-		{2, 2, 2, 2, 2, 2, 2, 2, 9: 2, 2, 2, 2},
-		{1, 1, 1, 1, 1, 1, 1, 1, 9: 1, 1, 1, 1},
+		{7: 122, 9: 122, 20: 122, 22: 122},
+		{7: 119, 9: 119, 20: 119, 22: 119, 242: 630},
+		{7: 132, 9: 132, 20: 132, 22: 132},
+		{7: 135, 9: 135, 22: 641, 228: 640},
+		{7: 4, 9: 4, 20: 637, 22: 4, 163: 636},
 		// 365
-		{26: 584, 28: 585, 140: 587},
-		{181, 181, 181, 181, 181, 181, 181, 181, 9: 181, 181, 181, 181},
-		{192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192},
-		{8: 139, 19: 139, 139, 139, 139, 139, 139},
-		{28: 229, 30: 228, 248, 48: 592, 149: 591},
+		{97: 634},
+		{135: 635},
+		{7: 5, 9: 5, 11: 5, 5, 5, 5, 5, 20: 5, 22: 5, 36: 5, 45: 5},
+		{7: 7, 9: 7, 22: 7},
+		{97: 638},
 		// 370
-		{126, 126},
-		{15: 302, 303, 108: 305},
-		{8: 140, 19: 140, 140, 140, 140, 140, 140},
-		{28: 229, 30: 228, 248, 48: 596, 147: 595, 150: 299},
-		{136, 136},
+		{142: 639},
+		{7: 3, 9: 3, 11: 3, 3, 3, 3, 3, 22: 3, 45: 3},
+		{7: 149, 9: 149},
+		{21: 289, 23: 288, 27: 287, 95: 642},
+		{7: 134, 9: 134},
 		// 375
-		{51: 314, 58: 333, 323, 61: 331, 330, 321, 320, 327, 328, 324, 338, 337, 342, 319, 340, 339, 326, 322, 335, 316, 329, 318, 336, 317, 343, 341, 325, 332, 334, 315, 100: 307, 308, 104: 304, 311, 109: 312, 310, 309, 306, 313},
-		{28: 229, 30: 228, 248, 48: 601, 129: 599, 151: 600, 175: 598},
-		{621, 622},
-		{197, 197},
-		{195, 195},
+		{21: 289, 23: 288, 27: 644},
+		{261, 261, 261, 261, 261, 261, 261, 261, 261, 261, 11: 261, 261, 261, 261, 261, 261, 20: 261, 22: 261, 25: 261, 261, 29: 261, 261, 36: 261, 45: 261, 91: 261},
+		{21: 289, 23: 288, 27: 287, 95: 646},
+		{11: 6, 6, 6, 6, 6, 20: 633, 36: 650, 45: 6, 162: 649, 219: 647, 648},
+		{11: 670, 672, 671, 667, 668, 45: 673, 144: 664, 663, 152: 666, 164: 665, 166: 669, 198: 661, 660, 234: 662},
 		// 380
-		{51: 314, 58: 333, 323, 61: 331, 330, 321, 320, 327, 328, 324, 338, 337, 342, 319, 340, 339, 326, 322, 335, 316, 329, 318, 336, 317, 343, 341, 325, 332, 334, 315, 100: 307, 308, 104: 602, 311, 109: 312, 310, 309, 306, 313},
-		{193, 193, 193, 193, 193, 193, 193, 193, 9: 193, 193, 193, 13: 193, 193, 193, 193, 193, 466, 128: 603},
-		{191, 191, 191, 191, 191, 191, 191, 191, 9: 191, 191, 191, 13: 191, 191, 191, 191, 605, 196: 604},
-		{189, 189, 189, 189, 189, 189, 189, 189, 9: 189, 189, 189, 13: 189, 189, 302, 303, 108: 607, 187: 606},
-		{190, 190, 190, 190, 190, 190, 190, 190, 9: 190, 190, 190, 13: 190, 190, 190, 190},
+		{11: 4, 4, 4, 4, 4, 20: 637, 36: 656, 45: 4, 163: 655, 221: 654},
+		{11: 11, 11, 11, 11, 11, 20: 11, 36: 11, 45: 11},
+		{20: 651},
+		{97: 652},
+		{135: 653},
 		// 385
-		{185, 185, 185, 185, 185, 185, 185, 185, 9: 185, 185, 185, 13: 470, 471, 134: 468, 608, 141: 469},
-		{188, 188, 188, 188, 188, 188, 188, 188, 9: 188, 188, 188, 13: 188, 188},
-		{157, 157, 157, 157, 157, 157, 157, 157, 9: 157, 157, 476, 139: 609},
-		{145, 145, 32, 32, 32, 32, 32, 483, 9: 615, 614, 94: 613, 97: 480, 143: 612, 174: 610, 185: 611},
-		{194, 194},
+		{11: 10, 10, 10, 10, 10, 20: 10, 36: 10, 45: 10},
+		{11: 12, 12, 12, 12, 12, 45: 12},
+		{11: 9, 9, 9, 9, 9, 45: 9},
+		{20: 657},
+		{97: 658},
 		// 390
-		{144, 144},
-		{143, 143, 32, 32, 32, 32, 32, 483, 94: 484, 97: 524},
-		{2: 486, 487, 489, 491, 488, 144: 485, 152: 619},
-		{161: 617},
-		{61: 616},
+		{142: 659},
+		{11: 8, 8, 8, 8, 8, 45: 8},
+		{7: 255, 9: 255},
+		{7: 254, 9: 254, 11: 670, 672, 671, 667, 668, 144: 664, 753, 152: 666, 164: 665, 166: 669},
+		{7: 253, 9: 253},
 		// 395
-		{4, 4},
-		{28: 229, 30: 228, 227, 114: 618},
-		{5, 5},
-		{25, 25, 25, 510, 25, 25, 25, 25, 27: 509, 29: 511, 102: 507, 508, 132: 506, 620},
-		{3, 3},
+		{7: 252, 9: 252, 11: 252, 252, 252, 252, 252},
+		{7: 250, 9: 250, 11: 250, 250, 250, 250, 250},
+		{7: 249, 9: 249, 11: 249, 249, 249, 249, 249},
+		{7: 248, 9: 248, 11: 248, 248, 248, 248, 248},
+		{16: 745},
 		// 400
-		{8: 199, 19: 199, 199, 199, 199, 199, 199, 177: 624},
-		{28: 229, 30: 228, 248, 48: 601, 129: 623, 151: 600},
-		{196, 196},
-		{8: 198, 19: 198, 198, 198, 198, 198, 198, 192: 625},
-		{8: 200, 19: 200, 200, 200, 200, 200, 200},
+		{16: 718},
+		{7: 184, 9: 184, 11: 184, 184, 184, 184, 184},
+		{21: 289, 23: 288, 27: 303, 46: 705},
+		{141: 700},
+		{11: 681, 16: 682, 126: 680, 141: 679, 147: 678},
 		// 405
-		{8: 204, 19: 204, 204, 204, 204, 204, 204},
-		{28: 229, 30: 228, 628},
-		{216, 216, 216, 216, 216, 216, 216, 216, 216, 19: 216, 21: 216, 216, 216, 25: 216, 27: 216, 29: 216, 54: 216, 60: 216},
-		{20: 218},
+		{11: 674},
+		{21: 289, 23: 288, 27: 303, 46: 675},
+		{59: 676},
+		{21: 289, 23: 288, 27: 303, 46: 677},
+		{7: 150, 9: 150},
+		// 410
+		{7: 160, 9: 160, 11: 160, 160, 160, 160, 160, 44: 160, 47: 695, 696, 115: 694, 153: 693, 692},
+		{126: 690},
+		{175: 686},
+		{21: 289, 23: 288, 27: 303, 46: 685},
+		{21: 289, 23: 288, 27: 303, 46: 573, 146: 683},
+		// 415
+		{684, 575},
+		{7: 161, 9: 161, 11: 161, 161, 161, 161, 161, 44: 161, 47: 161, 161, 161},
+		{7: 162, 9: 162, 11: 162, 162, 162, 162, 162, 44: 162, 47: 162, 162, 162},
+		{7: 152, 9: 152, 11: 152, 152, 152, 152, 152, 44: 688, 114: 687},
+		{7: 163, 9: 163, 11: 163, 163, 163, 163, 163},
+		// 420
+		{19: 689},
+		{7: 151, 9: 151, 11: 151, 151, 151, 151, 151},
+		{7: 152, 9: 152, 11: 152, 152, 152, 152, 152, 44: 688, 114: 691},
+		{7: 164, 9: 164, 11: 164, 164, 164, 164, 164},
+		{7: 152, 9: 152, 11: 152, 152, 152, 152, 152, 44: 688, 114: 699},
+		// 425
+		{7: 159, 9: 159, 11: 159, 159, 159, 159, 159, 44: 159, 47: 695, 696, 159, 115: 698},
+		{7: 158, 9: 158, 11: 158, 158, 158, 158, 158, 44: 158, 47: 158, 158, 158},
+		{174: 697},
+		{7: 155, 9: 155, 11: 155, 155, 155, 155, 155, 44: 155, 47: 155, 155, 155},
+		{7: 156, 9: 156, 11: 156, 156, 156, 156, 156, 44: 156, 47: 156, 156, 156},
+		// 430
+		{7: 157, 9: 157, 11: 157, 157, 157, 157, 157, 44: 157, 47: 157, 157, 157},
+		{7: 165, 9: 165, 11: 165, 165, 165, 165, 165},
+		{11: 681, 16: 682, 147: 701},
+		{7: 160, 9: 160, 11: 160, 160, 160, 160, 160, 47: 695, 696, 160, 115: 694, 153: 693, 702},
+		{7: 154, 9: 154, 11: 154, 154, 154, 154, 154, 49: 704, 208: 703},
+		// 435
+		{7: 166, 9: 166, 11: 166, 166, 166, 166, 166},
+		{7: 153, 9: 153, 11: 153, 153, 153, 153, 153},
+		{3: 707, 92: 706},
+		{123: 714},
+		{92: 708},
+		// 440
+		{123: 709},
+		{122: 710},
+		{132: 711},
+		{7: 168, 9: 168, 11: 168, 168, 168, 168, 168, 131: 713, 161: 712},
+		{7: 169, 9: 169, 11: 169, 169, 169, 169, 169},
+		// 445
+		{7: 167, 9: 167, 11: 167, 167, 167, 167, 167},
+		{122: 715},
+		{132: 716},
+		{7: 168, 9: 168, 11: 168, 168, 168, 168, 168, 131: 713, 161: 717},
+		{7: 170, 9: 170, 11: 170, 170, 170, 170, 170},
+		// 450
+		{21: 289, 23: 288, 27: 303, 46: 723, 165: 721, 167: 724, 722, 222: 719, 720},
+		{741, 742},
+		{737, 738},
+		{183, 183},
+		{181, 181},
+		// 455
+		{52: 321, 480, 481, 60: 340, 330, 338, 337, 328, 327, 334, 335, 331, 345, 344, 349, 326, 347, 346, 333, 329, 342, 323, 336, 325, 343, 324, 350, 348, 332, 339, 341, 322, 107: 314, 315, 112: 725, 318, 116: 726, 319, 317, 316, 313, 320},
+		{173, 173},
+		{10: 474, 109: 727},
+		{171, 171},
+		{231, 231, 231, 231, 231, 231, 231, 8: 231, 12: 729, 24: 231, 485, 28: 231, 50: 486, 150: 483, 730, 157: 484, 207: 728},
+		// 460
+		{203, 203, 203, 203, 203, 203, 203, 8: 203, 24: 537, 28: 733, 155: 734, 210: 732},
+		{90: 731},
+		{178, 178, 178, 178, 178, 178, 178, 8: 178, 24: 178, 28: 178},
+		{179, 179, 179, 179, 179, 179, 179, 8: 179, 24: 179, 28: 179},
+		{175, 175, 42, 42, 42, 42, 42, 8: 556, 100: 607, 103: 555, 159: 735, 200: 736},
+		// 465
+		{177, 177, 177, 177, 177, 177, 177, 8: 177},
+		{176, 176, 176, 176, 176, 176, 176, 8: 176},
+		{174, 174, 42, 42, 42, 42, 42, 8: 556, 100: 607, 103: 606},
+		{180, 180},
+		{7: 185, 9: 185, 11: 185, 185, 185, 185, 185},
+		// 470
+		{21: 289, 23: 288, 27: 303, 46: 740, 167: 739},
+		{172, 172},
+		{53: 480, 481, 116: 726},
+		{7: 186, 9: 186, 11: 186, 186, 186, 186, 186},
+		{21: 289, 23: 288, 27: 303, 46: 744, 165: 743, 168: 722},
+		// 475
+		{182, 182},
+		{52: 321, 60: 340, 330, 338, 337, 328, 327, 334, 335, 331, 345, 344, 349, 326, 347, 346, 333, 329, 342, 323, 336, 325, 343, 324, 350, 348, 332, 339, 341, 322, 107: 314, 315, 112: 725, 318, 117: 319, 317, 316, 313, 320},
+		{21: 289, 23: 288, 27: 303, 46: 305, 99: 747, 104: 304, 202: 746},
+		{748, 749},
+		{244, 244},
+		// 480
+		{7: 246, 9: 246, 11: 246, 246, 246, 246, 246, 204: 751},
+		{21: 289, 23: 288, 27: 303, 46: 305, 99: 750, 104: 304},
+		{243, 243},
+		{7: 245, 9: 245, 11: 245, 245, 245, 245, 245, 227: 752},
+		{7: 247, 9: 247, 11: 247, 247, 247, 247, 247},
+		// 485
+		{7: 251, 9: 251, 11: 251, 251, 251, 251, 251},
+		{7: 265},
 	}
 )
 
@@ -1328,7 +1583,7 @@ func yylex1(yylex yyLexer, lval *yySymType) (n int) {
 }
 
 func yyParse(yylex yyLexer) int {
-	const yyError = 202
+	const yyError = 248
 
 	yyEx, _ := yylex.(yyLexerEx)
 	var yyn int
@@ -1530,49 +1785,49 @@ yynewstate:
 		}
 	case 4:
 		{
+			yyVAL.node = yyS[yypt-0].node
+		}
+	case 5:
+		{
+			yyVAL.node = &ast.CreateTableStmt{}
+		}
+	case 6:
+		{
 			yyVAL.anything = &ast.TableName{
 				Table: yyS[yypt-0].anything.(*element.Identifier),
 			}
 		}
-	case 5:
+	case 7:
 		{
 			yyVAL.anything = &ast.TableName{
 				Schema: yyS[yypt-2].anything.(*element.Identifier),
 				Table:  yyS[yypt-0].anything.(*element.Identifier),
 			}
 		}
-	case 8:
+	case 10:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 9:
+	case 11:
 		{
 			yyVAL.anything = &element.Identifier{
 				Typ:   element.IdentifierTypeNonQuoted,
 				Value: yyS[yypt-0].str,
 			}
 		}
-	case 10:
+	case 12:
 		{
 			yyVAL.anything = &element.Identifier{
 				Typ:   element.IdentifierTypeQuoted,
 				Value: yyS[yypt-0].str,
 			}
 		}
-	case 11:
-		{
-			yyVAL.node = &ast.AlterTableStmt{
-				TableName:     yyS[yypt-3].anything.(*ast.TableName),
-				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
-			}
-		}
-	case 12:
-		{
-			// TODO
-		}
 	case 13:
 		{
-			// TODO
+			yyVAL.node = &ast.AlterTableStmt{
+				TableName:     yyS[yypt-2].anything.(*ast.TableName),
+				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
+			}
 		}
 	case 14:
 		{
@@ -1653,71 +1908,71 @@ yynewstate:
 		}
 	case 29:
 		{
-			yyVAL.anything = &ast.Collation{Name: yyS[yypt-0].anything.(*element.Identifier)}
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 30:
 		{
-			yyVAL.b = false
+			yyVAL.anything = &ast.Collation{Name: yyS[yypt-0].anything.(*element.Identifier)}
 		}
 	case 31:
 		{
-			yyVAL.b = true
+			yyVAL.b = false
 		}
 	case 32:
 		{
-			yyVAL.anything = nil
+			yyVAL.b = true
 		}
 	case 33:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.anything = nil
 		}
 	case 34:
 		{
-			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyInvisible}
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 35:
 		{
-			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyVisible}
+			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyInvisible}
 		}
 	case 36:
 		{
-			// empty
+			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyVisible}
 		}
-	case 46:
+	case 37:
 		{
 			// empty
 		}
-	case 48:
+	case 47:
 		{
 			// empty
 		}
-	case 64:
+	case 49:
 		{
 			// empty
 		}
-	case 67:
+	case 65:
 		{
 			// empty
 		}
-	case 69:
+	case 68:
 		{
 			// empty
 		}
-	case 71:
+	case 70:
 		{
 			// empty
 		}
-	case 73:
+	case 72:
 		{
 			// empty
 		}
-	case 76:
+	case 74:
 		{
 			// empty
 		}
-	case 81:
+	case 77:
 		{
-			yyVAL.anything = nil
+			// empty
 		}
 	case 82:
 		{
@@ -1727,17 +1982,17 @@ yynewstate:
 		{
 			yyVAL.anything = nil
 		}
-	case 92:
-		{
-			// empty
-		}
-	case 99:
-		{
-			// empty
-		}
-	case 101:
+	case 84:
 		{
 			yyVAL.anything = nil
+		}
+	case 93:
+		{
+			// empty
+		}
+	case 100:
+		{
+			// empty
 		}
 	case 102:
 		{
@@ -1751,83 +2006,123 @@ yynewstate:
 		{
 			yyVAL.anything = nil
 		}
-	case 107:
-		{
-			// empty
-		}
-	case 113:
-		{
-			// empty
-		}
-	case 115:
-		{
-			// empty
-		}
-	case 117:
+	case 105:
 		{
 			yyVAL.anything = nil
 		}
+	case 108:
+		{
+			// empty
+		}
+	case 114:
+		{
+			// empty
+		}
+	case 116:
+		{
+			// empty
+		}
 	case 118:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.anything = nil
 		}
 	case 119:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.node = nil
 		}
 	case 120:
 		{
+			// empty
+		}
+	case 128:
+		{
+			// empty
+		}
+	case 133:
+		{
+			// empty
+		}
+	case 137:
+		{
+			yyVAL.anything = nil
+		}
+	case 138:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 142:
+		{
+			// empty
+		}
+	case 145:
+		{
+			// empty
+		}
+	case 150:
+		{
+			// empty
+		}
+	case 155:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 156:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 157:
+		{
 			yyVAL.anything = &element.NumberOrAsterisk{Number: yyS[yypt-0].i}
 		}
-	case 121:
+	case 158:
 		{
 			yyVAL.anything = &element.NumberOrAsterisk{IsAsterisk: true}
 		}
-	case 122:
+	case 159:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 123:
+	case 160:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 124:
+	case 161:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 125:
+	case 162:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 126:
+	case 163:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 127:
+	case 164:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
 		}
-	case 128:
+	case 165:
 		{
 			d := &element.Char{}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 129:
+	case 166:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Char{Size: &size}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 130:
+	case 167:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsByteSize: true}
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 131:
+	case 168:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsCharSize: true}
@@ -1835,7 +2130,7 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineChar)
 			yyVAL.anything = d
 		}
-	case 132:
+	case 169:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
@@ -1843,7 +2138,7 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineVarchar2)
 			yyVAL.anything = d
 		}
-	case 133:
+	case 170:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Varchar2{}
@@ -1852,7 +2147,7 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineVarchar2)
 			yyVAL.anything = d
 		}
-	case 134:
+	case 171:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Varchar2{}
@@ -1861,267 +2156,17 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineVarchar2)
 			yyVAL.anything = d
 		}
-	case 135:
+	case 172:
 		{
 			d := &element.NChar{}
 			d.SetDataDefine(element.DataDefineNChar)
-			yyVAL.anything = d
-		}
-	case 136:
-		{
-			size := yyS[yypt-1].i
-			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNChar)
-			yyVAL.anything = d
-		}
-	case 137:
-		{
-			size := yyS[yypt-1].i
-			d := &element.NVarchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineNVarChar2)
-			yyVAL.anything = d
-		}
-	case 138:
-		{
-			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineNumber)
-			yyVAL.anything = d
-		}
-	case 139:
-		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineNumber)
-			yyVAL.anything = d
-		}
-	case 140:
-		{
-			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
-			scale := yyS[yypt-1].i
-			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineNumber)
-			yyVAL.anything = d
-		}
-	case 141:
-		{
-			d := &element.Float{}
-			d.SetDataDefine(element.DataDefineFloat)
-			yyVAL.anything = d
-		}
-	case 142:
-		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Float{Precision: precision}
-			d.SetDataDefine(element.DataDefineFloat)
-			yyVAL.anything = d
-		}
-	case 143:
-		{
-			d := &element.BinaryFloat{}
-			d.SetDataDefine(element.DataDefineBinaryFloat)
-			yyVAL.anything = d
-		}
-	case 144:
-		{
-			d := &element.BinaryDouble{}
-			d.SetDataDefine(element.DataDefineBinaryDouble)
-			yyVAL.anything = d
-		}
-	case 145:
-		{
-			d := &element.Long{}
-			d.SetDataDefine(element.DataDefineLong)
-			yyVAL.anything = d
-		}
-	case 146:
-		{
-			d := &element.LongRaw{}
-			d.SetDataDefine(element.DataDefineLongRaw)
-			yyVAL.anything = d
-		}
-	case 147:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Raw{Size: &size}
-			d.SetDataDefine(element.DataDefineRaw)
-			yyVAL.anything = d
-		}
-	case 148:
-		{
-			d := &element.Date{}
-			d.SetDataDefine(element.DataDefineDate)
-			yyVAL.anything = d
-		}
-	case 149:
-		{
-			d := &element.Timestamp{}
-			d.SetDataDefine(element.DataDefineTimestamp)
-			yyVAL.anything = d
-		}
-	case 150:
-		{
-			precision := yyS[yypt-1].i
-			d := &element.Timestamp{FractionalSecondsPrecision: &precision}
-			d.SetDataDefine(element.DataDefineTimestamp)
-			yyVAL.anything = d
-		}
-	case 151:
-		{
-			precision := yyS[yypt-4].i
-			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
-			d.SetDataDefine(element.DataDefineTimestamp)
-			yyVAL.anything = d
-		}
-	case 152:
-		{
-			precision := yyS[yypt-5].i
-			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
-			d.SetDataDefine(element.DataDefineTimestamp)
-			yyVAL.anything = d
-		}
-	case 153:
-		{
-			d := &element.IntervalYear{}
-			d.SetDataDefine(element.DataDefineIntervalYear)
-			yyVAL.anything = d
-		}
-	case 154:
-		{
-			precision := yyS[yypt-3].i
-			d := &element.IntervalYear{Precision: &precision}
-			d.SetDataDefine(element.DataDefineIntervalYear)
-			yyVAL.anything = d
-		}
-	case 155:
-		{
-			d := &element.IntervalDay{}
-			d.SetDataDefine(element.DataDefineIntervalDay)
-			yyVAL.anything = d
-		}
-	case 156:
-		{
-			precision := yyS[yypt-3].i
-			d := &element.IntervalDay{Precision: &precision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
-			yyVAL.anything = d
-		}
-	case 157:
-		{
-			precision := yyS[yypt-6].i
-			sPrecision := yyS[yypt-1].i
-			d := &element.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
-			yyVAL.anything = d
-		}
-	case 158:
-		{
-			sPrecision := yyS[yypt-1].i
-			d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
-			yyVAL.anything = d
-		}
-	case 159:
-		{
-			d := &element.Blob{}
-			d.SetDataDefine(element.DataDefineBlob)
-			yyVAL.anything = d
-		}
-	case 160:
-		{
-			d := &element.Clob{}
-			d.SetDataDefine(element.DataDefineClob)
-			yyVAL.anything = d
-		}
-	case 161:
-		{
-			d := &element.NClob{}
-			d.SetDataDefine(element.DataDefineNClob)
-			yyVAL.anything = d
-		}
-	case 162:
-		{
-			d := &element.BFile{}
-			d.SetDataDefine(element.DataDefineBFile)
-			yyVAL.anything = d
-		}
-	case 163:
-		{
-			d := &element.RowId{}
-			d.SetDataDefine(element.DataDefineRowId)
-			yyVAL.anything = d
-		}
-	case 164:
-		{
-			d := &element.URowId{}
-			d.SetDataDefine(element.DataDefineURowId)
-			yyVAL.anything = d
-		}
-	case 165:
-		{
-			size := yyS[yypt-1].i
-			d := &element.URowId{Size: &size}
-			d.SetDataDefine(element.DataDefineURowId)
-			yyVAL.anything = d
-		}
-	case 166:
-		{
-			d := &element.Char{}
-			d.SetDataDefine(element.DataDefineCharacter)
-			yyVAL.anything = d
-		}
-	case 167:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharacterVarying)
-			yyVAL.anything = d
-		}
-	case 168:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharVarying)
-			yyVAL.anything = d
-		}
-	case 169:
-		{
-			size := yyS[yypt-1].i
-			d := &element.NVarchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineNCharVarying)
-			yyVAL.anything = d
-		}
-	case 170:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineVarchar)
-			yyVAL.anything = d
-		}
-	case 171:
-		{
-			size := yyS[yypt-1].i
-			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNationalCharacter)
-			yyVAL.anything = d
-		}
-	case 172:
-		{
-			size := yyS[yypt-1].i
-			d := &element.NVarchar2{}
-			d.Size = &size
-			d.SetDataDefine(element.DataDefineNationalCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 173:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNationalChar)
+			d.SetDataDefine(element.DataDefineNChar)
 			yyVAL.anything = d
 		}
 	case 174:
@@ -2129,20 +2174,20 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineNationalCharVarying)
+			d.SetDataDefine(element.DataDefineNVarChar2)
 			yyVAL.anything = d
 		}
 	case 175:
 		{
 			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
 	case 176:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
 	case 177:
@@ -2150,23 +2195,273 @@ yynewstate:
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDefine(element.DataDefineNumber)
 			yyVAL.anything = d
 		}
 	case 178:
 		{
-			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineDecimal)
+			d := &element.Float{}
+			d.SetDataDefine(element.DataDefineFloat)
 			yyVAL.anything = d
 		}
 	case 179:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Float{Precision: precision}
+			d.SetDataDefine(element.DataDefineFloat)
+			yyVAL.anything = d
+		}
+	case 180:
+		{
+			d := &element.BinaryFloat{}
+			d.SetDataDefine(element.DataDefineBinaryFloat)
+			yyVAL.anything = d
+		}
+	case 181:
+		{
+			d := &element.BinaryDouble{}
+			d.SetDataDefine(element.DataDefineBinaryDouble)
+			yyVAL.anything = d
+		}
+	case 182:
+		{
+			d := &element.Long{}
+			d.SetDataDefine(element.DataDefineLong)
+			yyVAL.anything = d
+		}
+	case 183:
+		{
+			d := &element.LongRaw{}
+			d.SetDataDefine(element.DataDefineLongRaw)
+			yyVAL.anything = d
+		}
+	case 184:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Raw{Size: &size}
+			d.SetDataDefine(element.DataDefineRaw)
+			yyVAL.anything = d
+		}
+	case 185:
+		{
+			d := &element.Date{}
+			d.SetDataDefine(element.DataDefineDate)
+			yyVAL.anything = d
+		}
+	case 186:
+		{
+			d := &element.Timestamp{}
+			d.SetDataDefine(element.DataDefineTimestamp)
+			yyVAL.anything = d
+		}
+	case 187:
+		{
+			precision := yyS[yypt-1].i
+			d := &element.Timestamp{FractionalSecondsPrecision: &precision}
+			d.SetDataDefine(element.DataDefineTimestamp)
+			yyVAL.anything = d
+		}
+	case 188:
+		{
+			precision := yyS[yypt-4].i
+			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
+			d.SetDataDefine(element.DataDefineTimestamp)
+			yyVAL.anything = d
+		}
+	case 189:
+		{
+			precision := yyS[yypt-5].i
+			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
+			d.SetDataDefine(element.DataDefineTimestamp)
+			yyVAL.anything = d
+		}
+	case 190:
+		{
+			d := &element.IntervalYear{}
+			d.SetDataDefine(element.DataDefineIntervalYear)
+			yyVAL.anything = d
+		}
+	case 191:
+		{
+			precision := yyS[yypt-3].i
+			d := &element.IntervalYear{Precision: &precision}
+			d.SetDataDefine(element.DataDefineIntervalYear)
+			yyVAL.anything = d
+		}
+	case 192:
+		{
+			d := &element.IntervalDay{}
+			d.SetDataDefine(element.DataDefineIntervalDay)
+			yyVAL.anything = d
+		}
+	case 193:
+		{
+			precision := yyS[yypt-3].i
+			d := &element.IntervalDay{Precision: &precision}
+			d.SetDataDefine(element.DataDefineIntervalDay)
+			yyVAL.anything = d
+		}
+	case 194:
+		{
+			precision := yyS[yypt-6].i
+			sPrecision := yyS[yypt-1].i
+			d := &element.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
+			d.SetDataDefine(element.DataDefineIntervalDay)
+			yyVAL.anything = d
+		}
+	case 195:
+		{
+			sPrecision := yyS[yypt-1].i
+			d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
+			d.SetDataDefine(element.DataDefineIntervalDay)
+			yyVAL.anything = d
+		}
+	case 196:
+		{
+			d := &element.Blob{}
+			d.SetDataDefine(element.DataDefineBlob)
+			yyVAL.anything = d
+		}
+	case 197:
+		{
+			d := &element.Clob{}
+			d.SetDataDefine(element.DataDefineClob)
+			yyVAL.anything = d
+		}
+	case 198:
+		{
+			d := &element.NClob{}
+			d.SetDataDefine(element.DataDefineNClob)
+			yyVAL.anything = d
+		}
+	case 199:
+		{
+			d := &element.BFile{}
+			d.SetDataDefine(element.DataDefineBFile)
+			yyVAL.anything = d
+		}
+	case 200:
+		{
+			d := &element.RowId{}
+			d.SetDataDefine(element.DataDefineRowId)
+			yyVAL.anything = d
+		}
+	case 201:
+		{
+			d := &element.URowId{}
+			d.SetDataDefine(element.DataDefineURowId)
+			yyVAL.anything = d
+		}
+	case 202:
+		{
+			size := yyS[yypt-1].i
+			d := &element.URowId{Size: &size}
+			d.SetDataDefine(element.DataDefineURowId)
+			yyVAL.anything = d
+		}
+	case 203:
+		{
+			d := &element.Char{}
+			d.SetDataDefine(element.DataDefineCharacter)
+			yyVAL.anything = d
+		}
+	case 204:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineCharacterVarying)
+			yyVAL.anything = d
+		}
+	case 205:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineCharVarying)
+			yyVAL.anything = d
+		}
+	case 206:
+		{
+			size := yyS[yypt-1].i
+			d := &element.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineNCharVarying)
+			yyVAL.anything = d
+		}
+	case 207:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineVarchar)
+			yyVAL.anything = d
+		}
+	case 208:
+		{
+			size := yyS[yypt-1].i
+			d := &element.NChar{Size: &size}
+			d.SetDataDefine(element.DataDefineNationalCharacter)
+			yyVAL.anything = d
+		}
+	case 209:
+		{
+			size := yyS[yypt-1].i
+			d := &element.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineNationalCharacterVarying)
+			yyVAL.anything = d
+		}
+	case 210:
+		{
+			size := yyS[yypt-1].i
+			d := &element.NChar{Size: &size}
+			d.SetDataDefine(element.DataDefineNationalChar)
+			yyVAL.anything = d
+		}
+	case 211:
+		{
+			size := yyS[yypt-1].i
+			d := &element.NVarchar2{}
+			d.Size = &size
+			d.SetDataDefine(element.DataDefineNationalCharVarying)
+			yyVAL.anything = d
+		}
+	case 212:
+		{
+			d := &element.Number{}
+			d.SetDataDefine(element.DataDefineNumeric)
+			yyVAL.anything = d
+		}
+	case 213:
+		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Number{Precision: precision}
+			d.SetDataDefine(element.DataDefineNumeric)
+			yyVAL.anything = d
+		}
+	case 214:
+		{
+			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
+			scale := yyS[yypt-1].i
+			d := &element.Number{Precision: precision, Scale: &scale}
+			d.SetDataDefine(element.DataDefineNumeric)
+			yyVAL.anything = d
+		}
+	case 215:
+		{
+			d := &element.Number{}
+			d.SetDataDefine(element.DataDefineDecimal)
+			yyVAL.anything = d
+		}
+	case 216:
+		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineDecimal)
 			yyVAL.anything = d
 		}
-	case 180:
+	case 217:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
@@ -2174,20 +2469,20 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineDecimal)
 			yyVAL.anything = d
 		}
-	case 181:
+	case 218:
 		{
 			d := &element.Number{}
 			d.SetDataDefine(element.DataDefineDec)
 			yyVAL.anything = d
 		}
-	case 182:
+	case 219:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineDec)
 			yyVAL.anything = d
 		}
-	case 183:
+	case 220:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
@@ -2195,58 +2490,66 @@ yynewstate:
 			d.SetDataDefine(element.DataDefineDec)
 			yyVAL.anything = d
 		}
-	case 184:
+	case 221:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineInteger)
 			yyVAL.anything = d
 		}
-	case 185:
+	case 222:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineInt)
 			yyVAL.anything = d
 		}
-	case 186:
+	case 223:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
 			d.SetDataDefine(element.DataDefineSmallInt)
 			yyVAL.anything = d
 		}
-	case 187:
+	case 224:
 		{
 			precision := &element.NumberOrAsterisk{Number: 126}
 			d := &element.Float{Precision: precision}
 			d.SetDataDefine(element.DataDefineDoublePrecision)
 			yyVAL.anything = d
 		}
-	case 188:
+	case 225:
 		{
 			precision := &element.NumberOrAsterisk{Number: 63}
 			d := &element.Float{Precision: precision}
 			d.SetDataDefine(element.DataDefineReal)
 			yyVAL.anything = d
 		}
-	case 189:
+	case 226:
 		{
 			// empty
 		}
-	case 198:
+	case 235:
 		{
 			// empty
 		}
-	case 200:
+	case 237:
 		{
 			// empty
 		}
-	case 203:
+	case 240:
 		{
 			// empty
 		}
-	case 213:
+	case 250:
+		{
+			// empty
+		}
+	case 262:
+		{
+			// empty
+		}
+	case 264:
 		{
 			// empty
 		}

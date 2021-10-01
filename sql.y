@@ -130,6 +130,28 @@ import (
     _online
     _checkpoint
     _rename
+    _create
+    _blockchain
+    _duplicated
+    _global
+    _immutable
+    _private
+    _sharded
+    _temporary
+    _data
+    _extended
+    _metadata
+    _none
+    _sharding
+    _parent
+    _commit
+    _definition
+    _preserve
+    _rows
+    _for
+    _memoptimize
+    _read
+    _write
 
 %token <i>
 	_intNumber 		"int number"
@@ -152,8 +174,10 @@ import (
 	_nonquotedIdentifier
 
 %type	<node>
-	Statement 		"all statement"
-	AlterTableStmt		"*ast.AlterTableStmt"
+    StatementList
+    Statement 		"all statement"
+    AlterTableStmt	"*ast.AlterTableStmt"
+    CreateTableStmt
 
 %type	<anything>
 	TableName
@@ -179,29 +203,41 @@ import (
     ColumnDefinition
     DropColumnClause
     NumberOrAsterisk
+    CollateClauseOrEmpty
     CollateClause
     InvisibleProperty
     InvisiblePropertyOrEmpty
+    DefaultCollateClauseOrEmpty
 
 %start Start
 
 %%
 
 Start:
-	Statement
+	StatementList
 	{
 		yylex.(*yyLexImpl).result = $1
 	}
 
+StatementList:
+    Statement
+    {
+    	$$ = $1
+    }
+|   Statement ';'
+    {
+    	$$ = $1
+    }
+
 Statement:
-	AlterTableStmt
-	{
-	    $$ = $1
-	}
-|   AlterTableStmt ';'
-	{
-	    $$ = $1
-	}
+    AlterTableStmt
+    {
+    	$$ = $1
+    }
+|   CreateTableStmt
+    {
+    	$$ = &ast.CreateTableStmt{}
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ base stmt ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -250,23 +286,13 @@ Identifier:
 
 // see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877
 AlterTableStmt:
-	_alter _table TableName MemoptimizeReadClause MemoptimizeWriteClause ColumnClauses
+	_alter _table TableName MemoptimizeForAlterTable ColumnClauses
 	{
 		$$ = &ast.AlterTableStmt{
 			TableName:      $3.(*ast.TableName),
-			ColumnClauses:  $6.([]ast.ColumnClause),
+			ColumnClauses:  $5.([]ast.ColumnClause),
 		}
 	}
-
-MemoptimizeReadClause:
-    {
-        // TODO
-    }
-
-MemoptimizeWriteClause:
-    {
-        // TODO
-    }
 
 ColumnClauses:
 	ChangeColumnClauseList
@@ -361,11 +387,17 @@ RealColumnDefinition:
     	}
 	}
 
-CollateClause:
+CollateClauseOrEmpty:
     {
         $$ = nil
     }
-|   _collate Identifier
+|   CollateClause
+    {
+        $$ = $1
+    }
+
+CollateClause:
+    _collate Identifier
     {
         $$ = &ast.Collation{Name: $2.(*element.Identifier)}
     }
@@ -604,6 +636,94 @@ RenameColumnClause:
     {
     	$$ = nil
     }
+
+/* +++++++++++++++++++++++++++++++++++++++++++ create table ++++++++++++++++++++++++++++++++++++++++++ */
+
+CreateTableStmt:
+    _create _table TableType TableName ShardingType TableDef Memoptimize ParentTable
+    {
+    	$$ = nil
+    }
+
+TableType:
+    {
+        // empty
+    }
+|   _global _temporary
+|   _private _temporary
+|   _sharded
+|   _duplicated
+|   _immutable
+|   _blockchain
+|   _immutable _blockchain
+
+ShardingType:
+    {
+        // empty
+    }
+|   _sharding '=' _metadata
+|   _sharding '=' _data
+|   _sharding '=' _extended _data
+|   _sharding '=' _none
+
+ParentTable:
+    {
+        // empty
+    }
+|   _parent TableName
+
+TableDef: // todo: support object table and XML type table
+    RelTableDef
+
+RelTableDef:
+    RelTablePropertiesOrEmpty ImmutableTableClauses BlockchainTableClauses DefaultCollateClauseOrEmpty OnCommitClause PhysicalProperties TableProperties
+
+ImmutableTableClauses:
+
+BlockchainTableClauses:
+
+DefaultCollateClauseOrEmpty:
+    {
+        $$ = nil
+    }
+|   _default CollateClause
+    {
+        $$ = $2
+    }
+
+OnCommitClause:
+    OnCommitDef OnCommitRows
+
+OnCommitDef:
+    {
+        // empty
+    }
+|   _on _commit _drop _definition
+|   _on _commit _preserve _definition
+
+OnCommitRows:
+    {
+        // empty
+    }
+|   _on _commit _delete _rows
+|   _on _commit _preserve _rows
+
+PhysicalProperties: // todo
+
+TableProperties: // todo
+
+RelTablePropertiesOrEmpty:
+    {
+        // empty
+    }
+|   '(' RelTableProperties ')'
+
+RelTableProperties:
+    RelTableProperty
+|   RelTableProperties ',' RelTableProperty
+
+RelTableProperty:
+    ColumnDefinition
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -1198,6 +1318,34 @@ InlineRefConstraint:
     _scope _is TableName
 |   _with _rowid
 |   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+
+/* +++++++++++++++++++++++++++++++++++++++++ memoptimize +++++++++++++++++++++++++++++++++++++++++ */
+
+MemoptimizeForAlterTable:
+    MemoptimizeReadForAlterTable MemoptimizeWriteForAlterTable
+
+MemoptimizeReadForAlterTable:
+    MemoptimizeRead
+|   _no _memoptimize _for _read
+
+MemoptimizeWriteForAlterTable:
+    MemoptimizeWrite
+|   _no _memoptimize _for _write
+
+Memoptimize:
+    MemoptimizeRead MemoptimizeWrite
+
+MemoptimizeRead:
+    {
+        // empty
+    }
+|   _memoptimize _for _read
+
+MemoptimizeWrite:
+    {
+        // empty
+    }
+|   _memoptimize _for _write
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ expr ++++++++++++++++++++++++++++++++++++++++++++ */
 

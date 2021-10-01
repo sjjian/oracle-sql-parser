@@ -68,10 +68,26 @@ alter table db1.table1 drop (id,name)
 		`
 alter table db1.table1 set unused column id
 `,
+		`
+alter table db1.table1 rename column id to new_id
+`,
 	}
 	for _, query := range querys {
 		stmt, err := Parser(query)
 		assert.NoError(t, err, "query: %s", query)
 		assert.IsType(t, &ast.AlterTableStmt{}, stmt)
+	}
+}
+
+func TestParseCreateTableStmt(t *testing.T) {
+	querys := []string{
+		`
+crate table db1.table1 (id number, name varchar2(255))
+`,
+	}
+	for _, query := range querys {
+		stmt, err := Parser(query)
+		assert.NoError(t, err, "query: %s", query)
+		assert.IsType(t, &ast.CreateTableStmt{}, stmt)
 	}
 }
