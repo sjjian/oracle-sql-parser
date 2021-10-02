@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestParseAlterTableAddColumn(t *testing.T) {
+func TestParseAlterTable(t *testing.T) {
 	querys := []string{
 		`
 alter table db1.table1 add (id number)
@@ -57,7 +57,10 @@ alter table db1.table1 add (id varchar2(255) default "test")
 alter table db1.table1 add (id number default 123) 
 `,
 		`
-alter table db1.table1 modify (id number default 123) 
+alter table db1.table1 modify (id varchar2(255))
+`,
+		`
+alter table db1.table1 modify (id varchar2(255) default "123")
 `,
 		`
 alter table db1.table1 drop column id
@@ -68,10 +71,29 @@ alter table db1.table1 drop (id,name)
 		`
 alter table db1.table1 set unused column id
 `,
+		`
+alter table db1.table1 rename column id to new_id
+`,
 	}
 	for _, query := range querys {
 		stmt, err := Parser(query)
 		assert.NoError(t, err, "query: %s", query)
 		assert.IsType(t, &ast.AlterTableStmt{}, stmt)
+	}
+}
+
+func TestParseCreateTableStmt(t *testing.T) {
+	querys := []string{
+		`
+create table db1.table1 (id number(10));
+`,
+		`
+create table db1.table1 (id number(10), name varchar2(255));
+`,
+	}
+	for _, query := range querys {
+		stmt, err := Parser(query)
+		assert.NoError(t, err, "query: %s", query)
+		assert.IsType(t, &ast.CreateTableStmt{}, stmt)
 	}
 }

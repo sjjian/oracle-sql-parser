@@ -190,6 +190,28 @@ var keywordMap = map[string]int{
 	"online":        _online,
 	"checkpoint":    _checkpoint,
 	"rename":        _rename,
+	"create":        _create,
+	"blockchain":    _blockchain,
+	"duplicated":    _duplicated,
+	"global":        _global,
+	"immutable":     _immutable,
+	"private":       _private,
+	"sharded":       _sharded,
+	"temporary":     _temporary,
+	"data":          _data,
+	"extended":      _extended,
+	"metadata":      _metadata,
+	"none":          _none,
+	"sharding":      _sharding,
+	"parent":        _parent,
+	"commit":        _commit,
+	"definition":    _definition,
+	"preserve":      _preserve,
+	"rows":          _rows,
+	"for":           _for,
+	"memoptimize":   _memoptimize,
+	"read":          _read,
+	"write":         _write,
 }
 
 func init() {
@@ -227,6 +249,7 @@ type yyLexImpl struct {
 	scanner *lexmachine.Scanner
 	err     error
 	result  ast.Node
+	token   *lexmachine.Token
 }
 
 func NewLexer(s string) (*yyLexImpl, error) {
@@ -250,6 +273,7 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 		return 0
 	}
 	token := tok.(*lexmachine.Token)
+	l.token = token
 	switch v := token.Value.(type) {
 	case string:
 		lval.str = v
@@ -257,9 +281,8 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 		lval.i = v
 	}
 	return token.Type
-
 }
 
 func (l *yyLexImpl) Error(s string) {
-	l.err = fmt.Errorf(s)
+	l.err = fmt.Errorf("syntax error, %s, at line %d:%d", s, l.token.StartLine, l.token.TC)
 }

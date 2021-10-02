@@ -42,3 +42,7 @@ type DropColumnClause struct {
 type RenameColumnClause struct {
 	columnClause
 }
+
+type CreateTableStmt struct {
+	node
+}
