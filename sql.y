@@ -367,7 +367,7 @@ ColumnDefinition:
 //|	VirtualColumnDefinition // TODO； support
 
 RealColumnDefinition:
-	ColumnName Datatype CollateClause SortProperty InvisiblePropertyOrEmpty DefaultOrIdentityClause EncryptClause ColumnDefinitionConstraint
+	ColumnName Datatype CollateClauseOrEmpty SortProperty InvisiblePropertyOrEmpty DefaultOrIdentityClause EncryptClause ColumnDefinitionConstraint
 	{
 	    var collation *ast.Collation
 	    if $3 != nil {
@@ -546,7 +546,7 @@ ModifyColumnProperty:
 // |   ModifyVirtualColumnProperty // TODO
 
 ModifyRealColumnProperty:
-    ColumnName Datatype CollateClause DefaultOrIdentityClauseForModify EncryptClauseForModify ColumnConstraintForModify
+    ColumnName Datatype CollateClauseOrEmpty DefaultOrIdentityClauseForModify EncryptClauseForModify ColumnConstraintForModify
 
 DefaultOrIdentityClauseForModify:
     _drop _identity
