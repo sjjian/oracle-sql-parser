@@ -1,8 +1,8 @@
-package oralce_sql_parser
+package parser
 
 import (
 	"fmt"
-	"github.com/sjjian/oralce_sql_parser/ast"
+	"github.com/sjjian/oracle_sql_parser/ast"
 )
 
 func Parser(query string) (ast.Node, error) {
