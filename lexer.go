@@ -249,6 +249,7 @@ type yyLexImpl struct {
 	scanner *lexmachine.Scanner
 	err     error
 	result  ast.Node
+	token   *lexmachine.Token
 }
 
 func NewLexer(s string) (*yyLexImpl, error) {
@@ -272,6 +273,7 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 		return 0
 	}
 	token := tok.(*lexmachine.Token)
+	l.token = token
 	switch v := token.Value.(type) {
 	case string:
 		lval.str = v
@@ -279,9 +281,8 @@ func (l *yyLexImpl) Lex(lval *yySymType) int {
 		lval.i = v
 	}
 	return token.Type
-
 }
 
 func (l *yyLexImpl) Error(s string) {
-	l.err = fmt.Errorf(s)
+	l.err = fmt.Errorf("syntax error, %s, at line %d:%d", s, l.token.StartLine, l.token.TC)
 }
