@@ -13,13 +13,13 @@ type Collation struct {
 	Name *element.Identifier
 }
 
-type SortProperty bool
+type SortProp bool
 
 const (
-	InvisiblePropertyInvisible = iota
-	InvisiblePropertyVisible
+	InvisiblePropInvisible = iota
+	InvisiblePropVisible
 )
 
-type InvisibleProperty struct {
+type InvisibleProp struct {
 	Type int
 }

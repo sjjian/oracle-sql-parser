@@ -1,61 +1,61 @@
 package element
 
 type Datatype interface {
-	DataDefine() DataDefine
+	DataDef() DataDef
 }
 
-type DataDefine int
+type DataDef int
 
 const (
-	DataDefineChar DataDefine = iota
-	DataDefineVarchar2
-	DataDefineNChar
-	DataDefineNVarChar2
-	DataDefineNumber
-	DataDefineFloat
-	DataDefineBinaryFloat
-	DataDefineBinaryDouble
-	DataDefineLong
-	DataDefineLongRaw
-	DataDefineRaw
-	DataDefineDate
-	DataDefineTimestamp
-	DataDefineIntervalYear
-	DataDefineIntervalDay
-	DataDefineBlob
-	DataDefineClob
-	DataDefineNClob
-	DataDefineBFile
-	DataDefineRowId
-	DataDefineURowId
-	DataDefineCharacter
-	DataDefineCharacterVarying
-	DataDefineCharVarying
-	DataDefineNCharVarying
-	DataDefineVarchar
-	DataDefineNationalCharacter
-	DataDefineNationalCharacterVarying
-	DataDefineNationalChar
-	DataDefineNationalCharVarying
-	DataDefineNumeric
-	DataDefineDecimal
-	DataDefineDec
-	DataDefineInteger
-	DataDefineInt
-	DataDefineSmallInt
-	DataDefineDoublePrecision
-	DataDefineReal
+	DataDefChar DataDef = iota
+	DataDefVarchar2
+	DataDefNChar
+	DataDefNVarChar2
+	DataDefNumber
+	DataDefFloat
+	DataDefBinaryFloat
+	DataDefBinaryDouble
+	DataDefLong
+	DataDefLongRaw
+	DataDefRaw
+	DataDefDate
+	DataDefTimestamp
+	DataDefIntervalYear
+	DataDefIntervalDay
+	DataDefBlob
+	DataDefClob
+	DataDefNClob
+	DataDefBFile
+	DataDefRowId
+	DataDefURowId
+	DataDefCharacter
+	DataDefCharacterVarying
+	DataDefCharVarying
+	DataDefNCharVarying
+	DataDefVarchar
+	DataDefNationalCharacter
+	DataDefNationalCharacterVarying
+	DataDefNationalChar
+	DataDefNationalCharVarying
+	DataDefNumeric
+	DataDefDecimal
+	DataDefDec
+	DataDefInteger
+	DataDefInt
+	DataDefSmallInt
+	DataDefDoublePrecision
+	DataDefReal
 )
 
 type datatype struct {
-	typ DataDefine
+	typ DataDef
 }
 
-func (d *datatype) DataDefine () DataDefine {
+func (d *datatype) DataDef () DataDef {
 	return d.typ
 }
 
-func (d *datatype) SetDataDefine(typ DataDefine) {
+func (d *datatype) SetDataDef(typ DataDef) {
 	d.typ = typ
 }
 

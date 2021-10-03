@@ -20,15 +20,15 @@ func (c *columnClause) IsColumnClause() {}
 
 type AddColumnClause struct {
 	columnClause
-	Columns []*ColumnDefine
+	Columns []*ColumnDef
 }
 
-type ColumnDefine struct {
-	ColumnName        *element.Identifier
-	Datatype          element.Datatype
-	Collation         *Collation
-	Sort              SortProperty
-	InvisibleProperty *InvisibleProperty
+type ColumnDef struct {
+	ColumnName    *element.Identifier
+	Datatype      element.Datatype
+	Collation     *Collation
+	Sort          SortProp
+	InvisibleProp *InvisibleProp
 }
 
 type ModifyColumnClause struct {

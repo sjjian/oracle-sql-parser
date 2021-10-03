@@ -273,12 +273,12 @@ var (
 		57583: 96,  // TableName (5x)
 		57424: 97,  // _as (4x)
 		57476: 98,  // _for (4x)
-		57496: 99,  // ColumnDefinition (4x)
+		57496: 99,  // ColumnDef (4x)
 		57504: 100, // ConstraintNameOrEmpty (4x)
 		57509: 101, // ConstraintStateRely (4x)
 		57533: 102, // IdentityOptionsOrEmpty (4x)
 		57535: 103, // InlineConstraint (4x)
-		57567: 104, // RealColumnDefinition (4x)
+		57567: 104, // RealColumnDef (4x)
 		57400: 105, // _by (3x)
 		57399: 106, // _identified (3x)
 		57487: 107, // AnsiSupportDataTypes (3x)
@@ -289,8 +289,8 @@ var (
 		57511: 112, // Datatype (3x)
 		57512: 113, // DatetimeDataTypes (3x)
 		57517: 114, // DropColumnCheckpoint (3x)
-		57522: 115, // DropColumnProperty (3x)
-		57540: 116, // InvisibleProperty (3x)
+		57520: 115, // DropColumnProp (3x)
+		57540: 116, // InvisibleProp (3x)
 		57543: 117, // LargeObjectDataTypes (3x)
 		57544: 118, // LongAndRawDataTypes (3x)
 		57558: 119, // NumberDataTypes (3x)
@@ -328,24 +328,24 @@ var (
 		57513: 151, // DefaultClause (2x)
 		57515: 152, // DefaultOrIdentityClause (2x)
 		57518: 153, // DropColumnClause (2x)
-		57520: 154, // DropColumnProperties (2x)
-		57521: 155, // DropColumnPropertiesOrEmpty (2x)
+		57521: 154, // DropColumnProps (2x)
+		57522: 155, // DropColumnPropsOrEmpty (2x)
 		57524: 156, // EncryptClause (2x)
 		57527: 157, // Expr (2x)
 		57530: 158, // IdentityClause (2x)
 		57531: 159, // IdentityOption (2x)
 		57536: 160, // InlineConstraintList (2x)
-		57537: 161, // InlineConstraintProperty (2x)
+		57537: 161, // InlineConstraintProp (2x)
 		57542: 162, // IsForce (2x)
 		57547: 163, // MemoptimizeRead (2x)
 		57549: 164, // MemoptimizeWrite (2x)
 		57551: 165, // ModifyColumnClause (2x)
-		57553: 166, // ModifyColumnProperty (2x)
+		57552: 166, // ModifyColumnProp (2x)
 		57554: 167, // ModifyColumnSubstitutable (2x)
 		57555: 168, // ModifyColumnVisibility (2x)
-		57557: 169, // ModifyRealColumnProperty (2x)
+		57557: 169, // ModifyRealColumnProp (2x)
 		57568: 170, // ReferencesClause (2x)
-		57573: 171, // RelTableProperty (2x)
+		57571: 171, // RelTableProp (2x)
 		61:    172, // '=' (1x)
 		57348: 173, // _alter (1x)
 		57423: 174, // _always (1x)
@@ -376,10 +376,10 @@ var (
 		57490: 199, // ChangeColumnClauseList (1x)
 		57494: 200, // ColumnClauses (1x)
 		57495: 201, // ColumnConstraintForModify (1x)
-		57497: 202, // ColumnDefinitionConstraint (1x)
-		57498: 203, // ColumnDefinitionList (1x)
+		57497: 202, // ColumnDefConstraint (1x)
+		57498: 203, // ColumnDefList (1x)
 		57502: 204, // ColumnNameListOrEmpty (1x)
-		57503: 205, // ColumnProperties (1x)
+		57503: 205, // ColumnProps (1x)
 		57510: 206, // CreateTableStmt (1x)
 		57514: 207, // DefaultCollateClauseOrEmpty (1x)
 		57516: 208, // DefaultOrIdentityClauseForModify (1x)
@@ -392,32 +392,32 @@ var (
 		57534: 215, // ImmutableTableClauses (1x)
 		57538: 216, // InlineRefConstraint (1x)
 		57539: 217, // IntergrityAlgorithm (1x)
-		57541: 218, // InvisiblePropertyOrEmpty (1x)
+		57541: 218, // InvisiblePropOrEmpty (1x)
 		57545: 219, // Memoptimize (1x)
 		57546: 220, // MemoptimizeForAlterTable (1x)
 		57548: 221, // MemoptimizeReadForAlterTable (1x)
 		57550: 222, // MemoptimizeWriteForAlterTable (1x)
-		57552: 223, // ModifyColumnProperties (1x)
+		57553: 223, // ModifyColumnProps (1x)
 		57556: 224, // ModifyColumnVisibilityList (1x)
 		57560: 225, // OnCommitClause (1x)
 		57561: 226, // OnCommitDef (1x)
 		57562: 227, // OnCommitRows (1x)
 		57564: 228, // OutOfLinePartStorageList (1x)
 		57565: 229, // ParentTable (1x)
-		57566: 230, // PhysicalProperties (1x)
+		57566: 230, // PhysicalProps (1x)
 		57569: 231, // ReferencesOnDelete (1x)
 		57570: 232, // RelTableDef (1x)
-		57571: 233, // RelTableProperties (1x)
-		57572: 234, // RelTablePropertiesOrEmpty (1x)
+		57572: 233, // RelTableProps (1x)
+		57573: 234, // RelTablePropsOrEmpty (1x)
 		57574: 235, // RenameColumnClause (1x)
-		57576: 236, // SaltProperty (1x)
+		57576: 236, // SaltProp (1x)
 		57577: 237, // ShardingType (1x)
-		57578: 238, // SortProperty (1x)
+		57578: 238, // SortProp (1x)
 		57579: 239, // Start (1x)
 		57580: 240, // Statement (1x)
 		57581: 241, // StatementList (1x)
 		57582: 242, // TableDef (1x)
-		57584: 243, // TableProperties (1x)
+		57584: 243, // TableProps (1x)
 		57585: 244, // TableType (1x)
 		57484: 245, // $default (0x)
 		57347: 246, // _from (0x)
@@ -525,12 +525,12 @@ var (
 		"TableName",
 		"_as",
 		"_for",
-		"ColumnDefinition",
+		"ColumnDef",
 		"ConstraintNameOrEmpty",
 		"ConstraintStateRely",
 		"IdentityOptionsOrEmpty",
 		"InlineConstraint",
-		"RealColumnDefinition",
+		"RealColumnDef",
 		"_by",
 		"_identified",
 		"AnsiSupportDataTypes",
@@ -541,8 +541,8 @@ var (
 		"Datatype",
 		"DatetimeDataTypes",
 		"DropColumnCheckpoint",
-		"DropColumnProperty",
-		"InvisibleProperty",
+		"DropColumnProp",
+		"InvisibleProp",
 		"LargeObjectDataTypes",
 		"LongAndRawDataTypes",
 		"NumberDataTypes",
@@ -580,24 +580,24 @@ var (
 		"DefaultClause",
 		"DefaultOrIdentityClause",
 		"DropColumnClause",
-		"DropColumnProperties",
-		"DropColumnPropertiesOrEmpty",
+		"DropColumnProps",
+		"DropColumnPropsOrEmpty",
 		"EncryptClause",
 		"Expr",
 		"IdentityClause",
 		"IdentityOption",
 		"InlineConstraintList",
-		"InlineConstraintProperty",
+		"InlineConstraintProp",
 		"IsForce",
 		"MemoptimizeRead",
 		"MemoptimizeWrite",
 		"ModifyColumnClause",
-		"ModifyColumnProperty",
+		"ModifyColumnProp",
 		"ModifyColumnSubstitutable",
 		"ModifyColumnVisibility",
-		"ModifyRealColumnProperty",
+		"ModifyRealColumnProp",
 		"ReferencesClause",
-		"RelTableProperty",
+		"RelTableProp",
 		"'='",
 		"_alter",
 		"_always",
@@ -628,10 +628,10 @@ var (
 		"ChangeColumnClauseList",
 		"ColumnClauses",
 		"ColumnConstraintForModify",
-		"ColumnDefinitionConstraint",
-		"ColumnDefinitionList",
+		"ColumnDefConstraint",
+		"ColumnDefList",
 		"ColumnNameListOrEmpty",
-		"ColumnProperties",
+		"ColumnProps",
 		"CreateTableStmt",
 		"DefaultCollateClauseOrEmpty",
 		"DefaultOrIdentityClauseForModify",
@@ -644,32 +644,32 @@ var (
 		"ImmutableTableClauses",
 		"InlineRefConstraint",
 		"IntergrityAlgorithm",
-		"InvisiblePropertyOrEmpty",
+		"InvisiblePropOrEmpty",
 		"Memoptimize",
 		"MemoptimizeForAlterTable",
 		"MemoptimizeReadForAlterTable",
 		"MemoptimizeWriteForAlterTable",
-		"ModifyColumnProperties",
+		"ModifyColumnProps",
 		"ModifyColumnVisibilityList",
 		"OnCommitClause",
 		"OnCommitDef",
 		"OnCommitRows",
 		"OutOfLinePartStorageList",
 		"ParentTable",
-		"PhysicalProperties",
+		"PhysicalProps",
 		"ReferencesOnDelete",
 		"RelTableDef",
-		"RelTableProperties",
-		"RelTablePropertiesOrEmpty",
+		"RelTableProps",
+		"RelTablePropsOrEmpty",
 		"RenameColumnClause",
-		"SaltProperty",
+		"SaltProp",
 		"ShardingType",
-		"SortProperty",
+		"SortProp",
 		"Start",
 		"Statement",
 		"StatementList",
 		"TableDef",
-		"TableProperties",
+		"TableProps",
 		"TableType",
 		"$default",
 		"_from",
@@ -1861,7 +1861,7 @@ yynewstate:
 	case 21:
 		{
 			yyVAL.anything = &ast.AddColumnClause{
-				Columns: yyS[yypt-3].anything.([]*ast.ColumnDefine),
+				Columns: yyS[yypt-3].anything.([]*ast.ColumnDef),
 			}
 		}
 	case 22:
@@ -1874,11 +1874,11 @@ yynewstate:
 		}
 	case 24:
 		{
-			yyVAL.anything = []*ast.ColumnDefine{yyS[yypt-0].anything.(*ast.ColumnDefine)}
+			yyVAL.anything = []*ast.ColumnDef{yyS[yypt-0].anything.(*ast.ColumnDef)}
 		}
 	case 25:
 		{
-			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDefine), yyS[yypt-0].anything.(*ast.ColumnDefine))
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDef), yyS[yypt-0].anything.(*ast.ColumnDef))
 		}
 	case 26:
 		{
@@ -1890,17 +1890,17 @@ yynewstate:
 			if yyS[yypt-5].anything != nil {
 				collation = yyS[yypt-5].anything.(*ast.Collation)
 			}
-			var invisible *ast.InvisibleProperty
+			var invisible *ast.InvisibleProp
 			if yyS[yypt-3].anything != nil {
-				invisible = yyS[yypt-3].anything.(*ast.InvisibleProperty)
+				invisible = yyS[yypt-3].anything.(*ast.InvisibleProp)
 			}
 
-			yyVAL.anything = &ast.ColumnDefine{
-				ColumnName:        yyS[yypt-7].anything.(*element.Identifier),
-				Datatype:          yyS[yypt-6].anything.(element.Datatype),
-				Collation:         collation,
-				Sort:              ast.SortProperty(yyS[yypt-4].b),
-				InvisibleProperty: invisible,
+			yyVAL.anything = &ast.ColumnDef{
+				ColumnName:    yyS[yypt-7].anything.(*element.Identifier),
+				Datatype:      yyS[yypt-6].anything.(element.Datatype),
+				Collation:     collation,
+				Sort:          ast.SortProp(yyS[yypt-4].b),
+				InvisibleProp: invisible,
 			}
 		}
 	case 28:
@@ -1933,11 +1933,11 @@ yynewstate:
 		}
 	case 35:
 		{
-			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyInvisible}
+			yyVAL.anything = &ast.InvisibleProp{Type: ast.InvisiblePropInvisible}
 		}
 	case 36:
 		{
-			yyVAL.anything = &ast.InvisibleProperty{Type: ast.InvisiblePropertyVisible}
+			yyVAL.anything = &ast.InvisibleProp{Type: ast.InvisiblePropVisible}
 		}
 	case 37:
 		{
@@ -2106,29 +2106,29 @@ yynewstate:
 	case 165:
 		{
 			d := &element.Char{}
-			d.SetDataDefine(element.DataDefineChar)
+			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
 	case 166:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Char{Size: &size}
-			d.SetDataDefine(element.DataDefineChar)
+			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
 	case 167:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsByteSize: true}
-			d.SetDataDefine(element.DataDefineChar)
+			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
 	case 168:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsCharSize: true}
-			d.SetDataDefine(element.DataDefineChar)
-			d.SetDataDefine(element.DataDefineChar)
+			d.SetDataDef(element.DataDefChar)
+			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
 	case 169:
@@ -2136,7 +2136,7 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineVarchar2)
+			d.SetDataDef(element.DataDefVarchar2)
 			yyVAL.anything = d
 		}
 	case 170:
@@ -2145,7 +2145,7 @@ yynewstate:
 			d := &element.Varchar2{}
 			d.Size = &size
 			d.IsByteSize = true
-			d.SetDataDefine(element.DataDefineVarchar2)
+			d.SetDataDef(element.DataDefVarchar2)
 			yyVAL.anything = d
 		}
 	case 171:
@@ -2154,20 +2154,20 @@ yynewstate:
 			d := &element.Varchar2{}
 			d.Size = &size
 			d.IsCharSize = true
-			d.SetDataDefine(element.DataDefineVarchar2)
+			d.SetDataDef(element.DataDefVarchar2)
 			yyVAL.anything = d
 		}
 	case 172:
 		{
 			d := &element.NChar{}
-			d.SetDataDefine(element.DataDefineNChar)
+			d.SetDataDef(element.DataDefNChar)
 			yyVAL.anything = d
 		}
 	case 173:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNChar)
+			d.SetDataDef(element.DataDefNChar)
 			yyVAL.anything = d
 		}
 	case 174:
@@ -2175,20 +2175,20 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineNVarChar2)
+			d.SetDataDef(element.DataDefNVarChar2)
 			yyVAL.anything = d
 		}
 	case 175:
 		{
 			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineNumber)
+			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
 	case 176:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineNumber)
+			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
 	case 177:
@@ -2196,110 +2196,110 @@ yynewstate:
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineNumber)
+			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
 	case 178:
 		{
 			d := &element.Float{}
-			d.SetDataDefine(element.DataDefineFloat)
+			d.SetDataDef(element.DataDefFloat)
 			yyVAL.anything = d
 		}
 	case 179:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Float{Precision: precision}
-			d.SetDataDefine(element.DataDefineFloat)
+			d.SetDataDef(element.DataDefFloat)
 			yyVAL.anything = d
 		}
 	case 180:
 		{
 			d := &element.BinaryFloat{}
-			d.SetDataDefine(element.DataDefineBinaryFloat)
+			d.SetDataDef(element.DataDefBinaryFloat)
 			yyVAL.anything = d
 		}
 	case 181:
 		{
 			d := &element.BinaryDouble{}
-			d.SetDataDefine(element.DataDefineBinaryDouble)
+			d.SetDataDef(element.DataDefBinaryDouble)
 			yyVAL.anything = d
 		}
 	case 182:
 		{
 			d := &element.Long{}
-			d.SetDataDefine(element.DataDefineLong)
+			d.SetDataDef(element.DataDefLong)
 			yyVAL.anything = d
 		}
 	case 183:
 		{
 			d := &element.LongRaw{}
-			d.SetDataDefine(element.DataDefineLongRaw)
+			d.SetDataDef(element.DataDefLongRaw)
 			yyVAL.anything = d
 		}
 	case 184:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Raw{Size: &size}
-			d.SetDataDefine(element.DataDefineRaw)
+			d.SetDataDef(element.DataDefRaw)
 			yyVAL.anything = d
 		}
 	case 185:
 		{
 			d := &element.Date{}
-			d.SetDataDefine(element.DataDefineDate)
+			d.SetDataDef(element.DataDefDate)
 			yyVAL.anything = d
 		}
 	case 186:
 		{
 			d := &element.Timestamp{}
-			d.SetDataDefine(element.DataDefineTimestamp)
+			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
 	case 187:
 		{
 			precision := yyS[yypt-1].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision}
-			d.SetDataDefine(element.DataDefineTimestamp)
+			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
 	case 188:
 		{
 			precision := yyS[yypt-4].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
-			d.SetDataDefine(element.DataDefineTimestamp)
+			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
 	case 189:
 		{
 			precision := yyS[yypt-5].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
-			d.SetDataDefine(element.DataDefineTimestamp)
+			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
 	case 190:
 		{
 			d := &element.IntervalYear{}
-			d.SetDataDefine(element.DataDefineIntervalYear)
+			d.SetDataDef(element.DataDefIntervalYear)
 			yyVAL.anything = d
 		}
 	case 191:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalYear{Precision: &precision}
-			d.SetDataDefine(element.DataDefineIntervalYear)
+			d.SetDataDef(element.DataDefIntervalYear)
 			yyVAL.anything = d
 		}
 	case 192:
 		{
 			d := &element.IntervalDay{}
-			d.SetDataDefine(element.DataDefineIntervalDay)
+			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
 	case 193:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalDay{Precision: &precision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
+			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
 	case 194:
@@ -2307,63 +2307,63 @@ yynewstate:
 			precision := yyS[yypt-6].i
 			sPrecision := yyS[yypt-1].i
 			d := &element.IntervalDay{Precision: &precision, FractionalSecondsPrecision: &sPrecision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
+			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
 	case 195:
 		{
 			sPrecision := yyS[yypt-1].i
 			d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
-			d.SetDataDefine(element.DataDefineIntervalDay)
+			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
 	case 196:
 		{
 			d := &element.Blob{}
-			d.SetDataDefine(element.DataDefineBlob)
+			d.SetDataDef(element.DataDefBlob)
 			yyVAL.anything = d
 		}
 	case 197:
 		{
 			d := &element.Clob{}
-			d.SetDataDefine(element.DataDefineClob)
+			d.SetDataDef(element.DataDefClob)
 			yyVAL.anything = d
 		}
 	case 198:
 		{
 			d := &element.NClob{}
-			d.SetDataDefine(element.DataDefineNClob)
+			d.SetDataDef(element.DataDefNClob)
 			yyVAL.anything = d
 		}
 	case 199:
 		{
 			d := &element.BFile{}
-			d.SetDataDefine(element.DataDefineBFile)
+			d.SetDataDef(element.DataDefBFile)
 			yyVAL.anything = d
 		}
 	case 200:
 		{
 			d := &element.RowId{}
-			d.SetDataDefine(element.DataDefineRowId)
+			d.SetDataDef(element.DataDefRowId)
 			yyVAL.anything = d
 		}
 	case 201:
 		{
 			d := &element.URowId{}
-			d.SetDataDefine(element.DataDefineURowId)
+			d.SetDataDef(element.DataDefURowId)
 			yyVAL.anything = d
 		}
 	case 202:
 		{
 			size := yyS[yypt-1].i
 			d := &element.URowId{Size: &size}
-			d.SetDataDefine(element.DataDefineURowId)
+			d.SetDataDef(element.DataDefURowId)
 			yyVAL.anything = d
 		}
 	case 203:
 		{
 			d := &element.Char{}
-			d.SetDataDefine(element.DataDefineCharacter)
+			d.SetDataDef(element.DataDefCharacter)
 			yyVAL.anything = d
 		}
 	case 204:
@@ -2371,7 +2371,7 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharacterVarying)
+			d.SetDataDef(element.DataDefCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 205:
@@ -2379,7 +2379,7 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineCharVarying)
+			d.SetDataDef(element.DataDefCharVarying)
 			yyVAL.anything = d
 		}
 	case 206:
@@ -2387,7 +2387,7 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineNCharVarying)
+			d.SetDataDef(element.DataDefNCharVarying)
 			yyVAL.anything = d
 		}
 	case 207:
@@ -2395,14 +2395,14 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineVarchar)
+			d.SetDataDef(element.DataDefVarchar)
 			yyVAL.anything = d
 		}
 	case 208:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNationalCharacter)
+			d.SetDataDef(element.DataDefNationalCharacter)
 			yyVAL.anything = d
 		}
 	case 209:
@@ -2410,14 +2410,14 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineNationalCharacterVarying)
+			d.SetDataDef(element.DataDefNationalCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 210:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
-			d.SetDataDefine(element.DataDefineNationalChar)
+			d.SetDataDef(element.DataDefNationalChar)
 			yyVAL.anything = d
 		}
 	case 211:
@@ -2425,20 +2425,20 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
 			d.Size = &size
-			d.SetDataDefine(element.DataDefineNationalCharVarying)
+			d.SetDataDef(element.DataDefNationalCharVarying)
 			yyVAL.anything = d
 		}
 	case 212:
 		{
 			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDef(element.DataDefNumeric)
 			yyVAL.anything = d
 		}
 	case 213:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDef(element.DataDefNumeric)
 			yyVAL.anything = d
 		}
 	case 214:
@@ -2446,20 +2446,20 @@ yynewstate:
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineNumeric)
+			d.SetDataDef(element.DataDefNumeric)
 			yyVAL.anything = d
 		}
 	case 215:
 		{
 			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineDecimal)
+			d.SetDataDef(element.DataDefDecimal)
 			yyVAL.anything = d
 		}
 	case 216:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineDecimal)
+			d.SetDataDef(element.DataDefDecimal)
 			yyVAL.anything = d
 		}
 	case 217:
@@ -2467,20 +2467,20 @@ yynewstate:
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineDecimal)
+			d.SetDataDef(element.DataDefDecimal)
 			yyVAL.anything = d
 		}
 	case 218:
 		{
 			d := &element.Number{}
-			d.SetDataDefine(element.DataDefineDec)
+			d.SetDataDef(element.DataDefDec)
 			yyVAL.anything = d
 		}
 	case 219:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineDec)
+			d.SetDataDef(element.DataDefDec)
 			yyVAL.anything = d
 		}
 	case 220:
@@ -2488,42 +2488,42 @@ yynewstate:
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
-			d.SetDataDefine(element.DataDefineDec)
+			d.SetDataDef(element.DataDefDec)
 			yyVAL.anything = d
 		}
 	case 221:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineInteger)
+			d.SetDataDef(element.DataDefInteger)
 			yyVAL.anything = d
 		}
 	case 222:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineInt)
+			d.SetDataDef(element.DataDefInt)
 			yyVAL.anything = d
 		}
 	case 223:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDefine(element.DataDefineSmallInt)
+			d.SetDataDef(element.DataDefSmallInt)
 			yyVAL.anything = d
 		}
 	case 224:
 		{
 			precision := &element.NumberOrAsterisk{Number: 126}
 			d := &element.Float{Precision: precision}
-			d.SetDataDefine(element.DataDefineDoublePrecision)
+			d.SetDataDef(element.DataDefDoublePrecision)
 			yyVAL.anything = d
 		}
 	case 225:
 		{
 			precision := &element.NumberOrAsterisk{Number: 63}
 			d := &element.Float{Precision: precision}
-			d.SetDataDefine(element.DataDefineReal)
+			d.SetDataDef(element.DataDefReal)
 			yyVAL.anything = d
 		}
 	case 226:
