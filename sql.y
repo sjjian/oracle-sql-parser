@@ -2,9 +2,19 @@
 package parser
 
 import (
+	"strings"
+
 	"github.com/sjjian/oracle_sql_parser/ast"
 	"github.com/sjjian/oracle_sql_parser/ast/element"
 )
+
+func nextQuery(yylex interface{}) string {
+	lex := yylex.(*yyLexImpl)
+	tc := lex.scanner.TC
+	query := string(lex.scanner.Text[lex.lastPos:tc])
+	lex.lastPos = tc
+	return strings.TrimSpace(query)
+}
 
 %}
 
@@ -174,12 +184,13 @@ import (
     _nonquotedIdentifier
 
 %type <node>
-    StatementList
+    EmptyStmt
     Statement 		"all statement"
     AlterTableStmt	"*ast.AlterTableStmt"
     CreateTableStmt
 
 %type <anything>
+    StatementList
     TableName
     Identifier
     ColumnName
@@ -215,28 +226,36 @@ import (
 
 Start:
     StatementList
-    {
-    	yylex.(*yyLexImpl).result = $1
-    }
 
 StatementList:
     Statement
     {
-    	$$ = $1
+        if $1 != nil {
+            stmt := $1
+            stmt.SetText(nextQuery(yylex))
+            yylex.(*yyLexImpl).result = append(yylex.(*yyLexImpl).result, stmt)
+        }
     }
-|   Statement ';'
+|   StatementList ';' Statement
     {
-    	$$ = $1
+        if $3 != nil {
+            stmt := $3
+            stmt.SetText(nextQuery(yylex))
+            yylex.(*yyLexImpl).result = append(yylex.(*yyLexImpl).result, stmt)
+        }
     }
 
 Statement:
-    AlterTableStmt
-    {
-    	$$ = $1
-    }
+    EmptyStmt
+|   AlterTableStmt
 |   CreateTableStmt
     {
     	$$ = &ast.CreateTableStmt{}
+    }
+
+EmptyStmt:
+    {
+        $$ = nil
     }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ base stmt ++++++++++++++++++++++++++++++++++++++++++++ */

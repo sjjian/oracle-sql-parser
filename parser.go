@@ -5,7 +5,7 @@ import (
 	"github.com/sjjian/oracle_sql_parser/ast"
 )
 
-func Parser(query string) (ast.Node, error) {
+func Parser(query string) ([]ast.Node, error) {
 	l, err := NewLexer(query)
 	if err != nil {
 		fmt.Println(err)

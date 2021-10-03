@@ -1,5 +1,5 @@
 # Oracle SQL Parser
-this is an oracle sql parser
+this is an oracle sql parser. ref: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf
 
 ## supported statement
 |statement| sub statement |yacc|ast|
