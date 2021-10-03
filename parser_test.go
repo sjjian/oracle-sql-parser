@@ -78,22 +78,54 @@ alter table db1.table1 rename column id to new_id
 	for _, query := range querys {
 		stmt, err := Parser(query)
 		assert.NoError(t, err, "query: %s", query)
-		assert.IsType(t, &ast.AlterTableStmt{}, stmt)
+		assert.IsType(t, &ast.AlterTableStmt{}, stmt[0])
 	}
 }
 
 func TestParseCreateTableStmt(t *testing.T) {
 	querys := []string{
 		`
-create table db1.table1 (id number(10));
-`,
-		`
-create table db1.table1 (id number(10), name varchar2(255));
+create table db1.table1 (id number(10));create table db1.table1 (id number(10), name varchar2(255));
 `,
 	}
 	for _, query := range querys {
 		stmt, err := Parser(query)
+		assert.Equal(t, 2, len(stmt))
 		assert.NoError(t, err, "query: %s", query)
-		assert.IsType(t, &ast.CreateTableStmt{}, stmt)
+		assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
 	}
+}
+
+func TestSingleQuery(t *testing.T) {
+	stmt, err := Parser(`create table db1.table1 (id number(10))`)
+	assert.NoError(t, err)
+	assert.Equal(t, 1, len(stmt))
+	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
+	assert.Equal(t, `create table db1.table1 (id number(10))`, stmt[0])
+
+	stmt, err = Parser(`create table db1.table1 (id number(10));`)
+	assert.NoError(t, err)
+	assert.Equal(t, 1, len(stmt))
+	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
+	assert.Equal(t, `create table db1.table1 (id number(10));`, stmt[0])
+}
+
+func TestMultiQuery(t *testing.T) {
+	stmt, err := Parser(`create table db1.table1 (id number(10));
+alter table db1.table1 add (name varchar(255))`)
+	assert.NoError(t, err)
+	assert.Equal(t, 2, len(stmt))
+	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
+	assert.Equal(t, "create table db1.table1 (id number(10));", stmt[0].Text())
+	assert.IsType(t, &ast.AlterTableStmt{}, stmt[1])
+	assert.Equal(t, "alter table db1.table1 add (name varchar(255))", stmt[1].Text())
+
+	stmt, err = Parser(`create table db1.table1 (id number(10));
+alter table db1.table1 add (name varchar(255));`)
+	assert.NoError(t, err)
+	assert.Equal(t, 2, len(stmt))
+	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
+	assert.Equal(t, "create table db1.table1 (id number(10));", stmt[0].Text())
+	assert.IsType(t, &ast.AlterTableStmt{}, stmt[1])
+	assert.Equal(t, "alter table db1.table1 add (name varchar(255));", stmt[1].Text())
 }

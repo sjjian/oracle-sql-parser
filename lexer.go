@@ -248,8 +248,9 @@ func init() {
 type yyLexImpl struct {
 	scanner *lexmachine.Scanner
 	err     error
-	result  ast.Node
+	result  []ast.Node
 	token   *lexmachine.Token
+	lastPos int
 }
 
 func NewLexer(s string) (*yyLexImpl, error) {
