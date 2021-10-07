@@ -13,13 +13,51 @@ type Collation struct {
 	Name *element.Identifier
 }
 
-type SortProp bool
+type ColumnProp int
 
 const (
-	InvisiblePropInvisible = iota
-	InvisiblePropVisible
+	ColumnPropEmpty ColumnProp = iota
+	ColumnPropSort // for add column
+	ColumnPropInvisible
+	ColumnPropVisible
+	ColumnPropSubstitutable // for modify column
+	ColumnPropNotSubstitutable // for modify column
+	ColumnPropSubstitutableForce // for modify column
+	ColumnPropNotSubstitutableForce // for modify column
 )
 
-type InvisibleProp struct {
-	Type int
+type ColumnDefault struct {
+	OnNull bool
+	Value  interface{}
+}
+
+type ConstraintType int
+
+const (
+	ConstraintTypeNull ConstraintType = iota
+	ConstraintTypeNotNull
+	ConstraintTypeUnique
+	ConstraintTypePK
+	ConstraintTypeReferences
+)
+
+type ConstraintState int
+
+const (
+	ConstraintStateDeferrable ConstraintState = iota
+	ConstraintStateNotDeferrable
+	ConstraintStateInitiallyDeferred
+	ConstraintStateInitiallyImmediate
+	ConstraintStateRely
+	ConstraintStateNorely
+)
+
+type InlineConstraint struct {
+	Name   *element.Identifier
+	Type   ConstraintState
+	States []ConstraintState
+}
+
+type InlineReferences struct {
+	Scope TableName
 }

@@ -174,9 +174,14 @@ func nextQuery(yylex interface{}) string {
 // define type for all structure
 %type <i>
     _intNumber
+    SortProp
+    InvisibleProp
+    InvisiblePropOrEmpty
+    DropColumnProp
+    DropColumnOnline
 
 %type <b>
-    SortProp
+    IsForce
 
 %type <str>
     _singleQuoteStr
@@ -209,6 +214,12 @@ func nextQuery(yylex interface{}) string {
     RenameColumnClause
     AddColumnClause
     ModifyColumnClause
+    ModifyColumnProps
+    ModifyColumnProp
+    ModifyRealColumnProp
+    ModifyColumnVisibilityList
+    ModifyColumnVisibility
+    ModifyColumnSubstitutable
     RealColumnDef
     ColumnDefList
     ColumnDef
@@ -216,9 +227,12 @@ func nextQuery(yylex interface{}) string {
     NumberOrAsterisk
     CollateClauseOrEmpty
     CollateClause
-    InvisibleProp
-    InvisiblePropOrEmpty
     DefaultCollateClauseOrEmpty
+    ColumnNameList
+    ColumnNameListForDropColumn
+    DropColumnCheckpoint
+    DropColumnProps
+    DropColumnPropsOrEmpty
 
 %start Start
 
@@ -277,7 +291,13 @@ TableName:
 
 ColumnNameList:
     ColumnName
+    {
+        $$ = []*element.Identifier{$1.(*element.Identifier)}
+    }
 |   ColumnNameList ',' ColumnName
+    {
+        $$ = append($1.([]*element.Identifier), $3.(*element.Identifier))
+    }
 
 ColumnName:
     Identifier
@@ -320,7 +340,7 @@ ColumnClauses:
     }
 |   RenameColumnClause
     {
-        $$ = []ast.ColumnClause{&ast.RenameColumnClause{}}
+        $$ = []ast.ColumnClause{$1.(ast.ColumnClause)}
     }
 
 ChangeColumnClauseList:
@@ -335,17 +355,8 @@ ChangeColumnClauseList:
 
 ChangeColumnClause:
     AddColumnClause
-    {
-        $$ = $1
-    }
 |   ModifyColumnClause
-    {
-        $$ = &ast.ModifyColumnClause{}
-    }
 |   DropColumnClause
-    {
-        $$ = &ast.DropColumnClause{}
-    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ add column ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -353,7 +364,7 @@ AddColumnClause:
     _add '(' ColumnDefList ')' ColumnProps  OutOfLinePartStorageList
     {
         $$ = &ast.AddColumnClause{
-	    Columns: $3.([]*ast.ColumnDef),
+	        Columns: $3.([]*ast.ColumnDef),
         }
     }
 
@@ -391,18 +402,21 @@ RealColumnDef:
         var collation *ast.Collation
         if $3 != nil {
             collation = $3.(*ast.Collation)
-	}
-        var invisible *ast.InvisibleProp
-        if $5 != nil {
-            invisible = $5.(*ast.InvisibleProp)
+	    }
+        props := []ast.ColumnProp{}
+        sort := ast.ColumnProp($4)
+        if sort != ast.ColumnPropEmpty {
+            props = append(props, sort)
         }
-
+        invisible := ast.ColumnProp($5)
+        if invisible != ast.ColumnPropEmpty {
+            props = append(props, invisible)
+        }
         $$ = &ast.ColumnDef{
             ColumnName:         $1.(*element.Identifier),
             Datatype:           $2.(element.Datatype),
             Collation:          collation,
-            Sort:               ast.SortProp($4),
-            InvisibleProp:  invisible,
+            Props:              props,
         }
     }
 
@@ -423,30 +437,27 @@ CollateClause:
 
 SortProp:
     {
-        $$ = false
+        $$ = int(ast.ColumnPropEmpty)
     }
 |   _sort
     {
-        $$ = true
+        $$ = int(ast.ColumnPropSort)
     }
 
 InvisiblePropOrEmpty:
     {
-        $$ = nil
+        $$ = int(ast.ColumnPropEmpty)
     }
 |   InvisibleProp
-    {
-        $$ = $1
-    }
 
 InvisibleProp:
     _invisible
     {
-        $$ = &ast.InvisibleProp{Type: ast.InvisiblePropInvisible}
+        $$ = int(ast.ColumnPropInvisible)
     }
 |   _visible
     {
-        $$ = &ast.InvisibleProp{Type: ast.InvisiblePropVisible}
+        $$ = int(ast.ColumnPropVisible)
     }
 
 DefaultOrIdentityClause:
@@ -545,20 +556,32 @@ InlineConstraintList:
 ModifyColumnClause:
     _modify '(' ModifyColumnProps ')'
     {
-        $$ = nil
+        $$ = &ast.ModifyColumnClause{
+	        Columns: $3.([]*ast.ColumnDef),
+        }
     }
 |   _modify '(' ModifyColumnVisibilityList ')'
     {
-        $$ = nil
+        $$ = &ast.ModifyColumnClause{
+	        Columns: $3.([]*ast.ColumnDef),
+        }
     }
 |   ModifyColumnSubstitutable
     {
-        $$ = nil
+        $$ = &ast.ModifyColumnClause{
+	        Columns: $1.([]*ast.ColumnDef),
+        }
     }
 
 ModifyColumnProps:
     ModifyColumnProp
+    {
+        $$ = []*ast.ColumnDef{$1.(*ast.ColumnDef)}
+    }
 |   ModifyColumnProps ',' ModifyColumnProp
+    {
+        $$ = append($1.([]*ast.ColumnDef), $3.(*ast.ColumnDef))
+    }
 
 ModifyColumnProp:
     ModifyRealColumnProp
@@ -566,6 +589,18 @@ ModifyColumnProp:
 
 ModifyRealColumnProp:
     ColumnName Datatype CollateClauseOrEmpty DefaultOrIdentityClauseForModify EncryptClauseForModify ColumnConstraintForModify
+    {
+        var collation *ast.Collation
+        if $3 != nil {
+            collation = $3.(*ast.Collation)
+	    }
+        $$ = &ast.ColumnDef{
+            ColumnName:         $1.(*element.Identifier),
+            Datatype:           $2.(element.Datatype),
+            Collation:          collation,
+            Props:              []ast.ColumnProp{},
+        }
+    }
 
 DefaultOrIdentityClauseForModify:
     _drop _identity
@@ -583,77 +618,181 @@ ColumnConstraintForModify:
 
 ModifyColumnVisibilityList:
     ModifyColumnVisibility
+    {
+        $$ = []*ast.ColumnDef{$1.(*ast.ColumnDef)}
+    }
 |   ModifyColumnVisibilityList ',' ModifyColumnVisibility
+    {
+        $$ = append($1.([]*ast.ColumnDef), $3.(*ast.ColumnDef))
+    }
 
 ModifyColumnVisibility:
     ColumnName InvisibleProp
+    {
+        $$ = &ast.ColumnDef{
+            ColumnName: $1.(*element.Identifier),
+            Props:      []ast.ColumnProp{ast.ColumnProp($2)},
+        }
+    }
 
 ModifyColumnSubstitutable:
     _column ColumnName _substitutable _at _all _levels IsForce
+    {
+        prop := ast.ColumnPropSubstitutable
+        if $7 {
+            prop = ast.ColumnPropSubstitutableForce
+        }
+        $$ = &ast.ColumnDef{
+            ColumnName: $2.(*element.Identifier),
+            Props:      []ast.ColumnProp{prop},
+        }
+    }
 |   _column ColumnName _not _substitutable _at _all _levels IsForce
+    {
+        prop := ast.ColumnPropNotSubstitutable
+        if $8 {
+            prop = ast.ColumnPropNotSubstitutableForce
+        }
+        $$ = &ast.ColumnDef{
+            ColumnName: $2.(*element.Identifier),
+            Props:      []ast.ColumnProp{prop},
+        }
+    }
 
 IsForce:
     {
-        // empty
+        $$ = false
     }
 |   _force
+    {
+        $$ = true
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ drop column ++++++++++++++++++++++++++++++++++++++++++++ */
 
 DropColumnClause:
     _set _unused ColumnNameListForDropColumn DropColumnPropsOrEmpty DropColumnOnline
     {
-    	$$ = nil
+        props := []ast.DropColumnProp{}
+        if $4 != nil {
+            props = append(props, $4.([]ast.DropColumnProp)...)
+        }
+        online := ast.DropColumnProp($5)
+        if online != ast.DropColumnPropEmpty {
+            props = append(props, online)
+        }
+    	$$ = &ast.DropColumnClause{
+            Type:    ast.DropColumnTypeSetUnused,
+            Columns: $3.([]*element.Identifier),
+            Props:   props,
+    	}
     }
 |   _drop ColumnNameListForDropColumn DropColumnPropsOrEmpty DropColumnCheckpoint
     {
-    	$$ = nil
+        props := []ast.DropColumnProp{}
+        if $3 != nil {
+            props = append(props, $3.([]ast.DropColumnProp)...)
+        }
+    	cc := &ast.DropColumnClause{
+            Type:    ast.DropColumnTypeDrop,
+            Columns: $2.([]*element.Identifier),
+            Props:   props,
+    	}
+    	var checkout int
+        if $4 != nil {
+            checkout = $4.(int)
+            cc.CheckPoint = &checkout
+        }
+        $$ = cc
     }
 |   _drop _unused _columns DropColumnCheckpoint
     {
-    	$$ = nil
+    	cc := &ast.DropColumnClause{
+            Type: ast.DropColumnTypeDropUnusedColumns,
+    	}
+    	var checkout int
+        if $4 != nil {
+            checkout = $4.(int)
+            cc.CheckPoint = &checkout
+        }
+        $$ = cc
     }
 |   _drop _columns _continue DropColumnCheckpoint
     {
-    	$$ = nil
+    	cc := &ast.DropColumnClause{
+            Type: ast.DropColumnTypeDropColumnsContinue,
+    	}
+    	var checkout int
+        if $4 != nil {
+            checkout = $4.(int)
+            cc.CheckPoint = &checkout
+        }
+        $$ = cc
     }
 
 ColumnNameListForDropColumn:
     _column ColumnName
+    {
+        $$ = []*element.Identifier{$2.(*element.Identifier)}
+    }
 |   '(' ColumnNameList ')'
+    {
+        $$ = $2
+    }
 
 DropColumnPropsOrEmpty:
     {
-        // empty
+        $$ = nil
     }
 |   DropColumnProps
 
 DropColumnProps:
     DropColumnProp
+    {
+        $$ = []ast.DropColumnProp{ast.DropColumnProp($1)}
+    }
 |   DropColumnProps DropColumnProp
+    {
+        $$ = append($1.([]ast.DropColumnProp), ast.DropColumnProp($2))
+    }
 
 DropColumnProp:
     _cascade _constraints
+    {
+        $$ = int(ast.DropColumnPropCascade)
+    }
 |   _invalidate
+    {
+        $$ = int(ast.DropColumnPropInvalidate)
+    }
 
 DropColumnOnline:
     {
-        // empty
+        $$ = int(ast.DropColumnPropEmpty)
     }
 |   _online
+    {
+        $$ = int(ast.DropColumnPropOnline)
+    }
 
 DropColumnCheckpoint:
     {
-        // empty
+        $$ = nil
     }
 |   _checkpoint _intNumber
+    {
+        $$ = $2
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++ rename column +++++++++++++++++++++++++++++++++++++++++ */
 
 RenameColumnClause:
     _rename _column ColumnName _to ColumnName
     {
-    	$$ = nil
+    	$$ = &ast.RenameColumnClause{
+    	    OldName: $3.(*element.Identifier),
+    	    NewName: $5.(*element.Identifier),
+    	}
     }
 
 /* +++++++++++++++++++++++++++++++++++++++++++ create table ++++++++++++++++++++++++++++++++++++++++++ */
@@ -1312,7 +1451,7 @@ ConstraintStateOrEmpty:
     }
 |   ConstraintState
 
-ConstraintState:
+ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
     ConstraintStateDeferrable ConstraintStateRely
 |   ConstraintStateDeferrable ConstraintStateDeferredOrImmediate ConstraintStateRely
 |   ConstraintStateDeferredOrImmediate ConstraintStateRely

@@ -1825,6 +1825,14 @@ yynewstate:
 				Table:  yyS[yypt-0].anything.(*element.Identifier),
 			}
 		}
+	case 10:
+		{
+			yyVAL.anything = []*element.Identifier{yyS[yypt-0].anything.(*element.Identifier)}
+		}
+	case 11:
+		{
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*element.Identifier), yyS[yypt-0].anything.(*element.Identifier))
+		}
 	case 12:
 		{
 			yyVAL.anything = yyS[yypt-0].anything
@@ -1856,7 +1864,7 @@ yynewstate:
 		}
 	case 17:
 		{
-			yyVAL.anything = []ast.ColumnClause{&ast.RenameColumnClause{}}
+			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
 		}
 	case 18:
 		{
@@ -1865,18 +1873,6 @@ yynewstate:
 	case 19:
 		{
 			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.ColumnClause), yyS[yypt-0].anything.(ast.ColumnClause))
-		}
-	case 20:
-		{
-			yyVAL.anything = yyS[yypt-0].anything
-		}
-	case 21:
-		{
-			yyVAL.anything = &ast.ModifyColumnClause{}
-		}
-	case 22:
-		{
-			yyVAL.anything = &ast.DropColumnClause{}
 		}
 	case 23:
 		{
@@ -1910,17 +1906,20 @@ yynewstate:
 			if yyS[yypt-5].anything != nil {
 				collation = yyS[yypt-5].anything.(*ast.Collation)
 			}
-			var invisible *ast.InvisibleProp
-			if yyS[yypt-3].anything != nil {
-				invisible = yyS[yypt-3].anything.(*ast.InvisibleProp)
+			props := []ast.ColumnProp{}
+			sort := ast.ColumnProp(yyS[yypt-4].i)
+			if sort != ast.ColumnPropEmpty {
+				props = append(props, sort)
 			}
-
+			invisible := ast.ColumnProp(yyS[yypt-3].i)
+			if invisible != ast.ColumnPropEmpty {
+				props = append(props, invisible)
+			}
 			yyVAL.anything = &ast.ColumnDef{
-				ColumnName:    yyS[yypt-7].anything.(*element.Identifier),
-				Datatype:      yyS[yypt-6].anything.(element.Datatype),
-				Collation:     collation,
-				Sort:          ast.SortProp(yyS[yypt-4].b),
-				InvisibleProp: invisible,
+				ColumnName: yyS[yypt-7].anything.(*element.Identifier),
+				Datatype:   yyS[yypt-6].anything.(element.Datatype),
+				Collation:  collation,
+				Props:      props,
 			}
 		}
 	case 30:
@@ -1937,27 +1936,23 @@ yynewstate:
 		}
 	case 33:
 		{
-			yyVAL.b = false
+			yyVAL.i = int(ast.ColumnPropEmpty)
 		}
 	case 34:
 		{
-			yyVAL.b = true
+			yyVAL.i = int(ast.ColumnPropSort)
 		}
 	case 35:
 		{
-			yyVAL.anything = nil
-		}
-	case 36:
-		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.i = int(ast.ColumnPropEmpty)
 		}
 	case 37:
 		{
-			yyVAL.anything = &ast.InvisibleProp{Type: ast.InvisiblePropInvisible}
+			yyVAL.i = int(ast.ColumnPropInvisible)
 		}
 	case 38:
 		{
-			yyVAL.anything = &ast.InvisibleProp{Type: ast.InvisiblePropVisible}
+			yyVAL.i = int(ast.ColumnPropVisible)
 		}
 	case 39:
 		{
@@ -1997,55 +1992,200 @@ yynewstate:
 		}
 	case 84:
 		{
-			yyVAL.anything = nil
+			yyVAL.anything = &ast.ModifyColumnClause{
+				Columns: yyS[yypt-1].anything.([]*ast.ColumnDef),
+			}
 		}
 	case 85:
 		{
-			yyVAL.anything = nil
+			yyVAL.anything = &ast.ModifyColumnClause{
+				Columns: yyS[yypt-1].anything.([]*ast.ColumnDef),
+			}
 		}
 	case 86:
 		{
-			yyVAL.anything = nil
+			yyVAL.anything = &ast.ModifyColumnClause{
+				Columns: yyS[yypt-0].anything.([]*ast.ColumnDef),
+			}
+		}
+	case 87:
+		{
+			yyVAL.anything = []*ast.ColumnDef{yyS[yypt-0].anything.(*ast.ColumnDef)}
+		}
+	case 88:
+		{
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDef), yyS[yypt-0].anything.(*ast.ColumnDef))
+		}
+	case 90:
+		{
+			var collation *ast.Collation
+			if yyS[yypt-3].anything != nil {
+				collation = yyS[yypt-3].anything.(*ast.Collation)
+			}
+			yyVAL.anything = &ast.ColumnDef{
+				ColumnName: yyS[yypt-5].anything.(*element.Identifier),
+				Datatype:   yyS[yypt-4].anything.(element.Datatype),
+				Collation:  collation,
+				Props:      []ast.ColumnProp{},
+			}
 		}
 	case 95:
 		{
 			// empty
 		}
+	case 97:
+		{
+			yyVAL.anything = []*ast.ColumnDef{yyS[yypt-0].anything.(*ast.ColumnDef)}
+		}
+	case 98:
+		{
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDef), yyS[yypt-0].anything.(*ast.ColumnDef))
+		}
+	case 99:
+		{
+			yyVAL.anything = &ast.ColumnDef{
+				ColumnName: yyS[yypt-1].anything.(*element.Identifier),
+				Props:      []ast.ColumnProp{ast.ColumnProp(yyS[yypt-0].i)},
+			}
+		}
+	case 100:
+		{
+			prop := ast.ColumnPropSubstitutable
+			if yyS[yypt-0].b {
+				prop = ast.ColumnPropSubstitutableForce
+			}
+			yyVAL.anything = &ast.ColumnDef{
+				ColumnName: yyS[yypt-5].anything.(*element.Identifier),
+				Props:      []ast.ColumnProp{prop},
+			}
+		}
+	case 101:
+		{
+			prop := ast.ColumnPropNotSubstitutable
+			if yyS[yypt-0].b {
+				prop = ast.ColumnPropNotSubstitutableForce
+			}
+			yyVAL.anything = &ast.ColumnDef{
+				ColumnName: yyS[yypt-6].anything.(*element.Identifier),
+				Props:      []ast.ColumnProp{prop},
+			}
+		}
 	case 102:
 		{
-			// empty
+			yyVAL.b = false
+		}
+	case 103:
+		{
+			yyVAL.b = true
 		}
 	case 104:
 		{
-			yyVAL.anything = nil
+			props := []ast.DropColumnProp{}
+			if yyS[yypt-1].anything != nil {
+				props = append(props, yyS[yypt-1].anything.([]ast.DropColumnProp)...)
+			}
+			online := ast.DropColumnProp(yyS[yypt-0].i)
+			if online != ast.DropColumnPropEmpty {
+				props = append(props, online)
+			}
+			yyVAL.anything = &ast.DropColumnClause{
+				Type:    ast.DropColumnTypeSetUnused,
+				Columns: yyS[yypt-2].anything.([]*element.Identifier),
+				Props:   props,
+			}
 		}
 	case 105:
 		{
-			yyVAL.anything = nil
+			props := []ast.DropColumnProp{}
+			if yyS[yypt-1].anything != nil {
+				props = append(props, yyS[yypt-1].anything.([]ast.DropColumnProp)...)
+			}
+			cc := &ast.DropColumnClause{
+				Type:    ast.DropColumnTypeDrop,
+				Columns: yyS[yypt-2].anything.([]*element.Identifier),
+				Props:   props,
+			}
+			var checkout int
+			if yyS[yypt-0].anything != nil {
+				checkout = yyS[yypt-0].anything.(int)
+				cc.CheckPoint = &checkout
+			}
+			yyVAL.anything = cc
 		}
 	case 106:
 		{
-			yyVAL.anything = nil
+			cc := &ast.DropColumnClause{
+				Type: ast.DropColumnTypeDropUnusedColumns,
+			}
+			var checkout int
+			if yyS[yypt-0].anything != nil {
+				checkout = yyS[yypt-0].anything.(int)
+				cc.CheckPoint = &checkout
+			}
+			yyVAL.anything = cc
 		}
 	case 107:
 		{
-			yyVAL.anything = nil
+			cc := &ast.DropColumnClause{
+				Type: ast.DropColumnTypeDropColumnsContinue,
+			}
+			var checkout int
+			if yyS[yypt-0].anything != nil {
+				checkout = yyS[yypt-0].anything.(int)
+				cc.CheckPoint = &checkout
+			}
+			yyVAL.anything = cc
+		}
+	case 108:
+		{
+			yyVAL.anything = []*element.Identifier{yyS[yypt-0].anything.(*element.Identifier)}
+		}
+	case 109:
+		{
+			yyVAL.anything = yyS[yypt-1].anything
 		}
 	case 110:
 		{
-			// empty
+			yyVAL.anything = nil
+		}
+	case 112:
+		{
+			yyVAL.anything = []ast.DropColumnProp{ast.DropColumnProp(yyS[yypt-0].i)}
+		}
+	case 113:
+		{
+			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.DropColumnProp), ast.DropColumnProp(yyS[yypt-0].i))
+		}
+	case 114:
+		{
+			yyVAL.i = int(ast.DropColumnPropCascade)
+		}
+	case 115:
+		{
+			yyVAL.i = int(ast.DropColumnPropInvalidate)
 		}
 	case 116:
 		{
-			// empty
+			yyVAL.i = int(ast.DropColumnPropEmpty)
+		}
+	case 117:
+		{
+			yyVAL.i = int(ast.DropColumnPropOnline)
 		}
 	case 118:
 		{
-			// empty
+			yyVAL.anything = nil
+		}
+	case 119:
+		{
+			yyVAL.anything = yyS[yypt-0].i
 		}
 	case 120:
 		{
-			yyVAL.anything = nil
+			yyVAL.anything = &ast.RenameColumnClause{
+				OldName: yyS[yypt-2].anything.(*element.Identifier),
+				NewName: yyS[yypt-0].anything.(*element.Identifier),
+			}
 		}
 	case 121:
 		{
