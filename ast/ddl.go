@@ -70,4 +70,10 @@ type RenameColumnClause struct {
 
 type CreateTableStmt struct {
 	node
+	TableName *TableName
+	RelTable  *RelTableDef
+}
+
+type RelTableDef struct {
+	Columns []*ColumnDef
 }

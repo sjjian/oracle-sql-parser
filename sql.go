@@ -1804,10 +1804,6 @@ yynewstate:
 				yylex.(*yyLexImpl).result = append(yylex.(*yyLexImpl).result, stmt)
 			}
 		}
-	case 6:
-		{
-			yyVAL.node = &ast.CreateTableStmt{}
-		}
 	case 7:
 		{
 			yyVAL.node = nil
@@ -2189,7 +2185,10 @@ yynewstate:
 		}
 	case 121:
 		{
-			yyVAL.node = nil
+			yyVAL.node = &ast.CreateTableStmt{
+				TableName: yyS[yypt-4].anything.(*ast.TableName),
+				RelTable:  yyS[yypt-2].anything.(*ast.RelTableDef),
+			}
 		}
 	case 122:
 		{
@@ -2202,6 +2201,14 @@ yynewstate:
 	case 135:
 		{
 			// empty
+		}
+	case 138:
+		{
+			rd := &ast.RelTableDef{}
+			if yyS[yypt-6].anything != nil {
+				rd.Columns = yyS[yypt-6].anything.([]*ast.ColumnDef)
+			}
+			yyVAL.anything = rd
 		}
 	case 141:
 		{
@@ -2221,7 +2228,19 @@ yynewstate:
 		}
 	case 152:
 		{
-			// empty
+			yyVAL.anything = nil
+		}
+	case 153:
+		{
+			yyVAL.anything = yyS[yypt-1].anything
+		}
+	case 154:
+		{
+			yyVAL.anything = []*ast.ColumnDef{yyS[yypt-0].anything.(*ast.ColumnDef)}
+		}
+	case 155:
+		{
+			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDef), yyS[yypt-0].anything.(*ast.ColumnDef))
 		}
 	case 157:
 		{

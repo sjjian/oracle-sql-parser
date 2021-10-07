@@ -233,6 +233,11 @@ func nextQuery(yylex interface{}) string {
     DropColumnCheckpoint
     DropColumnProps
     DropColumnPropsOrEmpty
+    TableDef
+    RelTableDef
+    RelTablePropsOrEmpty
+    RelTableProps
+    RelTableProp
 
 %start Start
 
@@ -263,9 +268,6 @@ Statement:
     EmptyStmt
 |   AlterTableStmt
 |   CreateTableStmt
-    {
-    	$$ = &ast.CreateTableStmt{}
-    }
 
 EmptyStmt:
     {
@@ -800,7 +802,10 @@ RenameColumnClause:
 CreateTableStmt:
     _create _table TableType TableName ShardingType TableDef Memoptimize ParentTable
     {
-    	$$ = nil
+    	$$ = &ast.CreateTableStmt{
+            TableName:  $4.(*ast.TableName),
+            RelTable:   $6.(*ast.RelTableDef),
+    	}
     }
 
 TableType:
@@ -835,6 +840,13 @@ TableDef: // todo: support object table and XML type table
 
 RelTableDef:
     RelTablePropsOrEmpty ImmutableTableClauses BlockchainTableClauses DefaultCollateClauseOrEmpty OnCommitClause PhysicalProps TableProps
+    {
+        rd := &ast.RelTableDef{}
+        if $1 != nil {
+            rd.Columns = $1.([]*ast.ColumnDef)
+        }
+        $$ = rd
+    }
 
 ImmutableTableClauses:
 
@@ -872,13 +884,22 @@ TableProps: // todo
 
 RelTablePropsOrEmpty:
     {
-        // empty
+        $$ = nil
     }
 |   '(' RelTableProps ')'
+    {
+        $$ = $2
+    }
 
 RelTableProps:
     RelTableProp
+    {
+        $$ = []*ast.ColumnDef{$1.(*ast.ColumnDef)}
+    }
 |   RelTableProps ',' RelTableProp
+    {
+        $$ = append($1.([]*ast.ColumnDef), $3.(*ast.ColumnDef))
+    }
 
 RelTableProp:
     ColumnDef
