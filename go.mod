@@ -1,4 +1,4 @@
-module github.com/sjjian/oracle_sql_parser
+module github.com/sjjian/oracle-sql-parser
 
 go 1.16
 

@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/sjjian/oracle_sql_parser/ast/element"
+	"github.com/sjjian/oracle-sql-parser/ast/element"
 )
 
 type AlterTableStmt struct {

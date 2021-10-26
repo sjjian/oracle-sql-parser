@@ -3,7 +3,7 @@ package parser
 import (
 	"bytes"
 	"fmt"
-	"github.com/sjjian/oracle_sql_parser/ast"
+	"github.com/sjjian/oracle-sql-parser/ast"
 	"github.com/timtadh/lexmachine"
 	"github.com/timtadh/lexmachine/machines"
 	"strconv"

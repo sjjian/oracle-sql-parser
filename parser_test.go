@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"github.com/sjjian/oracle_sql_parser/ast"
+	"github.com/sjjian/oracle-sql-parser/ast"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
