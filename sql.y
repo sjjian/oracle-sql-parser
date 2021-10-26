@@ -162,6 +162,80 @@ func nextQuery(yylex interface{}) string {
     _memoptimize
     _read
     _write
+    _cluster
+    _organization
+    _creation
+    _segment
+    _tablespace
+    _initrans
+    _maxtrans
+    _pctfree
+    _pctused
+    _storage
+    _buffer_pool
+    _cell_flash_cache
+    _flash_cache
+    _freelist
+    _freelists
+    _initial
+    _keep
+    _maxextents
+    _maxsize
+    _minextents
+    _next
+    _optimal
+    _pctincrease
+    _recycle
+    _unlimited
+    _groups
+    _E
+    _G
+    _K
+    _M
+    _P
+    _T
+    _filesystem_like_logging
+    _logging
+    _nologging
+    _advanced
+    _basic
+    _compress
+    _nocompress
+    _row
+    _store
+    _archive
+    _query
+    _level
+    _locking
+    _inmemory
+    _auto
+    _capacity
+    _dml
+    _high
+    _low
+    _memcompress
+    _critical
+    _medium
+    _priority
+    _distribute
+    _partition
+    _range
+    _subpartition
+    _service
+    _duplicate
+    _spatial
+    _delete_all
+    _disable
+    _disable_all
+    _enable
+    _enable_all
+    _ilm
+    _policy
+    _external
+    _heap
+    _index
+    _attributes
+    _reject
 
 %token <i>
     _intNumber 		"int number"
@@ -799,6 +873,7 @@ RenameColumnClause:
 
 /* +++++++++++++++++++++++++++++++++++++++++++ create table ++++++++++++++++++++++++++++++++++++++++++ */
 
+// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/CREATE-TABLE.html#GUID-F9CE0CC3-13AE-4744-A43C-EAC7A71AAAB6
 CreateTableStmt:
     _create _table TableType TableName ShardingType TableDef Memoptimize ParentTable
     {
@@ -878,7 +953,259 @@ OnCommitRows:
 |   _on _commit _delete _rows
 |   _on _commit _preserve _rows
 
-PhysicalProps: // todo
+PhysicalProps:
+    {
+        // empty
+    }
+|   DeferredSegmentCreation SegmentAttrsClause TableCompressionOrEmpty InmemoryTableClause IlmClause
+|   DeferredSegmentCreation _organization OrgClause
+|   DeferredSegmentCreation ExternalPartitionClause
+|   _cluster Identifier  '(' ColumnNameList ')'
+
+DeferredSegmentCreation:
+    {
+        // empty
+    }
+|   _segment _creation _immediate
+|   _segment _creation _deferred
+
+SegmentAttrsClauseOrEmpty:
+    {
+        // empty
+    }
+|   SegmentAttrsClause
+
+SegmentAttrsClause:
+    SegmentAttrClause
+|   SegmentAttrsClause SegmentAttrClause
+
+SegmentAttrClause:
+    PhysicalAttrsClause
+|   _tablespace Identifier
+|   _tablespace _set Identifier
+|   LoggingClause
+|   TableCompression // TODO: this is not include in oracle 21 syntax docs
+
+PhysicalAttrsClause:
+    PhysicalAttrClause
+|   PhysicalAttrsClause PhysicalAttrClause
+
+PhysicalAttrClause:
+    _pctfree _intNumber
+|   _pctused _intNumber
+|   _initrans _intNumber
+|   _maxtrans _intNumber // has been deprecated,
+|   StorageClause
+
+StorageClause:
+    _storage '(' StorageProps ')'
+
+StorageProps:
+    StorageProp
+|   StorageProps StorageProp
+
+StorageProp:
+    _initial SizeClause
+|   _next SizeClause
+|   _minextents _intNumber
+|   _maxextents _intNumber
+|   _maxextents _unlimited
+|   _maxsize _unlimited
+|   _maxsize SizeClause
+|   _pctincrease _intNumber
+|   _freelists _intNumber
+|   _freelist _groups _intNumber
+|   _optimal
+|   _optimal SizeClause
+|   _optimal _null
+|   _buffer_pool _keep
+|   _buffer_pool _recycle
+|   _buffer_pool _default
+|   _flash_cache _keep
+|   _flash_cache _none
+|   _flash_cache _default
+|   _cell_flash_cache _keep
+|   _cell_flash_cache _none
+|   _cell_flash_cache _default
+|   _encrypt
+
+SizeClause:
+    _intNumber SizeUnit
+
+SizeUnit:
+    {
+        // empty
+    }
+|   _K
+|   _M
+|   _G
+|   _T
+|   _P
+|   _E
+
+LoggingClause:
+    _logging
+|   _nologging
+|   _filesystem_like_logging
+
+TableCompressionOrEmpty:
+    {
+        // empty
+    }
+|   TableCompression
+
+TableCompression:
+    _compress
+|   _row _store _compress
+|   _row _store _compress _basic
+|   _row _store _compress _advanced
+|   _column _store _compress ColumnCompressProp ColumnCompressLock
+|   _nocompress
+
+ColumnCompressProp:
+    {
+        // empty
+    }
+|   _for _query
+|   _for _query _low
+|   _for _query _high
+|   _for _archive
+|   _for _archive _low
+|   _for _archive _high
+
+ColumnCompressLock:
+    {
+        // empty
+    }
+|   _row _level _locking
+|   _no _row _level _locking
+
+InmemoryTableClause:
+    {
+        // empty
+    }
+|   _inmemory InmemoryAttrs InmemoryColumnClausesOrEmpty
+|   _no _inmemory InmemoryColumnClausesOrEmpty
+|   InmemoryColumnClausesOrEmpty
+
+InmemoryAttrs:
+    InmemoryMemCompress InmemoryProp InmemoryDistribute InmemoryDuplicate InmemorySpatial
+
+InmemoryMemCompress:
+    {
+        // empty
+    }
+|   _memcompress _for _dml
+|   _memcompress _for _query
+|   _memcompress _for _query _low
+|   _memcompress _for _query _high
+|   _memcompress _for _capacity
+|   _memcompress _for _capacity _low
+|   _memcompress _for _capacity _high
+|   _no _memcompress
+|   _memcompress _auto
+
+InmemoryProp:
+    {
+        // empty
+    }
+|   _priority _none
+|   _priority _low
+|   _priority _medium
+|   _priority _high
+|   _priority _critical
+
+InmemoryDistribute:
+    {
+        // empty
+    }
+|   _distribute InmemoryDistributeBy InmemoryDistributeFor
+
+InmemoryDistributeBy:
+    {
+        // empty
+    }
+|   _auto
+|   _by _rowid _range
+|   _by _partition
+|   _by _subpartition
+
+InmemoryDistributeFor:
+    {
+        // empty
+    }
+|   _for _service _default
+|   _for _service _all
+|   _for _service Identifier
+|   _for _service _none
+
+InmemoryDuplicate:
+    {
+        // empty
+    }
+|   _duplicate
+|   _duplicate _all
+|   _no _duplicate
+
+InmemorySpatial:
+    {
+        // empty
+    }
+|   _spatial ColumnName
+
+InmemoryColumnClausesOrEmpty:
+    {
+        // empty
+    }
+|   InmemoryColumnClauses
+
+InmemoryColumnClauses:
+    InmemoryColumnClause
+|   InmemoryColumnClauses InmemoryColumnClause
+
+InmemoryColumnClause:
+    _inmemory '(' ColumnNameList ')'
+|   _inmemory InmemoryMemCompress '(' ColumnNameList ')'
+|   _no _inmemory '(' ColumnNameList ')'
+
+IlmClause:
+    {
+        // empty
+    }
+|   _ilm _add _policy IlmPolicyClause
+|   _ilm _delete _policy IlmPolicyClause
+|   _ilm _enable _policy IlmPolicyClause
+|   _ilm _disable _policy IlmPolicyClause
+|   _ilm _delete_all
+|   _ilm _enable_all
+|   _ilm _disable_all
+
+IlmPolicyClause:
+    IlmCompressionPolicy
+|   IlmTieringPolicy
+|   IlmInmemoryPolicy
+
+IlmCompressionPolicy:
+
+IlmTieringPolicy:
+
+IlmInmemoryPolicy:
+
+OrgClause:
+    _heap SegmentAttrsClauseOrEmpty HeapOrgTableClause
+|   _index SegmentAttrsClauseOrEmpty IndexOrgTableClause
+|   _external ExternalTableClause
+
+HeapOrgTableClause:
+    TableCompressionOrEmpty InmemoryTableClause IlmClause
+
+IndexOrgTableClause:
+
+ExternalTableClause:
+
+ExternalPartitionClause:
+    _external _partition _attributes ExternalTableClause
+|   _external _partition _attributes ExternalTableClause _reject _limit
 
 TableProps: // todo
 
