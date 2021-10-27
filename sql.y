@@ -236,6 +236,7 @@ func nextQuery(yylex interface{}) string {
     _index
     _attributes
     _reject
+    _foreign
 
 %token <i>
     _intNumber 		"int number"
@@ -253,6 +254,7 @@ func nextQuery(yylex interface{}) string {
     InvisiblePropOrEmpty
     DropColumnProp
     DropColumnOnline
+    InlineConstraintType
 
 %type <b>
     IsForce
@@ -312,6 +314,11 @@ func nextQuery(yylex interface{}) string {
     RelTablePropsOrEmpty
     RelTableProps
     RelTableProp
+    OutOfLineConstraint
+    ConstraintNameOrEmpty
+    ColumnDefConstraint
+    InlineConstraintList
+    InlineConstraint
 
 %start Start
 
@@ -405,7 +412,7 @@ AlterTableStmt:
     {
         $$ = &ast.AlterTableStmt{
             TableName:      $3.(*ast.TableName),
-            ColumnClauses:  $5.([]ast.ColumnClause),
+            ColumnClauses:  $5.([]ast.AlterTableClause),
         }
     }
 
@@ -416,17 +423,17 @@ ColumnClauses:
     }
 |   RenameColumnClause
     {
-        $$ = []ast.ColumnClause{$1.(ast.ColumnClause)}
+        $$ = []ast.AlterTableClause{$1.(ast.AlterTableClause)}
     }
 
 ChangeColumnClauseList:
     ChangeColumnClause
     {
-        $$ = []ast.ColumnClause{$1.(ast.ColumnClause)}
+        $$ = []ast.AlterTableClause{$1.(ast.AlterTableClause)}
     }
 |   ChangeColumnClauseList ChangeColumnClause
     {
-        $$ = append($1.([]ast.ColumnClause), $2.(ast.ColumnClause))
+        $$ = append($1.([]ast.AlterTableClause), $2.(ast.AlterTableClause))
     }
 
 ChangeColumnClause:
@@ -488,11 +495,18 @@ RealColumnDef:
         if invisible != ast.ColumnPropEmpty {
             props = append(props, invisible)
         }
+
+        var constraints []*ast.InlineConstraint
+        if $8 != nil {
+            constraints = $8.([]*ast.InlineConstraint)
+        }
+
         $$ = &ast.ColumnDef{
             ColumnName:         $1.(*element.Identifier),
             Datatype:           $2.(element.Datatype),
             Collation:          collation,
             Props:              props,
+            Constraints: 	constraints,
         }
     }
 
@@ -618,14 +632,26 @@ SaltProp:
 
 ColumnDefConstraint:
     {
-        // empty
+        $$ = nil
     }
 |   InlineRefConstraint
+    {
+        $$ = nil
+    }
 |   InlineConstraintList
+    {
+        $$ = $1
+    }
 
 InlineConstraintList:
     InlineConstraint
+    {
+        $$ = []*ast.InlineConstraint{$1.(*ast.InlineConstraint)}
+    }
 |   InlineConstraintList InlineConstraint
+    {
+        $$ = append($1.([]*ast.InlineConstraint), $2.(*ast.InlineConstraint))
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ modify column ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -918,7 +944,7 @@ RelTableDef:
     {
         rd := &ast.RelTableDef{}
         if $1 != nil {
-            rd.Columns = $1.([]*ast.ColumnDef)
+            rd.TableStructs = $1.([]ast.TableStructDef)
         }
         $$ = rd
     }
@@ -1221,15 +1247,22 @@ RelTablePropsOrEmpty:
 RelTableProps:
     RelTableProp
     {
-        $$ = []*ast.ColumnDef{$1.(*ast.ColumnDef)}
+        $$ = []ast.TableStructDef{$1.(ast.TableStructDef)}
     }
 |   RelTableProps ',' RelTableProp
     {
-        $$ = append($1.([]*ast.ColumnDef), $3.(*ast.ColumnDef))
+        $$ = append($1.([]ast.TableStructDef), $3.(ast.TableStructDef))
     }
 
 RelTableProp:
     ColumnDef
+    {
+        $$ = $1
+    }
+|   OutOfLineConstraint
+    {
+        $$ = $1
+    }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -1762,20 +1795,51 @@ AnsiSupportDataTypes:
 
 ConstraintNameOrEmpty:
     {
-        // empty
+        $$ = nil
     }
 |   _constraint Identifier
+    {
+        $$ = $2
+    }
 
 InlineConstraint:
-    ConstraintNameOrEmpty InlineConstraintProp ConstraintStateOrEmpty
-
-InlineConstraintProp:
-    _null
-|   _not _null
-|   _unique
-|   _primary _key
-|   ReferencesClause
+    ConstraintNameOrEmpty InlineConstraintType ConstraintStateOrEmpty
+    {
+        constraint := &ast.InlineConstraint{}
+        if $1 != nil {
+            constraint.Name = $1.(*element.Identifier)
+        }
+	constraint.Type = ast.ConstraintType($2)
+	$$ = constraint
+    }
+|   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+    {
+        constraint := &ast.InlineConstraint{}
+        if $1 != nil {
+            constraint.Name = $1.(*element.Identifier)
+        }
+	constraint.Type = ast.ConstraintTypeReferences
+	$$ = constraint
+    }
 //|   ConstraintCheckCondition // todo
+
+InlineConstraintType:
+    _null
+    {
+        $$ = int(ast.ConstraintTypeNull)
+    }
+|   _not _null
+    {
+        $$ = int(ast.ConstraintTypeNotNull)
+    }
+|   _unique
+    {
+        $$ = int(ast.ConstraintTypeUnique)
+    }
+|   _primary _key
+    {
+        $$ = int(ast.ConstraintTypePK)
+    }
 
 ReferencesClause:
     _references TableName ColumnNameListOrEmpty ReferencesOnDelete
@@ -1824,6 +1888,44 @@ InlineRefConstraint:
     _scope _is TableName
 |   _with _rowid
 |   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+
+OutOfLineConstraint:
+    ConstraintNameOrEmpty _unique '(' ColumnNameList ')' ConstraintStateOrEmpty
+    {
+        constraint := &ast.OutOfLineConstraint{}
+        if $1 != nil {
+            constraint.Name = $1.(*element.Identifier)
+        }
+	constraint.Type = ast.ConstraintTypeUnique
+	constraint.Columns = $4.([]*element.Identifier)
+	$$ = constraint
+    }
+|    ConstraintNameOrEmpty _primary _key '(' ColumnNameList ')' ConstraintStateOrEmpty
+    {
+        constraint := &ast.OutOfLineConstraint{}
+        if $1 != nil {
+            constraint.Name = $1.(*element.Identifier)
+        }
+	constraint.Type = ast.ConstraintTypePK
+	constraint.Columns = $5.([]*element.Identifier)
+	$$ = constraint
+    }
+|    ConstraintNameOrEmpty _foreign _key '(' ColumnNameList ')' ReferencesClause ConstraintStateOrEmpty
+    {
+        constraint := &ast.OutOfLineConstraint{}
+        if $1 != nil {
+            constraint.Name = $1.(*element.Identifier)
+        }
+	constraint.Type = ast.ConstraintTypeReferences
+	constraint.Columns = $5.([]*element.Identifier)
+	$$ = constraint
+    }
+//|   ConstraintCheckCondition // todo
+
+//OutOfLineRefConstraint:
+//    _scope _for '(' RefType ')' _is TableName
+//|   _ref '(' RefType ')' _with _rowid
+//|   ConstraintNameOrEmpty _foreign _key '(' RefTypeList ')' ReferencesClause ConstraintStateOrEmpty
 
 /* +++++++++++++++++++++++++++++++++++++++++ memoptimize +++++++++++++++++++++++++++++++++++++++++ */
 

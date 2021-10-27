@@ -34,7 +34,7 @@ type yyXError struct {
 }
 
 const (
-	yyDefault                = 57558
+	yyDefault                = 57559
 	yyEofCode                = 57344
 	_E                       = 57506
 	_G                       = 57507
@@ -99,7 +99,7 @@ const (
 	_distribute              = 57535
 	_dml                     = 57528
 	_double                  = 57390
-	_doubleQuoteStr          = 57556
+	_doubleQuoteStr          = 57557
 	_drop                    = 57442
 	_duplicate               = 57540
 	_duplicated              = 57460
@@ -113,6 +113,7 @@ const (
 	_float                   = 57357
 	_for                     = 57476
 	_force                   = 57449
+	_foreign                 = 57554
 	_freelist                = 57493
 	_freelists               = 57494
 	_from                    = 57347
@@ -133,7 +134,7 @@ const (
 	_initrans                = 57485
 	_inmemory                = 57525
 	_int                     = 57388
-	_intNumber               = 57554
+	_intNumber               = 57555
 	_interger                = 57387
 	_interval                = 57368
 	_invalidate              = 57454
@@ -173,7 +174,7 @@ const (
 	_nomaxvalue              = 57435
 	_nominvalue              = 57436
 	_none                    = 57469
-	_nonquotedIdentifier     = 57557
+	_nonquotedIdentifier     = 57558
 	_noorder                 = 57437
 	_norely                  = 57418
 	_not                     = 57405
@@ -219,7 +220,7 @@ const (
 	_set                     = 57413
 	_sharded                 = 57464
 	_sharding                = 57470
-	_singleQuoteStr          = 57555
+	_singleQuoteStr          = 57556
 	_smallInt                = 57389
 	_sort                    = 57394
 	_spatial                 = 57541
@@ -251,24 +252,24 @@ const (
 	yyErrCode                = 57345
 
 	yyMaxDepth = 200
-	yyTabOfs   = -416
+	yyTabOfs   = -420
 )
 
 var (
 	yyPrec = map[int]int{}
 
 	yyXLAT = map[int]int{
-		41:    0,   // ')' (269x)
+		41:    0,   // ')' (280x)
 		57344: 1,   // $end (202x)
 		59:    2,   // ';' (201x)
-		44:    3,   // ',' (186x)
-		57406: 4,   // _null (160x)
-		57405: 5,   // _not (157x)
-		57477: 6,   // _memoptimize (155x)
-		57407: 7,   // _primary (155x)
-		57409: 8,   // _references (155x)
-		57408: 9,   // _unique (155x)
-		57403: 10,  // _constraint (152x)
+		44:    3,   // ',' (197x)
+		57405: 4,   // _not (162x)
+		57406: 5,   // _null (162x)
+		57407: 6,   // _primary (160x)
+		57408: 7,   // _unique (160x)
+		57409: 8,   // _references (158x)
+		57403: 9,   // _constraint (156x)
+		57477: 10,  // _memoptimize (155x)
 		57471: 11,  // _parent (152x)
 		57397: 12,  // _encrypt (137x)
 		57442: 13,  // _drop (125x)
@@ -297,13 +298,13 @@ var (
 		57488: 36,  // _pctused (66x)
 		57489: 37,  // _storage (66x)
 		57484: 38,  // _tablespace (66x)
-		40:    39,  // '(' (61x)
+		40:    39,  // '(' (64x)
 		57413: 40,  // _set (53x)
 		57350: 41,  // _add (52x)
 		57441: 42,  // _modify (51x)
-		57554: 43,  // _intNumber (50x)
-		57556: 44,  // _doubleQuoteStr (42x)
-		57557: 45,  // _nonquotedIdentifier (40x)
+		57555: 43,  // _intNumber (50x)
+		57557: 44,  // _doubleQuoteStr (45x)
+		57558: 45,  // _nonquotedIdentifier (43x)
 		57490: 46,  // _buffer_pool (35x)
 		57491: 47,  // _cell_flash_cache (35x)
 		57492: 48,  // _flash_cache (35x)
@@ -317,16 +318,16 @@ var (
 		57501: 56,  // _optimal (35x)
 		57502: 57,  // _pctincrease (35x)
 		57541: 58,  // _spatial (35x)
-		57540: 59,  // _duplicate (32x)
-		57610: 60,  // Identifier (32x)
+		57611: 59,  // Identifier (35x)
+		57540: 60,  // _duplicate (32x)
 		57549: 61,  // _external (28x)
 		57481: 62,  // _organization (27x)
 		57480: 63,  // _cluster (24x)
-		57412: 64,  // _on (24x)
-		57483: 65,  // _segment (24x)
-		57414: 66,  // _deferrable (21x)
-		57417: 67,  // _initially (20x)
-		57575: 68,  // ColumnName (19x)
+		57414: 64,  // _deferrable (24x)
+		57412: 65,  // _on (24x)
+		57483: 66,  // _segment (24x)
+		57417: 67,  // _initially (23x)
+		57576: 68,  // ColumnName (22x)
 		57427: 69,  // _cache (17x)
 		57428: 70,  // _cycle (17x)
 		57535: 71,  // _distribute (17x)
@@ -349,277 +350,279 @@ var (
 		57534: 88,  // _priority (11x)
 		57402: 89,  // _salt (10x)
 		57351: 90,  // _char (9x)
-		46:    91,  // '.' (8x)
-		57418: 92,  // _norely (8x)
-		57419: 93,  // _rely (8x)
-		57378: 94,  // _rowid (8x)
-		57555: 95,  // _singleQuoteStr (8x)
-		57370: 96,  // _to (8x)
-		57380: 97,  // _character (7x)
-		57361: 98,  // _raw (7x)
-		57377: 99,  // _bfile (6x)
-		57359: 100, // _binaryDouble (6x)
-		57358: 101, // _binaryFloat (6x)
-		57374: 102, // _blob (6x)
-		57375: 103, // _clob (6x)
-		57362: 104, // _date (6x)
-		57386: 105, // _dec (6x)
-		57385: 106, // _decimal (6x)
-		57390: 107, // _double (6x)
-		57357: 108, // _float (6x)
-		57388: 109, // _int (6x)
-		57387: 110, // _interger (6x)
-		57368: 111, // _interval (6x)
-		57360: 112, // _long (6x)
-		57383: 113, // _national (6x)
-		57354: 114, // _nchar (6x)
-		57376: 115, // _nclob (6x)
-		57356: 116, // _number (6x)
-		57384: 117, // _numeric (6x)
-		57355: 118, // _nvarchar2 (6x)
-		57392: 119, // _real (6x)
-		57389: 120, // _smallInt (6x)
-		57363: 121, // _timestamp (6x)
-		57379: 122, // _urowid (6x)
-		57382: 123, // _varchar (6x)
-		57353: 124, // _varchar2 (6x)
-		57576: 125, // ColumnNameList (6x)
-		57667: 126, // PhysicalAttrClause (6x)
-		57690: 127, // StorageClause (6x)
-		57693: 128, // TableCompression (6x)
-		42:    129, // '*' (5x)
-		57529: 130, // _high (5x)
-		57426: 131, // _identity (5x)
-		57530: 132, // _low (5x)
-		57469: 133, // _none (5x)
-		57470: 134, // _sharding (5x)
-		57448: 135, // _substitutable (5x)
-		57381: 136, // _varying (5x)
-		57627: 137, // InmemoryColumnClause (5x)
-		57643: 138, // LoggingClause (5x)
-		57659: 139, // NumberOrAsterisk (5x)
-		57668: 140, // PhysicalAttrsClause (5x)
-		57680: 141, // SegmentAttrClause (5x)
-		57696: 142, // TableName (5x)
-		57444: 143, // _all (4x)
-		57424: 144, // _as (4x)
-		57400: 145, // _by (4x)
-		57548: 146, // _policy (4x)
-		57572: 147, // ColumnDef (4x)
-		57580: 148, // ConstraintNameOrEmpty (4x)
-		57585: 149, // ConstraintStateRely (4x)
-		57614: 150, // IdentityOptionsOrEmpty (4x)
-		57616: 151, // IlmCompressionPolicy (4x)
-		57617: 152, // IlmInmemoryPolicy (4x)
-		57618: 153, // IlmPolicyClause (4x)
-		57619: 154, // IlmTieringPolicy (4x)
-		57622: 155, // InlineConstraint (4x)
-		57628: 156, // InmemoryColumnClauses (4x)
-		57629: 157, // InmemoryColumnClausesOrEmpty (4x)
-		57670: 158, // RealColumnDef (4x)
-		57684: 159, // SizeClause (4x)
-		57411: 160, // _delete (3x)
-		57399: 161, // _identified (3x)
-		57496: 162, // _keep (3x)
-		57531: 163, // _memcompress (3x)
-		57561: 164, // AnsiSupportDataTypes (3x)
-		57565: 165, // CharacterDataTypes (3x)
-		57566: 166, // CollateClause (3x)
-		57582: 167, // ConstraintStateDeferrable (3x)
-		57583: 168, // ConstraintStateDeferredOrImmediate (3x)
-		57587: 169, // Datatype (3x)
-		57588: 170, // DatetimeDataTypes (3x)
-		57594: 171, // DropColumnCheckpoint (3x)
-		57597: 172, // DropColumnProp (3x)
-		57639: 173, // InvisibleProp (3x)
-		57642: 174, // LargeObjectDataTypes (3x)
-		57644: 175, // LongAndRawDataTypes (3x)
-		57658: 176, // NumberDataTypes (3x)
-		57663: 177, // OralceBuiltInDataTypes (3x)
-		57678: 178, // RowIdDataTypes (3x)
-		57681: 179, // SegmentAttrsClause (3x)
-		57348: 180, // _alter (2x)
-		57445: 181, // _at (2x)
-		57526: 182, // _auto (2x)
-		57459: 183, // _blockchain (2x)
-		57352: 184, // _byte (2x)
-		57450: 185, // _columns (2x)
-		57472: 186, // _commit (2x)
-		57458: 187, // _create (2x)
-		57466: 188, // _data (2x)
-		57415: 189, // _deferred (2x)
-		57473: 190, // _definition (2x)
-		57449: 191, // _force (2x)
-		57416: 192, // _immediate (2x)
-		57523: 193, // _level (2x)
-		57447: 194, // _levels (2x)
-		57430: 195, // _limit (2x)
-		57524: 196, // _locking (2x)
-		57371: 197, // _mouth (2x)
-		57536: 198, // _partition (2x)
-		57474: 199, // _preserve (2x)
-		57522: 200, // _query (2x)
-		57478: 201, // _read (2x)
-		57553: 202, // _reject (2x)
-		57475: 203, // _rows (2x)
-		57373: 204, // _second (2x)
-		57520: 205, // _store (2x)
-		57349: 206, // _table (2x)
-		57465: 207, // _temporary (2x)
-		57366: 208, // _time (2x)
-		57504: 209, // _unlimited (2x)
-		57452: 210, // _unused (2x)
-		57479: 211, // _write (2x)
-		57367: 212, // _zone (2x)
-		57559: 213, // AddColumnClause (2x)
-		57560: 214, // AlterTableStmt (2x)
-		57563: 215, // ChangeColumnClause (2x)
-		57567: 216, // CollateClauseOrEmpty (2x)
-		57577: 217, // ColumnNameListForDropColumn (2x)
-		57581: 218, // ConstraintState (2x)
-		57584: 219, // ConstraintStateOrEmpty (2x)
-		57586: 220, // CreateTableStmt (2x)
-		57589: 221, // DefaultClause (2x)
-		57591: 222, // DefaultOrIdentityClause (2x)
-		57595: 223, // DropColumnClause (2x)
-		57598: 224, // DropColumnProps (2x)
-		57599: 225, // DropColumnPropsOrEmpty (2x)
-		57600: 226, // EmptyStmt (2x)
-		57602: 227, // EncryptClause (2x)
-		57605: 228, // Expr (2x)
-		57607: 229, // ExternalTableClause (2x)
-		57611: 230, // IdentityClause (2x)
-		57612: 231, // IdentityOption (2x)
-		57615: 232, // IlmClause (2x)
-		57623: 233, // InlineConstraintList (2x)
-		57624: 234, // InlineConstraintProp (2x)
-		57634: 235, // InmemoryMemCompress (2x)
-		57637: 236, // InmemoryTableClause (2x)
-		57641: 237, // IsForce (2x)
-		57647: 238, // MemoptimizeRead (2x)
-		57649: 239, // MemoptimizeWrite (2x)
-		57651: 240, // ModifyColumnClause (2x)
-		57652: 241, // ModifyColumnProp (2x)
-		57654: 242, // ModifyColumnSubstitutable (2x)
-		57655: 243, // ModifyColumnVisibility (2x)
-		57657: 244, // ModifyRealColumnProp (2x)
-		57671: 245, // ReferencesClause (2x)
-		57674: 246, // RelTableProp (2x)
-		57682: 247, // SegmentAttrsClauseOrEmpty (2x)
-		57688: 248, // Statement (2x)
-		57691: 249, // StorageProp (2x)
-		57694: 250, // TableCompressionOrEmpty (2x)
-		61:    251, // '=' (1x)
-		57515: 252, // _advanced (1x)
-		57423: 253, // _always (1x)
-		57521: 254, // _archive (1x)
-		57552: 255, // _attributes (1x)
-		57516: 256, // _basic (1x)
-		57527: 257, // _capacity (1x)
-		57453: 258, // _constraints (1x)
-		57451: 259, // _continue (1x)
-		57482: 260, // _creation (1x)
-		57532: 261, // _critical (1x)
-		57372: 262, // _day (1x)
-		57542: 263, // _delete_all (1x)
-		57543: 264, // _disable (1x)
-		57544: 265, // _disable_all (1x)
-		57528: 266, // _dml (1x)
-		57460: 267, // _duplicated (1x)
-		57506: 268, // _E (1x)
-		57545: 269, // _enable (1x)
-		57546: 270, // _enable_all (1x)
-		57467: 271, // _extended (1x)
-		57507: 272, // _G (1x)
-		57461: 273, // _global (1x)
-		57505: 274, // _groups (1x)
-		57550: 275, // _heap (1x)
-		57462: 276, // _immutable (1x)
-		57551: 277, // _index (1x)
-		57420: 278, // _is (1x)
-		57508: 279, // _K (1x)
-		57404: 280, // _key (1x)
-		57365: 281, // _local (1x)
-		57509: 282, // _M (1x)
-		57533: 283, // _medium (1x)
-		57468: 284, // _metadata (1x)
-		57510: 285, // _P (1x)
-		57391: 286, // _precision (1x)
-		57463: 287, // _private (1x)
-		57537: 288, // _range (1x)
-		57503: 289, // _recycle (1x)
-		57539: 290, // _service (1x)
-		57464: 291, // _sharded (1x)
-		57538: 292, // _subpartition (1x)
-		57511: 293, // _T (1x)
-		57398: 294, // _using (1x)
-		57440: 295, // _value (1x)
-		57369: 296, // _year (1x)
-		57562: 297, // BlockchainTableClauses (1x)
-		57564: 298, // ChangeColumnClauseList (1x)
-		57568: 299, // ColumnClauses (1x)
-		57569: 300, // ColumnCompressLock (1x)
-		57570: 301, // ColumnCompressProp (1x)
-		57571: 302, // ColumnConstraintForModify (1x)
-		57573: 303, // ColumnDefConstraint (1x)
-		57574: 304, // ColumnDefList (1x)
-		57578: 305, // ColumnNameListOrEmpty (1x)
-		57579: 306, // ColumnProps (1x)
-		57590: 307, // DefaultCollateClauseOrEmpty (1x)
-		57592: 308, // DefaultOrIdentityClauseForModify (1x)
-		57593: 309, // DeferredSegmentCreation (1x)
-		57596: 310, // DropColumnOnline (1x)
-		57601: 311, // EncryptAlgorithm (1x)
-		57603: 312, // EncryptClauseForModify (1x)
-		57604: 313, // EncryptionSpec (1x)
-		57606: 314, // ExternalPartitionClause (1x)
-		57608: 315, // HeapOrgTableClause (1x)
-		57609: 316, // IdentifiedByClause (1x)
-		57613: 317, // IdentityOptions (1x)
-		57620: 318, // ImmutableTableClauses (1x)
-		57621: 319, // IndexOrgTableClause (1x)
-		57625: 320, // InlineRefConstraint (1x)
-		57626: 321, // InmemoryAttrs (1x)
-		57630: 322, // InmemoryDistribute (1x)
-		57631: 323, // InmemoryDistributeBy (1x)
-		57632: 324, // InmemoryDistributeFor (1x)
-		57633: 325, // InmemoryDuplicate (1x)
-		57635: 326, // InmemoryProp (1x)
-		57636: 327, // InmemorySpatial (1x)
-		57638: 328, // IntergrityAlgorithm (1x)
-		57640: 329, // InvisiblePropOrEmpty (1x)
-		57645: 330, // Memoptimize (1x)
-		57646: 331, // MemoptimizeForAlterTable (1x)
-		57648: 332, // MemoptimizeReadForAlterTable (1x)
-		57650: 333, // MemoptimizeWriteForAlterTable (1x)
-		57653: 334, // ModifyColumnProps (1x)
-		57656: 335, // ModifyColumnVisibilityList (1x)
-		57660: 336, // OnCommitClause (1x)
-		57661: 337, // OnCommitDef (1x)
-		57662: 338, // OnCommitRows (1x)
-		57664: 339, // OrgClause (1x)
-		57665: 340, // OutOfLinePartStorageList (1x)
-		57666: 341, // ParentTable (1x)
-		57669: 342, // PhysicalProps (1x)
-		57672: 343, // ReferencesOnDelete (1x)
-		57673: 344, // RelTableDef (1x)
-		57675: 345, // RelTableProps (1x)
-		57676: 346, // RelTablePropsOrEmpty (1x)
-		57677: 347, // RenameColumnClause (1x)
-		57679: 348, // SaltProp (1x)
-		57683: 349, // ShardingType (1x)
-		57685: 350, // SizeUnit (1x)
-		57686: 351, // SortProp (1x)
-		57687: 352, // Start (1x)
-		57689: 353, // StatementList (1x)
-		57692: 354, // StorageProps (1x)
-		57695: 355, // TableDef (1x)
-		57697: 356, // TableProps (1x)
-		57698: 357, // TableType (1x)
-		57558: 358, // $default (0x)
-		57347: 359, // _from (0x)
-		57346: 360, // _select (0x)
-		57345: 361, // error (0x)
+		57577: 91,  // ColumnNameList (9x)
+		46:    92,  // '.' (8x)
+		57418: 93,  // _norely (8x)
+		57419: 94,  // _rely (8x)
+		57378: 95,  // _rowid (8x)
+		57556: 96,  // _singleQuoteStr (8x)
+		57370: 97,  // _to (8x)
+		57380: 98,  // _character (7x)
+		57361: 99,  // _raw (7x)
+		57583: 100, // ConstraintStateDeferrable (7x)
+		57584: 101, // ConstraintStateDeferredOrImmediate (7x)
+		57377: 102, // _bfile (6x)
+		57359: 103, // _binaryDouble (6x)
+		57358: 104, // _binaryFloat (6x)
+		57374: 105, // _blob (6x)
+		57375: 106, // _clob (6x)
+		57362: 107, // _date (6x)
+		57386: 108, // _dec (6x)
+		57385: 109, // _decimal (6x)
+		57390: 110, // _double (6x)
+		57357: 111, // _float (6x)
+		57554: 112, // _foreign (6x)
+		57388: 113, // _int (6x)
+		57387: 114, // _interger (6x)
+		57368: 115, // _interval (6x)
+		57360: 116, // _long (6x)
+		57383: 117, // _national (6x)
+		57354: 118, // _nchar (6x)
+		57376: 119, // _nclob (6x)
+		57356: 120, // _number (6x)
+		57384: 121, // _numeric (6x)
+		57355: 122, // _nvarchar2 (6x)
+		57392: 123, // _real (6x)
+		57389: 124, // _smallInt (6x)
+		57363: 125, // _timestamp (6x)
+		57379: 126, // _urowid (6x)
+		57382: 127, // _varchar (6x)
+		57353: 128, // _varchar2 (6x)
+		57581: 129, // ConstraintNameOrEmpty (6x)
+		57582: 130, // ConstraintState (6x)
+		57585: 131, // ConstraintStateOrEmpty (6x)
+		57669: 132, // PhysicalAttrClause (6x)
+		57692: 133, // StorageClause (6x)
+		57695: 134, // TableCompression (6x)
+		42:    135, // '*' (5x)
+		57529: 136, // _high (5x)
+		57426: 137, // _identity (5x)
+		57530: 138, // _low (5x)
+		57469: 139, // _none (5x)
+		57470: 140, // _sharding (5x)
+		57448: 141, // _substitutable (5x)
+		57381: 142, // _varying (5x)
+		57628: 143, // InmemoryColumnClause (5x)
+		57644: 144, // LoggingClause (5x)
+		57660: 145, // NumberOrAsterisk (5x)
+		57670: 146, // PhysicalAttrsClause (5x)
+		57682: 147, // SegmentAttrClause (5x)
+		57698: 148, // TableName (5x)
+		57444: 149, // _all (4x)
+		57424: 150, // _as (4x)
+		57400: 151, // _by (4x)
+		57548: 152, // _policy (4x)
+		57573: 153, // ColumnDef (4x)
+		57586: 154, // ConstraintStateRely (4x)
+		57615: 155, // IdentityOptionsOrEmpty (4x)
+		57617: 156, // IlmCompressionPolicy (4x)
+		57618: 157, // IlmInmemoryPolicy (4x)
+		57619: 158, // IlmPolicyClause (4x)
+		57620: 159, // IlmTieringPolicy (4x)
+		57623: 160, // InlineConstraint (4x)
+		57629: 161, // InmemoryColumnClauses (4x)
+		57630: 162, // InmemoryColumnClausesOrEmpty (4x)
+		57672: 163, // RealColumnDef (4x)
+		57686: 164, // SizeClause (4x)
+		57411: 165, // _delete (3x)
+		57399: 166, // _identified (3x)
+		57496: 167, // _keep (3x)
+		57404: 168, // _key (3x)
+		57531: 169, // _memcompress (3x)
+		57562: 170, // AnsiSupportDataTypes (3x)
+		57566: 171, // CharacterDataTypes (3x)
+		57567: 172, // CollateClause (3x)
+		57588: 173, // Datatype (3x)
+		57589: 174, // DatetimeDataTypes (3x)
+		57595: 175, // DropColumnCheckpoint (3x)
+		57598: 176, // DropColumnProp (3x)
+		57640: 177, // InvisibleProp (3x)
+		57643: 178, // LargeObjectDataTypes (3x)
+		57645: 179, // LongAndRawDataTypes (3x)
+		57659: 180, // NumberDataTypes (3x)
+		57664: 181, // OralceBuiltInDataTypes (3x)
+		57673: 182, // ReferencesClause (3x)
+		57680: 183, // RowIdDataTypes (3x)
+		57683: 184, // SegmentAttrsClause (3x)
+		57348: 185, // _alter (2x)
+		57445: 186, // _at (2x)
+		57526: 187, // _auto (2x)
+		57459: 188, // _blockchain (2x)
+		57352: 189, // _byte (2x)
+		57450: 190, // _columns (2x)
+		57472: 191, // _commit (2x)
+		57458: 192, // _create (2x)
+		57466: 193, // _data (2x)
+		57415: 194, // _deferred (2x)
+		57473: 195, // _definition (2x)
+		57449: 196, // _force (2x)
+		57416: 197, // _immediate (2x)
+		57523: 198, // _level (2x)
+		57447: 199, // _levels (2x)
+		57430: 200, // _limit (2x)
+		57524: 201, // _locking (2x)
+		57371: 202, // _mouth (2x)
+		57536: 203, // _partition (2x)
+		57474: 204, // _preserve (2x)
+		57522: 205, // _query (2x)
+		57478: 206, // _read (2x)
+		57553: 207, // _reject (2x)
+		57475: 208, // _rows (2x)
+		57373: 209, // _second (2x)
+		57520: 210, // _store (2x)
+		57349: 211, // _table (2x)
+		57465: 212, // _temporary (2x)
+		57366: 213, // _time (2x)
+		57504: 214, // _unlimited (2x)
+		57452: 215, // _unused (2x)
+		57479: 216, // _write (2x)
+		57367: 217, // _zone (2x)
+		57560: 218, // AddColumnClause (2x)
+		57561: 219, // AlterTableStmt (2x)
+		57564: 220, // ChangeColumnClause (2x)
+		57568: 221, // CollateClauseOrEmpty (2x)
+		57578: 222, // ColumnNameListForDropColumn (2x)
+		57587: 223, // CreateTableStmt (2x)
+		57590: 224, // DefaultClause (2x)
+		57592: 225, // DefaultOrIdentityClause (2x)
+		57596: 226, // DropColumnClause (2x)
+		57599: 227, // DropColumnProps (2x)
+		57600: 228, // DropColumnPropsOrEmpty (2x)
+		57601: 229, // EmptyStmt (2x)
+		57603: 230, // EncryptClause (2x)
+		57606: 231, // Expr (2x)
+		57608: 232, // ExternalTableClause (2x)
+		57612: 233, // IdentityClause (2x)
+		57613: 234, // IdentityOption (2x)
+		57616: 235, // IlmClause (2x)
+		57624: 236, // InlineConstraintList (2x)
+		57625: 237, // InlineConstraintType (2x)
+		57635: 238, // InmemoryMemCompress (2x)
+		57638: 239, // InmemoryTableClause (2x)
+		57642: 240, // IsForce (2x)
+		57648: 241, // MemoptimizeRead (2x)
+		57650: 242, // MemoptimizeWrite (2x)
+		57652: 243, // ModifyColumnClause (2x)
+		57653: 244, // ModifyColumnProp (2x)
+		57655: 245, // ModifyColumnSubstitutable (2x)
+		57656: 246, // ModifyColumnVisibility (2x)
+		57658: 247, // ModifyRealColumnProp (2x)
+		57666: 248, // OutOfLineConstraint (2x)
+		57676: 249, // RelTableProp (2x)
+		57684: 250, // SegmentAttrsClauseOrEmpty (2x)
+		57690: 251, // Statement (2x)
+		57693: 252, // StorageProp (2x)
+		57696: 253, // TableCompressionOrEmpty (2x)
+		61:    254, // '=' (1x)
+		57515: 255, // _advanced (1x)
+		57423: 256, // _always (1x)
+		57521: 257, // _archive (1x)
+		57552: 258, // _attributes (1x)
+		57516: 259, // _basic (1x)
+		57527: 260, // _capacity (1x)
+		57453: 261, // _constraints (1x)
+		57451: 262, // _continue (1x)
+		57482: 263, // _creation (1x)
+		57532: 264, // _critical (1x)
+		57372: 265, // _day (1x)
+		57542: 266, // _delete_all (1x)
+		57543: 267, // _disable (1x)
+		57544: 268, // _disable_all (1x)
+		57528: 269, // _dml (1x)
+		57460: 270, // _duplicated (1x)
+		57506: 271, // _E (1x)
+		57545: 272, // _enable (1x)
+		57546: 273, // _enable_all (1x)
+		57467: 274, // _extended (1x)
+		57507: 275, // _G (1x)
+		57461: 276, // _global (1x)
+		57505: 277, // _groups (1x)
+		57550: 278, // _heap (1x)
+		57462: 279, // _immutable (1x)
+		57551: 280, // _index (1x)
+		57420: 281, // _is (1x)
+		57508: 282, // _K (1x)
+		57365: 283, // _local (1x)
+		57509: 284, // _M (1x)
+		57533: 285, // _medium (1x)
+		57468: 286, // _metadata (1x)
+		57510: 287, // _P (1x)
+		57391: 288, // _precision (1x)
+		57463: 289, // _private (1x)
+		57537: 290, // _range (1x)
+		57503: 291, // _recycle (1x)
+		57539: 292, // _service (1x)
+		57464: 293, // _sharded (1x)
+		57538: 294, // _subpartition (1x)
+		57511: 295, // _T (1x)
+		57398: 296, // _using (1x)
+		57440: 297, // _value (1x)
+		57369: 298, // _year (1x)
+		57563: 299, // BlockchainTableClauses (1x)
+		57565: 300, // ChangeColumnClauseList (1x)
+		57569: 301, // ColumnClauses (1x)
+		57570: 302, // ColumnCompressLock (1x)
+		57571: 303, // ColumnCompressProp (1x)
+		57572: 304, // ColumnConstraintForModify (1x)
+		57574: 305, // ColumnDefConstraint (1x)
+		57575: 306, // ColumnDefList (1x)
+		57579: 307, // ColumnNameListOrEmpty (1x)
+		57580: 308, // ColumnProps (1x)
+		57591: 309, // DefaultCollateClauseOrEmpty (1x)
+		57593: 310, // DefaultOrIdentityClauseForModify (1x)
+		57594: 311, // DeferredSegmentCreation (1x)
+		57597: 312, // DropColumnOnline (1x)
+		57602: 313, // EncryptAlgorithm (1x)
+		57604: 314, // EncryptClauseForModify (1x)
+		57605: 315, // EncryptionSpec (1x)
+		57607: 316, // ExternalPartitionClause (1x)
+		57609: 317, // HeapOrgTableClause (1x)
+		57610: 318, // IdentifiedByClause (1x)
+		57614: 319, // IdentityOptions (1x)
+		57621: 320, // ImmutableTableClauses (1x)
+		57622: 321, // IndexOrgTableClause (1x)
+		57626: 322, // InlineRefConstraint (1x)
+		57627: 323, // InmemoryAttrs (1x)
+		57631: 324, // InmemoryDistribute (1x)
+		57632: 325, // InmemoryDistributeBy (1x)
+		57633: 326, // InmemoryDistributeFor (1x)
+		57634: 327, // InmemoryDuplicate (1x)
+		57636: 328, // InmemoryProp (1x)
+		57637: 329, // InmemorySpatial (1x)
+		57639: 330, // IntergrityAlgorithm (1x)
+		57641: 331, // InvisiblePropOrEmpty (1x)
+		57646: 332, // Memoptimize (1x)
+		57647: 333, // MemoptimizeForAlterTable (1x)
+		57649: 334, // MemoptimizeReadForAlterTable (1x)
+		57651: 335, // MemoptimizeWriteForAlterTable (1x)
+		57654: 336, // ModifyColumnProps (1x)
+		57657: 337, // ModifyColumnVisibilityList (1x)
+		57661: 338, // OnCommitClause (1x)
+		57662: 339, // OnCommitDef (1x)
+		57663: 340, // OnCommitRows (1x)
+		57665: 341, // OrgClause (1x)
+		57667: 342, // OutOfLinePartStorageList (1x)
+		57668: 343, // ParentTable (1x)
+		57671: 344, // PhysicalProps (1x)
+		57674: 345, // ReferencesOnDelete (1x)
+		57675: 346, // RelTableDef (1x)
+		57677: 347, // RelTableProps (1x)
+		57678: 348, // RelTablePropsOrEmpty (1x)
+		57679: 349, // RenameColumnClause (1x)
+		57681: 350, // SaltProp (1x)
+		57685: 351, // ShardingType (1x)
+		57687: 352, // SizeUnit (1x)
+		57688: 353, // SortProp (1x)
+		57689: 354, // Start (1x)
+		57691: 355, // StatementList (1x)
+		57694: 356, // StorageProps (1x)
+		57697: 357, // TableDef (1x)
+		57699: 358, // TableProps (1x)
+		57700: 359, // TableType (1x)
+		57559: 360, // $default (0x)
+		57347: 361, // _from (0x)
+		57346: 362, // _select (0x)
+		57345: 363, // error (0x)
 	}
 
 	yySymNames = []string{
@@ -627,13 +630,13 @@ var (
 		"$end",
 		"';'",
 		"','",
-		"_null",
 		"_not",
-		"_memoptimize",
+		"_null",
 		"_primary",
-		"_references",
 		"_unique",
+		"_references",
 		"_constraint",
+		"_memoptimize",
 		"_parent",
 		"_encrypt",
 		"_drop",
@@ -682,14 +685,14 @@ var (
 		"_optimal",
 		"_pctincrease",
 		"_spatial",
-		"_duplicate",
 		"Identifier",
+		"_duplicate",
 		"_external",
 		"_organization",
 		"_cluster",
+		"_deferrable",
 		"_on",
 		"_segment",
-		"_deferrable",
 		"_initially",
 		"ColumnName",
 		"_cache",
@@ -714,6 +717,7 @@ var (
 		"_priority",
 		"_salt",
 		"_char",
+		"ColumnNameList",
 		"'.'",
 		"_norely",
 		"_rely",
@@ -722,6 +726,8 @@ var (
 		"_to",
 		"_character",
 		"_raw",
+		"ConstraintStateDeferrable",
+		"ConstraintStateDeferredOrImmediate",
 		"_bfile",
 		"_binaryDouble",
 		"_binaryFloat",
@@ -732,6 +738,7 @@ var (
 		"_decimal",
 		"_double",
 		"_float",
+		"_foreign",
 		"_int",
 		"_interger",
 		"_interval",
@@ -748,7 +755,9 @@ var (
 		"_urowid",
 		"_varchar",
 		"_varchar2",
-		"ColumnNameList",
+		"ConstraintNameOrEmpty",
+		"ConstraintState",
+		"ConstraintStateOrEmpty",
 		"PhysicalAttrClause",
 		"StorageClause",
 		"TableCompression",
@@ -771,7 +780,6 @@ var (
 		"_by",
 		"_policy",
 		"ColumnDef",
-		"ConstraintNameOrEmpty",
 		"ConstraintStateRely",
 		"IdentityOptionsOrEmpty",
 		"IlmCompressionPolicy",
@@ -786,12 +794,11 @@ var (
 		"_delete",
 		"_identified",
 		"_keep",
+		"_key",
 		"_memcompress",
 		"AnsiSupportDataTypes",
 		"CharacterDataTypes",
 		"CollateClause",
-		"ConstraintStateDeferrable",
-		"ConstraintStateDeferredOrImmediate",
 		"Datatype",
 		"DatetimeDataTypes",
 		"DropColumnCheckpoint",
@@ -801,6 +808,7 @@ var (
 		"LongAndRawDataTypes",
 		"NumberDataTypes",
 		"OralceBuiltInDataTypes",
+		"ReferencesClause",
 		"RowIdDataTypes",
 		"SegmentAttrsClause",
 		"_alter",
@@ -841,8 +849,6 @@ var (
 		"ChangeColumnClause",
 		"CollateClauseOrEmpty",
 		"ColumnNameListForDropColumn",
-		"ConstraintState",
-		"ConstraintStateOrEmpty",
 		"CreateTableStmt",
 		"DefaultClause",
 		"DefaultOrIdentityClause",
@@ -857,7 +863,7 @@ var (
 		"IdentityOption",
 		"IlmClause",
 		"InlineConstraintList",
-		"InlineConstraintProp",
+		"InlineConstraintType",
 		"InmemoryMemCompress",
 		"InmemoryTableClause",
 		"IsForce",
@@ -868,7 +874,7 @@ var (
 		"ModifyColumnSubstitutable",
 		"ModifyColumnVisibility",
 		"ModifyRealColumnProp",
-		"ReferencesClause",
+		"OutOfLineConstraint",
 		"RelTableProp",
 		"SegmentAttrsClauseOrEmpty",
 		"Statement",
@@ -903,7 +909,6 @@ var (
 		"_index",
 		"_is",
 		"_K",
-		"_key",
 		"_local",
 		"_M",
 		"_medium",
@@ -988,1288 +993,1317 @@ var (
 	}
 
 	yyTokenLiteralStrings = map[int]string{
-		57554: "int number",
-		57556: "double quotes string",
-		57557: "nonquoted identifier",
-		57555: "single quotes string",
+		57555: "int number",
+		57557: "double quotes string",
+		57558: "nonquoted identifier",
+		57556: "single quotes string",
 	}
 
 	yyReductions = map[int]struct{ xsym, components int }{
 		0:   {0, 1},
-		1:   {352, 1},
-		2:   {353, 1},
-		3:   {353, 3},
-		4:   {248, 1},
-		5:   {248, 1},
-		6:   {248, 1},
-		7:   {226, 0},
-		8:   {142, 1},
-		9:   {142, 3},
-		10:  {125, 1},
-		11:  {125, 3},
+		1:   {354, 1},
+		2:   {355, 1},
+		3:   {355, 3},
+		4:   {251, 1},
+		5:   {251, 1},
+		6:   {251, 1},
+		7:   {229, 0},
+		8:   {148, 1},
+		9:   {148, 3},
+		10:  {91, 1},
+		11:  {91, 3},
 		12:  {68, 1},
-		13:  {60, 1},
-		14:  {60, 1},
-		15:  {214, 5},
-		16:  {299, 1},
-		17:  {299, 1},
-		18:  {298, 1},
-		19:  {298, 2},
-		20:  {215, 1},
-		21:  {215, 1},
-		22:  {215, 1},
-		23:  {213, 6},
-		24:  {306, 0},
-		25:  {340, 0},
-		26:  {304, 1},
-		27:  {304, 3},
-		28:  {147, 1},
-		29:  {158, 8},
-		30:  {216, 0},
-		31:  {216, 1},
-		32:  {166, 2},
-		33:  {351, 0},
-		34:  {351, 1},
-		35:  {329, 0},
-		36:  {329, 1},
-		37:  {173, 1},
-		38:  {173, 1},
-		39:  {222, 0},
-		40:  {222, 1},
-		41:  {222, 1},
-		42:  {221, 2},
-		43:  {221, 4},
-		44:  {230, 4},
-		45:  {230, 5},
-		46:  {230, 5},
-		47:  {230, 6},
-		48:  {230, 8},
-		49:  {150, 0},
-		50:  {150, 3},
-		51:  {317, 0},
-		52:  {317, 1},
-		53:  {317, 2},
-		54:  {231, 3},
-		55:  {231, 4},
-		56:  {231, 3},
-		57:  {231, 2},
-		58:  {231, 1},
-		59:  {231, 2},
-		60:  {231, 1},
-		61:  {231, 1},
-		62:  {231, 1},
-		63:  {231, 2},
-		64:  {231, 1},
-		65:  {231, 1},
-		66:  {231, 1},
-		67:  {227, 0},
-		68:  {227, 2},
-		69:  {313, 4},
-		70:  {311, 0},
-		71:  {311, 2},
-		72:  {316, 0},
-		73:  {316, 3},
-		74:  {328, 0},
-		75:  {328, 1},
-		76:  {348, 0},
-		77:  {348, 1},
-		78:  {348, 2},
-		79:  {303, 0},
-		80:  {303, 1},
-		81:  {303, 1},
-		82:  {233, 1},
-		83:  {233, 2},
-		84:  {240, 4},
-		85:  {240, 4},
-		86:  {240, 1},
-		87:  {334, 1},
-		88:  {334, 3},
-		89:  {241, 1},
-		90:  {244, 6},
-		91:  {308, 2},
-		92:  {308, 1},
-		93:  {312, 1},
-		94:  {312, 1},
-		95:  {302, 0},
-		96:  {302, 1},
-		97:  {335, 1},
-		98:  {335, 3},
-		99:  {243, 2},
-		100: {242, 7},
-		101: {242, 8},
-		102: {237, 0},
-		103: {237, 1},
-		104: {223, 5},
-		105: {223, 4},
-		106: {223, 4},
-		107: {223, 4},
-		108: {217, 2},
-		109: {217, 3},
-		110: {225, 0},
-		111: {225, 1},
-		112: {224, 1},
-		113: {224, 2},
-		114: {172, 2},
-		115: {172, 1},
-		116: {310, 0},
-		117: {310, 1},
-		118: {171, 0},
-		119: {171, 2},
-		120: {347, 5},
-		121: {220, 8},
-		122: {357, 0},
-		123: {357, 2},
-		124: {357, 2},
-		125: {357, 1},
-		126: {357, 1},
-		127: {357, 1},
-		128: {357, 1},
-		129: {357, 2},
-		130: {349, 0},
-		131: {349, 3},
-		132: {349, 3},
-		133: {349, 4},
-		134: {349, 3},
-		135: {341, 0},
-		136: {341, 2},
-		137: {355, 1},
-		138: {344, 7},
-		139: {318, 0},
-		140: {297, 0},
-		141: {307, 0},
-		142: {307, 2},
-		143: {336, 2},
-		144: {337, 0},
-		145: {337, 4},
-		146: {337, 4},
-		147: {338, 0},
-		148: {338, 4},
-		149: {338, 4},
-		150: {342, 0},
-		151: {342, 5},
-		152: {342, 3},
-		153: {342, 2},
-		154: {342, 5},
-		155: {309, 0},
-		156: {309, 3},
-		157: {309, 3},
-		158: {247, 0},
-		159: {247, 1},
-		160: {179, 1},
-		161: {179, 2},
-		162: {141, 1},
-		163: {141, 2},
-		164: {141, 3},
-		165: {141, 1},
-		166: {141, 1},
-		167: {140, 1},
-		168: {140, 2},
-		169: {126, 2},
-		170: {126, 2},
-		171: {126, 2},
-		172: {126, 2},
-		173: {126, 1},
-		174: {127, 4},
-		175: {354, 1},
-		176: {354, 2},
-		177: {249, 2},
-		178: {249, 2},
-		179: {249, 2},
-		180: {249, 2},
-		181: {249, 2},
-		182: {249, 2},
-		183: {249, 2},
-		184: {249, 2},
-		185: {249, 2},
-		186: {249, 3},
-		187: {249, 1},
-		188: {249, 2},
-		189: {249, 2},
-		190: {249, 2},
-		191: {249, 2},
-		192: {249, 2},
-		193: {249, 2},
-		194: {249, 2},
-		195: {249, 2},
-		196: {249, 2},
-		197: {249, 2},
-		198: {249, 2},
-		199: {249, 1},
-		200: {159, 2},
-		201: {350, 0},
-		202: {350, 1},
-		203: {350, 1},
-		204: {350, 1},
-		205: {350, 1},
-		206: {350, 1},
-		207: {350, 1},
-		208: {138, 1},
-		209: {138, 1},
-		210: {138, 1},
-		211: {250, 0},
-		212: {250, 1},
-		213: {128, 1},
-		214: {128, 3},
-		215: {128, 4},
-		216: {128, 4},
-		217: {128, 5},
-		218: {128, 1},
-		219: {301, 0},
-		220: {301, 2},
-		221: {301, 3},
-		222: {301, 3},
-		223: {301, 2},
-		224: {301, 3},
-		225: {301, 3},
-		226: {300, 0},
-		227: {300, 3},
-		228: {300, 4},
-		229: {236, 0},
-		230: {236, 3},
-		231: {236, 3},
-		232: {236, 1},
-		233: {321, 5},
-		234: {235, 0},
-		235: {235, 3},
-		236: {235, 3},
-		237: {235, 4},
-		238: {235, 4},
-		239: {235, 3},
-		240: {235, 4},
-		241: {235, 4},
-		242: {235, 2},
-		243: {235, 2},
-		244: {326, 0},
-		245: {326, 2},
-		246: {326, 2},
-		247: {326, 2},
-		248: {326, 2},
-		249: {326, 2},
-		250: {322, 0},
-		251: {322, 3},
-		252: {323, 0},
-		253: {323, 1},
-		254: {323, 3},
-		255: {323, 2},
-		256: {323, 2},
-		257: {324, 0},
-		258: {324, 3},
-		259: {324, 3},
-		260: {324, 3},
-		261: {324, 3},
-		262: {325, 0},
-		263: {325, 1},
-		264: {325, 2},
-		265: {325, 2},
-		266: {327, 0},
-		267: {327, 2},
-		268: {157, 0},
-		269: {157, 1},
-		270: {156, 1},
-		271: {156, 2},
-		272: {137, 4},
-		273: {137, 5},
-		274: {137, 5},
-		275: {232, 0},
-		276: {232, 4},
-		277: {232, 4},
-		278: {232, 4},
-		279: {232, 4},
-		280: {232, 2},
-		281: {232, 2},
-		282: {232, 2},
-		283: {153, 1},
-		284: {153, 1},
-		285: {153, 1},
-		286: {151, 0},
-		287: {154, 0},
-		288: {152, 0},
-		289: {339, 3},
-		290: {339, 3},
-		291: {339, 2},
-		292: {315, 3},
-		293: {319, 0},
-		294: {229, 0},
-		295: {314, 4},
-		296: {314, 6},
-		297: {356, 0},
-		298: {346, 0},
-		299: {346, 3},
-		300: {345, 1},
-		301: {345, 3},
-		302: {246, 1},
-		303: {169, 1},
-		304: {169, 1},
-		305: {139, 1},
-		306: {139, 1},
-		307: {177, 1},
-		308: {177, 1},
-		309: {177, 1},
-		310: {177, 1},
-		311: {177, 1},
-		312: {177, 1},
-		313: {165, 1},
-		314: {165, 4},
-		315: {165, 5},
-		316: {165, 5},
-		317: {165, 4},
-		318: {165, 5},
-		319: {165, 5},
-		320: {165, 1},
-		321: {165, 4},
-		322: {165, 4},
-		323: {176, 1},
-		324: {176, 4},
-		325: {176, 6},
-		326: {176, 1},
-		327: {176, 4},
-		328: {176, 1},
-		329: {176, 1},
-		330: {175, 1},
-		331: {175, 2},
-		332: {175, 4},
-		333: {170, 1},
-		334: {170, 1},
-		335: {170, 4},
-		336: {170, 7},
-		337: {170, 8},
-		338: {170, 4},
-		339: {170, 7},
-		340: {170, 4},
-		341: {170, 7},
-		342: {170, 10},
-		343: {170, 7},
-		344: {174, 1},
-		345: {174, 1},
-		346: {174, 1},
-		347: {174, 1},
+		13:  {59, 1},
+		14:  {59, 1},
+		15:  {219, 5},
+		16:  {301, 1},
+		17:  {301, 1},
+		18:  {300, 1},
+		19:  {300, 2},
+		20:  {220, 1},
+		21:  {220, 1},
+		22:  {220, 1},
+		23:  {218, 6},
+		24:  {308, 0},
+		25:  {342, 0},
+		26:  {306, 1},
+		27:  {306, 3},
+		28:  {153, 1},
+		29:  {163, 8},
+		30:  {221, 0},
+		31:  {221, 1},
+		32:  {172, 2},
+		33:  {353, 0},
+		34:  {353, 1},
+		35:  {331, 0},
+		36:  {331, 1},
+		37:  {177, 1},
+		38:  {177, 1},
+		39:  {225, 0},
+		40:  {225, 1},
+		41:  {225, 1},
+		42:  {224, 2},
+		43:  {224, 4},
+		44:  {233, 4},
+		45:  {233, 5},
+		46:  {233, 5},
+		47:  {233, 6},
+		48:  {233, 8},
+		49:  {155, 0},
+		50:  {155, 3},
+		51:  {319, 0},
+		52:  {319, 1},
+		53:  {319, 2},
+		54:  {234, 3},
+		55:  {234, 4},
+		56:  {234, 3},
+		57:  {234, 2},
+		58:  {234, 1},
+		59:  {234, 2},
+		60:  {234, 1},
+		61:  {234, 1},
+		62:  {234, 1},
+		63:  {234, 2},
+		64:  {234, 1},
+		65:  {234, 1},
+		66:  {234, 1},
+		67:  {230, 0},
+		68:  {230, 2},
+		69:  {315, 4},
+		70:  {313, 0},
+		71:  {313, 2},
+		72:  {318, 0},
+		73:  {318, 3},
+		74:  {330, 0},
+		75:  {330, 1},
+		76:  {350, 0},
+		77:  {350, 1},
+		78:  {350, 2},
+		79:  {305, 0},
+		80:  {305, 1},
+		81:  {305, 1},
+		82:  {236, 1},
+		83:  {236, 2},
+		84:  {243, 4},
+		85:  {243, 4},
+		86:  {243, 1},
+		87:  {336, 1},
+		88:  {336, 3},
+		89:  {244, 1},
+		90:  {247, 6},
+		91:  {310, 2},
+		92:  {310, 1},
+		93:  {314, 1},
+		94:  {314, 1},
+		95:  {304, 0},
+		96:  {304, 1},
+		97:  {337, 1},
+		98:  {337, 3},
+		99:  {246, 2},
+		100: {245, 7},
+		101: {245, 8},
+		102: {240, 0},
+		103: {240, 1},
+		104: {226, 5},
+		105: {226, 4},
+		106: {226, 4},
+		107: {226, 4},
+		108: {222, 2},
+		109: {222, 3},
+		110: {228, 0},
+		111: {228, 1},
+		112: {227, 1},
+		113: {227, 2},
+		114: {176, 2},
+		115: {176, 1},
+		116: {312, 0},
+		117: {312, 1},
+		118: {175, 0},
+		119: {175, 2},
+		120: {349, 5},
+		121: {223, 8},
+		122: {359, 0},
+		123: {359, 2},
+		124: {359, 2},
+		125: {359, 1},
+		126: {359, 1},
+		127: {359, 1},
+		128: {359, 1},
+		129: {359, 2},
+		130: {351, 0},
+		131: {351, 3},
+		132: {351, 3},
+		133: {351, 4},
+		134: {351, 3},
+		135: {343, 0},
+		136: {343, 2},
+		137: {357, 1},
+		138: {346, 7},
+		139: {320, 0},
+		140: {299, 0},
+		141: {309, 0},
+		142: {309, 2},
+		143: {338, 2},
+		144: {339, 0},
+		145: {339, 4},
+		146: {339, 4},
+		147: {340, 0},
+		148: {340, 4},
+		149: {340, 4},
+		150: {344, 0},
+		151: {344, 5},
+		152: {344, 3},
+		153: {344, 2},
+		154: {344, 5},
+		155: {311, 0},
+		156: {311, 3},
+		157: {311, 3},
+		158: {250, 0},
+		159: {250, 1},
+		160: {184, 1},
+		161: {184, 2},
+		162: {147, 1},
+		163: {147, 2},
+		164: {147, 3},
+		165: {147, 1},
+		166: {147, 1},
+		167: {146, 1},
+		168: {146, 2},
+		169: {132, 2},
+		170: {132, 2},
+		171: {132, 2},
+		172: {132, 2},
+		173: {132, 1},
+		174: {133, 4},
+		175: {356, 1},
+		176: {356, 2},
+		177: {252, 2},
+		178: {252, 2},
+		179: {252, 2},
+		180: {252, 2},
+		181: {252, 2},
+		182: {252, 2},
+		183: {252, 2},
+		184: {252, 2},
+		185: {252, 2},
+		186: {252, 3},
+		187: {252, 1},
+		188: {252, 2},
+		189: {252, 2},
+		190: {252, 2},
+		191: {252, 2},
+		192: {252, 2},
+		193: {252, 2},
+		194: {252, 2},
+		195: {252, 2},
+		196: {252, 2},
+		197: {252, 2},
+		198: {252, 2},
+		199: {252, 1},
+		200: {164, 2},
+		201: {352, 0},
+		202: {352, 1},
+		203: {352, 1},
+		204: {352, 1},
+		205: {352, 1},
+		206: {352, 1},
+		207: {352, 1},
+		208: {144, 1},
+		209: {144, 1},
+		210: {144, 1},
+		211: {253, 0},
+		212: {253, 1},
+		213: {134, 1},
+		214: {134, 3},
+		215: {134, 4},
+		216: {134, 4},
+		217: {134, 5},
+		218: {134, 1},
+		219: {303, 0},
+		220: {303, 2},
+		221: {303, 3},
+		222: {303, 3},
+		223: {303, 2},
+		224: {303, 3},
+		225: {303, 3},
+		226: {302, 0},
+		227: {302, 3},
+		228: {302, 4},
+		229: {239, 0},
+		230: {239, 3},
+		231: {239, 3},
+		232: {239, 1},
+		233: {323, 5},
+		234: {238, 0},
+		235: {238, 3},
+		236: {238, 3},
+		237: {238, 4},
+		238: {238, 4},
+		239: {238, 3},
+		240: {238, 4},
+		241: {238, 4},
+		242: {238, 2},
+		243: {238, 2},
+		244: {328, 0},
+		245: {328, 2},
+		246: {328, 2},
+		247: {328, 2},
+		248: {328, 2},
+		249: {328, 2},
+		250: {324, 0},
+		251: {324, 3},
+		252: {325, 0},
+		253: {325, 1},
+		254: {325, 3},
+		255: {325, 2},
+		256: {325, 2},
+		257: {326, 0},
+		258: {326, 3},
+		259: {326, 3},
+		260: {326, 3},
+		261: {326, 3},
+		262: {327, 0},
+		263: {327, 1},
+		264: {327, 2},
+		265: {327, 2},
+		266: {329, 0},
+		267: {329, 2},
+		268: {162, 0},
+		269: {162, 1},
+		270: {161, 1},
+		271: {161, 2},
+		272: {143, 4},
+		273: {143, 5},
+		274: {143, 5},
+		275: {235, 0},
+		276: {235, 4},
+		277: {235, 4},
+		278: {235, 4},
+		279: {235, 4},
+		280: {235, 2},
+		281: {235, 2},
+		282: {235, 2},
+		283: {158, 1},
+		284: {158, 1},
+		285: {158, 1},
+		286: {156, 0},
+		287: {159, 0},
+		288: {157, 0},
+		289: {341, 3},
+		290: {341, 3},
+		291: {341, 2},
+		292: {317, 3},
+		293: {321, 0},
+		294: {232, 0},
+		295: {316, 4},
+		296: {316, 6},
+		297: {358, 0},
+		298: {348, 0},
+		299: {348, 3},
+		300: {347, 1},
+		301: {347, 3},
+		302: {249, 1},
+		303: {249, 1},
+		304: {173, 1},
+		305: {173, 1},
+		306: {145, 1},
+		307: {145, 1},
+		308: {181, 1},
+		309: {181, 1},
+		310: {181, 1},
+		311: {181, 1},
+		312: {181, 1},
+		313: {181, 1},
+		314: {171, 1},
+		315: {171, 4},
+		316: {171, 5},
+		317: {171, 5},
+		318: {171, 4},
+		319: {171, 5},
+		320: {171, 5},
+		321: {171, 1},
+		322: {171, 4},
+		323: {171, 4},
+		324: {180, 1},
+		325: {180, 4},
+		326: {180, 6},
+		327: {180, 1},
+		328: {180, 4},
+		329: {180, 1},
+		330: {180, 1},
+		331: {179, 1},
+		332: {179, 2},
+		333: {179, 4},
+		334: {174, 1},
+		335: {174, 1},
+		336: {174, 4},
+		337: {174, 7},
+		338: {174, 8},
+		339: {174, 4},
+		340: {174, 7},
+		341: {174, 4},
+		342: {174, 7},
+		343: {174, 10},
+		344: {174, 7},
+		345: {178, 1},
+		346: {178, 1},
+		347: {178, 1},
 		348: {178, 1},
-		349: {178, 1},
-		350: {178, 4},
-		351: {164, 4},
-		352: {164, 5},
-		353: {164, 5},
-		354: {164, 5},
-		355: {164, 4},
-		356: {164, 5},
-		357: {164, 6},
-		358: {164, 5},
-		359: {164, 6},
-		360: {164, 1},
-		361: {164, 4},
-		362: {164, 6},
-		363: {164, 1},
-		364: {164, 4},
-		365: {164, 6},
-		366: {164, 1},
-		367: {164, 4},
-		368: {164, 6},
-		369: {164, 1},
-		370: {164, 1},
-		371: {164, 1},
-		372: {164, 2},
-		373: {164, 1},
-		374: {148, 0},
-		375: {148, 2},
-		376: {155, 3},
-		377: {234, 1},
-		378: {234, 2},
-		379: {234, 1},
-		380: {234, 2},
-		381: {234, 1},
-		382: {245, 4},
-		383: {305, 0},
-		384: {305, 3},
-		385: {343, 0},
-		386: {343, 3},
-		387: {343, 4},
-		388: {219, 0},
-		389: {219, 1},
-		390: {218, 2},
-		391: {218, 3},
-		392: {218, 2},
-		393: {218, 3},
-		394: {167, 1},
-		395: {167, 2},
-		396: {168, 2},
-		397: {168, 2},
-		398: {149, 0},
-		399: {149, 1},
-		400: {149, 1},
-		401: {320, 3},
-		402: {320, 2},
-		403: {320, 3},
-		404: {331, 2},
-		405: {332, 1},
-		406: {332, 4},
-		407: {333, 1},
-		408: {333, 4},
-		409: {330, 2},
-		410: {238, 0},
-		411: {238, 3},
-		412: {239, 0},
-		413: {239, 3},
-		414: {228, 1},
-		415: {228, 1},
+		349: {183, 1},
+		350: {183, 1},
+		351: {183, 4},
+		352: {170, 4},
+		353: {170, 5},
+		354: {170, 5},
+		355: {170, 5},
+		356: {170, 4},
+		357: {170, 5},
+		358: {170, 6},
+		359: {170, 5},
+		360: {170, 6},
+		361: {170, 1},
+		362: {170, 4},
+		363: {170, 6},
+		364: {170, 1},
+		365: {170, 4},
+		366: {170, 6},
+		367: {170, 1},
+		368: {170, 4},
+		369: {170, 6},
+		370: {170, 1},
+		371: {170, 1},
+		372: {170, 1},
+		373: {170, 2},
+		374: {170, 1},
+		375: {129, 0},
+		376: {129, 2},
+		377: {160, 3},
+		378: {160, 3},
+		379: {237, 1},
+		380: {237, 2},
+		381: {237, 1},
+		382: {237, 2},
+		383: {182, 4},
+		384: {307, 0},
+		385: {307, 3},
+		386: {345, 0},
+		387: {345, 3},
+		388: {345, 4},
+		389: {131, 0},
+		390: {131, 1},
+		391: {130, 2},
+		392: {130, 3},
+		393: {130, 2},
+		394: {130, 3},
+		395: {100, 1},
+		396: {100, 2},
+		397: {101, 2},
+		398: {101, 2},
+		399: {154, 0},
+		400: {154, 1},
+		401: {154, 1},
+		402: {322, 3},
+		403: {322, 2},
+		404: {322, 3},
+		405: {248, 6},
+		406: {248, 7},
+		407: {248, 8},
+		408: {333, 2},
+		409: {334, 1},
+		410: {334, 4},
+		411: {335, 1},
+		412: {335, 4},
+		413: {332, 2},
+		414: {241, 0},
+		415: {241, 3},
+		416: {242, 0},
+		417: {242, 3},
+		418: {231, 1},
+		419: {231, 1},
 	}
 
 	yyXErrors = map[yyXError]string{}
 
-	yyParseTab = [711][]uint16{
+	yyParseTab = [732][]uint16{
 		// 0
-		{1: 409, 409, 180: 423, 187: 424, 214: 421, 220: 422, 226: 420, 248: 419, 352: 417, 418},
-		{1: 416},
-		{1: 415, 1125},
-		{1: 414, 414},
-		{1: 412, 412},
+		{1: 413, 413, 185: 427, 192: 428, 219: 425, 223: 426, 229: 424, 251: 423, 354: 421, 422},
+		{1: 420},
+		{1: 419, 1150},
+		{1: 418, 418},
+		{1: 416, 416},
 		// 5
-		{1: 411, 411},
-		{1: 410, 410},
-		{206: 1016},
-		{206: 425},
-		{44: 294, 294, 183: 432, 267: 430, 273: 427, 276: 431, 287: 428, 291: 429, 357: 426},
+		{1: 415, 415},
+		{1: 414, 414},
+		{211: 1041},
+		{211: 429},
+		{44: 298, 298, 188: 436, 270: 434, 276: 431, 279: 435, 289: 432, 293: 433, 359: 430},
 		// 10
-		{44: 438, 437, 60: 436, 142: 439},
-		{207: 435},
-		{207: 434},
-		{44: 291, 291},
-		{44: 290, 290},
+		{44: 442, 441, 59: 440, 148: 443},
+		{212: 439},
+		{212: 438},
+		{44: 295, 295},
+		{44: 294, 294},
 		// 15
-		{44: 289, 289, 183: 433},
-		{44: 288, 288},
-		{44: 287, 287},
+		{44: 293, 293, 188: 437},
 		{44: 292, 292},
-		{44: 293, 293},
+		{44: 291, 291},
+		{44: 296, 296},
+		{44: 297, 297},
 		// 20
-		{408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 13: 408, 408, 17: 408, 408, 27: 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 61: 408, 408, 408, 408, 408, 408, 408, 83: 408, 91: 1014, 134: 408},
-		{403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 27: 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 58: 403, 403, 61: 403, 403, 403, 403, 403, 403, 403, 82: 403, 403, 403, 86: 403, 403, 89: 403, 403, 403, 94: 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 403, 134: 403, 403},
-		{402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 27: 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 58: 402, 402, 61: 402, 402, 402, 402, 402, 402, 402, 82: 402, 402, 402, 86: 402, 402, 89: 402, 402, 402, 94: 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 402, 134: 402, 402},
-		{1: 286, 286, 6: 286, 11: 286, 14: 286, 18: 286, 27: 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 61: 286, 286, 286, 286, 286, 134: 441, 349: 440},
-		{1: 118, 118, 6: 118, 11: 118, 14: 118, 18: 118, 27: 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 451, 61: 118, 118, 118, 118, 118, 344: 449, 346: 450, 355: 448},
+		{412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 13: 412, 412, 17: 412, 412, 27: 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 412, 61: 412, 412, 412, 412, 412, 412, 412, 83: 412, 92: 1039, 140: 412},
+		{407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 27: 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 58: 407, 60: 407, 407, 407, 407, 407, 407, 407, 407, 82: 407, 407, 407, 86: 407, 407, 89: 407, 407, 92: 407, 95: 407, 407, 407, 407, 407, 102: 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 140: 407, 407},
+		{406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 27: 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 58: 406, 60: 406, 406, 406, 406, 406, 406, 406, 406, 82: 406, 406, 406, 86: 406, 406, 89: 406, 406, 92: 406, 95: 406, 406, 406, 406, 406, 102: 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 406, 140: 406, 406},
+		{1: 290, 290, 10: 290, 290, 14: 290, 18: 290, 27: 290, 290, 290, 290, 290, 290, 290, 290, 290, 290, 290, 290, 290, 61: 290, 290, 290, 65: 290, 290, 140: 445, 351: 444},
+		{1: 122, 122, 10: 122, 122, 14: 122, 18: 122, 27: 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 455, 61: 122, 122, 122, 65: 122, 122, 346: 453, 348: 454, 357: 452},
 		// 25
-		{251: 442},
-		{133: 446, 188: 444, 271: 445, 284: 443},
-		{1: 285, 285, 6: 285, 11: 285, 14: 285, 18: 285, 27: 285, 285, 285, 285, 285, 285, 285, 285, 285, 285, 285, 285, 285, 61: 285, 285, 285, 285, 285},
-		{1: 284, 284, 6: 284, 11: 284, 14: 284, 18: 284, 27: 284, 284, 284, 284, 284, 284, 284, 284, 284, 284, 284, 284, 284, 61: 284, 284, 284, 284, 284},
-		{188: 447},
+		{254: 446},
+		{139: 450, 193: 448, 274: 449, 286: 447},
+		{1: 289, 289, 10: 289, 289, 14: 289, 18: 289, 27: 289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 289, 61: 289, 289, 289, 65: 289, 289},
+		{1: 288, 288, 10: 288, 288, 14: 288, 18: 288, 27: 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 288, 61: 288, 288, 288, 65: 288, 288},
+		{193: 451},
 		// 30
-		{1: 282, 282, 6: 282, 11: 282, 14: 282, 18: 282, 27: 282, 282, 282, 282, 282, 282, 282, 282, 282, 282, 282, 282, 282, 61: 282, 282, 282, 282, 282},
-		{1: 283, 283, 6: 283, 11: 283, 14: 283, 18: 283, 27: 283, 283, 283, 283, 283, 283, 283, 283, 283, 283, 283, 283, 283, 61: 283, 283, 283, 283, 283},
-		{1: 6, 6, 6: 1004, 11: 6, 238: 1003, 330: 1002},
-		{1: 279, 279, 6: 279, 11: 279},
-		{1: 277, 277, 6: 277, 11: 277, 14: 277, 18: 277, 27: 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 61: 277, 277, 277, 277, 277, 318: 759},
+		{1: 286, 286, 10: 286, 286, 14: 286, 18: 286, 27: 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 286, 61: 286, 286, 286, 65: 286, 286},
+		{1: 287, 287, 10: 287, 287, 14: 287, 18: 287, 27: 287, 287, 287, 287, 287, 287, 287, 287, 287, 287, 287, 287, 287, 61: 287, 287, 287, 65: 287, 287},
+		{1: 6, 6, 10: 1029, 6, 241: 1028, 332: 1027},
+		{1: 283, 283, 10: 283, 283},
+		{1: 281, 281, 10: 281, 281, 14: 281, 18: 281, 27: 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 61: 281, 281, 281, 65: 281, 281, 320: 784},
 		// 35
-		{44: 438, 437, 60: 452, 68: 454, 147: 457, 158: 453, 246: 456, 345: 455},
-		{404, 404, 404, 404, 5: 404, 404, 11: 404, 13: 404, 404, 17: 404, 20: 404, 404, 23: 404, 404, 40: 404, 404, 404, 82: 404, 84: 404, 86: 404, 404, 90: 404, 94: 404, 96: 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 135: 404},
-		{388, 3: 388},
-		{90: 470, 94: 487, 97: 489, 479, 486, 477, 476, 483, 484, 480, 494, 493, 498, 475, 496, 495, 482, 478, 491, 472, 485, 474, 492, 473, 499, 497, 481, 488, 490, 471, 164: 463, 464, 169: 461, 467, 174: 468, 466, 465, 462, 469},
-		{458, 3: 459},
+		{6: 45, 45, 9: 463, 44: 442, 441, 59: 456, 68: 458, 112: 45, 129: 464, 153: 461, 163: 457, 248: 462, 460, 347: 459},
+		{408, 408, 408, 408, 408, 10: 408, 408, 13: 408, 408, 17: 408, 20: 408, 408, 23: 408, 408, 40: 408, 408, 408, 82: 408, 84: 408, 86: 408, 408, 90: 408, 95: 408, 97: 408, 408, 408, 102: 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 113: 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 408, 141: 408},
+		{392, 3: 392},
+		{90: 528, 95: 545, 98: 547, 537, 102: 544, 535, 534, 541, 542, 538, 552, 551, 556, 533, 113: 554, 553, 540, 536, 549, 530, 543, 532, 550, 531, 557, 555, 539, 546, 548, 529, 170: 521, 522, 173: 519, 525, 178: 526, 524, 523, 520, 183: 527},
+		{516, 3: 517},
 		// 40
-		{116, 3: 116},
-		{114, 3: 114},
-		{1: 117, 117, 6: 117, 11: 117, 14: 117, 18: 117, 27: 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 61: 117, 117, 117, 117, 117},
-		{44: 438, 437, 60: 452, 68: 454, 147: 457, 158: 453, 246: 460},
-		{115, 3: 115},
+		{120, 3: 120},
+		{118, 3: 118},
+		{117, 3: 117},
+		{44: 442, 441, 59: 515},
+		{6: 466, 465, 112: 467},
 		// 45
-		{386, 3: 386, 386, 386, 7: 386, 386, 386, 386, 12: 386, 15: 386, 386, 18: 386, 22: 386, 386, 386, 386, 624, 166: 623, 216: 622},
-		{113, 3: 113, 113, 113, 7: 113, 113, 113, 113, 12: 113, 113, 15: 113, 113, 18: 113, 113, 22: 113, 113, 113, 113, 113},
-		{112, 3: 112, 112, 112, 7: 112, 112, 112, 112, 12: 112, 112, 15: 112, 112, 18: 112, 112, 22: 112, 112, 112, 112, 112},
-		{109, 3: 109, 109, 109, 7: 109, 109, 109, 109, 12: 109, 109, 15: 109, 109, 18: 109, 109, 22: 109, 109, 109, 109, 109},
-		{108, 3: 108, 108, 108, 7: 108, 108, 108, 108, 12: 108, 108, 15: 108, 108, 18: 108, 108, 22: 108, 108, 108, 108, 108},
+		{39: 511},
+		{168: 506},
+		{168: 468},
+		{39: 469},
+		{44: 442, 441, 59: 456, 68: 470, 91: 471},
 		// 50
-		{107, 3: 107, 107, 107, 7: 107, 107, 107, 107, 12: 107, 107, 15: 107, 107, 18: 107, 107, 22: 107, 107, 107, 107, 107},
-		{106, 3: 106, 106, 106, 7: 106, 106, 106, 106, 12: 106, 106, 15: 106, 106, 18: 106, 106, 22: 106, 106, 106, 106, 106},
-		{105, 3: 105, 105, 105, 7: 105, 105, 105, 105, 12: 105, 105, 15: 105, 105, 18: 105, 105, 22: 105, 105, 105, 105, 105},
-		{104, 3: 104, 104, 104, 7: 104, 104, 104, 104, 12: 104, 104, 15: 104, 104, 18: 104, 104, 22: 104, 104, 104, 104, 104},
-		{103, 3: 103, 103, 103, 7: 103, 103, 103, 103, 12: 103, 103, 15: 103, 103, 18: 103, 103, 22: 103, 103, 103, 103, 103, 39: 611, 136: 612},
+		{410, 3: 410},
+		{473, 3: 472},
+		{44: 442, 441, 59: 456, 68: 505},
+		{8: 474, 182: 475},
+		{44: 442, 441, 59: 440, 148: 494},
 		// 55
-		{39: 604},
-		{96, 3: 96, 96, 96, 7: 96, 96, 96, 96, 12: 96, 96, 15: 96, 96, 18: 96, 96, 22: 96, 96, 96, 96, 96, 39: 597, 136: 598},
-		{39: 594},
-		{93, 3: 93, 93, 93, 7: 93, 93, 93, 93, 12: 93, 93, 15: 93, 93, 18: 93, 93, 22: 93, 93, 93, 93, 93, 39: 588},
-		{90, 3: 90, 90, 90, 7: 90, 90, 90, 90, 12: 90, 90, 15: 90, 90, 18: 90, 90, 22: 90, 90, 90, 90, 90, 39: 585},
+		{31, 3: 31, 480, 64: 479, 67: 481, 100: 477, 478, 130: 476, 482},
+		{30, 3: 30, 30, 30, 30, 30, 30, 30},
+		{21, 3: 21, 21, 21, 21, 21, 21, 21, 67: 481, 93: 489, 488, 101: 492, 154: 491},
+		{21, 3: 21, 480, 21, 21, 21, 21, 21, 64: 479, 93: 489, 488, 100: 487, 154: 486},
+		{25, 3: 25, 25, 25, 25, 25, 25, 25, 67: 25, 93: 25, 25},
 		// 60
-		{88, 3: 88, 88, 88, 7: 88, 88, 88, 88, 12: 88, 88, 15: 88, 88, 18: 88, 88, 22: 88, 88, 88, 88, 88},
-		{87, 3: 87, 87, 87, 7: 87, 87, 87, 87, 12: 87, 87, 15: 87, 87, 18: 87, 87, 22: 87, 87, 87, 87, 87},
-		{86, 3: 86, 86, 86, 7: 86, 86, 86, 86, 12: 86, 86, 15: 86, 86, 18: 86, 86, 22: 86, 86, 86, 86, 86, 98: 584},
-		{39: 581},
-		{83, 3: 83, 83, 83, 7: 83, 83, 83, 83, 12: 83, 83, 15: 83, 83, 18: 83, 83, 22: 83, 83, 83, 83, 83},
+		{64: 485},
+		{194: 483, 197: 484},
+		{13, 3: 13},
+		{23, 3: 23, 23, 23, 23, 23, 23, 23, 64: 23, 93: 23, 23},
+		{22, 3: 22, 22, 22, 22, 22, 22, 22, 64: 22, 93: 22, 22},
 		// 65
-		{82, 3: 82, 82, 82, 7: 82, 82, 82, 82, 12: 82, 82, 15: 82, 82, 18: 82, 82, 22: 82, 82, 82, 82, 82, 39: 572},
-		{262: 551, 296: 550},
-		{72, 3: 72, 72, 72, 7: 72, 72, 72, 72, 12: 72, 72, 15: 72, 72, 18: 72, 72, 22: 72, 72, 72, 72, 72},
-		{71, 3: 71, 71, 71, 7: 71, 71, 71, 71, 12: 71, 71, 15: 71, 71, 18: 71, 71, 22: 71, 71, 71, 71, 71},
-		{70, 3: 70, 70, 70, 7: 70, 70, 70, 70, 12: 70, 70, 15: 70, 70, 18: 70, 70, 22: 70, 70, 70, 70, 70},
+		{24, 3: 24, 24, 24, 24, 24, 24, 24, 67: 24, 93: 24, 24},
+		{27, 3: 27, 27, 27, 27, 27, 27, 27},
+		{21, 3: 21, 21, 21, 21, 21, 21, 21, 93: 489, 488, 154: 490},
+		{20, 3: 20, 20, 20, 20, 20, 20, 20},
+		{19, 3: 19, 19, 19, 19, 19, 19, 19},
 		// 70
-		{69, 3: 69, 69, 69, 7: 69, 69, 69, 69, 12: 69, 69, 15: 69, 69, 18: 69, 69, 22: 69, 69, 69, 69, 69},
-		{68, 3: 68, 68, 68, 7: 68, 68, 68, 68, 12: 68, 68, 15: 68, 68, 18: 68, 68, 22: 68, 68, 68, 68, 68},
-		{67, 3: 67, 67, 67, 7: 67, 67, 67, 67, 12: 67, 67, 15: 67, 67, 18: 67, 67, 22: 67, 67, 67, 67, 67, 39: 547},
-		{39: 540, 136: 541},
-		{39: 537},
+		{26, 3: 26, 26, 26, 26, 26, 26, 26},
+		{29, 3: 29, 29, 29, 29, 29, 29, 29},
+		{21, 3: 21, 21, 21, 21, 21, 21, 21, 93: 489, 488, 154: 493},
+		{28, 3: 28, 28, 28, 28, 28, 28, 28},
+		{36, 3: 36, 36, 36, 36, 36, 36, 36, 39: 496, 64: 36, 36, 67: 36, 307: 495},
 		// 75
-		{90: 522, 97: 521},
-		{56, 3: 56, 56, 56, 7: 56, 56, 56, 56, 12: 56, 56, 15: 56, 56, 18: 56, 56, 22: 56, 56, 56, 56, 56, 39: 515},
-		{53, 3: 53, 53, 53, 7: 53, 53, 53, 53, 12: 53, 53, 15: 53, 53, 18: 53, 53, 22: 53, 53, 53, 53, 53, 39: 509},
-		{50, 3: 50, 50, 50, 7: 50, 50, 50, 50, 12: 50, 50, 15: 50, 50, 18: 50, 50, 22: 50, 50, 50, 50, 50, 39: 501},
-		{47, 3: 47, 47, 47, 7: 47, 47, 47, 47, 12: 47, 47, 15: 47, 47, 18: 47, 47, 22: 47, 47, 47, 47, 47},
+		{34, 3: 34, 34, 34, 34, 34, 34, 34, 64: 34, 500, 67: 34, 345: 499},
+		{44: 442, 441, 59: 456, 68: 470, 91: 497},
+		{498, 3: 472},
+		{35, 3: 35, 35, 35, 35, 35, 35, 35, 64: 35, 35, 67: 35},
+		{37, 3: 37, 37, 37, 37, 37, 37, 37, 64: 37, 67: 37},
 		// 80
-		{46, 3: 46, 46, 46, 7: 46, 46, 46, 46, 12: 46, 46, 15: 46, 46, 18: 46, 46, 22: 46, 46, 46, 46, 46},
-		{45, 3: 45, 45, 45, 7: 45, 45, 45, 45, 12: 45, 45, 15: 45, 45, 18: 45, 45, 22: 45, 45, 45, 45, 45},
-		{286: 500},
-		{43, 3: 43, 43, 43, 7: 43, 43, 43, 43, 12: 43, 43, 15: 43, 43, 18: 43, 43, 22: 43, 43, 43, 43, 43},
-		{44, 3: 44, 44, 44, 7: 44, 44, 44, 44, 12: 44, 44, 15: 44, 44, 18: 44, 44, 22: 44, 44, 44, 44, 44},
+		{165: 501},
+		{40: 503, 84: 502},
+		{33, 3: 33, 33, 33, 33, 33, 33, 33, 64: 33, 67: 33},
+		{5: 504},
+		{32, 3: 32, 32, 32, 32, 32, 32, 32, 64: 32, 67: 32},
 		// 85
-		{43: 502, 129: 503, 139: 504},
-		{111, 3: 111, 91: 111},
-		{110, 3: 110, 91: 110},
-		{505, 91: 506},
-		{49, 3: 49, 49, 49, 7: 49, 49, 49, 49, 12: 49, 49, 15: 49, 49, 18: 49, 49, 22: 49, 49, 49, 49, 49},
+		{409, 3: 409},
+		{39: 507},
+		{44: 442, 441, 59: 456, 68: 470, 91: 508},
+		{509, 3: 472},
+		{31, 3: 31, 480, 64: 479, 67: 481, 100: 477, 478, 130: 476, 510},
 		// 90
-		{43: 507},
-		{508},
-		{48, 3: 48, 48, 48, 7: 48, 48, 48, 48, 12: 48, 48, 15: 48, 48, 18: 48, 48, 22: 48, 48, 48, 48, 48},
-		{43: 502, 129: 503, 139: 510},
-		{511, 91: 512},
+		{14, 3: 14},
+		{44: 442, 441, 59: 456, 68: 470, 91: 512},
+		{513, 3: 472},
+		{31, 3: 31, 480, 64: 479, 67: 481, 100: 477, 478, 130: 476, 514},
+		{15, 3: 15},
 		// 95
-		{52, 3: 52, 52, 52, 7: 52, 52, 52, 52, 12: 52, 52, 15: 52, 52, 18: 52, 52, 22: 52, 52, 52, 52, 52},
-		{43: 513},
-		{514},
-		{51, 3: 51, 51, 51, 7: 51, 51, 51, 51, 12: 51, 51, 15: 51, 51, 18: 51, 51, 22: 51, 51, 51, 51, 51},
-		{43: 502, 129: 503, 139: 516},
+		{4: 44, 44, 44, 44, 44, 112: 44},
+		{1: 121, 121, 10: 121, 121, 14: 121, 18: 121, 27: 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 121, 61: 121, 121, 121, 65: 121, 121},
+		{6: 45, 45, 9: 463, 44: 442, 441, 59: 456, 68: 458, 112: 45, 129: 464, 153: 461, 163: 457, 248: 462, 518},
+		{119, 3: 119},
+		{390, 3: 390, 390, 390, 390, 390, 390, 390, 12: 390, 15: 390, 390, 18: 390, 22: 390, 390, 390, 390, 682, 172: 681, 221: 680},
 		// 100
-		{517, 91: 518},
-		{55, 3: 55, 55, 55, 7: 55, 55, 55, 55, 12: 55, 55, 15: 55, 55, 18: 55, 55, 22: 55, 55, 55, 55, 55},
-		{43: 519},
-		{520},
-		{54, 3: 54, 54, 54, 7: 54, 54, 54, 54, 12: 54, 54, 15: 54, 54, 18: 54, 54, 22: 54, 54, 54, 54, 54},
+		{116, 3: 116, 116, 116, 116, 116, 116, 116, 12: 116, 116, 15: 116, 116, 18: 116, 116, 22: 116, 116, 116, 116, 116},
+		{115, 3: 115, 115, 115, 115, 115, 115, 115, 12: 115, 115, 15: 115, 115, 18: 115, 115, 22: 115, 115, 115, 115, 115},
+		{112, 3: 112, 112, 112, 112, 112, 112, 112, 12: 112, 112, 15: 112, 112, 18: 112, 112, 22: 112, 112, 112, 112, 112},
+		{111, 3: 111, 111, 111, 111, 111, 111, 111, 12: 111, 111, 15: 111, 111, 18: 111, 111, 22: 111, 111, 111, 111, 111},
+		{110, 3: 110, 110, 110, 110, 110, 110, 110, 12: 110, 110, 15: 110, 110, 18: 110, 110, 22: 110, 110, 110, 110, 110},
 		// 105
-		{39: 530, 136: 531},
-		{39: 523, 136: 524},
-		{43: 528},
-		{39: 525},
-		{43: 526},
+		{109, 3: 109, 109, 109, 109, 109, 109, 109, 12: 109, 109, 15: 109, 109, 18: 109, 109, 22: 109, 109, 109, 109, 109},
+		{108, 3: 108, 108, 108, 108, 108, 108, 108, 12: 108, 108, 15: 108, 108, 18: 108, 108, 22: 108, 108, 108, 108, 108},
+		{107, 3: 107, 107, 107, 107, 107, 107, 107, 12: 107, 107, 15: 107, 107, 18: 107, 107, 22: 107, 107, 107, 107, 107},
+		{106, 3: 106, 106, 106, 106, 106, 106, 106, 12: 106, 106, 15: 106, 106, 18: 106, 106, 22: 106, 106, 106, 106, 106, 39: 669, 142: 670},
+		{39: 662},
 		// 110
-		{527},
-		{57, 3: 57, 57, 57, 7: 57, 57, 57, 57, 12: 57, 57, 15: 57, 57, 18: 57, 57, 22: 57, 57, 57, 57, 57},
-		{529},
-		{58, 3: 58, 58, 58, 7: 58, 58, 58, 58, 12: 58, 58, 15: 58, 58, 18: 58, 58, 22: 58, 58, 58, 58, 58},
-		{43: 535},
+		{99, 3: 99, 99, 99, 99, 99, 99, 99, 12: 99, 99, 15: 99, 99, 18: 99, 99, 22: 99, 99, 99, 99, 99, 39: 655, 142: 656},
+		{39: 652},
+		{96, 3: 96, 96, 96, 96, 96, 96, 96, 12: 96, 96, 15: 96, 96, 18: 96, 96, 22: 96, 96, 96, 96, 96, 39: 646},
+		{93, 3: 93, 93, 93, 93, 93, 93, 93, 12: 93, 93, 15: 93, 93, 18: 93, 93, 22: 93, 93, 93, 93, 93, 39: 643},
+		{91, 3: 91, 91, 91, 91, 91, 91, 91, 12: 91, 91, 15: 91, 91, 18: 91, 91, 22: 91, 91, 91, 91, 91},
 		// 115
-		{39: 532},
-		{43: 533},
-		{534},
-		{59, 3: 59, 59, 59, 7: 59, 59, 59, 59, 12: 59, 59, 15: 59, 59, 18: 59, 59, 22: 59, 59, 59, 59, 59},
-		{536},
+		{90, 3: 90, 90, 90, 90, 90, 90, 90, 12: 90, 90, 15: 90, 90, 18: 90, 90, 22: 90, 90, 90, 90, 90},
+		{89, 3: 89, 89, 89, 89, 89, 89, 89, 12: 89, 89, 15: 89, 89, 18: 89, 89, 22: 89, 89, 89, 89, 89, 99: 642},
+		{39: 639},
+		{86, 3: 86, 86, 86, 86, 86, 86, 86, 12: 86, 86, 15: 86, 86, 18: 86, 86, 22: 86, 86, 86, 86, 86},
+		{85, 3: 85, 85, 85, 85, 85, 85, 85, 12: 85, 85, 15: 85, 85, 18: 85, 85, 22: 85, 85, 85, 85, 85, 39: 630},
 		// 120
-		{60, 3: 60, 60, 60, 7: 60, 60, 60, 60, 12: 60, 60, 15: 60, 60, 18: 60, 60, 22: 60, 60, 60, 60, 60},
-		{43: 538},
-		{539},
-		{61, 3: 61, 61, 61, 7: 61, 61, 61, 61, 12: 61, 61, 15: 61, 61, 18: 61, 61, 22: 61, 61, 61, 61, 61},
-		{43: 545},
+		{265: 609, 298: 608},
+		{75, 3: 75, 75, 75, 75, 75, 75, 75, 12: 75, 75, 15: 75, 75, 18: 75, 75, 22: 75, 75, 75, 75, 75},
+		{74, 3: 74, 74, 74, 74, 74, 74, 74, 12: 74, 74, 15: 74, 74, 18: 74, 74, 22: 74, 74, 74, 74, 74},
+		{73, 3: 73, 73, 73, 73, 73, 73, 73, 12: 73, 73, 15: 73, 73, 18: 73, 73, 22: 73, 73, 73, 73, 73},
+		{72, 3: 72, 72, 72, 72, 72, 72, 72, 12: 72, 72, 15: 72, 72, 18: 72, 72, 22: 72, 72, 72, 72, 72},
 		// 125
-		{39: 542},
-		{43: 543},
-		{544},
-		{64, 3: 64, 64, 64, 7: 64, 64, 64, 64, 12: 64, 64, 15: 64, 64, 18: 64, 64, 22: 64, 64, 64, 64, 64},
-		{546},
+		{71, 3: 71, 71, 71, 71, 71, 71, 71, 12: 71, 71, 15: 71, 71, 18: 71, 71, 22: 71, 71, 71, 71, 71},
+		{70, 3: 70, 70, 70, 70, 70, 70, 70, 12: 70, 70, 15: 70, 70, 18: 70, 70, 22: 70, 70, 70, 70, 70, 39: 605},
+		{39: 598, 142: 599},
+		{39: 595},
+		{90: 580, 98: 579},
 		// 130
-		{65, 3: 65, 65, 65, 7: 65, 65, 65, 65, 12: 65, 65, 15: 65, 65, 18: 65, 65, 22: 65, 65, 65, 65, 65},
-		{43: 548},
-		{549},
-		{66, 3: 66, 66, 66, 7: 66, 66, 66, 66, 12: 66, 66, 15: 66, 66, 18: 66, 66, 22: 66, 66, 66, 66, 66},
-		{39: 566, 96: 565},
+		{59, 3: 59, 59, 59, 59, 59, 59, 59, 12: 59, 59, 15: 59, 59, 18: 59, 59, 22: 59, 59, 59, 59, 59, 39: 573},
+		{56, 3: 56, 56, 56, 56, 56, 56, 56, 12: 56, 56, 15: 56, 56, 18: 56, 56, 22: 56, 56, 56, 56, 56, 39: 567},
+		{53, 3: 53, 53, 53, 53, 53, 53, 53, 12: 53, 53, 15: 53, 53, 18: 53, 53, 22: 53, 53, 53, 53, 53, 39: 559},
+		{50, 3: 50, 50, 50, 50, 50, 50, 50, 12: 50, 50, 15: 50, 50, 18: 50, 50, 22: 50, 50, 50, 50, 50},
+		{49, 3: 49, 49, 49, 49, 49, 49, 49, 12: 49, 49, 15: 49, 49, 18: 49, 49, 22: 49, 49, 49, 49, 49},
 		// 135
-		{39: 553, 96: 552},
-		{204: 561},
-		{43: 554},
-		{555},
-		{96: 556},
+		{48, 3: 48, 48, 48, 48, 48, 48, 48, 12: 48, 48, 15: 48, 48, 18: 48, 48, 22: 48, 48, 48, 48, 48},
+		{288: 558},
+		{46, 3: 46, 46, 46, 46, 46, 46, 46, 12: 46, 46, 15: 46, 46, 18: 46, 46, 22: 46, 46, 46, 46, 46},
+		{47, 3: 47, 47, 47, 47, 47, 47, 47, 12: 47, 47, 15: 47, 47, 18: 47, 47, 22: 47, 47, 47, 47, 47},
+		{43: 560, 135: 561, 145: 562},
 		// 140
-		{204: 557},
-		{75, 3: 75, 75, 75, 7: 75, 75, 75, 75, 12: 75, 75, 15: 75, 75, 18: 75, 75, 22: 75, 75, 75, 75, 75, 39: 558},
-		{43: 559},
-		{560},
-		{74, 3: 74, 74, 74, 7: 74, 74, 74, 74, 12: 74, 74, 15: 74, 74, 18: 74, 74, 22: 74, 74, 74, 74, 74},
+		{114, 3: 114, 92: 114},
+		{113, 3: 113, 92: 113},
+		{563, 92: 564},
+		{52, 3: 52, 52, 52, 52, 52, 52, 52, 12: 52, 52, 15: 52, 52, 18: 52, 52, 22: 52, 52, 52, 52, 52},
+		{43: 565},
 		// 145
-		{76, 3: 76, 76, 76, 7: 76, 76, 76, 76, 12: 76, 76, 15: 76, 76, 18: 76, 76, 22: 76, 76, 76, 76, 76, 39: 562},
-		{43: 563},
-		{564},
-		{73, 3: 73, 73, 73, 7: 73, 73, 73, 73, 12: 73, 73, 15: 73, 73, 18: 73, 73, 22: 73, 73, 73, 73, 73},
-		{197: 571},
+		{566},
+		{51, 3: 51, 51, 51, 51, 51, 51, 51, 12: 51, 51, 15: 51, 51, 18: 51, 51, 22: 51, 51, 51, 51, 51},
+		{43: 560, 135: 561, 145: 568},
+		{569, 92: 570},
+		{55, 3: 55, 55, 55, 55, 55, 55, 55, 12: 55, 55, 15: 55, 55, 18: 55, 55, 22: 55, 55, 55, 55, 55},
 		// 150
-		{43: 567},
-		{568},
-		{96: 569},
-		{197: 570},
-		{77, 3: 77, 77, 77, 7: 77, 77, 77, 77, 12: 77, 77, 15: 77, 77, 18: 77, 77, 22: 77, 77, 77, 77, 77},
+		{43: 571},
+		{572},
+		{54, 3: 54, 54, 54, 54, 54, 54, 54, 12: 54, 54, 15: 54, 54, 18: 54, 54, 22: 54, 54, 54, 54, 54},
+		{43: 560, 135: 561, 145: 574},
+		{575, 92: 576},
 		// 155
-		{78, 3: 78, 78, 78, 7: 78, 78, 78, 78, 12: 78, 78, 15: 78, 78, 18: 78, 78, 22: 78, 78, 78, 78, 78},
-		{43: 573},
-		{574},
-		{81, 3: 81, 81, 81, 7: 81, 81, 81, 81, 12: 81, 81, 15: 575, 81, 18: 81, 81, 22: 81, 81, 81, 81, 81},
-		{208: 576, 281: 577},
+		{58, 3: 58, 58, 58, 58, 58, 58, 58, 12: 58, 58, 15: 58, 58, 18: 58, 58, 22: 58, 58, 58, 58, 58},
+		{43: 577},
+		{578},
+		{57, 3: 57, 57, 57, 57, 57, 57, 57, 12: 57, 57, 15: 57, 57, 18: 57, 57, 22: 57, 57, 57, 57, 57},
+		{39: 588, 142: 589},
 		// 160
-		{212: 580},
-		{208: 578},
-		{212: 579},
-		{79, 3: 79, 79, 79, 7: 79, 79, 79, 79, 12: 79, 79, 15: 79, 79, 18: 79, 79, 22: 79, 79, 79, 79, 79},
-		{80, 3: 80, 80, 80, 7: 80, 80, 80, 80, 12: 80, 80, 15: 80, 80, 18: 80, 80, 22: 80, 80, 80, 80, 80},
+		{39: 581, 142: 582},
+		{43: 586},
+		{39: 583},
+		{43: 584},
+		{585},
 		// 165
-		{43: 582},
-		{583},
-		{84, 3: 84, 84, 84, 7: 84, 84, 84, 84, 12: 84, 84, 15: 84, 84, 18: 84, 84, 22: 84, 84, 84, 84, 84},
-		{85, 3: 85, 85, 85, 7: 85, 85, 85, 85, 12: 85, 85, 15: 85, 85, 18: 85, 85, 22: 85, 85, 85, 85, 85},
-		{43: 502, 129: 503, 139: 586},
-		// 170
+		{60, 3: 60, 60, 60, 60, 60, 60, 60, 12: 60, 60, 15: 60, 60, 18: 60, 60, 22: 60, 60, 60, 60, 60},
 		{587},
-		{89, 3: 89, 89, 89, 7: 89, 89, 89, 89, 12: 89, 89, 15: 89, 89, 18: 89, 89, 22: 89, 89, 89, 89, 89},
-		{43: 502, 129: 503, 139: 589},
-		{590, 3: 591},
-		{92, 3: 92, 92, 92, 7: 92, 92, 92, 92, 12: 92, 92, 15: 92, 92, 18: 92, 92, 22: 92, 92, 92, 92, 92},
+		{61, 3: 61, 61, 61, 61, 61, 61, 61, 12: 61, 61, 15: 61, 61, 18: 61, 61, 22: 61, 61, 61, 61, 61},
+		{43: 593},
+		{39: 590},
+		// 170
+		{43: 591},
+		{592},
+		{62, 3: 62, 62, 62, 62, 62, 62, 62, 12: 62, 62, 15: 62, 62, 18: 62, 62, 22: 62, 62, 62, 62, 62},
+		{594},
+		{63, 3: 63, 63, 63, 63, 63, 63, 63, 12: 63, 63, 15: 63, 63, 18: 63, 63, 22: 63, 63, 63, 63, 63},
 		// 175
-		{43: 592},
-		{593},
-		{91, 3: 91, 91, 91, 7: 91, 91, 91, 91, 12: 91, 91, 15: 91, 91, 18: 91, 91, 22: 91, 91, 91, 91, 91},
-		{43: 595},
-		{596},
+		{43: 596},
+		{597},
+		{64, 3: 64, 64, 64, 64, 64, 64, 64, 12: 64, 64, 15: 64, 64, 18: 64, 64, 22: 64, 64, 64, 64, 64},
+		{43: 603},
+		{39: 600},
 		// 180
-		{94, 3: 94, 94, 94, 7: 94, 94, 94, 94, 12: 94, 94, 15: 94, 94, 18: 94, 94, 22: 94, 94, 94, 94, 94},
-		{43: 602},
-		{39: 599},
-		{43: 600},
-		{601},
+		{43: 601},
+		{602},
+		{67, 3: 67, 67, 67, 67, 67, 67, 67, 12: 67, 67, 15: 67, 67, 18: 67, 67, 22: 67, 67, 67, 67, 67},
+		{604},
+		{68, 3: 68, 68, 68, 68, 68, 68, 68, 12: 68, 68, 15: 68, 68, 18: 68, 68, 22: 68, 68, 68, 68, 68},
 		// 185
-		{62, 3: 62, 62, 62, 7: 62, 62, 62, 62, 12: 62, 62, 15: 62, 62, 18: 62, 62, 22: 62, 62, 62, 62, 62},
-		{603},
-		{95, 3: 95, 95, 95, 7: 95, 95, 95, 95, 12: 95, 95, 15: 95, 95, 18: 95, 95, 22: 95, 95, 95, 95, 95},
-		{43: 605},
-		{606, 90: 608, 184: 607},
+		{43: 606},
+		{607},
+		{69, 3: 69, 69, 69, 69, 69, 69, 69, 12: 69, 69, 15: 69, 69, 18: 69, 69, 22: 69, 69, 69, 69, 69},
+		{39: 624, 97: 623},
+		{39: 611, 97: 610},
 		// 190
-		{99, 3: 99, 99, 99, 7: 99, 99, 99, 99, 12: 99, 99, 15: 99, 99, 18: 99, 99, 22: 99, 99, 99, 99, 99},
-		{610},
-		{609},
-		{97, 3: 97, 97, 97, 7: 97, 97, 97, 97, 12: 97, 97, 15: 97, 97, 18: 97, 97, 22: 97, 97, 97, 97, 97},
-		{98, 3: 98, 98, 98, 7: 98, 98, 98, 98, 12: 98, 98, 15: 98, 98, 18: 98, 98, 22: 98, 98, 98, 98, 98},
+		{209: 619},
+		{43: 612},
+		{613},
+		{97: 614},
+		{209: 615},
 		// 195
-		{43: 616},
-		{39: 613},
-		{43: 614},
-		{615},
-		{63, 3: 63, 63, 63, 7: 63, 63, 63, 63, 12: 63, 63, 15: 63, 63, 18: 63, 63, 22: 63, 63, 63, 63, 63},
+		{78, 3: 78, 78, 78, 78, 78, 78, 78, 12: 78, 78, 15: 78, 78, 18: 78, 78, 22: 78, 78, 78, 78, 78, 39: 616},
+		{43: 617},
+		{618},
+		{77, 3: 77, 77, 77, 77, 77, 77, 77, 12: 77, 77, 15: 77, 77, 18: 77, 77, 22: 77, 77, 77, 77, 77},
+		{79, 3: 79, 79, 79, 79, 79, 79, 79, 12: 79, 79, 15: 79, 79, 18: 79, 79, 22: 79, 79, 79, 79, 79, 39: 620},
 		// 200
-		{617, 90: 619, 184: 618},
-		{102, 3: 102, 102, 102, 7: 102, 102, 102, 102, 12: 102, 102, 15: 102, 102, 18: 102, 102, 22: 102, 102, 102, 102, 102},
-		{621},
-		{620},
-		{100, 3: 100, 100, 100, 7: 100, 100, 100, 100, 12: 100, 100, 15: 100, 100, 18: 100, 100, 22: 100, 100, 100, 100, 100},
+		{43: 621},
+		{622},
+		{76, 3: 76, 76, 76, 76, 76, 76, 76, 12: 76, 76, 15: 76, 76, 18: 76, 76, 22: 76, 76, 76, 76, 76},
+		{202: 629},
+		{43: 625},
 		// 205
-		{101, 3: 101, 101, 101, 7: 101, 101, 101, 101, 12: 101, 101, 15: 101, 101, 18: 101, 101, 22: 101, 101, 101, 101, 101},
-		{383, 3: 383, 383, 383, 7: 383, 383, 383, 383, 12: 383, 15: 383, 383, 18: 383, 22: 383, 383, 383, 627, 351: 626},
-		{385, 3: 385, 385, 385, 7: 385, 385, 385, 385, 12: 385, 385, 15: 385, 385, 18: 385, 385, 22: 385, 385, 385, 385},
-		{44: 438, 437, 60: 625},
-		{384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 18: 384, 384, 22: 384, 384, 384, 384, 27: 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 384, 61: 384, 384, 384, 384, 384},
+		{626},
+		{97: 627},
+		{202: 628},
+		{80, 3: 80, 80, 80, 80, 80, 80, 80, 12: 80, 80, 15: 80, 80, 18: 80, 80, 22: 80, 80, 80, 80, 80},
+		{81, 3: 81, 81, 81, 81, 81, 81, 81, 12: 81, 81, 15: 81, 81, 18: 81, 81, 22: 81, 81, 81, 81, 81},
 		// 210
-		{381, 3: 381, 381, 381, 7: 381, 381, 381, 381, 12: 381, 15: 381, 381, 18: 381, 22: 381, 630, 631, 173: 629, 329: 628},
-		{382, 3: 382, 382, 382, 7: 382, 382, 382, 382, 12: 382, 15: 382, 382, 18: 382, 22: 382, 382, 382},
-		{377, 3: 377, 377, 377, 7: 377, 377, 377, 377, 12: 377, 15: 377, 377, 18: 635, 22: 636, 221: 633, 632, 230: 634},
-		{380, 3: 380, 380, 380, 7: 380, 380, 380, 380, 12: 380, 15: 380, 380, 18: 380, 22: 380},
-		{379, 3: 379, 379, 379, 7: 379, 379, 379, 379, 12: 379, 15: 379, 379, 18: 379, 22: 379},
+		{43: 631},
+		{632},
+		{84, 3: 84, 84, 84, 84, 84, 84, 84, 12: 84, 84, 15: 633, 84, 18: 84, 84, 22: 84, 84, 84, 84, 84},
+		{213: 634, 283: 635},
+		{217: 638},
 		// 215
-		{378, 3: 378, 378, 378, 7: 378, 378, 378, 378, 12: 378, 15: 378, 378, 18: 378, 22: 378},
-		{349, 3: 349, 349, 349, 7: 349, 349, 349, 349, 12: 687, 15: 349, 349, 227: 686},
-		{376, 3: 376, 376, 376, 7: 376, 376, 376, 376, 12: 376, 15: 376, 376, 19: 376},
-		{375, 3: 375, 375, 375, 7: 375, 375, 375, 375, 12: 375, 15: 375, 375, 19: 375},
-		{17: 681, 43: 682, 683, 228: 680},
+		{213: 636},
+		{217: 637},
+		{82, 3: 82, 82, 82, 82, 82, 82, 82, 12: 82, 82, 15: 82, 82, 18: 82, 82, 22: 82, 82, 82, 82, 82},
+		{83, 3: 83, 83, 83, 83, 83, 83, 83, 12: 83, 83, 15: 83, 83, 18: 83, 83, 22: 83, 83, 83, 83, 83},
+		{43: 640},
 		// 220
-		{144: 637, 639, 253: 638},
-		{131: 678},
-		{144: 675},
-		{18: 640},
-		{64: 642, 144: 641},
+		{641},
+		{87, 3: 87, 87, 87, 87, 87, 87, 87, 12: 87, 87, 15: 87, 87, 18: 87, 87, 22: 87, 87, 87, 87, 87},
+		{88, 3: 88, 88, 88, 88, 88, 88, 88, 12: 88, 88, 15: 88, 88, 18: 88, 88, 22: 88, 88, 88, 88, 88},
+		{43: 560, 135: 561, 145: 644},
+		{645},
 		// 225
-		{131: 673},
-		{4: 643},
-		{144: 644},
-		{131: 645},
-		{367, 3: 367, 367, 367, 7: 367, 367, 367, 367, 12: 367, 15: 367, 367, 19: 367, 39: 647, 150: 646},
+		{92, 3: 92, 92, 92, 92, 92, 92, 92, 12: 92, 92, 15: 92, 92, 18: 92, 92, 22: 92, 92, 92, 92, 92},
+		{43: 560, 135: 561, 145: 647},
+		{648, 3: 649},
+		{95, 3: 95, 95, 95, 95, 95, 95, 95, 12: 95, 95, 15: 95, 95, 18: 95, 95, 22: 95, 95, 95, 95, 95},
+		{43: 650},
 		// 230
-		{368, 3: 368, 368, 368, 7: 368, 368, 368, 368, 12: 368, 15: 368, 368, 19: 368},
-		{365, 69: 658, 656, 72: 651, 652, 654, 659, 657, 653, 655, 661, 660, 650, 231: 649, 317: 648},
-		{671, 69: 658, 656, 72: 651, 652, 654, 659, 657, 653, 655, 661, 660, 650, 231: 672},
-		{364, 69: 364, 364, 72: 364, 364, 364, 364, 364, 364, 364, 364, 364, 364},
-		{15: 667},
+		{651},
+		{94, 3: 94, 94, 94, 94, 94, 94, 94, 12: 94, 94, 15: 94, 94, 18: 94, 94, 22: 94, 94, 94, 94, 94},
+		{43: 653},
+		{654},
+		{97, 3: 97, 97, 97, 97, 97, 97, 97, 12: 97, 97, 15: 97, 97, 18: 97, 97, 22: 97, 97, 97, 97, 97},
 		// 235
-		{145: 665},
-		{43: 664},
-		{358, 69: 358, 358, 72: 358, 358, 358, 358, 358, 358, 358, 358, 358, 358},
-		{43: 663},
-		{356, 69: 356, 356, 72: 356, 356, 356, 356, 356, 356, 356, 356, 356, 356},
+		{43: 660},
+		{39: 657},
+		{43: 658},
+		{659},
+		{65, 3: 65, 65, 65, 65, 65, 65, 65, 12: 65, 65, 15: 65, 65, 18: 65, 65, 22: 65, 65, 65, 65, 65},
 		// 240
+		{661},
+		{98, 3: 98, 98, 98, 98, 98, 98, 98, 12: 98, 98, 15: 98, 98, 18: 98, 98, 22: 98, 98, 98, 98, 98},
+		{43: 663},
+		{664, 90: 666, 189: 665},
+		{102, 3: 102, 102, 102, 102, 102, 102, 102, 12: 102, 102, 15: 102, 102, 18: 102, 102, 22: 102, 102, 102, 102, 102},
+		// 245
+		{668},
+		{667},
+		{100, 3: 100, 100, 100, 100, 100, 100, 100, 12: 100, 100, 15: 100, 100, 18: 100, 100, 22: 100, 100, 100, 100, 100},
+		{101, 3: 101, 101, 101, 101, 101, 101, 101, 12: 101, 101, 15: 101, 101, 18: 101, 101, 22: 101, 101, 101, 101, 101},
+		{43: 674},
+		// 250
+		{39: 671},
+		{43: 672},
+		{673},
+		{66, 3: 66, 66, 66, 66, 66, 66, 66, 12: 66, 66, 15: 66, 66, 18: 66, 66, 22: 66, 66, 66, 66, 66},
+		{675, 90: 677, 189: 676},
+		// 255
+		{105, 3: 105, 105, 105, 105, 105, 105, 105, 12: 105, 105, 15: 105, 105, 18: 105, 105, 22: 105, 105, 105, 105, 105},
+		{679},
+		{678},
+		{103, 3: 103, 103, 103, 103, 103, 103, 103, 12: 103, 103, 15: 103, 103, 18: 103, 103, 22: 103, 103, 103, 103, 103},
+		{104, 3: 104, 104, 104, 104, 104, 104, 104, 12: 104, 104, 15: 104, 104, 18: 104, 104, 22: 104, 104, 104, 104, 104},
+		// 260
+		{387, 3: 387, 387, 387, 387, 387, 387, 387, 12: 387, 15: 387, 387, 18: 387, 22: 387, 387, 387, 685, 353: 684},
+		{389, 3: 389, 389, 389, 389, 389, 389, 389, 12: 389, 389, 15: 389, 389, 18: 389, 389, 22: 389, 389, 389, 389},
+		{44: 442, 441, 59: 683},
+		{388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 18: 388, 388, 22: 388, 388, 388, 388, 27: 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 388, 61: 388, 388, 388, 65: 388, 388},
+		{385, 3: 385, 385, 385, 385, 385, 385, 385, 12: 385, 15: 385, 385, 18: 385, 22: 385, 688, 689, 177: 687, 331: 686},
+		// 265
+		{386, 3: 386, 386, 386, 386, 386, 386, 386, 12: 386, 15: 386, 386, 18: 386, 22: 386, 386, 386},
+		{381, 3: 381, 381, 381, 381, 381, 381, 381, 12: 381, 15: 381, 381, 18: 693, 22: 694, 224: 691, 690, 233: 692},
+		{384, 3: 384, 384, 384, 384, 384, 384, 384, 12: 384, 15: 384, 384, 18: 384, 22: 384},
+		{383, 3: 383, 383, 383, 383, 383, 383, 383, 12: 383, 15: 383, 383, 18: 383, 22: 383},
+		{382, 3: 382, 382, 382, 382, 382, 382, 382, 12: 382, 15: 382, 382, 18: 382, 22: 382},
+		// 270
+		{353, 3: 353, 353, 353, 353, 353, 353, 353, 12: 745, 15: 353, 353, 230: 744},
+		{380, 3: 380, 380, 380, 380, 380, 380, 380, 12: 380, 15: 380, 380, 19: 380},
+		{379, 3: 379, 379, 379, 379, 379, 379, 379, 12: 379, 15: 379, 379, 19: 379},
+		{17: 739, 43: 740, 741, 231: 738},
+		{150: 695, 697, 256: 696},
+		// 275
+		{137: 736},
+		{150: 733},
+		{18: 698},
+		{65: 700, 150: 699},
+		{137: 731},
+		// 280
+		{5: 701},
+		{150: 702},
+		{137: 703},
+		{371, 3: 371, 371, 371, 371, 371, 371, 371, 12: 371, 15: 371, 371, 19: 371, 39: 705, 155: 704},
+		{372, 3: 372, 372, 372, 372, 372, 372, 372, 12: 372, 15: 372, 372, 19: 372},
+		// 285
+		{369, 69: 716, 714, 72: 709, 710, 712, 717, 715, 711, 713, 719, 718, 708, 234: 707, 319: 706},
+		{729, 69: 716, 714, 72: 709, 710, 712, 717, 715, 711, 713, 719, 718, 708, 234: 730},
+		{368, 69: 368, 368, 72: 368, 368, 368, 368, 368, 368, 368, 368, 368, 368},
+		{15: 725},
+		{151: 723},
+		// 290
+		{43: 722},
+		{362, 69: 362, 362, 72: 362, 362, 362, 362, 362, 362, 362, 362, 362, 362},
+		{43: 721},
+		{360, 69: 360, 360, 72: 360, 360, 360, 360, 360, 360, 360, 360, 360, 360},
+		{359, 69: 359, 359, 72: 359, 359, 359, 359, 359, 359, 359, 359, 359, 359},
+		// 295
+		{358, 69: 358, 358, 72: 358, 358, 358, 358, 358, 358, 358, 358, 358, 358},
+		{43: 720},
+		{356, 69: 356, 356, 72: 356, 356, 356, 356, 356, 356, 356, 356, 356, 356},
 		{355, 69: 355, 355, 72: 355, 355, 355, 355, 355, 355, 355, 355, 355, 355},
 		{354, 69: 354, 354, 72: 354, 354, 354, 354, 354, 354, 354, 354, 354, 354},
-		{43: 662},
-		{352, 69: 352, 352, 72: 352, 352, 352, 352, 352, 352, 352, 352, 352, 352},
-		{351, 69: 351, 351, 72: 351, 351, 351, 351, 351, 351, 351, 351, 351, 351},
-		// 245
-		{350, 69: 350, 350, 72: 350, 350, 350, 350, 350, 350, 350, 350, 350, 350},
-		{353, 69: 353, 353, 72: 353, 353, 353, 353, 353, 353, 353, 353, 353, 353},
-		{357, 69: 357, 357, 72: 357, 357, 357, 357, 357, 357, 357, 357, 357, 357},
-		{359, 69: 359, 359, 72: 359, 359, 359, 359, 359, 359, 359, 359, 359, 359},
-		{43: 666},
-		// 250
-		{360, 69: 360, 360, 72: 360, 360, 360, 360, 360, 360, 360, 360, 360, 360},
-		{43: 668, 195: 669},
-		{362, 69: 362, 362, 72: 362, 362, 362, 362, 362, 362, 362, 362, 362, 362},
-		{295: 670},
-		{361, 69: 361, 361, 72: 361, 361, 361, 361, 361, 361, 361, 361, 361, 361},
-		// 255
-		{366, 3: 366, 366, 366, 7: 366, 366, 366, 366, 12: 366, 15: 366, 366, 19: 366},
-		{363, 69: 363, 363, 72: 363, 363, 363, 363, 363, 363, 363, 363, 363, 363},
-		{367, 3: 367, 367, 367, 7: 367, 367, 367, 367, 12: 367, 15: 367, 367, 19: 367, 39: 647, 150: 674},
-		{369, 3: 369, 369, 369, 7: 369, 369, 369, 369, 12: 369, 15: 369, 369, 19: 369},
-		{131: 676},
-		// 260
-		{367, 3: 367, 367, 367, 7: 367, 367, 367, 367, 12: 367, 15: 367, 367, 19: 367, 39: 647, 150: 677},
-		{371, 3: 371, 371, 371, 7: 371, 371, 371, 371, 12: 371, 15: 371, 371, 19: 371},
-		{367, 3: 367, 367, 367, 7: 367, 367, 367, 367, 12: 367, 15: 367, 367, 19: 367, 39: 647, 150: 679},
-		{372, 3: 372, 372, 372, 7: 372, 372, 372, 372, 12: 372, 15: 372, 372, 19: 372},
-		{374, 3: 374, 374, 374, 7: 374, 374, 374, 374, 12: 374, 15: 374, 374, 19: 374},
-		// 265
-		{4: 684},
-		{2, 3: 2, 2, 2, 7: 2, 2, 2, 2, 12: 2, 15: 2, 2, 19: 2},
-		{1, 3: 1, 1, 1, 7: 1, 1, 1, 1, 12: 1, 15: 1, 1, 19: 1},
-		{43: 682, 683, 228: 685},
-		{373, 3: 373, 373, 373, 7: 373, 373, 373, 373, 12: 373, 15: 373, 373, 19: 373},
-		// 270
-		{337, 3: 337, 42, 42, 7: 42, 42, 42, 706, 15: 709, 708, 148: 707, 155: 705, 233: 704, 303: 702, 320: 703},
-		{346, 3: 346, 346, 346, 7: 346, 346, 346, 346, 15: 346, 346, 346, 89: 346, 95: 346, 161: 346, 294: 690, 311: 689, 313: 688},
-		{348, 3: 348, 348, 348, 7: 348, 348, 348, 348, 15: 348, 348},
-		{344, 3: 344, 344, 344, 7: 344, 344, 344, 344, 15: 344, 344, 344, 89: 344, 95: 344, 161: 693, 316: 692},
-		{95: 691},
-		// 275
-		{345, 3: 345, 345, 345, 7: 345, 345, 345, 345, 15: 345, 345, 345, 89: 345, 95: 345, 161: 345},
-		{342, 3: 342, 342, 342, 7: 342, 342, 342, 342, 15: 342, 342, 342, 89: 342, 95: 697, 328: 696},
-		{145: 694},
-		{44: 438, 437, 60: 695},
-		{343, 3: 343, 343, 343, 7: 343, 343, 343, 343, 15: 343, 343, 343, 89: 343, 95: 343},
-		// 280
-		{340, 3: 340, 340, 340, 7: 340, 340, 340, 340, 15: 340, 340, 700, 89: 699, 348: 698},
-		{341, 3: 341, 341, 341, 7: 341, 341, 341, 341, 15: 341, 341, 341, 89: 341},
-		{347, 3: 347, 347, 347, 7: 347, 347, 347, 347, 15: 347, 347},
-		{339, 3: 339, 339, 339, 7: 339, 339, 339, 339, 15: 339, 339},
-		{89: 701},
-		// 285
-		{338, 3: 338, 338, 338, 7: 338, 338, 338, 338, 15: 338, 338},
-		{387, 3: 387},
-		{336, 3: 336},
-		{335, 3: 335, 42, 42, 7: 42, 42, 42, 706, 148: 757, 155: 756},
-		{334, 3: 334, 334, 334, 7: 334, 334, 334, 334},
-		// 290
-		{44: 438, 437, 60: 755},
-		{4: 714, 715, 7: 717, 719, 716, 234: 713, 245: 718},
-		{278: 711},
-		{94: 710},
-		{14, 3: 14},
-		// 295
-		{44: 438, 437, 60: 436, 142: 712},
-		{15, 3: 15},
-		{28, 3: 28, 28, 738, 7: 28, 28, 28, 28, 66: 737, 739, 167: 735, 736, 218: 734, 754},
-		{39, 3: 39, 39, 39, 7: 39, 39, 39, 39, 66: 39, 39},
-		{4: 753},
 		// 300
-		{37, 3: 37, 37, 37, 7: 37, 37, 37, 37, 66: 37, 37},
-		{280: 752},
-		{35, 3: 35, 35, 738, 7: 35, 35, 35, 35, 66: 737, 739, 167: 735, 736, 218: 734, 740},
-		{44: 438, 437, 60: 436, 142: 720},
-		{33, 3: 33, 33, 33, 7: 33, 33, 33, 33, 39: 722, 64: 33, 66: 33, 33, 305: 721},
+		{357, 69: 357, 357, 72: 357, 357, 357, 357, 357, 357, 357, 357, 357, 357},
+		{361, 69: 361, 361, 72: 361, 361, 361, 361, 361, 361, 361, 361, 361, 361},
+		{363, 69: 363, 363, 72: 363, 363, 363, 363, 363, 363, 363, 363, 363, 363},
+		{43: 724},
+		{364, 69: 364, 364, 72: 364, 364, 364, 364, 364, 364, 364, 364, 364, 364},
 		// 305
-		{31, 3: 31, 31, 31, 7: 31, 31, 31, 31, 64: 729, 66: 31, 31, 343: 728},
-		{44: 438, 437, 60: 452, 68: 723, 125: 724},
-		{406, 3: 406},
-		{726, 3: 725},
-		{44: 438, 437, 60: 452, 68: 727},
+		{43: 726, 200: 727},
+		{366, 69: 366, 366, 72: 366, 366, 366, 366, 366, 366, 366, 366, 366, 366},
+		{297: 728},
+		{365, 69: 365, 365, 72: 365, 365, 365, 365, 365, 365, 365, 365, 365, 365},
+		{370, 3: 370, 370, 370, 370, 370, 370, 370, 12: 370, 15: 370, 370, 19: 370},
 		// 310
-		{32, 3: 32, 32, 32, 7: 32, 32, 32, 32, 64: 32, 66: 32, 32},
-		{405, 3: 405},
-		{34, 3: 34, 34, 34, 7: 34, 34, 34, 34, 66: 34, 34},
-		{160: 730},
-		{40: 732, 84: 731},
+		{367, 69: 367, 367, 72: 367, 367, 367, 367, 367, 367, 367, 367, 367, 367},
+		{371, 3: 371, 371, 371, 371, 371, 371, 371, 12: 371, 15: 371, 371, 19: 371, 39: 705, 155: 732},
+		{373, 3: 373, 373, 373, 373, 373, 373, 373, 12: 373, 15: 373, 373, 19: 373},
+		{137: 734},
+		{371, 3: 371, 371, 371, 371, 371, 371, 371, 12: 371, 15: 371, 371, 19: 371, 39: 705, 155: 735},
 		// 315
-		{30, 3: 30, 30, 30, 7: 30, 30, 30, 30, 66: 30, 30},
-		{4: 733},
-		{29, 3: 29, 29, 29, 7: 29, 29, 29, 29, 66: 29, 29},
-		{27, 3: 27, 27, 27, 7: 27, 27, 27, 27},
-		{18, 3: 18, 18, 18, 7: 18, 18, 18, 18, 67: 739, 92: 747, 746, 149: 749, 168: 750},
+		{375, 3: 375, 375, 375, 375, 375, 375, 375, 12: 375, 15: 375, 375, 19: 375},
+		{371, 3: 371, 371, 371, 371, 371, 371, 371, 12: 371, 15: 371, 371, 19: 371, 39: 705, 155: 737},
+		{376, 3: 376, 376, 376, 376, 376, 376, 376, 12: 376, 15: 376, 376, 19: 376},
+		{378, 3: 378, 378, 378, 378, 378, 378, 378, 12: 378, 15: 378, 378, 19: 378},
+		{5: 742},
 		// 320
-		{18, 3: 18, 18, 738, 7: 18, 18, 18, 18, 66: 737, 92: 747, 746, 149: 744, 167: 745},
-		{22, 3: 22, 22, 22, 7: 22, 22, 22, 22, 67: 22, 92: 22, 22},
-		{66: 743},
-		{189: 741, 192: 742},
-		{13, 3: 13},
+		{2, 3: 2, 2, 2, 2, 2, 2, 2, 12: 2, 15: 2, 2, 19: 2},
+		{1, 3: 1, 1, 1, 1, 1, 1, 1, 12: 1, 15: 1, 1, 19: 1},
+		{43: 740, 741, 231: 743},
+		{377, 3: 377, 377, 377, 377, 377, 377, 377, 12: 377, 15: 377, 377, 19: 377},
+		{341, 3: 341, 45, 45, 45, 45, 45, 463, 15: 766, 765, 129: 764, 160: 763, 236: 762, 305: 760, 322: 761},
 		// 325
-		{20, 3: 20, 20, 20, 7: 20, 20, 20, 20, 66: 20, 92: 20, 20},
-		{19, 3: 19, 19, 19, 7: 19, 19, 19, 19, 66: 19, 92: 19, 19},
-		{21, 3: 21, 21, 21, 7: 21, 21, 21, 21, 67: 21, 92: 21, 21},
-		{24, 3: 24, 24, 24, 7: 24, 24, 24, 24},
-		{18, 3: 18, 18, 18, 7: 18, 18, 18, 18, 92: 747, 746, 149: 748},
+		{350, 3: 350, 350, 350, 350, 350, 350, 350, 15: 350, 350, 350, 89: 350, 96: 350, 166: 350, 296: 748, 313: 747, 315: 746},
+		{352, 3: 352, 352, 352, 352, 352, 352, 352, 15: 352, 352},
+		{348, 3: 348, 348, 348, 348, 348, 348, 348, 15: 348, 348, 348, 89: 348, 96: 348, 166: 751, 318: 750},
+		{96: 749},
+		{349, 3: 349, 349, 349, 349, 349, 349, 349, 15: 349, 349, 349, 89: 349, 96: 349, 166: 349},
 		// 330
-		{17, 3: 17, 17, 17, 7: 17, 17, 17, 17},
-		{16, 3: 16, 16, 16, 7: 16, 16, 16, 16},
-		{23, 3: 23, 23, 23, 7: 23, 23, 23, 23},
-		{26, 3: 26, 26, 26, 7: 26, 26, 26, 26},
-		{18, 3: 18, 18, 18, 7: 18, 18, 18, 18, 92: 747, 746, 149: 751},
+		{346, 3: 346, 346, 346, 346, 346, 346, 346, 15: 346, 346, 346, 89: 346, 96: 755, 330: 754},
+		{151: 752},
+		{44: 442, 441, 59: 753},
+		{347, 3: 347, 347, 347, 347, 347, 347, 347, 15: 347, 347, 347, 89: 347, 96: 347},
+		{344, 3: 344, 344, 344, 344, 344, 344, 344, 15: 344, 344, 758, 89: 757, 350: 756},
 		// 335
-		{25, 3: 25, 25, 25, 7: 25, 25, 25, 25},
-		{36, 3: 36, 36, 36, 7: 36, 36, 36, 36, 66: 36, 36},
-		{38, 3: 38, 38, 38, 7: 38, 38, 38, 38, 66: 38, 38},
-		{40, 3: 40, 40, 40, 7: 40, 40, 40, 40},
-		{4: 41, 41, 7: 41, 41, 41},
+		{345, 3: 345, 345, 345, 345, 345, 345, 345, 15: 345, 345, 345, 89: 345},
+		{351, 3: 351, 351, 351, 351, 351, 351, 351, 15: 351, 351},
+		{343, 3: 343, 343, 343, 343, 343, 343, 343, 15: 343, 343},
+		{89: 759},
+		{342, 3: 342, 342, 342, 342, 342, 342, 342, 15: 342, 342},
 		// 340
-		{333, 3: 333, 333, 333, 7: 333, 333, 333, 333},
-		{4: 714, 715, 7: 717, 719, 716, 234: 713, 245: 758},
-		{35, 3: 35, 35, 35, 7: 35, 35, 35, 35, 66: 35, 35},
-		{1: 276, 276, 6: 276, 11: 276, 14: 276, 18: 276, 27: 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 61: 276, 276, 276, 276, 276, 297: 760},
-		{1: 275, 275, 6: 275, 11: 275, 14: 275, 18: 762, 27: 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 61: 275, 275, 275, 275, 275, 307: 761},
+		{391, 3: 391},
+		{340, 3: 340},
+		{339, 3: 339, 45, 45, 45, 45, 45, 463, 129: 781, 160: 780},
+		{338, 3: 338, 338, 338, 338, 338, 338, 338},
+		{4: 773, 772, 775, 774, 474, 182: 771, 237: 770},
 		// 345
-		{1: 272, 272, 6: 272, 11: 272, 14: 272, 27: 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 61: 272, 272, 272, 766, 272, 336: 764, 765},
-		{26: 624, 166: 763},
-		{1: 274, 274, 6: 274, 11: 274, 14: 274, 27: 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 61: 274, 274, 274, 274, 274},
-		{1: 266, 266, 6: 266, 11: 266, 14: 261, 27: 261, 261, 261, 261, 261, 261, 261, 261, 261, 261, 261, 261, 61: 261, 261, 781, 65: 782, 309: 780, 342: 779},
-		{1: 269, 269, 6: 269, 11: 269, 14: 269, 27: 269, 269, 269, 269, 269, 269, 269, 269, 269, 269, 269, 269, 61: 269, 269, 269, 773, 269, 338: 772},
+		{281: 768},
+		{95: 767},
+		{17, 3: 17},
+		{44: 442, 441, 59: 440, 148: 769},
+		{18, 3: 18},
 		// 350
-		{186: 767},
-		{13: 768, 199: 769},
-		{190: 771},
-		{190: 770},
-		{1: 270, 270, 6: 270, 11: 270, 14: 270, 27: 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 61: 270, 270, 270, 270, 270},
+		{31, 3: 31, 480, 31, 31, 31, 31, 31, 64: 479, 67: 481, 100: 477, 478, 130: 476, 779},
+		{31, 3: 31, 480, 31, 31, 31, 31, 31, 64: 479, 67: 481, 100: 477, 478, 130: 476, 778},
+		{41, 3: 41, 41, 41, 41, 41, 41, 41, 64: 41, 67: 41},
+		{5: 777},
+		{39, 3: 39, 39, 39, 39, 39, 39, 39, 64: 39, 67: 39},
 		// 355
-		{1: 271, 271, 6: 271, 11: 271, 14: 271, 27: 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 61: 271, 271, 271, 271, 271},
-		{1: 273, 273, 6: 273, 11: 273, 14: 273, 27: 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 61: 273, 273, 273, 65: 273},
-		{186: 774},
-		{160: 775, 199: 776},
-		{203: 778},
+		{168: 776},
+		{38, 3: 38, 38, 38, 38, 38, 38, 38, 64: 38, 67: 38},
+		{40, 3: 40, 40, 40, 40, 40, 40, 40, 64: 40, 67: 40},
+		{42, 3: 42, 42, 42, 42, 42, 42, 42},
+		{43, 3: 43, 43, 43, 43, 43, 43, 43},
 		// 360
-		{203: 777},
-		{1: 267, 267, 6: 267, 11: 267, 14: 267, 27: 267, 267, 267, 267, 267, 267, 267, 267, 267, 267, 267, 267, 61: 267, 267, 267, 65: 267},
-		{1: 268, 268, 6: 268, 11: 268, 14: 268, 27: 268, 268, 268, 268, 268, 268, 268, 268, 268, 268, 268, 268, 61: 268, 268, 268, 65: 268},
-		{1: 119, 119, 6: 119, 11: 119, 356: 1001},
-		{14: 810, 27: 808, 809, 811, 807, 801, 805, 802, 806, 799, 800, 804, 795, 61: 812, 791, 126: 798, 803, 797, 138: 796, 140: 794, 793, 179: 790, 314: 792},
+		{337, 3: 337, 337, 337, 337, 337, 337, 337},
+		{4: 773, 772, 775, 774, 474, 182: 782, 237: 770},
+		{31, 3: 31, 480, 31, 31, 31, 31, 31, 64: 479, 67: 481, 100: 477, 478, 130: 476, 783},
+		{42, 3: 42, 42, 42, 42, 42, 42, 42},
+		{1: 280, 280, 10: 280, 280, 14: 280, 18: 280, 27: 280, 280, 280, 280, 280, 280, 280, 280, 280, 280, 280, 280, 61: 280, 280, 280, 65: 280, 280, 299: 785},
 		// 365
-		{44: 438, 437, 60: 786},
-		{260: 783},
-		{189: 785, 192: 784},
-		{14: 260, 27: 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 61: 260, 260},
-		{14: 259, 27: 259, 259, 259, 259, 259, 259, 259, 259, 259, 259, 259, 259, 61: 259, 259},
+		{1: 279, 279, 10: 279, 279, 14: 279, 18: 787, 27: 279, 279, 279, 279, 279, 279, 279, 279, 279, 279, 279, 279, 61: 279, 279, 279, 65: 279, 279, 309: 786},
+		{1: 276, 276, 10: 276, 276, 14: 276, 27: 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 276, 61: 276, 276, 276, 65: 791, 276, 338: 789, 790},
+		{26: 682, 172: 788},
+		{1: 278, 278, 10: 278, 278, 14: 278, 27: 278, 278, 278, 278, 278, 278, 278, 278, 278, 278, 278, 278, 61: 278, 278, 278, 65: 278, 278},
+		{1: 270, 270, 10: 270, 270, 14: 265, 27: 265, 265, 265, 265, 265, 265, 265, 265, 265, 265, 265, 265, 61: 265, 265, 806, 66: 807, 311: 805, 344: 804},
 		// 370
-		{39: 787},
-		{44: 438, 437, 60: 452, 68: 723, 125: 788},
-		{789, 3: 725},
-		{1: 262, 262, 6: 262, 11: 262},
-		{1: 205, 205, 6: 205, 11: 205, 14: 810, 17: 205, 20: 205, 205, 27: 808, 809, 811, 807, 801, 805, 802, 806, 799, 800, 804, 795, 126: 798, 803, 998, 138: 796, 140: 794, 904, 250: 997},
+		{1: 273, 273, 10: 273, 273, 14: 273, 27: 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 273, 61: 273, 273, 273, 65: 798, 273, 340: 797},
+		{191: 792},
+		{13: 793, 204: 794},
+		{195: 796},
+		{195: 795},
 		// 375
-		{61: 899, 275: 897, 277: 898, 339: 896},
-		{1: 263, 263, 6: 263, 11: 263},
-		{1: 256, 256, 6: 256, 11: 256, 14: 256, 17: 256, 20: 256, 256, 27: 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256},
-		{1: 254, 254, 6: 254, 11: 254, 14: 254, 17: 254, 20: 254, 254, 27: 254, 254, 254, 254, 801, 254, 802, 254, 799, 800, 804, 254, 126: 895, 803},
-		{40: 893, 44: 438, 437, 60: 892},
+		{1: 274, 274, 10: 274, 274, 14: 274, 27: 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 274, 61: 274, 274, 274, 65: 274, 274},
+		{1: 275, 275, 10: 275, 275, 14: 275, 27: 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 275, 61: 275, 275, 275, 65: 275, 275},
+		{1: 277, 277, 10: 277, 277, 14: 277, 27: 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 277, 61: 277, 277, 277, 66: 277},
+		{191: 799},
+		{165: 800, 204: 801},
 		// 380
-		{1: 251, 251, 6: 251, 11: 251, 14: 251, 17: 251, 20: 251, 251, 27: 251, 251, 251, 251, 251, 251, 251, 251, 251, 251, 251, 251},
-		{1: 250, 250, 6: 250, 11: 250, 14: 250, 17: 250, 20: 250, 250, 27: 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250},
-		{1: 249, 249, 6: 249, 11: 249, 14: 249, 17: 249, 20: 249, 249, 27: 249, 249, 249, 249, 249, 249, 249, 249, 249, 249, 249, 249},
-		{43: 891},
-		{43: 890},
+		{208: 803},
+		{208: 802},
+		{1: 271, 271, 10: 271, 271, 14: 271, 27: 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 271, 61: 271, 271, 271, 66: 271},
+		{1: 272, 272, 10: 272, 272, 14: 272, 27: 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 61: 272, 272, 272, 66: 272},
+		{1: 123, 123, 10: 123, 123, 358: 1026},
 		// 385
-		{43: 889},
-		{43: 888},
-		{1: 243, 243, 6: 243, 11: 243, 14: 243, 17: 243, 20: 243, 243, 27: 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, 243},
-		{39: 840},
-		{1: 208, 208, 6: 208, 11: 208, 14: 208, 17: 208, 20: 208, 208, 27: 208, 208, 208, 208, 208, 208, 208, 208, 208, 208, 208, 208},
+		{14: 835, 27: 833, 834, 836, 832, 826, 830, 827, 831, 824, 825, 829, 820, 61: 837, 816, 132: 823, 828, 822, 144: 821, 146: 819, 818, 184: 815, 316: 817},
+		{44: 442, 441, 59: 811},
+		{263: 808},
+		{194: 810, 197: 809},
+		{14: 264, 27: 264, 264, 264, 264, 264, 264, 264, 264, 264, 264, 264, 264, 61: 264, 264},
 		// 390
-		{1: 207, 207, 6: 207, 11: 207, 14: 207, 17: 207, 20: 207, 207, 27: 207, 207, 207, 207, 207, 207, 207, 207, 207, 207, 207, 207},
-		{1: 206, 206, 6: 206, 11: 206, 14: 206, 17: 206, 20: 206, 206, 27: 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206},
-		{1: 203, 203, 6: 203, 11: 203, 14: 203, 17: 203, 20: 203, 203, 27: 203, 203, 203, 203, 203, 203, 203, 203, 203, 203, 203, 203},
-		{205: 836},
-		{205: 818},
+		{14: 263, 27: 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 263, 61: 263, 263},
+		{39: 812},
+		{44: 442, 441, 59: 456, 68: 470, 91: 813},
+		{814, 3: 472},
+		{1: 266, 266, 10: 266, 266},
 		// 395
-		{1: 198, 198, 6: 198, 11: 198, 14: 198, 17: 198, 20: 198, 198, 27: 198, 198, 198, 198, 198, 198, 198, 198, 198, 198, 198, 198},
-		{198: 813},
-		{255: 814},
-		{1: 122, 122, 6: 122, 11: 122, 202: 122, 229: 815},
-		{1: 121, 121, 6: 121, 11: 121, 202: 816},
+		{1: 209, 209, 10: 209, 209, 14: 835, 17: 209, 20: 209, 209, 27: 833, 834, 836, 832, 826, 830, 827, 831, 824, 825, 829, 820, 132: 823, 828, 1023, 144: 821, 146: 819, 929, 253: 1022},
+		{61: 924, 278: 922, 280: 923, 341: 921},
+		{1: 267, 267, 10: 267, 267},
+		{1: 260, 260, 10: 260, 260, 14: 260, 17: 260, 20: 260, 260, 27: 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260},
+		{1: 258, 258, 10: 258, 258, 14: 258, 17: 258, 20: 258, 258, 27: 258, 258, 258, 258, 826, 258, 827, 258, 824, 825, 829, 258, 132: 920, 828},
 		// 400
-		{195: 817},
-		{1: 120, 120, 6: 120, 11: 120},
-		{27: 819},
-		{1: 197, 197, 6: 197, 11: 197, 14: 197, 17: 197, 20: 197, 197, 27: 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 85: 821, 301: 820},
-		{1: 190, 190, 6: 190, 11: 190, 14: 190, 17: 830, 20: 190, 190, 27: 190, 829, 190, 190, 190, 190, 190, 190, 190, 190, 190, 190, 300: 828},
+		{40: 918, 44: 442, 441, 59: 917},
+		{1: 255, 255, 10: 255, 255, 14: 255, 17: 255, 20: 255, 255, 27: 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255},
+		{1: 254, 254, 10: 254, 254, 14: 254, 17: 254, 20: 254, 254, 27: 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254},
+		{1: 253, 253, 10: 253, 253, 14: 253, 17: 253, 20: 253, 253, 27: 253, 253, 253, 253, 253, 253, 253, 253, 253, 253, 253, 253},
+		{43: 916},
 		// 405
-		{200: 822, 254: 823},
-		{1: 196, 196, 6: 196, 11: 196, 14: 196, 17: 196, 20: 196, 196, 27: 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 130: 827, 132: 826},
-		{1: 193, 193, 6: 193, 11: 193, 14: 193, 17: 193, 20: 193, 193, 27: 193, 193, 193, 193, 193, 193, 193, 193, 193, 193, 193, 193, 130: 825, 132: 824},
-		{1: 192, 192, 6: 192, 11: 192, 14: 192, 17: 192, 20: 192, 192, 27: 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192},
-		{1: 191, 191, 6: 191, 11: 191, 14: 191, 17: 191, 20: 191, 191, 27: 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191},
+		{43: 915},
+		{43: 914},
+		{43: 913},
+		{1: 247, 247, 10: 247, 247, 14: 247, 17: 247, 20: 247, 247, 27: 247, 247, 247, 247, 247, 247, 247, 247, 247, 247, 247, 247},
+		{39: 865},
 		// 410
-		{1: 195, 195, 6: 195, 11: 195, 14: 195, 17: 195, 20: 195, 195, 27: 195, 195, 195, 195, 195, 195, 195, 195, 195, 195, 195, 195},
-		{1: 194, 194, 6: 194, 11: 194, 14: 194, 17: 194, 20: 194, 194, 27: 194, 194, 194, 194, 194, 194, 194, 194, 194, 194, 194, 194},
-		{1: 199, 199, 6: 199, 11: 199, 14: 199, 17: 199, 20: 199, 199, 27: 199, 199, 199, 199, 199, 199, 199, 199, 199, 199, 199, 199},
-		{193: 834},
-		{28: 831},
+		{1: 212, 212, 10: 212, 212, 14: 212, 17: 212, 20: 212, 212, 27: 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212},
+		{1: 211, 211, 10: 211, 211, 14: 211, 17: 211, 20: 211, 211, 27: 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211},
+		{1: 210, 210, 10: 210, 210, 14: 210, 17: 210, 20: 210, 210, 27: 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210},
+		{1: 207, 207, 10: 207, 207, 14: 207, 17: 207, 20: 207, 207, 27: 207, 207, 207, 207, 207, 207, 207, 207, 207, 207, 207, 207},
+		{210: 861},
 		// 415
-		{193: 832},
-		{196: 833},
-		{1: 188, 188, 6: 188, 11: 188, 14: 188, 17: 188, 20: 188, 188, 27: 188, 188, 188, 188, 188, 188, 188, 188, 188, 188, 188, 188},
-		{196: 835},
-		{1: 189, 189, 6: 189, 11: 189, 14: 189, 17: 189, 20: 189, 189, 27: 189, 189, 189, 189, 189, 189, 189, 189, 189, 189, 189, 189},
+		{210: 843},
+		{1: 202, 202, 10: 202, 202, 14: 202, 17: 202, 20: 202, 202, 27: 202, 202, 202, 202, 202, 202, 202, 202, 202, 202, 202, 202},
+		{203: 838},
+		{258: 839},
+		{1: 126, 126, 10: 126, 126, 207: 126, 232: 840},
 		// 420
-		{27: 837},
-		{1: 202, 202, 6: 202, 11: 202, 14: 202, 17: 202, 20: 202, 202, 27: 202, 202, 202, 202, 202, 202, 202, 202, 202, 202, 202, 202, 252: 839, 256: 838},
-		{1: 201, 201, 6: 201, 11: 201, 14: 201, 17: 201, 20: 201, 201, 27: 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201},
-		{1: 200, 200, 6: 200, 11: 200, 14: 200, 17: 200, 20: 200, 200, 27: 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200},
-		{12: 855, 46: 852, 854, 853, 850, 849, 843, 846, 847, 845, 844, 851, 848, 249: 842, 354: 841},
+		{1: 125, 125, 10: 125, 125, 207: 841},
+		{200: 842},
+		{1: 124, 124, 10: 124, 124},
+		{27: 844},
+		{1: 201, 201, 10: 201, 201, 14: 201, 17: 201, 20: 201, 201, 27: 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 201, 85: 846, 303: 845},
 		// 425
-		{886, 12: 855, 46: 852, 854, 853, 850, 849, 843, 846, 847, 845, 844, 851, 848, 249: 887},
-		{241, 12: 241, 46: 241, 241, 241, 241, 241, 241, 241, 241, 241, 241, 241, 241},
-		{43: 867, 159: 885},
-		{43: 867, 159: 884},
-		{43: 883},
+		{1: 194, 194, 10: 194, 194, 14: 194, 17: 855, 20: 194, 194, 27: 194, 854, 194, 194, 194, 194, 194, 194, 194, 194, 194, 194, 302: 853},
+		{205: 847, 257: 848},
+		{1: 200, 200, 10: 200, 200, 14: 200, 17: 200, 20: 200, 200, 27: 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 136: 852, 138: 851},
+		{1: 197, 197, 10: 197, 197, 14: 197, 17: 197, 20: 197, 197, 27: 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 197, 136: 850, 138: 849},
+		{1: 196, 196, 10: 196, 196, 14: 196, 17: 196, 20: 196, 196, 27: 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196, 196},
 		// 430
-		{43: 881, 209: 882},
-		{43: 867, 159: 880, 209: 879},
-		{43: 878},
-		{43: 877},
-		{274: 875},
+		{1: 195, 195, 10: 195, 195, 14: 195, 17: 195, 20: 195, 195, 27: 195, 195, 195, 195, 195, 195, 195, 195, 195, 195, 195, 195},
+		{1: 199, 199, 10: 199, 199, 14: 199, 17: 199, 20: 199, 199, 27: 199, 199, 199, 199, 199, 199, 199, 199, 199, 199, 199, 199},
+		{1: 198, 198, 10: 198, 198, 14: 198, 17: 198, 20: 198, 198, 27: 198, 198, 198, 198, 198, 198, 198, 198, 198, 198, 198, 198},
+		{1: 203, 203, 10: 203, 203, 14: 203, 17: 203, 20: 203, 203, 27: 203, 203, 203, 203, 203, 203, 203, 203, 203, 203, 203, 203},
+		{198: 859},
 		// 435
-		{229, 4: 866, 12: 229, 43: 867, 46: 229, 229, 229, 229, 229, 229, 229, 229, 229, 229, 229, 229, 159: 865},
-		{18: 864, 162: 862, 289: 863},
-		{18: 861, 133: 860, 162: 859},
-		{18: 858, 133: 857, 162: 856},
-		{217, 12: 217, 46: 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217},
+		{28: 856},
+		{198: 857},
+		{201: 858},
+		{1: 192, 192, 10: 192, 192, 14: 192, 17: 192, 20: 192, 192, 27: 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192, 192},
+		{201: 860},
 		// 440
-		{220, 12: 220, 46: 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220},
-		{219, 12: 219, 46: 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219},
-		{218, 12: 218, 46: 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218},
+		{1: 193, 193, 10: 193, 193, 14: 193, 17: 193, 20: 193, 193, 27: 193, 193, 193, 193, 193, 193, 193, 193, 193, 193, 193, 193},
+		{27: 862},
+		{1: 206, 206, 10: 206, 206, 14: 206, 17: 206, 20: 206, 206, 27: 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 255: 864, 259: 863},
+		{1: 205, 205, 10: 205, 205, 14: 205, 17: 205, 20: 205, 205, 27: 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205},
+		{1: 204, 204, 10: 204, 204, 14: 204, 17: 204, 20: 204, 204, 27: 204, 204, 204, 204, 204, 204, 204, 204, 204, 204, 204, 204},
+		// 445
+		{12: 880, 46: 877, 879, 878, 875, 874, 868, 871, 872, 870, 869, 876, 873, 252: 867, 356: 866},
+		{911, 12: 880, 46: 877, 879, 878, 875, 874, 868, 871, 872, 870, 869, 876, 873, 252: 912},
+		{245, 12: 245, 46: 245, 245, 245, 245, 245, 245, 245, 245, 245, 245, 245, 245},
+		{43: 892, 164: 910},
+		{43: 892, 164: 909},
+		// 450
+		{43: 908},
+		{43: 906, 214: 907},
+		{43: 892, 164: 905, 214: 904},
+		{43: 903},
+		{43: 902},
+		// 455
+		{277: 900},
+		{233, 5: 891, 12: 233, 43: 892, 46: 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 164: 890},
+		{18: 889, 167: 887, 291: 888},
+		{18: 886, 139: 885, 167: 884},
+		{18: 883, 139: 882, 167: 881},
+		// 460
+		{221, 12: 221, 46: 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221},
+		{224, 12: 224, 46: 224, 224, 224, 224, 224, 224, 224, 224, 224, 224, 224, 224},
 		{223, 12: 223, 46: 223, 223, 223, 223, 223, 223, 223, 223, 223, 223, 223, 223},
 		{222, 12: 222, 46: 222, 222, 222, 222, 222, 222, 222, 222, 222, 222, 222, 222},
-		// 445
-		{221, 12: 221, 46: 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221},
+		{227, 12: 227, 46: 227, 227, 227, 227, 227, 227, 227, 227, 227, 227, 227, 227},
+		// 465
 		{226, 12: 226, 46: 226, 226, 226, 226, 226, 226, 226, 226, 226, 226, 226, 226},
 		{225, 12: 225, 46: 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225},
-		{224, 12: 224, 46: 224, 224, 224, 224, 224, 224, 224, 224, 224, 224, 224, 224},
+		{230, 12: 230, 46: 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230},
+		{229, 12: 229, 46: 229, 229, 229, 229, 229, 229, 229, 229, 229, 229, 229, 229},
 		{228, 12: 228, 46: 228, 228, 228, 228, 228, 228, 228, 228, 228, 228, 228, 228},
-		// 450
-		{227, 12: 227, 46: 227, 227, 227, 227, 227, 227, 227, 227, 227, 227, 227, 227},
-		{215, 12: 215, 46: 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 268: 874, 272: 871, 279: 869, 282: 870, 285: 873, 293: 872, 350: 868},
+		// 470
+		{232, 12: 232, 46: 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232},
+		{231, 12: 231, 46: 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231},
+		{219, 12: 219, 46: 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 271: 899, 275: 896, 282: 894, 284: 895, 287: 898, 295: 897, 352: 893},
+		{220, 12: 220, 46: 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220},
+		{218, 12: 218, 46: 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218},
+		// 475
+		{217, 12: 217, 46: 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217},
 		{216, 12: 216, 46: 216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216},
+		{215, 12: 215, 46: 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215},
 		{214, 12: 214, 46: 214, 214, 214, 214, 214, 214, 214, 214, 214, 214, 214, 214},
 		{213, 12: 213, 46: 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213},
-		// 455
-		{212, 12: 212, 46: 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212},
-		{211, 12: 211, 46: 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211, 211},
-		{210, 12: 210, 46: 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210},
-		{209, 12: 209, 46: 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209},
-		{43: 876},
-		// 460
-		{230, 12: 230, 46: 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230},
-		{231, 12: 231, 46: 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231},
-		{232, 12: 232, 46: 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232},
-		{234, 12: 234, 46: 234, 234, 234, 234, 234, 234, 234, 234, 234, 234, 234, 234},
-		{233, 12: 233, 46: 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233},
-		// 465
-		{236, 12: 236, 46: 236, 236, 236, 236, 236, 236, 236, 236, 236, 236, 236, 236},
-		{235, 12: 235, 46: 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235},
-		{237, 12: 237, 46: 237, 237, 237, 237, 237, 237, 237, 237, 237, 237, 237, 237},
-		{238, 12: 238, 46: 238, 238, 238, 238, 238, 238, 238, 238, 238, 238, 238, 238},
-		{239, 12: 239, 46: 239, 239, 239, 239, 239, 239, 239, 239, 239, 239, 239, 239},
-		// 470
-		{1: 242, 242, 6: 242, 11: 242, 14: 242, 17: 242, 20: 242, 242, 27: 242, 242, 242, 242, 242, 242, 242, 242, 242, 242, 242, 242},
-		{240, 12: 240, 46: 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240},
-		{1: 244, 244, 6: 244, 11: 244, 14: 244, 17: 244, 20: 244, 244, 27: 244, 244, 244, 244, 244, 244, 244, 244, 244, 244, 244, 244},
-		{1: 245, 245, 6: 245, 11: 245, 14: 245, 17: 245, 20: 245, 245, 27: 245, 245, 245, 245, 245, 245, 245, 245, 245, 245, 245, 245},
-		{1: 246, 246, 6: 246, 11: 246, 14: 246, 17: 246, 20: 246, 246, 27: 246, 246, 246, 246, 246, 246, 246, 246, 246, 246, 246, 246},
-		// 475
-		{1: 247, 247, 6: 247, 11: 247, 14: 247, 17: 247, 20: 247, 247, 27: 247, 247, 247, 247, 247, 247, 247, 247, 247, 247, 247, 247},
-		{1: 253, 253, 6: 253, 11: 253, 14: 253, 17: 253, 20: 253, 253, 27: 253, 253, 253, 253, 253, 253, 253, 253, 253, 253, 253, 253},
-		{44: 438, 437, 60: 894},
-		{1: 252, 252, 6: 252, 11: 252, 14: 252, 17: 252, 20: 252, 252, 27: 252, 252, 252, 252, 252, 252, 252, 252, 252, 252, 252, 252},
-		{1: 248, 248, 6: 248, 11: 248, 14: 248, 17: 248, 20: 248, 248, 27: 248, 248, 248, 248, 248, 248, 248, 248, 248, 248, 248, 248},
 		// 480
-		{1: 264, 264, 6: 264, 11: 264},
-		{1: 258, 258, 6: 258, 11: 258, 14: 810, 17: 258, 20: 258, 258, 27: 808, 809, 811, 807, 801, 805, 802, 806, 799, 800, 804, 795, 126: 798, 803, 797, 138: 796, 140: 794, 793, 179: 901, 247: 905},
-		{1: 258, 258, 6: 258, 11: 258, 14: 810, 27: 808, 809, 811, 807, 801, 805, 802, 806, 799, 800, 804, 795, 126: 798, 803, 797, 138: 796, 140: 794, 793, 179: 901, 247: 902},
-		{1: 122, 122, 6: 122, 11: 122, 229: 900},
-		{1: 125, 125, 6: 125, 11: 125},
+		{43: 901},
+		{234, 12: 234, 46: 234, 234, 234, 234, 234, 234, 234, 234, 234, 234, 234, 234},
+		{235, 12: 235, 46: 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235},
+		{236, 12: 236, 46: 236, 236, 236, 236, 236, 236, 236, 236, 236, 236, 236, 236},
+		{238, 12: 238, 46: 238, 238, 238, 238, 238, 238, 238, 238, 238, 238, 238, 238},
 		// 485
-		{1: 257, 257, 6: 257, 11: 257, 14: 810, 17: 257, 20: 257, 257, 27: 808, 809, 811, 807, 801, 805, 802, 806, 799, 800, 804, 795, 126: 798, 803, 797, 138: 796, 140: 794, 904},
-		{1: 123, 123, 6: 123, 11: 123, 319: 903},
-		{1: 126, 126, 6: 126, 11: 126},
-		{1: 255, 255, 6: 255, 11: 255, 14: 255, 17: 255, 20: 255, 255, 27: 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255},
-		{1: 205, 205, 6: 205, 11: 205, 14: 810, 17: 205, 20: 205, 205, 27: 808, 809, 811, 128: 906, 250: 908, 315: 907},
+		{237, 12: 237, 46: 237, 237, 237, 237, 237, 237, 237, 237, 237, 237, 237, 237},
+		{240, 12: 240, 46: 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240},
+		{239, 12: 239, 46: 239, 239, 239, 239, 239, 239, 239, 239, 239, 239, 239, 239},
+		{241, 12: 241, 46: 241, 241, 241, 241, 241, 241, 241, 241, 241, 241, 241, 241},
+		{242, 12: 242, 46: 242, 242, 242, 242, 242, 242, 242, 242, 242, 242, 242, 242},
 		// 490
-		{1: 204, 204, 6: 204, 11: 204, 17: 204, 20: 204, 204},
-		{1: 127, 127, 6: 127, 11: 127},
-		{1: 187, 187, 6: 187, 11: 187, 17: 910, 20: 187, 909, 137: 913, 156: 912, 911, 236: 914},
-		{1: 182, 182, 6: 182, 11: 182, 17: 943, 20: 182, 182, 39: 944, 58: 182, 182, 71: 182, 88: 182, 163: 942, 235: 964, 321: 963},
-		{21: 961},
+		{243, 12: 243, 46: 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, 243},
+		{1: 246, 246, 10: 246, 246, 14: 246, 17: 246, 20: 246, 246, 27: 246, 246, 246, 246, 246, 246, 246, 246, 246, 246, 246, 246},
+		{244, 12: 244, 46: 244, 244, 244, 244, 244, 244, 244, 244, 244, 244, 244, 244},
+		{1: 248, 248, 10: 248, 248, 14: 248, 17: 248, 20: 248, 248, 27: 248, 248, 248, 248, 248, 248, 248, 248, 248, 248, 248, 248},
+		{1: 249, 249, 10: 249, 249, 14: 249, 17: 249, 20: 249, 249, 27: 249, 249, 249, 249, 249, 249, 249, 249, 249, 249, 249, 249},
 		// 495
-		{1: 184, 184, 6: 184, 11: 184, 20: 184},
-		{1: 147, 147, 6: 147, 11: 147, 17: 937, 20: 147, 936, 137: 935},
-		{1: 146, 146, 6: 146, 11: 146, 17: 146, 20: 146, 146},
-		{1: 141, 141, 6: 141, 11: 141, 20: 915, 232: 916},
-		{41: 917, 160: 918, 263: 921, 920, 923, 269: 919, 922},
+		{1: 250, 250, 10: 250, 250, 14: 250, 17: 250, 20: 250, 250, 27: 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250},
+		{1: 251, 251, 10: 251, 251, 14: 251, 17: 251, 20: 251, 251, 27: 251, 251, 251, 251, 251, 251, 251, 251, 251, 251, 251, 251},
+		{1: 257, 257, 10: 257, 257, 14: 257, 17: 257, 20: 257, 257, 27: 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257, 257},
+		{44: 442, 441, 59: 919},
+		{1: 256, 256, 10: 256, 256, 14: 256, 17: 256, 20: 256, 256, 27: 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256},
 		// 500
-		{1: 124, 124, 6: 124, 11: 124},
-		{146: 933},
-		{146: 931},
-		{146: 929},
-		{146: 924},
+		{1: 252, 252, 10: 252, 252, 14: 252, 17: 252, 20: 252, 252, 27: 252, 252, 252, 252, 252, 252, 252, 252, 252, 252, 252, 252},
+		{1: 268, 268, 10: 268, 268},
+		{1: 262, 262, 10: 262, 262, 14: 835, 17: 262, 20: 262, 262, 27: 833, 834, 836, 832, 826, 830, 827, 831, 824, 825, 829, 820, 132: 823, 828, 822, 144: 821, 146: 819, 818, 184: 926, 250: 930},
+		{1: 262, 262, 10: 262, 262, 14: 835, 27: 833, 834, 836, 832, 826, 830, 827, 831, 824, 825, 829, 820, 132: 823, 828, 822, 144: 821, 146: 819, 818, 184: 926, 250: 927},
+		{1: 126, 126, 10: 126, 126, 232: 925},
 		// 505
-		{1: 136, 136, 6: 136, 11: 136},
-		{1: 135, 135, 6: 135, 11: 135},
-		{1: 134, 134, 6: 134, 11: 134},
-		{1: 130, 130, 6: 130, 11: 130, 151: 926, 928, 925, 927},
-		{1: 137, 137, 6: 137, 11: 137},
+		{1: 129, 129, 10: 129, 129},
+		{1: 261, 261, 10: 261, 261, 14: 835, 17: 261, 20: 261, 261, 27: 833, 834, 836, 832, 826, 830, 827, 831, 824, 825, 829, 820, 132: 823, 828, 822, 144: 821, 146: 819, 929},
+		{1: 127, 127, 10: 127, 127, 321: 928},
+		{1: 130, 130, 10: 130, 130},
+		{1: 259, 259, 10: 259, 259, 14: 259, 17: 259, 20: 259, 259, 27: 259, 259, 259, 259, 259, 259, 259, 259, 259, 259, 259, 259},
 		// 510
-		{1: 133, 133, 6: 133, 11: 133},
-		{1: 132, 132, 6: 132, 11: 132},
-		{1: 131, 131, 6: 131, 11: 131},
-		{1: 130, 130, 6: 130, 11: 130, 151: 926, 928, 930, 927},
-		{1: 138, 138, 6: 138, 11: 138},
+		{1: 209, 209, 10: 209, 209, 14: 835, 17: 209, 20: 209, 209, 27: 833, 834, 836, 134: 931, 253: 933, 317: 932},
+		{1: 208, 208, 10: 208, 208, 17: 208, 20: 208, 208},
+		{1: 131, 131, 10: 131, 131},
+		{1: 191, 191, 10: 191, 191, 17: 935, 20: 191, 934, 143: 938, 161: 937, 936, 239: 939},
+		{1: 186, 186, 10: 186, 186, 17: 968, 20: 186, 186, 39: 969, 58: 186, 60: 186, 71: 186, 88: 186, 169: 967, 238: 989, 323: 988},
 		// 515
-		{1: 130, 130, 6: 130, 11: 130, 151: 926, 928, 932, 927},
-		{1: 139, 139, 6: 139, 11: 139},
-		{1: 130, 130, 6: 130, 11: 130, 151: 926, 928, 934, 927},
-		{1: 140, 140, 6: 140, 11: 140},
-		{1: 145, 145, 6: 145, 11: 145, 17: 145, 20: 145, 145},
+		{21: 986},
+		{1: 188, 188, 10: 188, 188, 20: 188},
+		{1: 151, 151, 10: 151, 151, 17: 962, 20: 151, 961, 143: 960},
+		{1: 150, 150, 10: 150, 150, 17: 150, 20: 150, 150},
+		{1: 145, 145, 10: 145, 145, 20: 940, 235: 941},
 		// 520
-		{17: 943, 39: 944, 163: 942, 235: 945},
-		{21: 938},
-		{39: 939},
-		{44: 438, 437, 60: 452, 68: 723, 125: 940},
-		{941, 3: 725},
+		{41: 942, 165: 943, 266: 946, 945, 948, 272: 944, 947},
+		{1: 128, 128, 10: 128, 128},
+		{152: 958},
+		{152: 956},
+		{152: 954},
 		// 525
-		{1: 142, 142, 6: 142, 11: 142, 17: 142, 20: 142, 142},
-		{85: 952, 182: 953},
-		{163: 951},
-		{44: 438, 437, 60: 452, 68: 723, 125: 949},
-		{39: 946},
+		{152: 949},
+		{1: 140, 140, 10: 140, 140},
+		{1: 139, 139, 10: 139, 139},
+		{1: 138, 138, 10: 138, 138},
+		{1: 134, 134, 10: 134, 134, 156: 951, 953, 950, 952},
 		// 530
-		{44: 438, 437, 60: 452, 68: 723, 125: 947},
-		{948, 3: 725},
-		{1: 143, 143, 6: 143, 11: 143, 17: 143, 20: 143, 143},
-		{950, 3: 725},
-		{1: 144, 144, 6: 144, 11: 144, 17: 144, 20: 144, 144},
+		{1: 141, 141, 10: 141, 141},
+		{1: 137, 137, 10: 137, 137},
+		{1: 136, 136, 10: 136, 136},
+		{1: 135, 135, 10: 135, 135},
+		{1: 134, 134, 10: 134, 134, 156: 951, 953, 955, 952},
 		// 535
-		{1: 174, 174, 6: 174, 11: 174, 17: 174, 20: 174, 174, 39: 174, 58: 174, 174, 71: 174, 88: 174},
-		{200: 955, 257: 956, 266: 954},
-		{1: 173, 173, 6: 173, 11: 173, 17: 173, 20: 173, 173, 39: 173, 58: 173, 173, 71: 173, 88: 173},
-		{1: 181, 181, 6: 181, 11: 181, 17: 181, 20: 181, 181, 39: 181, 58: 181, 181, 71: 181, 88: 181},
-		{1: 180, 180, 6: 180, 11: 180, 17: 180, 20: 180, 180, 39: 180, 58: 180, 180, 71: 180, 88: 180, 130: 960, 132: 959},
+		{1: 142, 142, 10: 142, 142},
+		{1: 134, 134, 10: 134, 134, 156: 951, 953, 957, 952},
+		{1: 143, 143, 10: 143, 143},
+		{1: 134, 134, 10: 134, 134, 156: 951, 953, 959, 952},
+		{1: 144, 144, 10: 144, 144},
 		// 540
-		{1: 177, 177, 6: 177, 11: 177, 17: 177, 20: 177, 177, 39: 177, 58: 177, 177, 71: 177, 88: 177, 130: 958, 132: 957},
-		{1: 176, 176, 6: 176, 11: 176, 17: 176, 20: 176, 176, 39: 176, 58: 176, 176, 71: 176, 88: 176},
-		{1: 175, 175, 6: 175, 11: 175, 17: 175, 20: 175, 175, 39: 175, 58: 175, 175, 71: 175, 88: 175},
-		{1: 179, 179, 6: 179, 11: 179, 17: 179, 20: 179, 179, 39: 179, 58: 179, 179, 71: 179, 88: 179},
-		{1: 178, 178, 6: 178, 11: 178, 17: 178, 20: 178, 178, 39: 178, 58: 178, 178, 71: 178, 88: 178},
+		{1: 149, 149, 10: 149, 149, 17: 149, 20: 149, 149},
+		{17: 968, 39: 969, 169: 967, 238: 970},
+		{21: 963},
+		{39: 964},
+		{44: 442, 441, 59: 456, 68: 470, 91: 965},
 		// 545
-		{1: 148, 148, 6: 148, 11: 148, 17: 937, 20: 148, 936, 39: 939, 137: 913, 156: 912, 962},
-		{1: 185, 185, 6: 185, 11: 185, 20: 185},
-		{1: 148, 148, 6: 148, 11: 148, 17: 937, 20: 148, 936, 137: 913, 156: 912, 996},
-		{1: 172, 172, 6: 172, 11: 172, 17: 172, 20: 172, 172, 39: 946, 58: 172, 172, 71: 172, 88: 966, 326: 965},
-		{1: 166, 166, 6: 166, 11: 166, 17: 166, 20: 166, 166, 58: 166, 166, 71: 973, 322: 972},
+		{966, 3: 472},
+		{1: 146, 146, 10: 146, 146, 17: 146, 20: 146, 146},
+		{85: 977, 187: 978},
+		{169: 976},
+		{44: 442, 441, 59: 456, 68: 470, 91: 974},
 		// 550
-		{130: 970, 132: 968, 967, 261: 971, 283: 969},
-		{1: 171, 171, 6: 171, 11: 171, 17: 171, 20: 171, 171, 58: 171, 171, 71: 171},
-		{1: 170, 170, 6: 170, 11: 170, 17: 170, 20: 170, 170, 58: 170, 170, 71: 170},
-		{1: 169, 169, 6: 169, 11: 169, 17: 169, 20: 169, 169, 58: 169, 169, 71: 169},
-		{1: 168, 168, 6: 168, 11: 168, 17: 168, 20: 168, 168, 58: 168, 168, 71: 168},
+		{39: 971},
+		{44: 442, 441, 59: 456, 68: 470, 91: 972},
+		{973, 3: 472},
+		{1: 147, 147, 10: 147, 147, 17: 147, 20: 147, 147},
+		{975, 3: 472},
 		// 555
-		{1: 167, 167, 6: 167, 11: 167, 17: 167, 20: 167, 167, 58: 167, 167, 71: 167},
-		{1: 154, 154, 6: 154, 11: 154, 17: 990, 20: 154, 154, 58: 154, 989, 325: 988},
-		{1: 164, 164, 6: 164, 11: 164, 17: 164, 20: 164, 164, 58: 164, 164, 85: 164, 145: 976, 182: 975, 323: 974},
-		{1: 159, 159, 6: 159, 11: 159, 17: 159, 20: 159, 159, 58: 159, 159, 85: 982, 324: 981},
-		{1: 163, 163, 6: 163, 11: 163, 17: 163, 20: 163, 163, 58: 163, 163, 85: 163},
+		{1: 148, 148, 10: 148, 148, 17: 148, 20: 148, 148},
+		{1: 178, 178, 10: 178, 178, 17: 178, 20: 178, 178, 39: 178, 58: 178, 60: 178, 71: 178, 88: 178},
+		{205: 980, 260: 981, 269: 979},
+		{1: 177, 177, 10: 177, 177, 17: 177, 20: 177, 177, 39: 177, 58: 177, 60: 177, 71: 177, 88: 177},
+		{1: 185, 185, 10: 185, 185, 17: 185, 20: 185, 185, 39: 185, 58: 185, 60: 185, 71: 185, 88: 185},
 		// 560
-		{94: 977, 198: 978, 292: 979},
-		{288: 980},
-		{1: 161, 161, 6: 161, 11: 161, 17: 161, 20: 161, 161, 58: 161, 161, 85: 161},
-		{1: 160, 160, 6: 160, 11: 160, 17: 160, 20: 160, 160, 58: 160, 160, 85: 160},
-		{1: 162, 162, 6: 162, 11: 162, 17: 162, 20: 162, 162, 58: 162, 162, 85: 162},
+		{1: 184, 184, 10: 184, 184, 17: 184, 20: 184, 184, 39: 184, 58: 184, 60: 184, 71: 184, 88: 184, 136: 985, 138: 984},
+		{1: 181, 181, 10: 181, 181, 17: 181, 20: 181, 181, 39: 181, 58: 181, 60: 181, 71: 181, 88: 181, 136: 983, 138: 982},
+		{1: 180, 180, 10: 180, 180, 17: 180, 20: 180, 180, 39: 180, 58: 180, 60: 180, 71: 180, 88: 180},
+		{1: 179, 179, 10: 179, 179, 17: 179, 20: 179, 179, 39: 179, 58: 179, 60: 179, 71: 179, 88: 179},
+		{1: 183, 183, 10: 183, 183, 17: 183, 20: 183, 183, 39: 183, 58: 183, 60: 183, 71: 183, 88: 183},
 		// 565
-		{1: 165, 165, 6: 165, 11: 165, 17: 165, 20: 165, 165, 58: 165, 165},
-		{290: 983},
-		{18: 984, 44: 438, 437, 60: 986, 133: 987, 143: 985},
-		{1: 158, 158, 6: 158, 11: 158, 17: 158, 20: 158, 158, 58: 158, 158},
-		{1: 157, 157, 6: 157, 11: 157, 17: 157, 20: 157, 157, 58: 157, 157},
+		{1: 182, 182, 10: 182, 182, 17: 182, 20: 182, 182, 39: 182, 58: 182, 60: 182, 71: 182, 88: 182},
+		{1: 152, 152, 10: 152, 152, 17: 962, 20: 152, 961, 39: 964, 143: 938, 161: 937, 987},
+		{1: 189, 189, 10: 189, 189, 20: 189},
+		{1: 152, 152, 10: 152, 152, 17: 962, 20: 152, 961, 143: 938, 161: 937, 1021},
+		{1: 176, 176, 10: 176, 176, 17: 176, 20: 176, 176, 39: 971, 58: 176, 60: 176, 71: 176, 88: 991, 328: 990},
 		// 570
-		{1: 156, 156, 6: 156, 11: 156, 17: 156, 20: 156, 156, 58: 156, 156},
-		{1: 155, 155, 6: 155, 11: 155, 17: 155, 20: 155, 155, 58: 155, 155},
-		{1: 150, 150, 6: 150, 11: 150, 17: 150, 20: 150, 150, 58: 994, 327: 993},
-		{1: 153, 153, 6: 153, 11: 153, 17: 153, 20: 153, 153, 58: 153, 143: 992},
-		{59: 991},
+		{1: 170, 170, 10: 170, 170, 17: 170, 20: 170, 170, 58: 170, 60: 170, 71: 998, 324: 997},
+		{136: 995, 138: 993, 992, 264: 996, 285: 994},
+		{1: 175, 175, 10: 175, 175, 17: 175, 20: 175, 175, 58: 175, 60: 175, 71: 175},
+		{1: 174, 174, 10: 174, 174, 17: 174, 20: 174, 174, 58: 174, 60: 174, 71: 174},
+		{1: 173, 173, 10: 173, 173, 17: 173, 20: 173, 173, 58: 173, 60: 173, 71: 173},
 		// 575
-		{1: 151, 151, 6: 151, 11: 151, 17: 151, 20: 151, 151, 58: 151},
-		{1: 152, 152, 6: 152, 11: 152, 17: 152, 20: 152, 152, 58: 152},
-		{1: 183, 183, 6: 183, 11: 183, 17: 183, 20: 183, 183},
-		{44: 438, 437, 60: 452, 68: 995},
-		{1: 149, 149, 6: 149, 11: 149, 17: 149, 20: 149, 149},
+		{1: 172, 172, 10: 172, 172, 17: 172, 20: 172, 172, 58: 172, 60: 172, 71: 172},
+		{1: 171, 171, 10: 171, 171, 17: 171, 20: 171, 171, 58: 171, 60: 171, 71: 171},
+		{1: 158, 158, 10: 158, 158, 17: 1015, 20: 158, 158, 58: 158, 60: 1014, 327: 1013},
+		{1: 168, 168, 10: 168, 168, 17: 168, 20: 168, 168, 58: 168, 60: 168, 85: 168, 151: 1001, 187: 1000, 325: 999},
+		{1: 163, 163, 10: 163, 163, 17: 163, 20: 163, 163, 58: 163, 60: 163, 85: 1007, 326: 1006},
 		// 580
-		{1: 186, 186, 6: 186, 11: 186, 20: 186},
-		{1: 187, 187, 6: 187, 11: 187, 17: 910, 20: 187, 909, 137: 913, 156: 912, 911, 236: 999},
-		{1: 250, 250, 6: 250, 11: 250, 14: 250, 17: 250, 20: 250, 250, 27: 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250},
-		{1: 141, 141, 6: 141, 11: 141, 20: 915, 232: 1000},
-		{1: 265, 265, 6: 265, 11: 265},
+		{1: 167, 167, 10: 167, 167, 17: 167, 20: 167, 167, 58: 167, 60: 167, 85: 167},
+		{95: 1002, 203: 1003, 294: 1004},
+		{290: 1005},
+		{1: 165, 165, 10: 165, 165, 17: 165, 20: 165, 165, 58: 165, 60: 165, 85: 165},
+		{1: 164, 164, 10: 164, 164, 17: 164, 20: 164, 164, 58: 164, 60: 164, 85: 164},
 		// 585
-		{1: 278, 278, 6: 278, 11: 278},
-		{1: 281, 281, 11: 1012, 341: 1011},
-		{1: 4, 4, 6: 1008, 11: 4, 239: 1007},
-		{85: 1005},
-		{201: 1006},
+		{1: 166, 166, 10: 166, 166, 17: 166, 20: 166, 166, 58: 166, 60: 166, 85: 166},
+		{1: 169, 169, 10: 169, 169, 17: 169, 20: 169, 169, 58: 169, 60: 169},
+		{292: 1008},
+		{18: 1009, 44: 442, 441, 59: 1011, 139: 1012, 149: 1010},
+		{1: 162, 162, 10: 162, 162, 17: 162, 20: 162, 162, 58: 162, 60: 162},
 		// 590
-		{1: 5, 5, 6: 5, 11: 5, 13: 5, 5, 17: 5, 40: 5, 5, 5, 83: 5},
-		{1: 7, 7, 11: 7},
-		{85: 1009},
-		{211: 1010},
-		{1: 3, 3, 11: 3, 13: 3, 3, 40: 3, 3, 3, 83: 3},
+		{1: 161, 161, 10: 161, 161, 17: 161, 20: 161, 161, 58: 161, 60: 161},
+		{1: 160, 160, 10: 160, 160, 17: 160, 20: 160, 160, 58: 160, 60: 160},
+		{1: 159, 159, 10: 159, 159, 17: 159, 20: 159, 159, 58: 159, 60: 159},
+		{1: 154, 154, 10: 154, 154, 17: 154, 20: 154, 154, 58: 1019, 329: 1018},
+		{1: 157, 157, 10: 157, 157, 17: 157, 20: 157, 157, 58: 157, 149: 1017},
 		// 595
-		{1: 295, 295},
-		{44: 438, 437, 60: 436, 142: 1013},
-		{1: 280, 280},
-		{44: 438, 437, 60: 1015},
-		{407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 13: 407, 407, 17: 407, 407, 27: 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 407, 61: 407, 407, 407, 407, 407, 407, 407, 83: 407, 134: 407},
+		{60: 1016},
+		{1: 155, 155, 10: 155, 155, 17: 155, 20: 155, 155, 58: 155},
+		{1: 156, 156, 10: 156, 156, 17: 156, 20: 156, 156, 58: 156},
+		{1: 187, 187, 10: 187, 187, 17: 187, 20: 187, 187},
+		{44: 442, 441, 59: 456, 68: 1020},
 		// 600
-		{44: 438, 437, 60: 436, 142: 1017},
-		{6: 1004, 13: 6, 6, 17: 1021, 40: 6, 6, 6, 83: 6, 238: 1020, 331: 1018, 1019},
-		{13: 1043, 1041, 40: 1042, 1038, 1039, 83: 1044, 213: 1035, 215: 1034, 223: 1037, 240: 1036, 242: 1040, 298: 1032, 1031, 347: 1033},
-		{6: 1008, 13: 4, 4, 17: 1027, 40: 4, 4, 4, 83: 4, 239: 1026, 333: 1025},
-		{6: 11, 13: 11, 11, 17: 11, 40: 11, 11, 11, 83: 11},
+		{1: 153, 153, 10: 153, 153, 17: 153, 20: 153, 153},
+		{1: 190, 190, 10: 190, 190, 20: 190},
+		{1: 191, 191, 10: 191, 191, 17: 935, 20: 191, 934, 143: 938, 161: 937, 936, 239: 1024},
+		{1: 254, 254, 10: 254, 254, 14: 254, 17: 254, 20: 254, 254, 27: 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254},
+		{1: 145, 145, 10: 145, 145, 20: 940, 235: 1025},
 		// 605
-		{6: 1022},
-		{85: 1023},
-		{201: 1024},
-		{6: 10, 13: 10, 10, 17: 10, 40: 10, 10, 10, 83: 10},
-		{13: 12, 12, 40: 12, 12, 12, 83: 12},
+		{1: 269, 269, 10: 269, 269},
+		{1: 282, 282, 10: 282, 282},
+		{1: 285, 285, 11: 1037, 343: 1036},
+		{1: 4, 4, 10: 1033, 4, 242: 1032},
+		{85: 1030},
 		// 610
-		{13: 9, 9, 40: 9, 9, 9, 83: 9},
-		{6: 1028},
-		{85: 1029},
-		{211: 1030},
-		{13: 8, 8, 40: 8, 8, 8, 83: 8},
+		{206: 1031},
+		{1: 5, 5, 10: 5, 5, 13: 5, 5, 17: 5, 40: 5, 5, 5, 83: 5},
+		{1: 7, 7, 11: 7},
+		{85: 1034},
+		{216: 1035},
 		// 615
-		{1: 401, 401},
-		{1: 400, 400, 13: 1043, 1041, 40: 1042, 1038, 1039, 213: 1035, 215: 1124, 223: 1037, 240: 1036, 242: 1040},
-		{1: 399, 399},
-		{1: 398, 398, 13: 398, 398, 40: 398, 398, 398},
-		{1: 396, 396, 13: 396, 396, 40: 396, 396, 396},
+		{1: 3, 3, 11: 3, 13: 3, 3, 40: 3, 3, 3, 83: 3},
+		{1: 299, 299},
+		{44: 442, 441, 59: 440, 148: 1038},
+		{1: 284, 284},
+		{44: 442, 441, 59: 1040},
 		// 620
-		{1: 395, 395, 13: 395, 395, 40: 395, 395, 395},
-		{1: 394, 394, 13: 394, 394, 40: 394, 394, 394},
-		{39: 1116},
-		{39: 1089},
-		{1: 330, 330, 13: 330, 330, 40: 330, 330, 330},
+		{411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 13: 411, 411, 17: 411, 411, 27: 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 411, 61: 411, 411, 411, 411, 411, 411, 411, 83: 411, 140: 411},
+		{44: 442, 441, 59: 440, 148: 1042},
+		{10: 1029, 13: 6, 6, 17: 1046, 40: 6, 6, 6, 83: 6, 241: 1045, 333: 1043, 1044},
+		{13: 1068, 1066, 40: 1067, 1063, 1064, 83: 1069, 218: 1060, 220: 1059, 226: 1062, 243: 1061, 245: 1065, 300: 1057, 1056, 349: 1058},
+		{10: 1033, 13: 4, 4, 17: 1052, 40: 4, 4, 4, 83: 4, 242: 1051, 335: 1050},
 		// 625
-		{44: 438, 437, 60: 452, 68: 1076},
-		{210: 1071},
-		{14: 1052, 39: 1053, 185: 1051, 210: 1050, 217: 1049},
-		{14: 1045},
-		{44: 438, 437, 60: 452, 68: 1046},
+		{10: 11, 13: 11, 11, 17: 11, 40: 11, 11, 11, 83: 11},
+		{10: 1047},
+		{85: 1048},
+		{206: 1049},
+		{10: 10, 13: 10, 10, 17: 10, 40: 10, 10, 10, 83: 10},
 		// 630
-		{96: 1047},
-		{44: 438, 437, 60: 452, 68: 1048},
-		{1: 296, 296},
-		{1: 306, 306, 13: 306, 306, 40: 306, 306, 306, 82: 306, 84: 1066, 86: 1067, 172: 1065, 224: 1064, 1063},
-		{185: 1061},
+		{13: 12, 12, 40: 12, 12, 12, 83: 12},
+		{13: 9, 9, 40: 9, 9, 9, 83: 9},
+		{10: 1053},
+		{85: 1054},
+		{216: 1055},
 		// 635
-		{259: 1057},
-		{44: 438, 437, 60: 452, 68: 1056},
-		{44: 438, 437, 60: 452, 68: 723, 125: 1054},
-		{1055, 3: 725},
-		{1: 307, 307, 13: 307, 307, 40: 307, 307, 307, 82: 307, 84: 307, 86: 307, 307},
+		{13: 8, 8, 40: 8, 8, 8, 83: 8},
+		{1: 405, 405},
+		{1: 404, 404, 13: 1068, 1066, 40: 1067, 1063, 1064, 218: 1060, 220: 1149, 226: 1062, 243: 1061, 245: 1065},
+		{1: 403, 403},
+		{1: 402, 402, 13: 402, 402, 40: 402, 402, 402},
 		// 640
-		{1: 308, 308, 13: 308, 308, 40: 308, 308, 308, 82: 308, 84: 308, 86: 308, 308},
-		{1: 298, 298, 13: 298, 298, 40: 298, 298, 298, 82: 1059, 171: 1058},
-		{1: 309, 309, 13: 309, 309, 40: 309, 309, 309},
-		{43: 1060},
-		{1: 297, 297, 13: 297, 297, 40: 297, 297, 297},
+		{1: 400, 400, 13: 400, 400, 40: 400, 400, 400},
+		{1: 399, 399, 13: 399, 399, 40: 399, 399, 399},
+		{1: 398, 398, 13: 398, 398, 40: 398, 398, 398},
+		{39: 1141},
+		{39: 1114},
 		// 645
-		{1: 298, 298, 13: 298, 298, 40: 298, 298, 298, 82: 1059, 171: 1062},
-		{1: 310, 310, 13: 310, 310, 40: 310, 310, 310},
-		{1: 298, 298, 13: 298, 298, 40: 298, 298, 298, 82: 1059, 171: 1070},
-		{1: 305, 305, 13: 305, 305, 40: 305, 305, 305, 82: 305, 84: 1066, 86: 1067, 305, 172: 1069},
-		{1: 304, 304, 13: 304, 304, 40: 304, 304, 304, 82: 304, 84: 304, 86: 304, 304},
+		{1: 334, 334, 13: 334, 334, 40: 334, 334, 334},
+		{44: 442, 441, 59: 456, 68: 1101},
+		{215: 1096},
+		{14: 1077, 39: 1078, 190: 1076, 215: 1075, 222: 1074},
+		{14: 1070},
 		// 650
-		{258: 1068},
-		{1: 301, 301, 13: 301, 301, 40: 301, 301, 301, 82: 301, 84: 301, 86: 301, 301},
-		{1: 302, 302, 13: 302, 302, 40: 302, 302, 302, 82: 302, 84: 302, 86: 302, 302},
-		{1: 303, 303, 13: 303, 303, 40: 303, 303, 303, 82: 303, 84: 303, 86: 303, 303},
-		{1: 311, 311, 13: 311, 311, 40: 311, 311, 311},
+		{44: 442, 441, 59: 456, 68: 1071},
+		{97: 1072},
+		{44: 442, 441, 59: 456, 68: 1073},
+		{1: 300, 300},
+		{1: 310, 310, 13: 310, 310, 40: 310, 310, 310, 82: 310, 84: 1091, 86: 1092, 176: 1090, 227: 1089, 1088},
 		// 655
-		{14: 1052, 39: 1053, 217: 1072},
-		{1: 306, 306, 13: 306, 306, 40: 306, 306, 306, 84: 1066, 86: 1067, 306, 172: 1065, 224: 1064, 1073},
-		{1: 300, 300, 13: 300, 300, 40: 300, 300, 300, 87: 1075, 310: 1074},
-		{1: 312, 312, 13: 312, 312, 40: 312, 312, 312},
-		{1: 299, 299, 13: 299, 299, 40: 299, 299, 299},
+		{190: 1086},
+		{262: 1082},
+		{44: 442, 441, 59: 456, 68: 1081},
+		{44: 442, 441, 59: 456, 68: 470, 91: 1079},
+		{1080, 3: 472},
 		// 660
-		{5: 1078, 135: 1077},
-		{181: 1085},
-		{135: 1079},
-		{181: 1080},
-		{143: 1081},
-		// 665
-		{194: 1082},
-		{1: 314, 314, 13: 314, 314, 40: 314, 314, 314, 191: 1084, 237: 1083},
-		{1: 315, 315, 13: 315, 315, 40: 315, 315, 315},
+		{1: 311, 311, 13: 311, 311, 40: 311, 311, 311, 82: 311, 84: 311, 86: 311, 311},
+		{1: 312, 312, 13: 312, 312, 40: 312, 312, 312, 82: 312, 84: 312, 86: 312, 312},
+		{1: 302, 302, 13: 302, 302, 40: 302, 302, 302, 82: 1084, 175: 1083},
 		{1: 313, 313, 13: 313, 313, 40: 313, 313, 313},
-		{143: 1086},
+		{43: 1085},
+		// 665
+		{1: 301, 301, 13: 301, 301, 40: 301, 301, 301},
+		{1: 302, 302, 13: 302, 302, 40: 302, 302, 302, 82: 1084, 175: 1087},
+		{1: 314, 314, 13: 314, 314, 40: 314, 314, 314},
+		{1: 302, 302, 13: 302, 302, 40: 302, 302, 302, 82: 1084, 175: 1095},
+		{1: 309, 309, 13: 309, 309, 40: 309, 309, 309, 82: 309, 84: 1091, 86: 1092, 309, 176: 1094},
 		// 670
-		{194: 1087},
-		{1: 314, 314, 13: 314, 314, 40: 314, 314, 314, 191: 1084, 237: 1088},
-		{1: 316, 316, 13: 316, 316, 40: 316, 316, 316},
-		{44: 438, 437, 60: 452, 68: 1094, 241: 1092, 243: 1095, 1093, 334: 1090, 1091},
-		{1112, 3: 1113},
+		{1: 308, 308, 13: 308, 308, 40: 308, 308, 308, 82: 308, 84: 308, 86: 308, 308},
+		{261: 1093},
+		{1: 305, 305, 13: 305, 305, 40: 305, 305, 305, 82: 305, 84: 305, 86: 305, 305},
+		{1: 306, 306, 13: 306, 306, 40: 306, 306, 306, 82: 306, 84: 306, 86: 306, 306},
+		{1: 307, 307, 13: 307, 307, 40: 307, 307, 307, 82: 307, 84: 307, 86: 307, 307},
 		// 675
-		{1108, 3: 1109},
-		{329, 3: 329},
-		{327, 3: 327},
-		{23: 630, 631, 90: 470, 94: 487, 97: 489, 479, 486, 477, 476, 483, 484, 480, 494, 493, 498, 475, 496, 495, 482, 478, 491, 472, 485, 474, 492, 473, 499, 497, 481, 488, 490, 471, 164: 463, 464, 169: 1096, 467, 173: 1097, 468, 466, 465, 462, 469},
-		{319, 3: 319},
+		{1: 315, 315, 13: 315, 315, 40: 315, 315, 315},
+		{14: 1077, 39: 1078, 222: 1097},
+		{1: 310, 310, 13: 310, 310, 40: 310, 310, 310, 84: 1091, 86: 1092, 310, 176: 1090, 227: 1089, 1098},
+		{1: 304, 304, 13: 304, 304, 40: 304, 304, 304, 87: 1100, 312: 1099},
+		{1: 316, 316, 13: 316, 316, 40: 316, 316, 316},
 		// 680
-		{386, 3: 386, 386, 386, 7: 386, 386, 386, 386, 12: 386, 386, 18: 386, 386, 22: 386, 26: 624, 166: 623, 216: 1098},
-		{317, 3: 317},
-		{377, 3: 377, 377, 377, 7: 377, 377, 377, 377, 12: 377, 1100, 18: 635, 377, 22: 636, 221: 633, 1101, 230: 634, 308: 1099},
-		{349, 3: 349, 349, 349, 7: 349, 349, 349, 349, 12: 687, 19: 1104, 227: 1105, 312: 1103},
-		{131: 1102},
+		{1: 303, 303, 13: 303, 303, 40: 303, 303, 303},
+		{4: 1103, 141: 1102},
+		{186: 1110},
+		{141: 1104},
+		{186: 1105},
 		// 685
-		{324, 3: 324, 324, 324, 7: 324, 324, 324, 324, 12: 324, 19: 324},
-		{325, 3: 325, 325, 325, 7: 325, 325, 325, 325, 12: 325, 19: 325},
-		{321, 3: 321, 42, 42, 7: 42, 42, 42, 706, 148: 757, 155: 705, 233: 1106, 302: 1107},
-		{323, 3: 323, 323, 323, 7: 323, 323, 323, 323},
-		{322, 3: 322, 322, 322, 7: 322, 322, 322, 322},
+		{149: 1106},
+		{199: 1107},
+		{1: 318, 318, 13: 318, 318, 40: 318, 318, 318, 196: 1109, 240: 1108},
+		{1: 319, 319, 13: 319, 319, 40: 319, 319, 319},
+		{1: 317, 317, 13: 317, 317, 40: 317, 317, 317},
 		// 690
-		{320, 3: 320, 42, 42, 7: 42, 42, 42, 706, 148: 757, 155: 756},
-		{326, 3: 326},
-		{1: 331, 331, 13: 331, 331, 40: 331, 331, 331},
-		{44: 438, 437, 60: 452, 68: 1111, 243: 1110},
-		{318, 3: 318},
+		{149: 1111},
+		{199: 1112},
+		{1: 318, 318, 13: 318, 318, 40: 318, 318, 318, 196: 1109, 240: 1113},
+		{1: 320, 320, 13: 320, 320, 40: 320, 320, 320},
+		{44: 442, 441, 59: 456, 68: 1119, 244: 1117, 246: 1120, 1118, 336: 1115, 1116},
 		// 695
-		{23: 630, 631, 173: 1097},
-		{1: 332, 332, 13: 332, 332, 40: 332, 332, 332},
-		{44: 438, 437, 60: 452, 68: 1115, 241: 1114, 244: 1093},
-		{328, 3: 328},
-		{90: 470, 94: 487, 97: 489, 479, 486, 477, 476, 483, 484, 480, 494, 493, 498, 475, 496, 495, 482, 478, 491, 472, 485, 474, 492, 473, 499, 497, 481, 488, 490, 471, 164: 463, 464, 169: 1096, 467, 174: 468, 466, 465, 462, 469},
+		{1137, 3: 1138},
+		{1133, 3: 1134},
+		{333, 3: 333},
+		{331, 3: 331},
+		{23: 688, 689, 90: 528, 95: 545, 98: 547, 537, 102: 544, 535, 534, 541, 542, 538, 552, 551, 556, 533, 113: 554, 553, 540, 536, 549, 530, 543, 532, 550, 531, 557, 555, 539, 546, 548, 529, 170: 521, 522, 173: 1121, 525, 177: 1122, 526, 524, 523, 520, 183: 527},
 		// 700
-		{44: 438, 437, 60: 452, 68: 454, 147: 1118, 158: 453, 304: 1117},
-		{1119, 3: 1120},
-		{390, 3: 390},
-		{1: 392, 392, 13: 392, 392, 40: 392, 392, 392, 306: 1122},
-		{44: 438, 437, 60: 452, 68: 454, 147: 1121, 158: 453},
+		{323, 3: 323},
+		{390, 3: 390, 390, 390, 390, 390, 390, 390, 12: 390, 390, 18: 390, 390, 22: 390, 26: 682, 172: 681, 221: 1123},
+		{321, 3: 321},
+		{381, 3: 381, 381, 381, 381, 381, 381, 381, 12: 381, 1125, 18: 693, 381, 22: 694, 224: 691, 1126, 233: 692, 310: 1124},
+		{353, 3: 353, 353, 353, 353, 353, 353, 353, 12: 745, 19: 1129, 230: 1130, 314: 1128},
 		// 705
-		{389, 3: 389},
-		{1: 391, 391, 13: 391, 391, 40: 391, 391, 391, 340: 1123},
-		{1: 393, 393, 13: 393, 393, 40: 393, 393, 393},
-		{1: 397, 397, 13: 397, 397, 40: 397, 397, 397},
-		{1: 409, 409, 180: 423, 187: 424, 214: 421, 220: 422, 226: 420, 248: 1126},
+		{137: 1127},
+		{328, 3: 328, 328, 328, 328, 328, 328, 328, 12: 328, 19: 328},
+		{329, 3: 329, 329, 329, 329, 329, 329, 329, 12: 329, 19: 329},
+		{325, 3: 325, 45, 45, 45, 45, 45, 463, 129: 781, 160: 763, 236: 1131, 304: 1132},
+		{327, 3: 327, 327, 327, 327, 327, 327, 327},
 		// 710
-		{1: 413, 413},
+		{326, 3: 326, 326, 326, 326, 326, 326, 326},
+		{324, 3: 324, 45, 45, 45, 45, 45, 463, 129: 781, 160: 780},
+		{330, 3: 330},
+		{1: 335, 335, 13: 335, 335, 40: 335, 335, 335},
+		{44: 442, 441, 59: 456, 68: 1136, 246: 1135},
+		// 715
+		{322, 3: 322},
+		{23: 688, 689, 177: 1122},
+		{1: 336, 336, 13: 336, 336, 40: 336, 336, 336},
+		{44: 442, 441, 59: 456, 68: 1140, 244: 1139, 247: 1118},
+		{332, 3: 332},
+		// 720
+		{90: 528, 95: 545, 98: 547, 537, 102: 544, 535, 534, 541, 542, 538, 552, 551, 556, 533, 113: 554, 553, 540, 536, 549, 530, 543, 532, 550, 531, 557, 555, 539, 546, 548, 529, 170: 521, 522, 173: 1121, 525, 178: 526, 524, 523, 520, 183: 527},
+		{44: 442, 441, 59: 456, 68: 458, 153: 1143, 163: 457, 306: 1142},
+		{1144, 3: 1145},
+		{394, 3: 394},
+		{1: 396, 396, 13: 396, 396, 40: 396, 396, 396, 308: 1147},
+		// 725
+		{44: 442, 441, 59: 456, 68: 458, 153: 1146, 163: 457},
+		{393, 3: 393},
+		{1: 395, 395, 13: 395, 395, 40: 395, 395, 395, 342: 1148},
+		{1: 397, 397, 13: 397, 397, 40: 397, 397, 397},
+		{1: 401, 401, 13: 401, 401, 40: 401, 401, 401},
+		// 730
+		{1: 413, 413, 185: 427, 192: 428, 219: 425, 223: 426, 229: 424, 251: 1151},
+		{1: 417, 417},
 	}
 )
 
@@ -2310,7 +2344,7 @@ func yylex1(yylex yyLexer, lval *yySymType) (n int) {
 }
 
 func yyParse(yylex yyLexer) int {
-	const yyError = 361
+	const yyError = 363
 
 	yyEx, _ := yylex.(yyLexerEx)
 	var yyn int
@@ -2561,7 +2595,7 @@ yynewstate:
 		{
 			yyVAL.node = &ast.AlterTableStmt{
 				TableName:     yyS[yypt-2].anything.(*ast.TableName),
-				ColumnClauses: yyS[yypt-0].anything.([]ast.ColumnClause),
+				ColumnClauses: yyS[yypt-0].anything.([]ast.AlterTableClause),
 			}
 		}
 	case 16:
@@ -2570,15 +2604,15 @@ yynewstate:
 		}
 	case 17:
 		{
-			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
+			yyVAL.anything = []ast.AlterTableClause{yyS[yypt-0].anything.(ast.AlterTableClause)}
 		}
 	case 18:
 		{
-			yyVAL.anything = []ast.ColumnClause{yyS[yypt-0].anything.(ast.ColumnClause)}
+			yyVAL.anything = []ast.AlterTableClause{yyS[yypt-0].anything.(ast.AlterTableClause)}
 		}
 	case 19:
 		{
-			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.ColumnClause), yyS[yypt-0].anything.(ast.ColumnClause))
+			yyVAL.anything = append(yyS[yypt-1].anything.([]ast.AlterTableClause), yyS[yypt-0].anything.(ast.AlterTableClause))
 		}
 	case 23:
 		{
@@ -2621,11 +2655,18 @@ yynewstate:
 			if invisible != ast.ColumnPropEmpty {
 				props = append(props, invisible)
 			}
+
+			var constraints []*ast.InlineConstraint
+			if yyS[yypt-0].anything != nil {
+				constraints = yyS[yypt-0].anything.([]*ast.InlineConstraint)
+			}
+
 			yyVAL.anything = &ast.ColumnDef{
-				ColumnName: yyS[yypt-7].anything.(*element.Identifier),
-				Datatype:   yyS[yypt-6].anything.(element.Datatype),
-				Collation:  collation,
-				Props:      props,
+				ColumnName:  yyS[yypt-7].anything.(*element.Identifier),
+				Datatype:    yyS[yypt-6].anything.(element.Datatype),
+				Collation:   collation,
+				Props:       props,
+				Constraints: constraints,
 			}
 		}
 	case 30:
@@ -2694,7 +2735,23 @@ yynewstate:
 		}
 	case 79:
 		{
-			// empty
+			yyVAL.anything = nil
+		}
+	case 80:
+		{
+			yyVAL.anything = nil
+		}
+	case 81:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 82:
+		{
+			yyVAL.anything = []*ast.InlineConstraint{yyS[yypt-0].anything.(*ast.InlineConstraint)}
+		}
+	case 83:
+		{
+			yyVAL.anything = append(yyS[yypt-1].anything.([]*ast.InlineConstraint), yyS[yypt-0].anything.(*ast.InlineConstraint))
 		}
 	case 84:
 		{
@@ -2916,7 +2973,7 @@ yynewstate:
 		{
 			rd := &ast.RelTableDef{}
 			if yyS[yypt-6].anything != nil {
-				rd.Columns = yyS[yypt-6].anything.([]*ast.ColumnDef)
+				rd.TableStructs = yyS[yypt-6].anything.([]ast.TableStructDef)
 			}
 			yyVAL.anything = rd
 		}
@@ -3014,11 +3071,15 @@ yynewstate:
 		}
 	case 300:
 		{
-			yyVAL.anything = []*ast.ColumnDef{yyS[yypt-0].anything.(*ast.ColumnDef)}
+			yyVAL.anything = []ast.TableStructDef{yyS[yypt-0].anything.(ast.TableStructDef)}
 		}
 	case 301:
 		{
-			yyVAL.anything = append(yyS[yypt-2].anything.([]*ast.ColumnDef), yyS[yypt-0].anything.(*ast.ColumnDef))
+			yyVAL.anything = append(yyS[yypt-2].anything.([]ast.TableStructDef), yyS[yypt-0].anything.(ast.TableStructDef))
+		}
+	case 302:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 303:
 		{
@@ -3030,15 +3091,15 @@ yynewstate:
 		}
 	case 305:
 		{
-			yyVAL.anything = &element.NumberOrAsterisk{Number: yyS[yypt-0].i}
+			yyVAL.anything = yyS[yypt-0].anything
 		}
 	case 306:
 		{
-			yyVAL.anything = &element.NumberOrAsterisk{IsAsterisk: true}
+			yyVAL.anything = &element.NumberOrAsterisk{Number: yyS[yypt-0].i}
 		}
 	case 307:
 		{
-			yyVAL.anything = yyS[yypt-0].anything
+			yyVAL.anything = &element.NumberOrAsterisk{IsAsterisk: true}
 		}
 	case 308:
 		{
@@ -3062,25 +3123,29 @@ yynewstate:
 		}
 	case 313:
 		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 314:
+		{
 			d := &element.Char{}
 			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
-	case 314:
+	case 315:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Char{Size: &size}
 			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
-	case 315:
+	case 316:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsByteSize: true}
 			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
-	case 316:
+	case 317:
 		{
 			size := yyS[yypt-2].i
 			d := &element.Char{Size: &size, IsCharSize: true}
@@ -3088,20 +3153,11 @@ yynewstate:
 			d.SetDataDef(element.DataDefChar)
 			yyVAL.anything = d
 		}
-	case 317:
+	case 318:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDef(element.DataDefVarchar2)
-			yyVAL.anything = d
-		}
-	case 318:
-		{
-			size := yyS[yypt-2].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.IsByteSize = true
 			d.SetDataDef(element.DataDefVarchar2)
 			yyVAL.anything = d
 		}
@@ -3110,24 +3166,33 @@ yynewstate:
 			size := yyS[yypt-2].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.IsCharSize = true
+			d.IsByteSize = true
 			d.SetDataDef(element.DataDefVarchar2)
 			yyVAL.anything = d
 		}
 	case 320:
 		{
+			size := yyS[yypt-2].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.IsCharSize = true
+			d.SetDataDef(element.DataDefVarchar2)
+			yyVAL.anything = d
+		}
+	case 321:
+		{
 			d := &element.NChar{}
 			d.SetDataDef(element.DataDefNChar)
 			yyVAL.anything = d
 		}
-	case 321:
+	case 322:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDef(element.DataDefNChar)
 			yyVAL.anything = d
 		}
-	case 322:
+	case 323:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -3135,20 +3200,20 @@ yynewstate:
 			d.SetDataDef(element.DataDefNVarChar2)
 			yyVAL.anything = d
 		}
-	case 323:
+	case 324:
 		{
 			d := &element.Number{}
 			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
-	case 324:
+	case 325:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
-	case 325:
+	case 326:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
@@ -3156,110 +3221,110 @@ yynewstate:
 			d.SetDataDef(element.DataDefNumber)
 			yyVAL.anything = d
 		}
-	case 326:
+	case 327:
 		{
 			d := &element.Float{}
 			d.SetDataDef(element.DataDefFloat)
 			yyVAL.anything = d
 		}
-	case 327:
+	case 328:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Float{Precision: precision}
 			d.SetDataDef(element.DataDefFloat)
 			yyVAL.anything = d
 		}
-	case 328:
+	case 329:
 		{
 			d := &element.BinaryFloat{}
 			d.SetDataDef(element.DataDefBinaryFloat)
 			yyVAL.anything = d
 		}
-	case 329:
+	case 330:
 		{
 			d := &element.BinaryDouble{}
 			d.SetDataDef(element.DataDefBinaryDouble)
 			yyVAL.anything = d
 		}
-	case 330:
+	case 331:
 		{
 			d := &element.Long{}
 			d.SetDataDef(element.DataDefLong)
 			yyVAL.anything = d
 		}
-	case 331:
+	case 332:
 		{
 			d := &element.LongRaw{}
 			d.SetDataDef(element.DataDefLongRaw)
 			yyVAL.anything = d
 		}
-	case 332:
+	case 333:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Raw{Size: &size}
 			d.SetDataDef(element.DataDefRaw)
 			yyVAL.anything = d
 		}
-	case 333:
+	case 334:
 		{
 			d := &element.Date{}
 			d.SetDataDef(element.DataDefDate)
 			yyVAL.anything = d
 		}
-	case 334:
+	case 335:
 		{
 			d := &element.Timestamp{}
 			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
-	case 335:
+	case 336:
 		{
 			precision := yyS[yypt-1].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision}
 			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
-	case 336:
+	case 337:
 		{
 			precision := yyS[yypt-4].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
 			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
-	case 337:
+	case 338:
 		{
 			precision := yyS[yypt-5].i
 			d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
 			d.SetDataDef(element.DataDefTimestamp)
 			yyVAL.anything = d
 		}
-	case 338:
+	case 339:
 		{
 			d := &element.IntervalYear{}
 			d.SetDataDef(element.DataDefIntervalYear)
 			yyVAL.anything = d
 		}
-	case 339:
+	case 340:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalYear{Precision: &precision}
 			d.SetDataDef(element.DataDefIntervalYear)
 			yyVAL.anything = d
 		}
-	case 340:
+	case 341:
 		{
 			d := &element.IntervalDay{}
 			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
-	case 341:
+	case 342:
 		{
 			precision := yyS[yypt-3].i
 			d := &element.IntervalDay{Precision: &precision}
 			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
-	case 342:
+	case 343:
 		{
 			precision := yyS[yypt-6].i
 			sPrecision := yyS[yypt-1].i
@@ -3267,68 +3332,60 @@ yynewstate:
 			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
-	case 343:
+	case 344:
 		{
 			sPrecision := yyS[yypt-1].i
 			d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
 			d.SetDataDef(element.DataDefIntervalDay)
 			yyVAL.anything = d
 		}
-	case 344:
+	case 345:
 		{
 			d := &element.Blob{}
 			d.SetDataDef(element.DataDefBlob)
 			yyVAL.anything = d
 		}
-	case 345:
+	case 346:
 		{
 			d := &element.Clob{}
 			d.SetDataDef(element.DataDefClob)
 			yyVAL.anything = d
 		}
-	case 346:
+	case 347:
 		{
 			d := &element.NClob{}
 			d.SetDataDef(element.DataDefNClob)
 			yyVAL.anything = d
 		}
-	case 347:
+	case 348:
 		{
 			d := &element.BFile{}
 			d.SetDataDef(element.DataDefBFile)
 			yyVAL.anything = d
 		}
-	case 348:
+	case 349:
 		{
 			d := &element.RowId{}
 			d.SetDataDef(element.DataDefRowId)
 			yyVAL.anything = d
 		}
-	case 349:
+	case 350:
 		{
 			d := &element.URowId{}
 			d.SetDataDef(element.DataDefURowId)
 			yyVAL.anything = d
 		}
-	case 350:
+	case 351:
 		{
 			size := yyS[yypt-1].i
 			d := &element.URowId{Size: &size}
 			d.SetDataDef(element.DataDefURowId)
 			yyVAL.anything = d
 		}
-	case 351:
+	case 352:
 		{
 			d := &element.Char{}
 			d.SetDataDef(element.DataDefCharacter)
-			yyVAL.anything = d
-		}
-	case 352:
-		{
-			size := yyS[yypt-1].i
-			d := &element.Varchar2{}
-			d.Size = &size
-			d.SetDataDef(element.DataDefCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 353:
@@ -3336,10 +3393,18 @@ yynewstate:
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
 			d.Size = &size
-			d.SetDataDef(element.DataDefCharVarying)
+			d.SetDataDef(element.DataDefCharacterVarying)
 			yyVAL.anything = d
 		}
 	case 354:
+		{
+			size := yyS[yypt-1].i
+			d := &element.Varchar2{}
+			d.Size = &size
+			d.SetDataDef(element.DataDefCharVarying)
+			yyVAL.anything = d
+		}
+	case 355:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -3347,7 +3412,7 @@ yynewstate:
 			d.SetDataDef(element.DataDefNCharVarying)
 			yyVAL.anything = d
 		}
-	case 355:
+	case 356:
 		{
 			size := yyS[yypt-1].i
 			d := &element.Varchar2{}
@@ -3355,14 +3420,14 @@ yynewstate:
 			d.SetDataDef(element.DataDefVarchar)
 			yyVAL.anything = d
 		}
-	case 356:
+	case 357:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDef(element.DataDefNationalCharacter)
 			yyVAL.anything = d
 		}
-	case 357:
+	case 358:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -3370,14 +3435,14 @@ yynewstate:
 			d.SetDataDef(element.DataDefNationalCharacterVarying)
 			yyVAL.anything = d
 		}
-	case 358:
+	case 359:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NChar{Size: &size}
 			d.SetDataDef(element.DataDefNationalChar)
 			yyVAL.anything = d
 		}
-	case 359:
+	case 360:
 		{
 			size := yyS[yypt-1].i
 			d := &element.NVarchar2{}
@@ -3385,129 +3450,197 @@ yynewstate:
 			d.SetDataDef(element.DataDefNationalCharVarying)
 			yyVAL.anything = d
 		}
-	case 360:
-		{
-			d := &element.Number{}
-			d.SetDataDef(element.DataDefNumeric)
-			yyVAL.anything = d
-		}
 	case 361:
 		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Number{Precision: precision}
+			d := &element.Number{}
 			d.SetDataDef(element.DataDefNumeric)
 			yyVAL.anything = d
 		}
 	case 362:
 		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Number{Precision: precision}
+			d.SetDataDef(element.DataDefNumeric)
+			yyVAL.anything = d
+		}
+	case 363:
+		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDef(element.DataDefNumeric)
 			yyVAL.anything = d
 		}
-	case 363:
-		{
-			d := &element.Number{}
-			d.SetDataDef(element.DataDefDecimal)
-			yyVAL.anything = d
-		}
 	case 364:
 		{
-			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
-			d := &element.Number{Precision: precision}
+			d := &element.Number{}
 			d.SetDataDef(element.DataDefDecimal)
 			yyVAL.anything = d
 		}
 	case 365:
 		{
+			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
+			d := &element.Number{Precision: precision}
+			d.SetDataDef(element.DataDefDecimal)
+			yyVAL.anything = d
+		}
+	case 366:
+		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDef(element.DataDefDecimal)
 			yyVAL.anything = d
 		}
-	case 366:
+	case 367:
 		{
 			d := &element.Number{}
 			d.SetDataDef(element.DataDefDec)
 			yyVAL.anything = d
 		}
-	case 367:
+	case 368:
 		{
 			precision := yyS[yypt-1].anything.(*element.NumberOrAsterisk)
 			d := &element.Number{Precision: precision}
 			d.SetDataDef(element.DataDefDec)
 			yyVAL.anything = d
 		}
-	case 368:
+	case 369:
 		{
 			precision := yyS[yypt-3].anything.(*element.NumberOrAsterisk)
 			scale := yyS[yypt-1].i
 			d := &element.Number{Precision: precision, Scale: &scale}
 			d.SetDataDef(element.DataDefDec)
-			yyVAL.anything = d
-		}
-	case 369:
-		{
-			precision := &element.NumberOrAsterisk{Number: 38}
-			d := &element.Number{Precision: precision}
-			d.SetDataDef(element.DataDefInteger)
 			yyVAL.anything = d
 		}
 	case 370:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDef(element.DataDefInt)
+			d.SetDataDef(element.DataDefInteger)
 			yyVAL.anything = d
 		}
 	case 371:
 		{
 			precision := &element.NumberOrAsterisk{Number: 38}
 			d := &element.Number{Precision: precision}
-			d.SetDataDef(element.DataDefSmallInt)
+			d.SetDataDef(element.DataDefInt)
 			yyVAL.anything = d
 		}
 	case 372:
+		{
+			precision := &element.NumberOrAsterisk{Number: 38}
+			d := &element.Number{Precision: precision}
+			d.SetDataDef(element.DataDefSmallInt)
+			yyVAL.anything = d
+		}
+	case 373:
 		{
 			precision := &element.NumberOrAsterisk{Number: 126}
 			d := &element.Float{Precision: precision}
 			d.SetDataDef(element.DataDefDoublePrecision)
 			yyVAL.anything = d
 		}
-	case 373:
+	case 374:
 		{
 			precision := &element.NumberOrAsterisk{Number: 63}
 			d := &element.Float{Precision: precision}
 			d.SetDataDef(element.DataDefReal)
 			yyVAL.anything = d
 		}
-	case 374:
+	case 375:
+		{
+			yyVAL.anything = nil
+		}
+	case 376:
+		{
+			yyVAL.anything = yyS[yypt-0].anything
+		}
+	case 377:
+		{
+			constraint := &ast.InlineConstraint{}
+			if yyS[yypt-2].anything != nil {
+				constraint.Name = yyS[yypt-2].anything.(*element.Identifier)
+			}
+			constraint.Type = ast.ConstraintType(yyS[yypt-1].i)
+			yyVAL.anything = constraint
+		}
+	case 378:
+		{
+			constraint := &ast.InlineConstraint{}
+			if yyS[yypt-2].anything != nil {
+				constraint.Name = yyS[yypt-2].anything.(*element.Identifier)
+			}
+			constraint.Type = ast.ConstraintTypeReferences
+			yyVAL.anything = constraint
+		}
+	case 379:
+		{
+			yyVAL.i = int(ast.ConstraintTypeNull)
+		}
+	case 380:
+		{
+			yyVAL.i = int(ast.ConstraintTypeNotNull)
+		}
+	case 381:
+		{
+			yyVAL.i = int(ast.ConstraintTypeUnique)
+		}
+	case 382:
+		{
+			yyVAL.i = int(ast.ConstraintTypePK)
+		}
+	case 384:
 		{
 			// empty
 		}
-	case 383:
+	case 386:
 		{
 			// empty
 		}
-	case 385:
+	case 389:
 		{
 			// empty
 		}
-	case 388:
+	case 399:
 		{
 			// empty
 		}
-	case 398:
+	case 405:
+		{
+			constraint := &ast.OutOfLineConstraint{}
+			if yyS[yypt-5].anything != nil {
+				constraint.Name = yyS[yypt-5].anything.(*element.Identifier)
+			}
+			constraint.Type = ast.ConstraintTypeUnique
+			constraint.Columns = yyS[yypt-2].anything.([]*element.Identifier)
+			yyVAL.anything = constraint
+		}
+	case 406:
+		{
+			constraint := &ast.OutOfLineConstraint{}
+			if yyS[yypt-6].anything != nil {
+				constraint.Name = yyS[yypt-6].anything.(*element.Identifier)
+			}
+			constraint.Type = ast.ConstraintTypePK
+			constraint.Columns = yyS[yypt-2].anything.([]*element.Identifier)
+			yyVAL.anything = constraint
+		}
+	case 407:
+		{
+			constraint := &ast.OutOfLineConstraint{}
+			if yyS[yypt-7].anything != nil {
+				constraint.Name = yyS[yypt-7].anything.(*element.Identifier)
+			}
+			constraint.Type = ast.ConstraintTypeReferences
+			constraint.Columns = yyS[yypt-3].anything.([]*element.Identifier)
+			yyVAL.anything = constraint
+		}
+	case 414:
 		{
 			// empty
 		}
-	case 410:
-		{
-			// empty
-		}
-	case 412:
+	case 416:
 		{
 			// empty
 		}

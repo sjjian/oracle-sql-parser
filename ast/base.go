@@ -17,12 +17,12 @@ type ColumnProp int
 
 const (
 	ColumnPropEmpty ColumnProp = iota
-	ColumnPropSort // for add column
+	ColumnPropSort             // for add column
 	ColumnPropInvisible
 	ColumnPropVisible
-	ColumnPropSubstitutable // for modify column
-	ColumnPropNotSubstitutable // for modify column
-	ColumnPropSubstitutableForce // for modify column
+	ColumnPropSubstitutable         // for modify column
+	ColumnPropNotSubstitutable      // for modify column
+	ColumnPropSubstitutableForce    // for modify column
 	ColumnPropNotSubstitutableForce // for modify column
 )
 
@@ -41,23 +41,31 @@ const (
 	ConstraintTypeReferences
 )
 
-type ConstraintState int
+//type ConstraintState int
+
+//const (
+//	ConstraintStateDeferrable ConstraintState = iota
+//	ConstraintStateNotDeferrable
+//	ConstraintStateInitiallyDeferred
+//	ConstraintStateInitiallyImmediate
+//	ConstraintStateRely
+//	ConstraintStateNorely
+//)
+
+type DropColumnType int
 
 const (
-	ConstraintStateDeferrable ConstraintState = iota
-	ConstraintStateNotDeferrable
-	ConstraintStateInitiallyDeferred
-	ConstraintStateInitiallyImmediate
-	ConstraintStateRely
-	ConstraintStateNorely
+	DropColumnTypeDrop DropColumnType = iota
+	DropColumnTypeSetUnused
+	DropColumnTypeDropUnusedColumns
+	DropColumnTypeDropColumnsContinue
 )
 
-type InlineConstraint struct {
-	Name   *element.Identifier
-	Type   ConstraintState
-	States []ConstraintState
-}
+type DropColumnProp int
 
-type InlineReferences struct {
-	Scope TableName
-}
+const (
+	DropColumnPropEmpty DropColumnProp = iota
+	DropColumnPropCascade
+	DropColumnPropInvalidate
+	DropColumnPropOnline
+)
