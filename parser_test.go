@@ -97,10 +97,10 @@ CREATE TABLE "TEST"."T1"
   TABLESPACE "SYSTEM"
 `,
 		`
-create table db1.table1 (id number(10) primary key);;
+create table db1.table1 (id number(10) primary key);
 `,
 		`
-create table db1.table1 (id number(10), primary key (id));;
+create table db1.table1 (id number(10), primary key (id) enable);
 `,
 	}
 	for _, query := range querys {
