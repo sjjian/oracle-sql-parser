@@ -237,6 +237,10 @@ func nextQuery(yylex interface{}) string {
     _attributes
     _reject
     _foreign
+    _novalidate
+    _validate
+    _exceptions
+    _into
 
 %token <i>
     _intNumber 		"int number"
@@ -1861,28 +1865,52 @@ ConstraintStateOrEmpty:
     {
         // empty
     }
-|   ConstraintState
+|   ConstraintStateList
 
-ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
-    ConstraintStateDeferrable ConstraintStateRely
-|   ConstraintStateDeferrable ConstraintStateDeferredOrImmediate ConstraintStateRely
-|   ConstraintStateDeferredOrImmediate ConstraintStateRely
-|   ConstraintStateDeferredOrImmediate ConstraintStateDeferrable ConstraintStateRely
+ConstraintStateList:
+    ConstraintState
+|   ConstraintStateList ConstraintState
 
-ConstraintStateDeferrable:
+// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1?
+ConstraintState:
     _deferrable
 |   _not _deferrable
-
-ConstraintStateDeferredOrImmediate:
-    _initially _deferred
+|   _initially _deferred
 |   _initially _immediate
-
-ConstraintStateRely:
-    {
-        // empty
-    }
 |   _rely
 |   _norely
+//|   UsingIndexClause // TODO: support
+|   _enable
+|   _disable
+|   _validate
+|   _novalidate
+|   ExceptionsClause
+
+//UsingIndexClause:
+
+ExceptionsClause:
+    _exceptions _into TableName
+
+//ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
+//    ConstraintStateDeferrable ConstraintStateRely
+//|   ConstraintStateDeferrable ConstraintStateDeferredOrImmediate ConstraintStateRely
+//|   ConstraintStateDeferredOrImmediate ConstraintStateRely
+//|   ConstraintStateDeferredOrImmediate ConstraintStateDeferrable ConstraintStateRely
+//
+//ConstraintStateDeferrable:
+//    _deferrable
+//|   _not _deferrable
+//
+//ConstraintStateDeferredOrImmediate:
+//    _initially _deferred
+//|   _initially _immediate
+//
+//ConstraintStateRely:
+//    {
+//        // empty
+//    }
+//|   _rely
+//|   _norely
 
 InlineRefConstraint:
     _scope _is TableName
