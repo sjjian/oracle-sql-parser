@@ -87,7 +87,7 @@ func TestParseCreateTableStmt(t *testing.T) {
 		`
 create table db1.table1 (id number(10));create table db1.table1 (id number(10), name varchar2(255));
 `,
-`
+		`
 CREATE TABLE "TEST"."T1"
    (    "ID" NUMBER(*,0)
    ) SEGMENT CREATION IMMEDIATE
@@ -95,6 +95,12 @@ CREATE TABLE "TEST"."T1"
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"
+`,
+		`
+create table db1.table1 (id number(10) primary key);;
+`,
+		`
+create table db1.table1 (id number(10), primary key (id));;
 `,
 	}
 	for _, query := range querys {

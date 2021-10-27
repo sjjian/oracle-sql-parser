@@ -286,6 +286,7 @@ var keywordMap = map[string]int{
 	"index":                   _index,
 	"attributes":              _attributes,
 	"reject":                  _reject,
+	"foreign":                 _foreign,
 }
 
 func init() {
