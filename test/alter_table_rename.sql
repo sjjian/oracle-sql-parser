@@ -1,0 +1,1 @@
+alter table db1.table1 rename column id to new_id;
