@@ -1,112 +1,43 @@
 package parser
 
 import (
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+	"strings"
+	"testing"
+
 	"github.com/sjjian/oracle-sql-parser/ast"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
-func TestParseAlterTable(t *testing.T) {
-	querys := []string{
-		`
-alter table db1.table1 add (id number)
-`,
-		`
-alter table db1.table1 add (id number, name varchar(255))
-`,
-		`
-alter table db1.table1 add (id number(*))
-`,
-		`
-alter table db1.table1 add (id number(5));
-`,
-		`
-alter table db1.table1 add (id number(5, 3));
-`,
-		`
-alter table db1.table1 add (id float(*))
-`,
-		`
-alter table db1.table1 add (id float(5))
-`,
-		`
-alter table db1.table1 add (id varchar2(255))
-`,
-		`
-alter table db1.table1 add (id varchar2(255) collate binary_ci) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) sort) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) collate binary_ci sort) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) collate binary_ci invisible) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) collate binary_ci  visible) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) collate binary_ci sort invisible) 
-`,
-		`
-alter table db1.table1 add (id varchar2(255) default "test") 
-`,
-		`
-alter table db1.table1 add (id number default 123) 
-`,
-		`
-alter table db1.table1 modify (id varchar2(255))
-`,
-		`
-alter table db1.table1 modify (id varchar2(255) default "123")
-`,
-		`
-alter table db1.table1 drop column id
-`,
-		`
-alter table db1.table1 drop (id,name)
-`,
-		`
-alter table db1.table1 set unused column id
-`,
-		`
-alter table db1.table1 rename column id to new_id
-`,
+func TestParserSQLCoverage(t *testing.T) {
+	path := "./test"
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		t.Error(err)
+		return
 	}
-	for _, query := range querys {
-		stmt, err := Parser(query)
-		assert.NoError(t, err, "query: %s", query)
-		assert.IsType(t, &ast.AlterTableStmt{}, stmt[0])
-	}
-}
-
-func TestParseCreateTableStmt(t *testing.T) {
-	querys := []string{
-		`
-create table db1.table1 (id number(10));create table db1.table1 (id number(10), name varchar2(255));
-`,
-		`
-CREATE TABLE "TEST"."T1"
-   (    "ID" NUMBER(*,0)
-   ) SEGMENT CREATION IMMEDIATE
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "SYSTEM"
-`,
-		`
-create table db1.table1 (id number(10) primary key);
-`,
-		`
-create table db1.table1 (id number(10), primary key (id) enable);
-`,
-	}
-	for _, query := range querys {
-		stmt, err := Parser(query)
-		assert.NoError(t, err, "query: %s", query)
-		assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
+	for _, f := range files {
+		fmt.Printf("test sql file %s\n", f.Name())
+		if !strings.HasSuffix(f.Name(), ".sql") {
+			continue
+		}
+		data, err := ioutil.ReadFile(filepath.Join(path, f.Name()))
+		if err != nil {
+			t.Error(err)
+			return
+		}
+		query := string(data)
+		stmts, err := Parser(query)
+		if err != nil {
+			t.Error(err)
+			return
+		}
+		for _, stmt := range stmts {
+			assert.NotNil(t, stmt)
+			assert.Equal(t, len(stmt.Text()) > 0, true)
+		}
 	}
 }
 
