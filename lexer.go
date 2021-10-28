@@ -314,7 +314,7 @@ func init() {
 
 	AddTokenBetween(_doubleQuoteStr, []byte(`"`), byte('"'))
 	AddTokenBetween(_singleQuoteStr, []byte(`'`), byte('\''))
-	err := lexer.Compile()
+	err := lexer.CompileNFA()
 	if err != nil {
 		panic(err)
 	}

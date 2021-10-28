@@ -115,13 +115,13 @@ func TestSingleQuery(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, 1, len(stmt))
 	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
-	assert.Equal(t, `create table db1.table1 (id number(10))`, stmt[0])
+	assert.Equal(t, `create table db1.table1 (id number(10))`, stmt[0].Text())
 
 	stmt, err = Parser(`create table db1.table1 (id number(10));`)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, len(stmt))
 	assert.IsType(t, &ast.CreateTableStmt{}, stmt[0])
-	assert.Equal(t, `create table db1.table1 (id number(10));`, stmt[0])
+	assert.Equal(t, `create table db1.table1 (id number(10));`, stmt[0].Text())
 }
 
 func TestMultiQuery(t *testing.T) {
