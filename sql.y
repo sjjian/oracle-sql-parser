@@ -241,6 +241,20 @@ func nextQuery(yylex interface{}) string {
     _validate
     _exceptions
     _into
+    _bitmap
+    _multivalue
+    _nosort
+    _peverse
+    _full
+    _indexing
+    _partial
+    _noparallel
+    _parallel
+    _asc
+    _desc
+    _usable
+    _unusable
+    _invalidation
 
 %token <i>
     _intNumber 		"int number"
@@ -273,6 +287,7 @@ func nextQuery(yylex interface{}) string {
     Statement 		"all statement"
     AlterTableStmt	"*ast.AlterTableStmt"
     CreateTableStmt
+    CreateIndexStmt
 
 %type <anything>
     StatementList
@@ -353,6 +368,7 @@ Statement:
     EmptyStmt
 |   AlterTableStmt
 |   CreateTableStmt
+|   CreateIndexStmt
 
 EmptyStmt:
     {
@@ -407,6 +423,10 @@ Identifier:
             Value: $1,
         }
     }
+
+ClusterName:
+    Identifier
+|   Identifier '.' Identifier
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ alter table ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -1027,52 +1047,6 @@ PhysicalAttrClause:
 |   _maxtrans _intNumber // has been deprecated,
 |   StorageClause
 
-StorageClause:
-    _storage '(' StorageProps ')'
-
-StorageProps:
-    StorageProp
-|   StorageProps StorageProp
-
-StorageProp:
-    _initial SizeClause
-|   _next SizeClause
-|   _minextents _intNumber
-|   _maxextents _intNumber
-|   _maxextents _unlimited
-|   _maxsize _unlimited
-|   _maxsize SizeClause
-|   _pctincrease _intNumber
-|   _freelists _intNumber
-|   _freelist _groups _intNumber
-|   _optimal
-|   _optimal SizeClause
-|   _optimal _null
-|   _buffer_pool _keep
-|   _buffer_pool _recycle
-|   _buffer_pool _default
-|   _flash_cache _keep
-|   _flash_cache _none
-|   _flash_cache _default
-|   _cell_flash_cache _keep
-|   _cell_flash_cache _none
-|   _cell_flash_cache _default
-|   _encrypt
-
-SizeClause:
-    _intNumber SizeUnit
-
-SizeUnit:
-    {
-        // empty
-    }
-|   _K
-|   _M
-|   _G
-|   _T
-|   _P
-|   _E
-
 LoggingClause:
     _logging
 |   _nologging
@@ -1267,6 +1241,115 @@ RelTableProp:
     {
         $$ = $1
     }
+
+/* ++++++++++++++++++++++++++++++++++++++++++++ create index +++++++++++++++++++++++++++++++++++++++++++ */
+
+// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/CREATE-INDEX.html#GUID-1F89BBC0-825F-4215-AF71-7588E31D8BFE
+CreateIndexStmt:
+    _create IndexType _index IndexName IndexIlmClause _on IndexClause CreateIndexUsable CreateIndexInvalidation
+    {
+        $$ = &ast.CreateIndexStmt{}
+    }
+
+IndexType:
+    {
+        // empty
+    }
+|   _unique
+|   _bitmap
+|   _multivalue
+
+IndexName:
+    Identifier
+|   Identifier '.' Identifier
+
+IndexIlmClause:
+
+IndexClause:
+    ClusterIndexClause
+|   TableIndexClause
+|   BitmapJoinIndexClause
+
+ClusterIndexClause:
+    _cluster ClusterName IndexAttrs
+
+IndexAttrs:
+    IndexAttr
+|   IndexAttrs IndexAttr
+
+IndexAttr:
+    PhysicalAttrsClause
+|   LoggingClause
+|   _online
+|   _tablespace Identifier
+|   _tablespace _default
+|   IndexCompression
+|   _sort
+|   _nosort
+|   _peverse
+|   _visible
+|   _invisible
+|   PartialIndexClause
+|   ParallelClause
+
+IndexCompression:
+    _compress
+|   _compress _intNumber
+|   _compress _advanced
+|   _compress _advanced _low
+|   _compress _advanced _high
+|   _nocompress
+
+PartialIndexClause:
+    _indexing _partial
+|   _indexing _full
+
+ParallelClause:
+    _parallel
+|   _parallel _intNumber
+|   _noparallel
+
+TableIndexClause:
+    TableName TableAlias '(' IndexExprs ')' IndexProps
+
+TableAlias:
+    {
+        // empty
+    }
+|   Identifier
+
+IndexExprs:
+    IndexExpr
+|   IndexExprs ',' IndexExpr
+
+IndexExpr:
+    ColumnName ColumnSortClause
+//|   ColumnExpr ColumnSortClause // TODO
+
+ColumnSortClause:
+    {
+        // empty
+    }
+|   _asc
+|   _desc
+
+IndexProps: // TODO
+
+BitmapJoinIndexClause: // TODO
+
+CreateIndexUsable:
+    {
+        // empty
+    }
+|   _usable
+|   _unusable
+
+CreateIndexInvalidation:
+    {
+        // empty
+    }
+|   _deferred _invalidation
+|   _immediate _invalidation
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -1871,7 +1954,7 @@ ConstraintStateList:
     ConstraintState
 |   ConstraintStateList ConstraintState
 
-// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1?
+// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1 docs?
 ConstraintState:
     _deferrable
 |   _not _deferrable
@@ -1879,14 +1962,17 @@ ConstraintState:
 |   _initially _immediate
 |   _rely
 |   _norely
-//|   UsingIndexClause // TODO: support
+|   UsingIndexClause
 |   _enable
 |   _disable
 |   _validate
 |   _novalidate
 |   ExceptionsClause
 
-//UsingIndexClause:
+UsingIndexClause:
+    _using _index IndexName
+|   _using _index '(' CreateIndexStmt ')'
+|   _using _index IndexProps
 
 ExceptionsClause:
     _exceptions _into TableName
@@ -1954,6 +2040,54 @@ OutOfLineConstraint:
 //    _scope _for '(' RefType ')' _is TableName
 //|   _ref '(' RefType ')' _with _rowid
 //|   ConstraintNameOrEmpty _foreign _key '(' RefTypeList ')' ReferencesClause ConstraintStateOrEmpty
+
+/* +++++++++++++++++++++++++++++++++++++++++++++ storage ++++++++++++++++++++++++++++++++++++++++++++ */
+
+StorageClause:
+    _storage '(' StorageProps ')'
+
+StorageProps:
+    StorageProp
+|   StorageProps StorageProp
+
+StorageProp:
+    _initial SizeClause
+|   _next SizeClause
+|   _minextents _intNumber
+|   _maxextents _intNumber
+|   _maxextents _unlimited
+|   _maxsize _unlimited
+|   _maxsize SizeClause
+|   _pctincrease _intNumber
+|   _freelists _intNumber
+|   _freelist _groups _intNumber
+|   _optimal
+|   _optimal SizeClause
+|   _optimal _null
+|   _buffer_pool _keep
+|   _buffer_pool _recycle
+|   _buffer_pool _default
+|   _flash_cache _keep
+|   _flash_cache _none
+|   _flash_cache _default
+|   _cell_flash_cache _keep
+|   _cell_flash_cache _none
+|   _cell_flash_cache _default
+|   _encrypt
+
+SizeClause:
+    _intNumber SizeUnit
+
+SizeUnit:
+    {
+        // empty
+    }
+|   _K
+|   _M
+|   _G
+|   _T
+|   _P
+|   _E
 
 /* +++++++++++++++++++++++++++++++++++++++++ memoptimize +++++++++++++++++++++++++++++++++++++++++ */
 

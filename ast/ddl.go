@@ -90,3 +90,12 @@ type OutOfLineConstraint struct {
 	InlineConstraint
 	Columns []*element.Identifier
 }
+
+/*
+	Create Table  Statement
+	see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/CREATE-INDEX.html#GUID-1F89BBC0-825F-4215-AF71-7588E31D8BFE
+*/
+
+type CreateIndexStmt struct {
+	node
+}

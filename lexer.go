@@ -287,6 +287,20 @@ var keywordMap = map[string]int{
 	"attributes":              _attributes,
 	"reject":                  _reject,
 	"foreign":                 _foreign,
+	"bitmap":                  _bitmap,
+	"multivalue":              _multivalue,
+	"nosort":                  _nosort,
+	"peverse":                 _peverse,
+	"full":                    _full,
+	"indexing":                _indexing,
+	"partial":                 _partial,
+	"noparallel":              _noparallel,
+	"parallel":                _parallel,
+	"asc":                     _asc,
+	"desc":                    _desc,
+	"usable":                  _usable,
+	"unusable":                _unusable,
+	"invalidation":            _invalidation,
 }
 
 func init() {

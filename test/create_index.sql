@@ -1,0 +1,1 @@
+create index db1.idx1 on db1.table1 (id);
