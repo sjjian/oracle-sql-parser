@@ -11,3 +11,5 @@ TABLESPACE "SYSTEM";
 create table db1.table1 (id number(10) primary key);
 
 create table db1.table1 (id number(10), primary key (id) enable);
+
+create table db1.table1 (id number(10), primary key (id)  using index enable);
