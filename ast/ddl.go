@@ -11,8 +11,8 @@ import (
 
 type AlterTableStmt struct {
 	node
-	TableName     *TableName
-	ColumnClauses []AlterTableClause
+	TableName         *TableName
+	AlterTableClauses []AlterTableClause
 }
 
 type AlterTableClause interface {
@@ -45,6 +45,22 @@ type RenameColumnClause struct {
 	alterTableClause
 	OldName *element.Identifier
 	NewName *element.Identifier
+}
+
+type AddConstraintClause struct {
+	alterTableClause
+}
+
+type ModifyConstraintClause struct {
+	alterTableClause
+}
+
+type RenameConstraintClause struct {
+	alterTableClause
+}
+
+type DropConstraintClause struct {
+	alterTableClause
 }
 
 /*
@@ -81,8 +97,8 @@ type ColumnDef struct {
 }
 
 type InlineConstraint struct {
-	Name       *element.Identifier
-	Type       ConstraintType
+	Name *element.Identifier
+	Type ConstraintType
 }
 
 type OutOfLineConstraint struct {
