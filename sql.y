@@ -303,7 +303,9 @@ func nextQuery(yylex interface{}) string {
     LargeObjectDataTypes
     RowIdDataTypes
     AnsiSupportDataTypes
+    AlterTableClauses
     ColumnClauses
+    ConstraintClauses
     ChangeColumnClauseList
     ChangeColumnClause
     RenameColumnClause
@@ -338,6 +340,8 @@ func nextQuery(yylex interface{}) string {
     ColumnDefConstraint
     InlineConstraintList
     InlineConstraint
+    DropConstraintClauses
+    DropConstraintClause
 
 %start Start
 
@@ -432,12 +436,22 @@ ClusterName:
 
 // see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html#GUID-552E7373-BF93-477D-9DA3-B2C9386F2877
 AlterTableStmt:
-    _alter _table TableName MemoptimizeForAlterTable ColumnClauses
+    _alter _table TableName MemoptimizeForAlterTable AlterTableClauses
     {
         $$ = &ast.AlterTableStmt{
-            TableName:      $3.(*ast.TableName),
-            ColumnClauses:  $5.([]ast.AlterTableClause),
+            TableName:      	$3.(*ast.TableName),
+            AlterTableClauses:  $5.([]ast.AlterTableClause),
         }
+    }
+
+AlterTableClauses:
+    ColumnClauses
+    {
+        $$ = $1
+    }
+|   ConstraintClauses
+    {
+        $$ = $1
     }
 
 ColumnClauses:
@@ -920,6 +934,85 @@ RenameColumnClause:
     	    NewName: $5.(*element.Identifier),
     	}
     }
+
+/* +++++++++++++++++++++++++++++++++++++ alter table constraint  +++++++++++++++++++++++++++++++++++++ */
+
+ConstraintClauses:
+    _add OutOfLineConstraints
+    {
+    	$$ = []ast.AlterTableClause{&ast.AddConstraintClause{}}
+    }
+//|   _add OutOfLineRefConstraint // TODO
+|   _modify _constraint Identifier ConstraintState CascadeOrEmpty
+    {
+    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+    }
+|   _modify _primary _key ConstraintState CascadeOrEmpty
+    {
+    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+    }
+|   _modify _unique '(' ColumnNameList ')' ConstraintState CascadeOrEmpty
+    {
+    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+    }
+|   _rename _constraint Identifier _to Identifier
+    {
+    	$$ = []ast.AlterTableClause{&ast.RenameConstraintClause{}}
+    }
+|   DropConstraintClauses
+    {
+    	$$ = $1
+    }
+
+OutOfLineConstraints:
+    OutOfLineConstraint
+|   OutOfLineConstraints OutOfLineConstraint
+
+DropConstraintClauses:
+    DropConstraintClause
+    {
+        $$ = []ast.AlterTableClause{$1.(ast.AlterTableClause)}
+    }
+|   DropConstraintClauses DropConstraintClause
+    {
+        $$ = append($1.([]ast.AlterTableClause), $2.(ast.AlterTableClause))
+    }
+
+DropConstraintClause:
+    _drop _primary _key CascadeOrEmpty DropConstraintProps
+    {
+    	$$ = &ast.DropConstraintClause{}
+    }
+|   _drop _unique '(' ColumnNameList ')' CascadeOrEmpty DropConstraintProps
+    {
+    	$$ = &ast.DropConstraintClause{}
+    }
+|   _drop _constraint Identifier CascadeOrEmpty DropConstraintProps
+    {
+    	$$ = &ast.DropConstraintClause{}
+    }
+
+CascadeOrEmpty:
+    {
+        // empty
+    }
+|   _cascade
+
+DropConstraintProps:
+    KeepIndexOrEmpty OnlineOrEmpty
+
+KeepIndexOrEmpty:
+    {
+        // empty
+    }
+|   _keep _index
+//|   _drop _index // TODO : conflict DropConstraintClause
+
+OnlineOrEmpty:
+    {
+        // empty
+    }
+|   _online
 
 /* +++++++++++++++++++++++++++++++++++++++++++ create table ++++++++++++++++++++++++++++++++++++++++++ */
 
