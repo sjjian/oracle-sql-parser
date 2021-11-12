@@ -255,6 +255,7 @@ func nextQuery(yylex interface{}) string {
     _usable
     _unusable
     _invalidation
+    _purge
 
 %token <i>
     _intNumber 		"int number"
@@ -288,6 +289,7 @@ func nextQuery(yylex interface{}) string {
     AlterTableStmt	"*ast.AlterTableStmt"
     CreateTableStmt
     CreateIndexStmt
+    DropTableStmt
 
 %type <anything>
     StatementList
@@ -373,6 +375,7 @@ Statement:
 |   AlterTableStmt
 |   CreateTableStmt
 |   CreateIndexStmt
+|   DropTableStmt
 
 EmptyStmt:
     {
@@ -1443,6 +1446,29 @@ CreateIndexInvalidation:
     }
 |   _deferred _invalidation
 |   _immediate _invalidation
+
+/* ++++++++++++++++++++++++++++++++++++++++++++ drop table +++++++++++++++++++++++++++++++++++++++++++ */
+
+// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/DROP-TABLE.html#GUID-39D89EDC-155D-4A24-837E-D45DDA757B45
+DropTableStmt:
+    _drop _table TableName CascadeConstraintsOrEmpty PurgeOrEmpty
+    {
+        $$ = &ast.DropTableStmt{
+            TableName:  $3.(*ast.TableName),
+        }
+    }
+
+CascadeConstraintsOrEmpty:
+    {
+        // empty
+    }
+|   _cascade _constraints
+
+PurgeOrEmpty:
+    {
+        // empty
+    }
+|   _purge
 
 /* +++++++++++++++++++++++++++++++++++++++++++++ datatype ++++++++++++++++++++++++++++++++++++++++++++ */
 

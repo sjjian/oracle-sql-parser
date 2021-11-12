@@ -301,6 +301,7 @@ var keywordMap = map[string]int{
 	"usable":                  _usable,
 	"unusable":                _unusable,
 	"invalidation":            _invalidation,
+	"purge":                   _purge,
 }
 
 func init() {
