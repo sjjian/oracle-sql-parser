@@ -13,3 +13,7 @@ create table db1.table1 (id number(10) primary key);
 create table db1.table1 (id number(10), primary key (id) enable);
 
 create table db1.table1 (id number(10), primary key (id)  using index enable);
+
+create table db1.table1 (id number(10,3) primary key);
+
+CREATE TABLE test."persons" ( NUMERIC_NAME NUMERIC ( 15, 2 ), Decimal_NAME DECIMAL ( 15, 2 ), Dec_NAME DEC ( 15, 2 ), INTEGER_NAME INTEGER );
