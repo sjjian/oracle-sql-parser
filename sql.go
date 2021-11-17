@@ -169,7 +169,7 @@ const (
 	_minextents              = 57498
 	_minvalue                = 57499
 	_modify                  = 57377
-	_mouth                   = 57500
+	_month                   = 57500
 	_multivalue              = 57501
 	_national                = 57502
 	_nchar                   = 57503
@@ -412,7 +412,7 @@ var (
 		57484: 131, // _levels (230x)
 		57485: 132, // _limit (230x)
 		57487: 133, // _locking (230x)
-		57500: 134, // _mouth (230x)
+		57500: 134, // _month (230x)
 		57501: 135, // _multivalue (230x)
 		57525: 136, // _partition (230x)
 		57531: 137, // _preserve (230x)
@@ -832,7 +832,7 @@ var (
 		"_levels",
 		"_limit",
 		"_locking",
-		"_mouth",
+		"_month",
 		"_multivalue",
 		"_partition",
 		"_preserve",

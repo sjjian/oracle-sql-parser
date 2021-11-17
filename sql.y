@@ -185,7 +185,7 @@ func nextQuery(yylex interface{}) string {
     _metadata
     _minextents
     _minvalue
-    _mouth
+    _month
     _multivalue
     _national
     _nchar
@@ -541,7 +541,7 @@ UnReservedKeyword:
 |   _metadata
 |   _minextents
 |   _minvalue
-|   _mouth
+|   _month
 |   _multivalue
 |   _national
 |   _nchar
@@ -1908,13 +1908,13 @@ DatetimeDataTypes:
         d.SetDataDef(element.DataDefTimestamp)
         $$ = d
     }
-|   _interval _year _to _mouth
+|   _interval _year _to _month
     {
         d := &element.IntervalYear{}
         d.SetDataDef(element.DataDefIntervalYear)
         $$ = d
     }
-|   _interval _year '(' _intNumber ')' _to _mouth
+|   _interval _year '(' _intNumber ')' _to _month
     {
         precision := $4
         d := &element.IntervalYear{Precision: &precision}

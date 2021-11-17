@@ -235,7 +235,7 @@ var unReservedKeyword = map[string]int{
 	"metadata":                _metadata,
 	"minextents":              _minextents,
 	"minvalue":                _minvalue,
-	"mouth":                   _mouth,
+	"month":                   _month,
 	"multivalue":              _multivalue,
 	"national":                _national,
 	"nchar":                   _nchar,
