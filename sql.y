@@ -2005,7 +2005,9 @@ RowIdDataTypes:
 AnsiSupportDataTypes:
     _character '(' _intNumber ')'
     {
+        size := $3
         d := &element.Char{}
+        d.Size = &size
         d.SetDataDef(element.DataDefCharacter)
         $$ = d
     }

@@ -4251,7 +4251,9 @@ yynewstate:
 		}
 	case 573:
 		{
+			size := yyS[yypt-1].i
 			d := &element.Char{}
+			d.Size = &size
 			d.SetDataDef(element.DataDefCharacter)
 			yyVAL.anything = d
 		}
