@@ -29,6 +29,7 @@ func nextQuery(yylex interface{}) string {
 
 %token <str>
 /* reserved keyword */
+/* see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/Oracle-SQL-Reserved-Words.html#GUID-55C49D1E-BE08-4C50-A9DD-8593EB925612 */
     _add
     _all
     _alter
@@ -257,6 +258,7 @@ func nextQuery(yylex interface{}) string {
     _varying
     _visible
     _write
+    _XMLType
     _year
     _zone
 
@@ -306,6 +308,7 @@ func nextQuery(yylex interface{}) string {
     LargeObjectDataTypes
     RowIdDataTypes
     AnsiSupportDataTypes
+    OracleSuppliedTypes
     AlterTableClauses
     ColumnClauses
     ConstraintClauses
@@ -1664,6 +1667,10 @@ Datatype:
     {
         $$ = $1
     }
+|   OracleSuppliedTypes
+    {
+        $$ = $1
+    }
 
 NumberOrAsterisk:
     _intNumber
@@ -2171,6 +2178,14 @@ AnsiSupportDataTypes:
         precision := &element.NumberOrAsterisk{Number: 63}
         d := &element.Float{Precision: precision}
         d.SetDataDef(element.DataDefReal)
+        $$ = d
+    }
+
+OracleSuppliedTypes:
+    _XMLType
+    {
+        d := &element.XMLType{}
+        d.SetDataDef(element.DataDefXMLType)
         $$ = d
     }
 
