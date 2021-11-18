@@ -339,10 +339,12 @@ func nextQuery(yylex interface{}) string {
     RelTableProps
     RelTableProp
     OutOfLineConstraint
-    ConstraintNameOrEmpty
+    OutOfLineConstraintBody
+    ConstraintName
     ColumnDefConstraint
     InlineConstraintList
     InlineConstraint
+    InlineConstraintBody
     DropConstraintClauses
     DropConstraintClause
 
@@ -500,7 +502,7 @@ UnReservedKeyword:
 |   _filesystem_like_logging
 |   _flash_cache
 |   _force
-//|   _foreign TODO: fix conflict
+|   _foreign
 |   _freelist
 |   _freelists
 |   _full
@@ -573,7 +575,7 @@ UnReservedKeyword:
 |   _policy
 |   _precision
 |   _preserve
-//|   _primary TODO: fix conflict
+|   _primary
 |   _priority
 |   _private
 |   _purge
@@ -2181,33 +2183,36 @@ AnsiSupportDataTypes:
 //|   InlineRefConstraint
 //|   OutOfLineRefConstraint
 
-ConstraintNameOrEmpty:
-    {
-        $$ = nil
-    }
-|   _constraint Identifier
+ConstraintName:
+    _constraint Identifier
     {
         $$ = $2
     }
 
 InlineConstraint:
-    ConstraintNameOrEmpty InlineConstraintType ConstraintStateOrEmpty
+    ConstraintName InlineConstraintBody
     {
-        constraint := &ast.InlineConstraint{}
-        if $1 != nil {
-            constraint.Name = $1.(*element.Identifier)
-        }
-	constraint.Type = ast.ConstraintType($2)
-	$$ = constraint
+        constraint := $2.(*ast.InlineConstraint)
+        constraint.Name = $1.(*element.Identifier)
+	    $$ = constraint
     }
-|   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+|   InlineConstraintBody
     {
-        constraint := &ast.InlineConstraint{}
-        if $1 != nil {
-            constraint.Name = $1.(*element.Identifier)
-        }
-	constraint.Type = ast.ConstraintTypeReferences
-	$$ = constraint
+	    $$ = $1
+    }
+
+InlineConstraintBody:
+    InlineConstraintType ConstraintStateOrEmpty
+    {
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintType($1),
+	    }
+    }
+|   ReferencesClause ConstraintStateOrEmpty
+    {
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeReferences,
+	    }
     }
 //|   ConstraintCheckCondition // todo
 
@@ -2302,38 +2307,42 @@ ExceptionsClause:
 InlineRefConstraint:
     _scope _is TableName
 |   _with _rowid
-|   ConstraintNameOrEmpty ReferencesClause ConstraintStateOrEmpty
+|   ConstraintName ReferencesClause ConstraintStateOrEmpty
+|   ReferencesClause ConstraintStateOrEmpty
 
 OutOfLineConstraint:
-    ConstraintNameOrEmpty _unique '(' ColumnNameList ')' ConstraintStateOrEmpty
+    ConstraintName OutOfLineConstraintBody
     {
-        constraint := &ast.OutOfLineConstraint{}
-        if $1 != nil {
-            constraint.Name = $1.(*element.Identifier)
-        }
-	constraint.Type = ast.ConstraintTypeUnique
-	constraint.Columns = $4.([]*element.Identifier)
-	$$ = constraint
+        constraint := $2.(*ast.OutOfLineConstraint)
+        constraint.Name = $1.(*element.Identifier)
+	    $$ = constraint
     }
-|    ConstraintNameOrEmpty _primary _key '(' ColumnNameList ')' ConstraintStateOrEmpty
+|   OutOfLineConstraintBody
     {
-        constraint := &ast.OutOfLineConstraint{}
-        if $1 != nil {
-            constraint.Name = $1.(*element.Identifier)
-        }
-	constraint.Type = ast.ConstraintTypePK
-	constraint.Columns = $5.([]*element.Identifier)
-	$$ = constraint
+	    $$ = $1
     }
-|    ConstraintNameOrEmpty _foreign _key '(' ColumnNameList ')' ReferencesClause ConstraintStateOrEmpty
+
+OutOfLineConstraintBody:
+    _unique '(' ColumnNameList ')' ConstraintStateOrEmpty
     {
         constraint := &ast.OutOfLineConstraint{}
-        if $1 != nil {
-            constraint.Name = $1.(*element.Identifier)
-        }
-	constraint.Type = ast.ConstraintTypeReferences
-	constraint.Columns = $5.([]*element.Identifier)
-	$$ = constraint
+	    constraint.Type = ast.ConstraintTypeUnique
+	    constraint.Columns = $3.([]*element.Identifier)
+	    $$ = constraint
+    }
+|    _primary _key '(' ColumnNameList ')' ConstraintStateOrEmpty
+    {
+        constraint := &ast.OutOfLineConstraint{}
+	    constraint.Type = ast.ConstraintTypePK
+	    constraint.Columns = $4.([]*element.Identifier)
+	    $$ = constraint
+    }
+|    _foreign _key '(' ColumnNameList ')' ReferencesClause ConstraintStateOrEmpty
+    {
+        constraint := &ast.OutOfLineConstraint{}
+	    constraint.Type = ast.ConstraintTypeReferences
+	    constraint.Columns = $4.([]*element.Identifier)
+	    $$ = constraint
     }
 //|   ConstraintCheckCondition // todo
 
