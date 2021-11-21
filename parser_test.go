@@ -74,9 +74,3 @@ alter table db1.table1 add (name varchar(255));`)
 	assert.IsType(t, &ast.AlterTableStmt{}, stmt[1])
 	assert.Equal(t, "alter table db1.table1 add (name varchar(255));", stmt[1].Text())
 }
-
-func TestParser(t *testing.T) {
-	stmt, err := Parser(`create table TEST.T21 (t CHAR(255));`)
-	assert.NoError(t, err)
-	assert.Equal(t, 2, len(stmt))
-}
