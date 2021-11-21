@@ -298,6 +298,7 @@ func nextQuery(yylex interface{}) string {
     StatementList
     TableName
     Identifier
+    IdentifierOrKeyword
     ColumnName
     Datatype
     OralceBuiltInDataTypes
@@ -391,13 +392,13 @@ EmptyStmt:
 /* +++++++++++++++++++++++++++++++++++++++++++++ base stmt ++++++++++++++++++++++++++++++++++++++++++++ */
 
 TableName:
-    Identifier
+    IdentifierOrKeyword
     {
     	$$ = &ast.TableName{
-	    Table: $1.(*element.Identifier),
-	}
+	        Table: $1.(*element.Identifier),
+	    }
     }
-|   Identifier '.' Identifier
+|   IdentifierOrKeyword '.' IdentifierOrKeyword
     {
     	$$ = &ast.TableName{
 	    Schema:	$1.(*element.Identifier),
@@ -416,7 +417,7 @@ ColumnNameList:
     }
 
 ColumnName:
-    Identifier
+    IdentifierOrKeyword
     {
         $$ = $1
     }
@@ -424,6 +425,27 @@ ColumnName:
 ClusterName:
     Identifier
 |   Identifier '.' Identifier
+
+IndexName:
+    IdentifierOrKeyword
+|   IdentifierOrKeyword '.' IdentifierOrKeyword
+
+UsingIndexName: // for using index clause
+    Identifier
+|   Identifier '.' Identifier
+
+IdentifierOrKeyword:
+    Identifier
+    {
+        $$ = $1
+    }
+|   UnReservedKeyword
+    {
+        $$ = &element.Identifier{
+            Typ: element.IdentifierTypeNonQuoted,
+            Value: $1,
+        }
+    }
 
 Identifier:
     _nonquotedIdentifier
@@ -437,13 +459,6 @@ Identifier:
     {
         $$ = &element.Identifier{
             Typ: element.IdentifierTypeQuoted,
-            Value: $1,
-        }
-    }
-|   UnReservedKeyword
-    {
-        $$ = &element.Identifier{
-            Typ: element.IdentifierTypeNonQuoted,
             Value: $1,
         }
     }
@@ -1126,7 +1141,7 @@ RenameColumnClause:
 /* +++++++++++++++++++++++++++++++++++++ alter table constraint  +++++++++++++++++++++++++++++++++++++ */
 
 ConstraintClauses:
-    _add OutOfLineConstraints
+    _add OutOfLineConstraint // TODO: in docs is _add OutOfLineConstraints, but actual is _add OutOfLineConstraint.
     {
     	$$ = []ast.AlterTableClause{&ast.AddConstraintClause{}}
     }
@@ -1152,9 +1167,9 @@ ConstraintClauses:
     	$$ = $1
     }
 
-OutOfLineConstraints:
-    OutOfLineConstraint
-|   OutOfLineConstraints OutOfLineConstraint
+//OutOfLineConstraints:
+//    OutOfLineConstraint
+//|   OutOfLineConstraints OutOfLineConstraint
 
 DropConstraintClauses:
     DropConstraintClause
@@ -1539,10 +1554,6 @@ IndexType:
 |   _unique
 |   _bitmap
 |   _multivalue
-
-IndexName:
-    Identifier
-|   Identifier '.' Identifier
 
 IndexIlmClause:
 
@@ -2269,55 +2280,81 @@ ConstraintStateOrEmpty:
     {
         // empty
     }
-|   ConstraintStateList
+|   ConstraintState
 
-ConstraintStateList:
-    ConstraintState
-|   ConstraintStateList ConstraintState
+//ConstraintStateList:
+//    ConstraintState
+//|   ConstraintStateList ConstraintState
 
-// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1 docs?
-ConstraintState:
+//// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1 docs?
+//ConstraintState:
+//    _deferrable
+//|   _not _deferrable
+//|   _initially _deferred
+//|   _initially _immediate
+//|   _rely
+//|   _norely
+//|   UsingIndexClause
+//|   _enable
+//|   _disable
+//|   _validate
+//|   _novalidate
+//|   ExceptionsClause
+
+ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
+    ConstraintStateDeferrableClause ConstraintStateRely UsingIndexClause ConstraintStateEnable ConstraintStateValidate ExceptionsClause
+
+ConstraintStateDeferrableClause:
+    {
+        // empty
+    }
+|   ConstraintStateDeferrable
+|   ConstraintStateDeferrable ConstraintStateInitially
+|   ConstraintStateInitially
+|   ConstraintStateInitially ConstraintStateDeferrable
+
+ConstraintStateDeferrable:
     _deferrable
 |   _not _deferrable
-|   _initially _deferred
+
+ConstraintStateInitially:
+    _initially _deferred
 |   _initially _immediate
+
+ConstraintStateRely:
+    {
+        // empty
+    }
 |   _rely
 |   _norely
-|   UsingIndexClause
-|   _enable
-|   _disable
-|   _validate
-|   _novalidate
-|   ExceptionsClause
 
 UsingIndexClause:
-    _using _index IndexName
+    {
+        // empty
+    }
+|   _using _index UsingIndexName
 |   _using _index '(' CreateIndexStmt ')'
 |   _using _index IndexProps
 
-ExceptionsClause:
-    _exceptions _into TableName
+ConstraintStateEnable:
+    {
+        // empty
+    }
+|   _enable
+|   _disable
 
-//ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
-//    ConstraintStateDeferrable ConstraintStateRely
-//|   ConstraintStateDeferrable ConstraintStateDeferredOrImmediate ConstraintStateRely
-//|   ConstraintStateDeferredOrImmediate ConstraintStateRely
-//|   ConstraintStateDeferredOrImmediate ConstraintStateDeferrable ConstraintStateRely
-//
-//ConstraintStateDeferrable:
-//    _deferrable
-//|   _not _deferrable
-//
-//ConstraintStateDeferredOrImmediate:
-//    _initially _deferred
-//|   _initially _immediate
-//
-//ConstraintStateRely:
-//    {
-//        // empty
-//    }
-//|   _rely
-//|   _norely
+ConstraintStateValidate:
+    {
+        // empty
+    }
+|   _validate
+|   _novalidate
+
+ExceptionsClause:
+    {
+        // empty
+    }
+|   _exceptions _into TableName
 
 InlineRefConstraint:
     _scope _is TableName
