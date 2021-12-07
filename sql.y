@@ -1283,20 +1283,19 @@ DefaultCollateClauseOrEmpty:
     }
 
 OnCommitClause:
-    OnCommitDef OnCommitRows
-
-OnCommitDef:
     {
         // empty
     }
-|   _on _commit _drop _definition
+|   OnCommitDef
+|   OnCommitRows
+|   OnCommitDef OnCommitRows
+
+OnCommitDef:
+    _on _commit _drop _definition
 |   _on _commit _preserve _definition
 
 OnCommitRows:
-    {
-        // empty
-    }
-|   _on _commit _delete _rows
+    _on _commit _delete _rows
 |   _on _commit _preserve _rows
 
 PhysicalProps:
@@ -2228,13 +2227,25 @@ InlineConstraint:
     }
 
 InlineConstraintBody:
-    InlineConstraintType ConstraintStateOrEmpty
+    InlineConstraintType ConstraintState
     {
 	    $$ = &ast.InlineConstraint{
 	        Type: ast.ConstraintType($1),
 	    }
     }
-|   ReferencesClause ConstraintStateOrEmpty
+//|   InlineConstraintType ConstraintState
+//    {
+//	    $$ = &ast.InlineConstraint{
+//	        Type: ast.ConstraintType($1),
+//	    }
+//    }
+//|   ReferencesClause
+//    {
+//	    $$ = &ast.InlineConstraint{
+//	        Type: ast.ConstraintTypeReferences,
+//	    }
+//    }
+|   ReferencesClause ConstraintState
     {
 	    $$ = &ast.InlineConstraint{
 	        Type: ast.ConstraintTypeReferences,
@@ -2276,12 +2287,6 @@ ReferencesOnDelete:
 |   _on _delete _cascade
 |   _on _delete _set _null
 
-ConstraintStateOrEmpty:
-    {
-        // empty
-    }
-|   ConstraintState
-
 //ConstraintStateList:
 //    ConstraintState
 //|   ConstraintStateList ConstraintState
@@ -2301,7 +2306,7 @@ ConstraintStateOrEmpty:
 //|   _novalidate
 //|   ExceptionsClause
 
-ConstraintState: // todo: support using_index_clause, enable/disable, validate, exceptions_clause
+ConstraintState:
     ConstraintStateDeferrableClause ConstraintStateRely UsingIndexClause ConstraintStateEnable ConstraintStateValidate ExceptionsClause
 
 ConstraintStateDeferrableClause:
@@ -2359,8 +2364,8 @@ ExceptionsClause:
 InlineRefConstraint:
     _scope _is TableName
 |   _with _rowid
-|   ConstraintName ReferencesClause ConstraintStateOrEmpty
-|   ReferencesClause ConstraintStateOrEmpty
+|   ConstraintName ReferencesClause ConstraintState
+|   ReferencesClause ConstraintState
 
 OutOfLineConstraint:
     ConstraintName OutOfLineConstraintBody
@@ -2375,21 +2380,21 @@ OutOfLineConstraint:
     }
 
 OutOfLineConstraintBody:
-    _unique '(' ColumnNameList ')' ConstraintStateOrEmpty
+    _unique '(' ColumnNameList ')' ConstraintState
     {
         constraint := &ast.OutOfLineConstraint{}
 	    constraint.Type = ast.ConstraintTypeUnique
 	    constraint.Columns = $3.([]*element.Identifier)
 	    $$ = constraint
     }
-|    _primary _key '(' ColumnNameList ')' ConstraintStateOrEmpty
+|    _primary _key '(' ColumnNameList ')' ConstraintState
     {
         constraint := &ast.OutOfLineConstraint{}
 	    constraint.Type = ast.ConstraintTypePK
 	    constraint.Columns = $4.([]*element.Identifier)
 	    $$ = constraint
     }
-|    _foreign _key '(' ColumnNameList ')' ReferencesClause ConstraintStateOrEmpty
+|    _foreign _key '(' ColumnNameList ')' ReferencesClause ConstraintState
     {
         constraint := &ast.OutOfLineConstraint{}
 	    constraint.Type = ast.ConstraintTypeReferences
