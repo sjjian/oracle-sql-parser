@@ -1302,7 +1302,7 @@ PhysicalProps:
     {
         // empty
     }
-|   DeferredSegmentCreation SegmentAttrsClause TableCompressionOrEmpty InmemoryTableClause IlmClause
+|   DeferredSegmentCreation SegmentAttrsClause InmemoryTableClause IlmClause
 |   DeferredSegmentCreation _organization OrgClause
 |   DeferredSegmentCreation ExternalPartitionClause
 |   _cluster Identifier  '(' ColumnNameList ')'
@@ -1326,10 +1326,10 @@ SegmentAttrsClause:
 
 SegmentAttrClause:
     PhysicalAttrsClause
-|   _tablespace Identifier
+|   _tablespace Identifier // TODO: using IdentifierOrKeyword?
 |   _tablespace _set Identifier
 |   LoggingClause
-|   TableCompression // TODO: this is not include in oracle 21 syntax docs
+|   TableCompression // TODO: this is not include in oracle 21 syntax docs?
 
 PhysicalAttrsClause:
     PhysicalAttrClause
@@ -1385,7 +1385,7 @@ InmemoryTableClause:
     }
 |   _inmemory InmemoryAttrs InmemoryColumnClausesOrEmpty
 |   _no _inmemory InmemoryColumnClausesOrEmpty
-|   InmemoryColumnClausesOrEmpty
+|   InmemoryColumnClauses
 
 InmemoryAttrs:
     InmemoryMemCompress InmemoryProp InmemoryDistribute InmemoryDuplicate InmemorySpatial
@@ -1467,28 +1467,30 @@ InmemoryColumnClause:
 |   _inmemory InmemoryMemCompress '(' ColumnNameList ')'
 |   _no _inmemory '(' ColumnNameList ')'
 
-IlmClause:
+IlmClause: // TODO: support IlmPolicyClause IlmPolicyName
     {
         // empty
     }
-|   _ilm _add _policy IlmPolicyClause
-|   _ilm _delete _policy IlmPolicyClause
-|   _ilm _enable _policy IlmPolicyClause
-|   _ilm _disable _policy IlmPolicyClause
+//|   _ilm _add _policy IlmPolicyClause
+//|   _ilm _delete _policy IlmPolicyName
+//|   _ilm _enable _policy IlmPolicyName
+//|   _ilm _disable _policy IlmPolicyName
 |   _ilm _delete_all
 |   _ilm _enable_all
 |   _ilm _disable_all
 
-IlmPolicyClause:
-    IlmCompressionPolicy
-|   IlmTieringPolicy
-|   IlmInmemoryPolicy
+//IlmPolicyClause:
+//    IlmCompressionPolicy
+//|   IlmTieringPolicy
+//|   IlmInmemoryPolicy
+//
+//IlmCompressionPolicy:
+//
+//IlmTieringPolicy:
+//
+//IlmInmemoryPolicy:
 
-IlmCompressionPolicy:
-
-IlmTieringPolicy:
-
-IlmInmemoryPolicy:
+//IlmPolicyName:
 
 OrgClause:
     _heap SegmentAttrsClauseOrEmpty HeapOrgTableClause
@@ -1559,7 +1561,7 @@ IndexIlmClause:
 IndexClause:
     ClusterIndexClause
 |   TableIndexClause
-|   BitmapJoinIndexClause
+//|   BitmapJoinIndexClause // TODO
 
 ClusterIndexClause:
     _cluster ClusterName IndexAttrs
@@ -1626,7 +1628,7 @@ ColumnSortClause:
 
 IndexProps: // TODO
 
-BitmapJoinIndexClause: // TODO
+//BitmapJoinIndexClause:
 
 CreateIndexUsable:
     {
