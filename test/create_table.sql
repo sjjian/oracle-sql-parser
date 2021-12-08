@@ -16,7 +16,7 @@ create table db1.table1 (id number(10), primary key (id) enable);
 
 create table db1.table1 (id number(10), CONSTRAINT pk primary key (id) enable);
 
-create table db1.table1 (id number(10), primary key (id)  using index enable);
+create table db1.table1 (id number(10), primary key (id) using index enable);
 
 create table db1.table1 (id number(10,3) primary key);
 
@@ -33,3 +33,29 @@ CREATE TABLE TEST.INTERVAL_YEAR_COLUMNS(ID INT, C_INTERVAL_YEAR INTERVAL YEAR(3)
 create table db1.table1 (primary varchar(255));
 
 create table db1.table1 (id int, xml_data XMLTYPE);
+
+create table db1.table1 (id int unique not deferrable not null);
+
+create table db1.table1 (id int) organization heap no inmemory;
+
+create table db1.table1 (id int) organization heap inmemory no memcompress no duplicate;
+
+-- create table db1.table1 (id int) organization heap inmemory no duplicate no memcompress; -- conflict
+
+create table db1.table1 (id number(10), CONSTRAINT pk primary key (id) not deferrable initially deferred);
+
+create table db1.table1 (id number(10), CONSTRAINT pk primary key (id) initially deferred not deferrable);
+
+create table db1.table1 (id number(10) not null);
+
+create table db1.table1 (id number(10) not null unique);
+
+-- create table db1.table1 (id number(10) unique not null); -- conflict
+
+create table db1.table1 (start_time timestamp(5));
+
+create table db1.table1 (start_time timestamp(5) with time zone with rowid);
+
+-- create table db1.table1 (start_time timestamp(5) with rowid); -- conflict
+
+create table db1.table1 (start_time timestamp with rowid);
