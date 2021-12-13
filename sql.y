@@ -2481,6 +2481,6 @@ MemoptimizeWrite:
 // TODO: support expression
 Expr:
     _intNumber
-|   _doubleQuoteStr
+|   _singleQuoteStr
 
 %%

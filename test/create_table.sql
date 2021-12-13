@@ -59,3 +59,11 @@ create table db1.table1 (start_time timestamp(5) with time zone with rowid);
 -- create table db1.table1 (start_time timestamp(5) with rowid); -- conflict
 
 create table db1.table1 (start_time timestamp with rowid);
+
+CREATE TABLE sbtest1 (
+id INTEGER NOT NULL,
+k INTEGER,
+c CHAR(120) DEFAULT '' NOT NULL,
+pad CHAR(60) DEFAULT '' NOT NULL,
+PRIMARY KEY (id)
+);
