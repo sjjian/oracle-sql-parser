@@ -873,10 +873,10 @@ ColumnDefConstraint:
     {
         $$ = nil
     }
-|   InlineRefConstraint
-    {
-        $$ = nil
-    }
+//|   InlineRefConstraint // NOTE: only for REF column.
+//    {
+//        $$ = nil
+//    }
 |   InlineConstraintList
     {
         $$ = $1
@@ -1904,7 +1904,7 @@ DatetimeDataTypes:
         d.SetDataDef(element.DataDefTimestamp)
         $$ = d
     }
-|   _timestamp '(' _intNumber ')' // TODO: conflict 2: "_with rowid"
+|   _timestamp '(' _intNumber ')'
     {
         precision := $3
         d := &element.Timestamp{FractionalSecondsPrecision: &precision}
@@ -2231,12 +2231,12 @@ InlineConstraintBody:
 	        Type: ast.ConstraintType($1),
 	    }
     }
-//|   ReferencesClause ConstraintState // TODO: this is defined in docs?
-//    {
-//	    $$ = &ast.InlineConstraint{
-//	        Type: ast.ConstraintTypeReferences,
-//	    }
-//    }
+|   ReferencesClause ConstraintState
+    {
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeReferences,
+	    }
+    }
 //|   ConstraintCheckCondition // todo
 
 InlineConstraintType:
@@ -2331,11 +2331,11 @@ ExceptionsClause:
     }
 |   _exceptions _into TableName
 
-InlineRefConstraint:
-    _scope _is TableName
-|   _with _rowid
-|   ConstraintName ReferencesClause ConstraintState
-|   ReferencesClause ConstraintState
+//InlineRefConstraint: // NOTE: only for REF column.
+//    _scope _is TableName
+//|   _with _rowid
+////|   ConstraintName ReferencesClause ConstraintState
+////|   ReferencesClause ConstraintState
 
 ReferencesClause:
     _references TableName ColumnNameListOrEmpty ReferencesOnDelete

@@ -54,11 +54,7 @@ create table db1.table1 (id number(10) not null unique);
 
 create table db1.table1 (start_time timestamp(5));
 
-create table db1.table1 (start_time timestamp(5) with time zone with rowid);
 
--- create table db1.table1 (start_time timestamp(5) with rowid); -- conflict
-
-create table db1.table1 (start_time timestamp with rowid);
 
 CREATE TABLE sbtest1 (
 id INTEGER NOT NULL,
