@@ -82,7 +82,7 @@ func AddTokenBetween(left []byte, right []byte, matchEnd bool, action lexmachine
 	})
 }
 
-func AddIdentToken(rs string, action lexmachine.Action) {
+func genKeywordIdent(rs string) []byte {
 	l := strings.ToLower(rs)
 	u := strings.ToUpper(rs)
 	var regex bytes.Buffer
@@ -96,7 +96,26 @@ func AddIdentToken(rs string, action lexmachine.Action) {
 			regex.WriteString("]")
 		}
 	}
-	lexer.Add(regex.Bytes(), action)
+	return regex.Bytes()
+}
+
+func genGroupKeywordIdent(rss ...string) []byte {
+	var regex bytes.Buffer
+	for i, rs := range rss {
+		regex.Write(genKeywordIdent(rs))
+		if i < len(rss)-1 {
+			regex.Write([]byte("( |\t|\n|\r)+"))
+		}
+	}
+	return regex.Bytes()
+}
+
+func AddIdentToken(rs string, action lexmachine.Action) {
+	lexer.Add(genKeywordIdent(rs), action)
+}
+
+func AddIdentGroupToken(action lexmachine.Action, rss ...string) {
+	lexer.Add(genGroupKeywordIdent(rss...), action)
 }
 
 var stdTokenMap = map[string]int{
@@ -345,6 +364,12 @@ var unReservedKeyword = map[string]int{
 
 func init() {
 	lexer = lexmachine.NewLexer()
+
+	AddIdentGroupToken(token(_not_deferrable), "not", "deferrable")
+	AddIdentGroupToken(token(_no_inmemory), "no", "inmemory")
+	AddIdentGroupToken(token(_no_duplicate), "no", "duplicate")
+	AddIdentGroupToken(token(_row_level_locking), "row", "level", "locking")
+	AddIdentGroupToken(token(_drop_index), "drop", "index")
 
 	for keyword, tokenId := range stdTokenMap {
 		AddIdentToken(keyword, token(tokenId))

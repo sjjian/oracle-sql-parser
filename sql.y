@@ -267,6 +267,13 @@ func nextQuery(yylex interface{}) string {
     _doubleQuoteStr 	"double quotes string"
     _nonquotedIdentifier    "nonquoted identifier"
 
+/* keyword group, for resolve confict */
+    _not_deferrable
+    _no_inmemory
+    _no_duplicate
+    _row_level_locking
+    _drop_index
+
 %token <i>
     _intNumber 		"int number"
 
@@ -278,7 +285,6 @@ func nextQuery(yylex interface{}) string {
     InvisiblePropOrEmpty
     DropColumnProp
     DropColumnOnline
-    InlineConstraintType
 
 %type <b>
     IsForce
@@ -873,10 +879,10 @@ ColumnDefConstraint:
     {
         $$ = nil
     }
-|   InlineRefConstraint
-    {
-        $$ = nil
-    }
+//|   InlineRefConstraint // NOTE: only for REF column.
+//    {
+//        $$ = nil
+//    }
 |   InlineConstraintList
     {
         $$ = $1
@@ -1207,7 +1213,7 @@ KeepIndexOrEmpty:
         // empty
     }
 |   _keep _index
-//|   _drop _index // TODO : conflict DropConstraintClause
+|   _drop_index
 
 OnlineOrEmpty:
     {
@@ -1356,7 +1362,7 @@ TableCompression:
 |   _row _store _compress
 |   _row _store _compress _basic
 |   _row _store _compress _advanced
-|   _column _store _compress ColumnCompressProp ColumnCompressLock // TODO: conflict 4,5: _row _no
+|   _column _store _compress ColumnCompressProp ColumnCompressLock
 |   _column _store _compress ColumnCompressProp
 |   _nocompress
 
@@ -1372,16 +1378,13 @@ ColumnCompressProp:
 |   _for _archive _high
 
 ColumnCompressLock:
-    _row _level _locking
-|   _no _row _level _locking
+    _row_level_locking
+|   _no _row_level_locking
 
 InmemoryTableClause:
-    {
-        // empty
-    }
+    InmemoryColumnClausesOrEmpty
 |   _inmemory InmemoryAttrs InmemoryColumnClausesOrEmpty
-|   _no _inmemory InmemoryColumnClausesOrEmpty
-|   InmemoryColumnClauses
+|   _no_inmemory InmemoryColumnClausesOrEmpty
 
 InmemoryAttrs:
     InmemoryMemCompress InmemoryProp InmemoryDistribute InmemoryDuplicate InmemorySpatial
@@ -1397,7 +1400,7 @@ InmemoryMemCompress:
 |   _memcompress _for _capacity
 |   _memcompress _for _capacity _low
 |   _memcompress _for _capacity _high
-|   _no _memcompress // TODO: conflict 6,7: _no with "_no _duplicate"
+|   _no _memcompress
 |   _memcompress _auto
 
 InmemoryProp:
@@ -1440,7 +1443,7 @@ InmemoryDuplicate:
     }
 |   _duplicate
 |   _duplicate _all
-|   _no _duplicate
+|   _no_duplicate
 
 InmemorySpatial:
     {
@@ -1460,7 +1463,7 @@ InmemoryColumnClauses:
 
 InmemoryColumnClause:
     _inmemory InmemoryMemCompress '(' ColumnNameList ')'
-|   _no _inmemory '(' ColumnNameList ')'
+|   _no_inmemory '(' ColumnNameList ')'
 
 IlmClause: // TODO: support IlmPolicyClause IlmPolicyName
     {
@@ -1904,7 +1907,7 @@ DatetimeDataTypes:
         d.SetDataDef(element.DataDefTimestamp)
         $$ = d
     }
-|   _timestamp '(' _intNumber ')' // TODO: conflict 2: "_with rowid"
+|   _timestamp '(' _intNumber ')'
     {
         precision := $3
         d := &element.Timestamp{FractionalSecondsPrecision: &precision}
@@ -2213,68 +2216,49 @@ ConstraintName:
     }
 
 InlineConstraint:
-    ConstraintName InlineConstraintBody
+    ConstraintName InlineConstraintBody ConstraintState
     {
         constraint := $2.(*ast.InlineConstraint)
         constraint.Name = $1.(*element.Identifier)
 	    $$ = constraint
     }
-|   InlineConstraintBody
+|   InlineConstraintBody ConstraintState
     {
 	    $$ = $1
     }
 
 InlineConstraintBody:
-    InlineConstraintType ConstraintState
-    {
-	    $$ = &ast.InlineConstraint{
-	        Type: ast.ConstraintType($1),
-	    }
-    }
-//|   ReferencesClause ConstraintState // TODO: this is defined in docs?
-//    {
-//	    $$ = &ast.InlineConstraint{
-//	        Type: ast.ConstraintTypeReferences,
-//	    }
-//    }
-//|   ConstraintCheckCondition // todo
-
-InlineConstraintType:
     _null
     {
-        $$ = int(ast.ConstraintTypeNull)
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeNull,
+	    }
     }
 |   _not _null
     {
-        $$ = int(ast.ConstraintTypeNotNull)
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeNotNull,
+	    }
     }
 |   _unique
     {
-        $$ = int(ast.ConstraintTypeUnique)
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeUnique,
+	    }
     }
 |   _primary _key
     {
-        $$ = int(ast.ConstraintTypePK)
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypePK,
+	    }
     }
-
-//ConstraintStateList:
-//    ConstraintState
-//|   ConstraintStateList ConstraintState
-
-//// ref: https://docs.oracle.com/cd/E11882_01/server.112/e41084/clauses002.htm#CJAFFBAA; TODO: is it diff from 12.1 docs?
-//ConstraintState:
-//    _deferrable
-//|   _not _deferrable
-//|   _initially _deferred
-//|   _initially _immediate
-//|   _rely
-//|   _norely
-//|   UsingIndexClause
-//|   _enable
-//|   _disable
-//|   _validate
-//|   _novalidate
-//|   ExceptionsClause
+|   ReferencesClause
+    {
+	    $$ = &ast.InlineConstraint{
+	        Type: ast.ConstraintTypeReferences,
+	    }
+    }
+//|   ConstraintCheckCondition // todo
 
 ConstraintState:
     ConstraintStateDeferrableClause ConstraintStateRely UsingIndexClause ConstraintStateEnable ConstraintStateValidate ExceptionsClause
@@ -2286,11 +2270,11 @@ ConstraintStateDeferrableClause:
 |   ConstraintStateDeferrable
 |   ConstraintStateDeferrable ConstraintStateInitially
 |   ConstraintStateInitially
-|   ConstraintStateInitially ConstraintStateDeferrable // TODO: conflict 1,3: _not with "_not _null"
+|   ConstraintStateInitially ConstraintStateDeferrable
 
 ConstraintStateDeferrable:
     _deferrable
-|   _not _deferrable
+|   _not_deferrable
 
 ConstraintStateInitially:
     _initially _deferred
@@ -2331,11 +2315,11 @@ ExceptionsClause:
     }
 |   _exceptions _into TableName
 
-InlineRefConstraint:
-    _scope _is TableName
-|   _with _rowid
-|   ConstraintName ReferencesClause ConstraintState
-|   ReferencesClause ConstraintState
+//InlineRefConstraint: // NOTE: only for REF column.
+//    _scope _is TableName
+//|   _with _rowid
+////|   ConstraintName ReferencesClause ConstraintState
+////|   ReferencesClause ConstraintState
 
 ReferencesClause:
     _references TableName ColumnNameListOrEmpty ReferencesOnDelete
