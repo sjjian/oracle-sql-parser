@@ -387,7 +387,10 @@ func init() {
 	AddTokenBetween([]byte("--"), []byte("\n"), true, skip)
 	AddTokenBetween([]byte(`/\*`), []byte("*/"), false, skip)
 
-	lexer.Add([]byte("[a-zA-Z]+\\w*"), token(_nonquotedIdentifier))
+	// see: https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/Database-Object-Names-and-Qualifiers.html#GUID-75337742-67FD-4EC0-985F-741C93D918DA
+	// Non quoted identifiers can only contain alphanumeric characters from your database
+	// character set and the underscore (_), dollar sign ($), and pound sign (#).
+	lexer.Add([]byte("[a-zA-Z][A-Za-z0-9_$#]*"), token(_nonquotedIdentifier))
 
 	lexer.Add([]byte(`[0-9]+`), func(s *lexmachine.Scanner, m *machines.Match) (interface{}, error) {
 		v, err := strconv.Atoi(string(m.Bytes))
