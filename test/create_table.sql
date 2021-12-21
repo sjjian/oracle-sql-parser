@@ -67,3 +67,8 @@ c CHAR(120) DEFAULT '' NOT NULL,
 pad CHAR(60) DEFAULT '' NOT NULL,
 PRIMARY KEY (id)
 );
+
+create table db1.table_1 (id_1 int);
+create table db1.table#1 (id#1 int);
+create table db1.table$1 (id$1 int);
+create table db1.table$#_1 (id$1_ int);
