@@ -72,3 +72,10 @@ create table db1.table_1 (id_1 int);
 create table db1.table#1 (id#1 int);
 create table db1.table$1 (id$1 int);
 create table db1.table$#_1 (id$1_ int);
+
+create table db1.table1 (ts TIMESTAMP);
+create table db1.table1 (ts TIMESTAMP(6));
+create table db1.table1 (ts TIMESTAMP WITH TIME ZONE);
+create table db1.table1 (ts TIMESTAMP WITH LOCAL TIME ZONE);
+create table db1.table1 (ts TIMESTAMP(6) WITH TIME ZONE);
+create table db1.table1 (ts TIMESTAMP(6) WITH LOCAL TIME ZONE);
