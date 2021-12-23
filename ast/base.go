@@ -9,6 +9,11 @@ type TableName struct {
 	Table  *element.Identifier
 }
 
+type IndexName struct {
+	Schema *element.Identifier
+	Index  *element.Identifier
+}
+
 type Collation struct {
 	Name *element.Identifier
 }

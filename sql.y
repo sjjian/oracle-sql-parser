@@ -298,11 +298,13 @@ func nextQuery(yylex interface{}) string {
     AlterTableStmt	"*ast.AlterTableStmt"
     CreateTableStmt
     CreateIndexStmt
+    DropIndexStmt
     DropTableStmt
 
 %type <anything>
     StatementList
     TableName
+    IndexName
     Identifier
     IdentifierOrKeyword
     ColumnName
@@ -389,6 +391,7 @@ Statement:
 |   AlterTableStmt
 |   CreateTableStmt
 |   CreateIndexStmt
+|   DropIndexStmt
 |   DropTableStmt
 
 EmptyStmt:
@@ -410,7 +413,7 @@ TableName:
     	$$ = &ast.TableName{
 	    Schema:	$1.(*element.Identifier),
 	    Table: 	$3.(*element.Identifier),
-	}
+	    }
     }
 
 ColumnNameList:
@@ -435,7 +438,18 @@ ClusterName:
 
 IndexName:
     IdentifierOrKeyword
+    {
+    	$$ = &ast.IndexName{
+	        Index: $1.(*element.Identifier),
+	    }
+    }
 |   IdentifierOrKeyword '.' IdentifierOrKeyword
+    {
+    	$$ = &ast.IndexName{
+	    Schema:	$1.(*element.Identifier),
+	    Index: 	$3.(*element.Identifier),
+	    }
+    }
 
 UsingIndexName: // for using index clause
     Identifier
@@ -1647,6 +1661,17 @@ CreateIndexInvalidation:
     }
 |   _deferred _invalidation
 |   _immediate _invalidation
+
+/* ++++++++++++++++++++++++++++++++++++++++++++ drop index +++++++++++++++++++++++++++++++++++++++++++ */
+
+// see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/DROP-INDEX.html#GUID-F60F75DF-2866-4F93-BB7F-8FCE64BF67B6
+DropIndexStmt:
+    _drop_index IndexName OnlineOrEmpty IsForce CreateIndexInvalidation
+    {
+        $$ = &ast.DropIndexStmt{
+            IndexName:  $2.(*ast.IndexName),
+        }
+    }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++ drop table +++++++++++++++++++++++++++++++++++++++++++ */
 
