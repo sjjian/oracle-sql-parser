@@ -1626,7 +1626,11 @@ ColumnSortClause:
 |   _asc
 |   _desc
 
-IndexProps: // TODO
+IndexProps: // TODO: support golbal_partitioned_index, local_partitioned_index, "index type is ..."
+    {
+        // empty
+    }
+|   IndexAttrs
 
 //BitmapJoinIndexClause:
 
