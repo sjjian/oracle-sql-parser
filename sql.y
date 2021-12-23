@@ -312,6 +312,7 @@ func nextQuery(yylex interface{}) string {
     NumberDataTypes
     LongAndRawDataTypes
     DatetimeDataTypes
+    TimestampDataType
     LargeObjectDataTypes
     RowIdDataTypes
     AnsiSupportDataTypes
@@ -1145,11 +1146,11 @@ RenameColumnClause:
 /* +++++++++++++++++++++++++++++++++++++ alter table constraint  +++++++++++++++++++++++++++++++++++++ */
 
 ConstraintClauses:
-    _add OutOfLineConstraint // TODO: in docs is _add OutOfLineConstraints, but actual is _add OutOfLineConstraint.
+    _add OutOfLineConstraint // Note: in docs is _add OutOfLineConstraints, but actual is _add OutOfLineConstraint.
     {
     	$$ = []ast.AlterTableClause{&ast.AddConstraintClause{}}
     }
-//|   _add OutOfLineRefConstraint // TODO
+//|   _add OutOfLineRefConstraint
 |   _modify _constraint Identifier ConstraintState CascadeOrEmpty
     {
     	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
@@ -1273,9 +1274,9 @@ RelTableDef:
         $$ = rd
     }
 
-ImmutableTableClauses:
+ImmutableTableClauses: // Note: introduced in version 19
 
-BlockchainTableClauses:
+BlockchainTableClauses: // Note: introduced in version 19
 
 DefaultCollateClauseOrEmpty:
     {
@@ -1333,7 +1334,7 @@ SegmentAttrClause:
 |   _tablespace Identifier // TODO: using IdentifierOrKeyword?
 |   _tablespace _set Identifier
 |   LoggingClause
-|   TableCompression // TODO: this is not include in oracle 21 syntax docs?
+|   TableCompression // Note: this is not include in oracle 21 syntax docs?
 
 PhysicalAttrsClause:
     PhysicalAttrClause
@@ -1343,7 +1344,7 @@ PhysicalAttrClause:
     _pctfree _intNumber
 |   _pctused _intNumber
 |   _initrans _intNumber
-|   _maxtrans _intNumber // has been deprecated,
+|   _maxtrans _intNumber // Note: has been deprecated.
 |   StorageClause
 
 LoggingClause:
@@ -1496,7 +1497,7 @@ OrgClause:
 |   _external ExternalTableClause
 
 HeapOrgTableClause:
-//    TableCompressionOrEmpty InmemoryTableClause IlmClause // TODO: table compress in segment?
+//    TableCompressionOrEmpty InmemoryTableClause IlmClause // Note: table compress in segment?
     InmemoryTableClause IlmClause
 
 IndexOrgTableClause:
@@ -1901,31 +1902,20 @@ DatetimeDataTypes:
         d.SetDataDef(element.DataDefDate)
         $$ = d
     }
-|   _timestamp
+|   TimestampDataType
     {
-        d := &element.Timestamp{}
-        d.SetDataDef(element.DataDefTimestamp)
+        $$ = $1
+    }
+|   TimestampDataType _with _time _zone
+    {
+        d := $1.(*element.Timestamp)
+        d.WithTimeZone = true
         $$ = d
     }
-|   _timestamp '(' _intNumber ')'
+|   TimestampDataType _with _local _time _zone
     {
-        precision := $3
-        d := &element.Timestamp{FractionalSecondsPrecision: &precision}
-        d.SetDataDef(element.DataDefTimestamp)
-        $$ = d
-    }
-|   _timestamp '(' _intNumber ')' _with _time _zone
-    {
-        precision := $3
-        d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithTimeZone: true}
-        d.SetDataDef(element.DataDefTimestamp)
-        $$ = d
-    }
-|   _timestamp '(' _intNumber ')' _with _local _time _zone
-    {
-        precision := $3
-        d := &element.Timestamp{FractionalSecondsPrecision: &precision, WithLocalTimeZone: true}
-        d.SetDataDef(element.DataDefTimestamp)
+        d := $1.(*element.Timestamp)
+        d.WithLocalTimeZone = true
         $$ = d
     }
 |   _interval _year _to _month
@@ -1967,6 +1957,21 @@ DatetimeDataTypes:
         sPrecision := $6
         d := &element.IntervalDay{FractionalSecondsPrecision: &sPrecision}
         d.SetDataDef(element.DataDefIntervalDay)
+        $$ = d
+    }
+
+TimestampDataType:
+    _timestamp
+    {
+        d := &element.Timestamp{}
+        d.SetDataDef(element.DataDefTimestamp)
+        $$ = d
+    }
+|   _timestamp '(' _intNumber ')'
+    {
+        precision := $3
+        d := &element.Timestamp{FractionalSecondsPrecision: &precision}
+        d.SetDataDef(element.DataDefTimestamp)
         $$ = d
     }
 
