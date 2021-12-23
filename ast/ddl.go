@@ -124,3 +124,12 @@ type DropTableStmt struct {
 	node
 	TableName *TableName
 }
+
+/*
+	Drop Index  Statement
+	see: https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/DROP-INDEX.html#GUID-F60F75DF-2866-4F93-BB7F-8FCE64BF67B6
+*/
+type DropIndexStmt struct {
+	node
+	IndexName *IndexName
+}

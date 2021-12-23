@@ -15,6 +15,7 @@ this is an oracle sql parser. ref: https://docs.oracle.com/en/database/oracle/or
 |Create table|Relational table|:heavy_check_mark:|:heavy_check_mark:|
 |Create index|Relational table|:heavy_check_mark:| |
 |Drop table|-|:heavy_check_mark:|:heavy_check_mark:|
+|Drop index|-|:heavy_check_mark:|:heavy_check_mark:|
 
 ## usage
 ```go
