@@ -1162,24 +1162,42 @@ RenameColumnClause:
 ConstraintClauses:
     _add OutOfLineConstraint // Note: in docs is _add OutOfLineConstraints, but actual is _add OutOfLineConstraint.
     {
-    	$$ = []ast.AlterTableClause{&ast.AddConstraintClause{}}
+        $$ = []ast.AlterTableClause{&ast.AddConstraintClause{
+               Constraints: []*ast.OutOfLineConstraint{$2.(*ast.OutOfLineConstraint)},
+        }}
     }
 //|   _add OutOfLineRefConstraint
 |   _modify _constraint Identifier ConstraintState CascadeOrEmpty
     {
-    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Name = $3.(*element.Identifier)
+        $$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+            Constraint: constraint,
+        }}
     }
 |   _modify _primary _key ConstraintState CascadeOrEmpty
     {
-    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Type = ast.ConstraintTypePK
+        $$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+            Constraint: constraint,
+        }}
     }
 |   _modify _unique '(' ColumnNameList ')' ConstraintState CascadeOrEmpty
     {
-    	$$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Type = ast.ConstraintTypeUnique
+        constraint.Columns = $4.([]*element.Identifier)
+        $$ = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+            Constraint: constraint,
+        }}
     }
 |   _rename _constraint Identifier _to Identifier
     {
-    	$$ = []ast.AlterTableClause{&ast.RenameConstraintClause{}}
+    	$$ = []ast.AlterTableClause{&ast.RenameConstraintClause{
+    	    OldName: $3.(*element.Identifier),
+    	    NewName: $5.(*element.Identifier),
+    	}}
     }
 |   DropConstraintClauses
     {
@@ -1203,15 +1221,28 @@ DropConstraintClauses:
 DropConstraintClause:
     _drop _primary _key CascadeOrEmpty DropConstraintProps
     {
-    	$$ = &ast.DropConstraintClause{}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Type = ast.ConstraintTypePK
+        $$ = &ast.DropConstraintClause{
+            Constraint: constraint,
+        }
     }
 |   _drop _unique '(' ColumnNameList ')' CascadeOrEmpty DropConstraintProps
     {
-    	$$ = &ast.DropConstraintClause{}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Type = ast.ConstraintTypeUnique
+        constraint.Columns = $4.([]*element.Identifier)
+        $$ = &ast.DropConstraintClause{
+            Constraint: constraint,
+        }
     }
 |   _drop _constraint Identifier CascadeOrEmpty DropConstraintProps
     {
-    	$$ = &ast.DropConstraintClause{}
+        constraint := &ast.OutOfLineConstraint{}
+        constraint.Name = $3.(*element.Identifier)
+        $$ = &ast.DropConstraintClause{
+            Constraint: constraint,
+        }
     }
 
 CascadeOrEmpty:

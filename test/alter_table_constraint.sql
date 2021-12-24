@@ -16,6 +16,10 @@ alter table db1.table1 modify primary key using index;
 
 alter table db1.table1 modify primary key rely using index idx_1 enable validate;
 
+alter table db1.table1 modify constraint idx_1 using index;
+
+alter table db1.table1 modify unique(name,age) using index;
+
 alter table db1.table1 drop primary key keep index;
 
 alter table db1.table1 drop primary key keep index drop unique(name,age) drop index;

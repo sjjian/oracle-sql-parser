@@ -39,7 +39,8 @@ type ColumnDefault struct {
 type ConstraintType int
 
 const (
-	ConstraintTypeNull ConstraintType = iota
+	ConstraintTypeDefault ConstraintType = iota
+	ConstraintTypeNull
 	ConstraintTypeNotNull
 	ConstraintTypeUnique
 	ConstraintTypePK

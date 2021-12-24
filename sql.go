@@ -3747,23 +3747,41 @@ yynewstate:
 		}
 	case 303:
 		{
-			yyVAL.anything = []ast.AlterTableClause{&ast.AddConstraintClause{}}
+			yyVAL.anything = []ast.AlterTableClause{&ast.AddConstraintClause{
+				Constraints: []*ast.OutOfLineConstraint{yyS[yypt-0].anything.(*ast.OutOfLineConstraint)},
+			}}
 		}
 	case 304:
 		{
-			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Name = yyS[yypt-2].anything.(*element.Identifier)
+			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+				Constraint: constraint,
+			}}
 		}
 	case 305:
 		{
-			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Type = ast.ConstraintTypePK
+			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+				Constraint: constraint,
+			}}
 		}
 	case 306:
 		{
-			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{}}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Type = ast.ConstraintTypeUnique
+			constraint.Columns = yyS[yypt-3].anything.([]*element.Identifier)
+			yyVAL.anything = []ast.AlterTableClause{&ast.ModifyConstraintClause{
+				Constraint: constraint,
+			}}
 		}
 	case 307:
 		{
-			yyVAL.anything = []ast.AlterTableClause{&ast.RenameConstraintClause{}}
+			yyVAL.anything = []ast.AlterTableClause{&ast.RenameConstraintClause{
+				OldName: yyS[yypt-2].anything.(*element.Identifier),
+				NewName: yyS[yypt-0].anything.(*element.Identifier),
+			}}
 		}
 	case 308:
 		{
@@ -3779,15 +3797,28 @@ yynewstate:
 		}
 	case 311:
 		{
-			yyVAL.anything = &ast.DropConstraintClause{}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Type = ast.ConstraintTypePK
+			yyVAL.anything = &ast.DropConstraintClause{
+				Constraint: constraint,
+			}
 		}
 	case 312:
 		{
-			yyVAL.anything = &ast.DropConstraintClause{}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Type = ast.ConstraintTypeUnique
+			constraint.Columns = yyS[yypt-3].anything.([]*element.Identifier)
+			yyVAL.anything = &ast.DropConstraintClause{
+				Constraint: constraint,
+			}
 		}
 	case 313:
 		{
-			yyVAL.anything = &ast.DropConstraintClause{}
+			constraint := &ast.OutOfLineConstraint{}
+			constraint.Name = yyS[yypt-2].anything.(*element.Identifier)
+			yyVAL.anything = &ast.DropConstraintClause{
+				Constraint: constraint,
+			}
 		}
 	case 314:
 		{

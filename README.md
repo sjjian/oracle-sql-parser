@@ -8,10 +8,10 @@ this is an oracle sql parser. ref: https://docs.oracle.com/en/database/oracle/or
 |Alter table|Modify column| :heavy_check_mark:|:heavy_check_mark:|
 |Alter table|Drop column| :heavy_check_mark:|:heavy_check_mark:|
 |Alter table|Rename column| :heavy_check_mark:|:heavy_check_mark:|
-|Alter table|Add constraint| :heavy_check_mark:| |
-|Alter table|Modify constraint| :heavy_check_mark:| |
-|Alter table|Rename constraint| :heavy_check_mark:| |
-|Alter table|Drop constraint| :heavy_check_mark:| |
+|Alter table|Add constraint| :heavy_check_mark:| :heavy_check_mark:|
+|Alter table|Modify constraint| :heavy_check_mark:| :heavy_check_mark:|
+|Alter table|Rename constraint| :heavy_check_mark:| :heavy_check_mark:|
+|Alter table|Drop constraint| :heavy_check_mark:| :heavy_check_mark:|
 |Create table|Relational table|:heavy_check_mark:|:heavy_check_mark:|
 |Create index|Relational table|:heavy_check_mark:| |
 |Drop table|-|:heavy_check_mark:|:heavy_check_mark:|

@@ -49,18 +49,23 @@ type RenameColumnClause struct {
 
 type AddConstraintClause struct {
 	alterTableClause
+	Constraints []*OutOfLineConstraint
 }
 
 type ModifyConstraintClause struct {
 	alterTableClause
+	Constraint *OutOfLineConstraint
 }
 
 type RenameConstraintClause struct {
 	alterTableClause
+	OldName *element.Identifier
+	NewName *element.Identifier
 }
 
 type DropConstraintClause struct {
 	alterTableClause
+	Constraint *OutOfLineConstraint
 }
 
 /*
